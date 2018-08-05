@@ -1,0 +1,15 @@
+{
+  "name": "parlparse",
+  "version": "1.0.0",
+  "description": "Parse the european parliament public register of documents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xavier dutoit",
+  "license": "aGPL3",
+  "dependencies": {
+    "fast-csv": "^2.4.1",
+    "osmosis": "^1.1.8"
+  }
+}
