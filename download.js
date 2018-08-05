@@ -4,7 +4,7 @@ const urlParse = require('url').parse;
 const csv = require('fast-csv');
 const zlib = require("zlib");
 
-http.globalAgent.maxSockets = 15;
+http.globalAgent.maxSockets = 8;
 
 var config ={ "folder": "./data/" };
 
@@ -14,13 +14,19 @@ var total=0;
 
 csv.fromPath(file, {headers: true})
   .on("data", function(d){
+    if (!d.extensions.includes("xml")){
+      console.log ("xml unpublished: " + d.reference);
+      return;
+    }
     var p=downloadFile(d.code,d.baseurl,"xml");
-    p.catch(console.log);
+    p.catch((err)=>{
+      console.log("got an error");
+      console.log(arguments);
+    });
     promises.push(p);
     //promises.push(downloadFile(d.code,d.baseurl,"xml"));
   })
-  .on("end", function(){
-});
+  .on("end", ()=>{});
 
 promises.map ((p)=>p.then(console.log).catch(console.log));
 
@@ -42,11 +48,13 @@ function downloadFile (folder,url,extension){
       fs.mkdirSync(folder);
     }
     var dest = folder+ "/"+ url.split('/').pop() + "."+extension +".zip";
-    console.log ("file:"+dest);
     if (fs.existsSync(dest)) {
+      console.log ("cached file:"+dest);
       total ++;
       resolve(url);
+      return;
     }
+    console.log ("downloading file:"+dest);
 
     var file = fs.createWriteStream(dest);
     var options= urlParse(url +"."+extension);
@@ -55,9 +63,7 @@ function downloadFile (folder,url,extension){
       const { statusCode } = res;
       const contentType = res.headers['content-type'];
       if (statusCode !== 200) {
-        error = new Error('Request Failed. '+url +'\n' +
-                        `Status Code: ${statusCode}`);
-
+        error = new Error('Request Failed. '+url+"."+extension +`Status Code: ${statusCode}`);
         res.resume();
         fs.unlink(dest,()=> reject(error));
         return; 
@@ -71,8 +77,8 @@ function downloadFile (folder,url,extension){
         total ++;
         file.close(()=>resolve(url)); 
       });
-    }).on('error', function(err) { // Handle errors
-      fs.unlink(dest);
+    }).on('error', (err) => { // Handle errors
+      fs.unlinkSync(dest);
       reject(err);
     });
   });

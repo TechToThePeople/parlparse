@@ -6,8 +6,8 @@ const {chain}  = require('stream-chain');
 
 const options = {
 //Minutes + rollcalls
-  ppvp_url:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVP&leg=8&lg=EN&currentPage=1&sortAndOrderBy=date_docu_desc",
-  ppvd_url:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVD&leg=8&lg=EN&currentPage=1&sortAndOrderBy=date_docu_desc",
+  provisional:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVP&leg=8&lg=EN&currentPage=1&sortAndOrderBy=date_docu_desc",
+  finalised:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVD&leg=8&lg=EN&currentPage=1&sortAndOrderBy=date_docu_desc",
   code: {
     RCV:"data/rollcall.csv"
    ,VOT:"data/vote.csv"
@@ -18,21 +18,60 @@ const options = {
   }
 };
 
+var buffer={};
+var noxml=[];
+for (var code in options.code) {
+  buffer[code] = {};
+}
+
+const promises= [];
 const pipes={};
 for (var code in options.code) {
   pipes[code]=streamCSV(options.code[code]);
-};
-
-const promises= [];
-/*for (var i in pipes) {
-  var p = 
   promises.push(new Promise((resolve, reject) => {
-    pipes[i].on("close", resolve);
+    pipes[code].on("close",() => resolve);
   }));
-}*/
+}
 
-promises.push(scrape(options.ppvp_url,pipes)); //provisional
-promises.push(scrape(options.ppvd_url,pipes)); //finalised
+
+scrape(options.finalised,(d)=>{
+  d.status="final";
+  if (buffer[d.code]) {
+    if (!d.extensions.includes('xml'))
+      noxml[d.date + d.code]=d;
+    if (buffer[d.code][d.date] && buffer[d.code][d.date].reference !== d.reference){
+      // yes, some documents are listed multiple times, because of reasons
+      console.log ("multiple files for "+d.code+ " on "+d.date 
+        +". ref:" + buffer[d.code][d.date].reference+ "<=>" + d.reference);
+    }
+    buffer[d.code][d.date]=d;
+  }else{
+    console.log(d);
+    buffer['error'].push(d);
+  }
+})
+.then(()=>{
+  scrape(options.provisional,(d)=>{
+    d.status="prov";
+    if (!buffer[d.code][d.date]){ // better a prov than none
+      buffer[d.code][d.date]=d;
+      return;
+    }
+    if (d.extensions.includes('xml') && noxml[d.date + d.code]){ //replace the final without xml by a provisional with
+      console.log("replace final without xml by provisional");
+      console.log(d);
+    }
+  }).then(()=>{
+    for (var b in buffer) {
+      console.log(buffer[b]);
+      for (var i in buffer[b]) {
+        pipes[b].write(buffer[b][i]);
+      }
+    }
+
+  });
+  
+});
 
 Promise
   .all(promises)
@@ -44,7 +83,7 @@ Promise
   });
 
 function streamCSV(file){
-  const head = "date,code,reference,name,baseurl,extensions".split(",");
+  const head = "date,code,status,reference,name,baseurl,extensions".split(",");
   const csvwriter = require('csv-write-stream')({separator:",",headers: head,sendHeaders:true});
 
   function row (d) {
@@ -61,12 +100,12 @@ function streamCSV(file){
   return pipeline;
 };
 
-function scrape(docurl,pipes) {
+function scrape(docurl,callback) {
 return new Promise((resolve, reject) => {
   osmosis.get(docurl)
   .log(console.log)
 .error(console.log)
-    .paginate('.ep_boxpaginate a#nav_next',200)
+    .paginate('.ep_boxpaginate a#nav_next',1000)
     .find('.notice')
     .set({
       'name':'.result_details_link',
@@ -99,9 +138,10 @@ return new Promise((resolve, reject) => {
       delete d.urls;
 
     })
-    .data( d => {
-      process.stdout.write(" ");
 
+/*    .data( d => {
+      process.stdout.write(" ");
+      
       if (pipes[d.code]) {
         pipes[d.code].write(d);
       }else{
@@ -109,9 +149,8 @@ return new Promise((resolve, reject) => {
         pipes['error'].write(d);
       }
     })
-    .data( d => {
-//      console.log(d);
-    })
+    */
+    .data(callback)
     
     .done (d => {
       console.log("done");
