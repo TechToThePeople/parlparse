@@ -9,10 +9,11 @@ http.globalAgent.maxSockets = 8;
 var config ={ "folder": "./data/" };
 
 promises = [];
-const file="./data/"+"rollcall.csv";
-var total=0;
+var total={};
 
-csv.fromPath(file, {headers: true})
+["rollcall.csv","attendance.csv"].map ((file)=>{ //ignore the votes for now, the format is just that bad
+total[file]=0;
+csv.fromPath("./data/"+file, {headers: true})
   .on("data", function(d){
     if (!d.extensions.includes("xml")){
       console.log ("xml unpublished: " + d.reference);
@@ -24,20 +25,25 @@ csv.fromPath(file, {headers: true})
       console.log(arguments);
     });
     promises.push(p);
-    //promises.push(downloadFile(d.code,d.baseurl,"xml"));
+    p.catch(console.log).then(() => {
+      total[file]++;
+    });
   })
-  .on("end", ()=>{});
-
-promises.map ((p)=>p.then(console.log).catch(console.log));
-
-Promise
-  .all(promises)
-  .catch((err) =>{
-    console.log(err);
-  })
-  .then(() => {
-    console.log("all processed:" + total)
+  .on("end", ()=>{
+    Promise
+      .all(promises)
+      .catch((err) =>{
+        console.log(err);
+      })
+      .then(() => {
+        console.log("all processed:");
+        for (var i in total) {
+          console.log (i +":"+total[i]);
+         };
+      });
   });
+});
+
 
 
 function downloadFile (folder,url,extension){
@@ -49,8 +55,7 @@ function downloadFile (folder,url,extension){
     }
     var dest = folder+ "/"+ url.split('/').pop() + "."+extension +".zip";
     if (fs.existsSync(dest)) {
-      console.log ("cached file:"+dest);
-      total ++;
+      //do we need to return that it was cached already?
       resolve(url);
       return;
     }
@@ -74,7 +79,6 @@ function downloadFile (folder,url,extension){
       }
       res.pipe(file);
       file.on('finish', function() {
-        total ++;
         file.close(()=>resolve(url)); 
       });
     }).on('error', (err) => { // Handle errors
