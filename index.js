@@ -138,20 +138,7 @@ return new Promise((resolve, reject) => {
       delete d.urls;
 
     })
-
-/*    .data( d => {
-      process.stdout.write(" ");
-      
-      if (pipes[d.code]) {
-        pipes[d.code].write(d);
-      }else{
-        console.log(d);
-        pipes['error'].write(d);
-      }
-    })
-    */
     .data(callback)
-    
     .done (d => {
       console.log("done");
       resolve(docurl);

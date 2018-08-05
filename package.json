@@ -10,6 +10,7 @@
   "license": "aGPL3",
   "dependencies": {
     "fast-csv": "^2.4.1",
-    "osmosis": "^1.1.8"
+    "osmosis": "^1.1.8",
+    "xml-stream": "^0.4.5"
   }
 }

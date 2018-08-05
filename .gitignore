@@ -1,3 +1,4 @@
+*.swp
 data/RCV
 data/LP
 node_modules/*
