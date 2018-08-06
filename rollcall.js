@@ -1,0 +1,146 @@
+const fs = require('fs');
+const csv = require('fast-csv');
+const zlib = require("zlib");
+const XmlStream = require('xml-stream');
+const {chain} = require("stream-chain");
+
+var config ={ "folder": "./data/" };
+
+promises = [];
+var total={};
+
+var mep_rollcall=streamCSV("./data/mep_rollcall.csv","mepid,mep,result,group,identifier");
+var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,desc");
+
+promises.push(new Promise((resolve, reject) => {
+  item_rollcall.on("close",() => resolve);
+}));
+
+promises.push(new Promise((resolve, reject) => {
+  mep_rollcall.on("close",() => resolve);
+}));
+
+function streamCSV(file,column){
+  const head = column.split(",");
+  const csvwriter = require('csv-write-stream')({separator:",",headers: head,sendHeaders:true});
+
+
+  function row (d){
+    console.log(d)
+    return d;
+  };
+  const pipeline = chain([
+    row,
+    csvwriter,
+    fs.createWriteStream(file)
+  ]);
+  pipeline.on("close", () => console.log("close" +file));
+  return pipeline;
+};
+
+var csvParser= csv.fromPath("./data/rollcall.csv", {headers: true})
+  .on("data", function(d){
+
+    if (!d.extensions.includes("xml")){
+//      console.log ("xml unpublished: " + d.reference);
+      return;
+    }
+    promises.push(transformFile(d));
+    console.log(d);
+    csvParser.pause();
+    csvParser.emit("end");
+  })
+  .on("end", ()=>{
+console.log("end");
+    Promise
+      .all(promises)
+      .catch((err) =>{
+        console.log(err);
+      })
+      .then(() => {
+        console.log("all processed:");
+        for (var i in total) {
+          console.log (i +":"+total[i]);
+         };
+        attendence.close();
+      });
+  });
+
+function transformFile(d){
+  const file = "./data/"+ d.code +"/" + d.baseurl.split('/').pop() + ".xml.zip";
+console.log(d.baseurl+".xml");
+  return new Promise((resolve, reject) => {
+    var xml = new XmlStream(
+      fs.createReadStream(file)
+      .pipe(zlib.createGunzip())
+    )
+    //xml.on("data",(d)=>{console.log(d)});
+    var vote= {
+      push: function (k,v) {
+        if (this[k]) {console.error("value for "+k+ " already set to "+ this[k]);}
+        this[k] = v;
+      },
+      pop: function (k) {
+        this[k]= null;
+      }
+    }
+
+    xml.on ("startElement: RollCallVote.Result",(result)=>{
+      vote.push("identifier",result.$.Identifier);
+      vote.push("date",result.$.Date);
+      console.log (">"+vote.date);
+    });
+    xml.on ("endElement: RollCallVote.Result",(result)=>{
+      console.log ("<"+vote.date);
+      vote.pop("identifier");
+      vote.pop("date");
+      vote.pop("desc");
+    });
+    xml.on ("updateElement: RollCallVote.Description.Text",(i) =>{
+      vote.push("desc",i.a? i.a.$.$text + " " +i.$text: i.$text);
+      item_rollcall.write(vote);
+      console.log (" "+vote.desc);
+    });
+    "For,Against,Abstention".split(",").map((result)=>{
+      xml.on ("startElement: Result."+result,(i) =>{
+        vote.push("result",i.$name.split(".").pop().toLowerCase());
+        vote.push("total",i.$.Number);
+        vote.push("processed",0);
+        console.log (" >"+vote.result);
+      })
+      xml.on ("endElement: Result."+result,(i) =>{
+        if (vote.processed != vote.total) {
+          console.log ("    processed "+ vote.processed +"/"+vote.total);
+          console.log(vote);
+          process.exit(1);
+        }
+        vote.pop("result");
+        vote.pop("total");
+        vote.pop("processed");
+      })
+    });
+    xml.on ("startElement: Result.PoliticalGroup.List",(i) =>{
+      vote.push("group",i.$.Identifier);
+    })
+    xml.on ("endElement: Result.PoliticalGroup.List",(i) =>{
+      vote.pop("group");
+    })
+    xml.on ("updateElement: PoliticalGroup.Member.Name",(mep)=>{
+      vote.processed++;
+      var t={mepid:mep.$.MepId,mep:mep.$text};
+      ["result","group","identifier","date","desc"].map((i)=>{//group not mandatory, more QA
+        t[i]=vote[i];
+      });
+      mep_rollcall.write(t);
+    })
+    xml.on ("updateElement: Member.Name",(mep)=>{
+      console.log(mep);
+      process.exit(1);
+    });
+    
+    xml.on ("end",()=>{
+      console.log("xmlend");
+      resolve()});
+  });
+
+}
