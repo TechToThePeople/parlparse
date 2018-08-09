@@ -26,7 +26,7 @@ function streamCSV(file,column){
 
 
   function row (d){
-    console.log(d)
+//    console.log(d)
     return d;
   };
   const pipeline = chain([
@@ -42,13 +42,12 @@ var csvParser= csv.fromPath("./data/rollcall.csv", {headers: true})
   .on("data", function(d){
 
     if (!d.extensions.includes("xml")){
-//      console.log ("xml unpublished: " + d.reference);
+      console.log ("xml unpublished: " + d.reference);
       return;
     }
     promises.push(transformFile(d));
-    console.log(d);
-    csvParser.pause();
-    csvParser.emit("end");
+//    csvParser.pause();
+//    csvParser.emit("end");
   })
   .on("end", ()=>{
 console.log("end");
@@ -62,13 +61,13 @@ console.log("end");
         for (var i in total) {
           console.log (i +":"+total[i]);
          };
-        attendence.close();
+        mep_rollcall.close();
+        item_rollcall.close();
       });
   });
 
 function transformFile(d){
   const file = "./data/"+ d.code +"/" + d.baseurl.split('/').pop() + ".xml.zip";
-console.log(d.baseurl+".xml");
   return new Promise((resolve, reject) => {
     var xml = new XmlStream(
       fs.createReadStream(file)
@@ -84,6 +83,9 @@ console.log(d.baseurl+".xml");
         this[k]= null;
       }
     }
+    console.log(d.baseurl+".xml");
+    //vote.pull ("url");
+    vote.push ("url",d.baseurl+".xml");
 
     xml.on ("startElement: RollCallVote.Result",(result)=>{
       vote.push("identifier",result.$.Identifier);
@@ -91,7 +93,7 @@ console.log(d.baseurl+".xml");
       console.log (">"+vote.date);
     });
     xml.on ("endElement: RollCallVote.Result",(result)=>{
-      console.log ("<"+vote.date);
+//      console.log ("<"+vote.date);
       vote.pop("identifier");
       vote.pop("date");
       vote.pop("desc");
@@ -104,15 +106,14 @@ console.log(d.baseurl+".xml");
     "For,Against,Abstention".split(",").map((result)=>{
       xml.on ("startElement: Result."+result,(i) =>{
         vote.push("result",i.$name.split(".").pop().toLowerCase());
-        vote.push("total",i.$.Number);
+        vote.push("total",+i.$.Number);
         vote.push("processed",0);
-        console.log (" >"+vote.result);
+//        console.log (" >"+vote.result + "="+i.$.Number);
       })
       xml.on ("endElement: Result."+result,(i) =>{
-        if (vote.processed != vote.total) {
-          console.log ("    processed "+ vote.processed +"/"+vote.total);
-          console.log(vote);
-          process.exit(1);
+        if (vote.processed != vote.total && vote.total != 0) {
+          console.log (vote.date + " for "+ vote.identifier+" error processed "+ vote.processed +"/"+vote.total + " at" + vote.url);
+//          process.exit(1);
         }
         vote.pop("result");
         vote.pop("total");
@@ -134,7 +135,7 @@ console.log(d.baseurl+".xml");
       mep_rollcall.write(t);
     })
     xml.on ("updateElement: Member.Name",(mep)=>{
-      console.log(mep);
+      console.log ("WTF updateElement: Member.Name");
       process.exit(1);
     });
     

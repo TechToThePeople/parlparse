@@ -6,8 +6,8 @@ const {chain}  = require('stream-chain');
 
 const options = {
 //Minutes + rollcalls
-  provisional:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVP&leg=8&lg=EN&currentPage=1&sortAndOrderBy=date_docu_desc",
-  finalised:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVD&leg=8&lg=EN&currentPage=1&sortAndOrderBy=date_docu_desc",
+  provisional:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVP&leg=8&lg=FR&currentPage=1&sortAndOrderBy=date_docu_desc",
+  finalised:"http://www.europarl.europa.eu/RegistreWeb/search/typedoc.htm?codeTypeDocu=PPVD&leg=8&lg=FR&currentPage=1&sortAndOrderBy=date_docu_desc",
   code: {
     RCV:"data/rollcall.csv"
    ,VOT:"data/vote.csv"
