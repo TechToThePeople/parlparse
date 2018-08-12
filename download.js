@@ -16,7 +16,7 @@ total[file]=0;
 csv.fromPath("./data/"+file, {headers: true})
   .on("data", function(d){
     if (!d.extensions.includes("xml")){
-      console.log ("xml unpublished: " + d.reference);
+      console.log ("xml unpublished: " + d.reference +" " + d.baseurl + d.reference + ".xml");
       return;
     }
     var p=downloadFile(d.code,d.baseurl,"xml");
