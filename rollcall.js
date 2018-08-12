@@ -10,7 +10,7 @@ promises = [];
 var total={};
 
 var mep_rollcall=streamCSV("./data/mep_rollcall.csv","mepid,mep,result,group,identifier");
-var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,desc");
+var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,desc,for,against,abstention,secret");
 
 promises.push(new Promise((resolve, reject) => {
   item_rollcall.on("close",() => resolve);
@@ -50,7 +50,6 @@ var csvParser= csv.fromPath("./data/rollcall.csv", {headers: true})
 //    csvParser.emit("end");
   })
   .on("end", ()=>{
-console.log("end");
     Promise
       .all(promises)
       .catch((err) =>{
@@ -91,7 +90,6 @@ function transformFile(d){
         this[k]= null;
       }
     }
-    console.log(d.baseurl+".xml");
     //vote.pull ("url");
     vote.push ("url",d.baseurl+".xml");
 
@@ -106,19 +104,23 @@ function transformFile(d){
     });
     xml.on ("endElement: RollCallVote.Result",(result)=>{
 //      console.log ("<"+vote.date);
+      item_rollcall.write(vote);
       vote.pop("identifier");
       vote.pop("date");
       vote.pop("desc");
+      "for,against,abstention,secret".split(",").map((result)=>{
+        vote.pop(result);
+      });
     });
     xml.on ("updateElement: RollCallVote.Description.Text",(i) =>{
       vote.push("desc",i.a? i.a.$.$text + " " +i.$text: i.$text);
-      item_rollcall.write(vote);
 //      console.log (" "+vote.desc);
     });
     "For,Against,Abstention,Secret".split(",").map((result)=>{
       xml.on ("startElement: Result."+result,(i) =>{
         vote.push("result",i.$name.split(".").pop().toLowerCase());
         vote.push("total",+i.$.Number);
+        vote.push(i.$name.split(".").pop().toLowerCase(),i.$.Number);
         vote.push("processed",0);
 //        console.log (" >"+vote.result + "="+i.$.Number);
       })
