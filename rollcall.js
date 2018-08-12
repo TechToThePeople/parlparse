@@ -69,14 +69,22 @@ console.log("end");
 function transformFile(d){
   const file = "./data/"+ d.code +"/" + d.baseurl.split('/').pop() + ".xml.zip";
   return new Promise((resolve, reject) => {
+    var unzip=zlib.createGunzip({flush:zlib.Z_SYNC_FLUSH,finishFlush: zlib.Z_SYNC_FLUSH});
+    unzip
+      .setEncoding('utf8')
+      .on('error',(err)=>{
+        console.log('unzip error',err);
+        this.emit('error', err);
+    });
     var xml = new XmlStream(
       fs.createReadStream(file)
-      .pipe(zlib.createGunzip())
+      //.pipe(zlib.createGunzip())
+      .pipe(unzip)
     )
     //xml.on("data",(d)=>{console.log(d)});
     var vote= {
       push: function (k,v) {
-        if (this[k]) {console.error("value for "+k+ " already set to "+ this[k]);}
+        if (this[k]) {console.log(this);console.error("value for "+k+ " already set to "+ this[k]);}
         this[k] = v;
       },
       pop: function (k) {
@@ -87,10 +95,14 @@ function transformFile(d){
     //vote.pull ("url");
     vote.push ("url",d.baseurl+".xml");
 
+    xml.on ("error",(err)=>{
+      console.log('error',err);
+      reject(err);
+    });
     xml.on ("startElement: RollCallVote.Result",(result)=>{
       vote.push("identifier",result.$.Identifier);
       vote.push("date",result.$.Date);
-      console.log (">"+vote.date);
+//      console.log (">"+vote.date);
     });
     xml.on ("endElement: RollCallVote.Result",(result)=>{
 //      console.log ("<"+vote.date);
@@ -101,9 +113,9 @@ function transformFile(d){
     xml.on ("updateElement: RollCallVote.Description.Text",(i) =>{
       vote.push("desc",i.a? i.a.$.$text + " " +i.$text: i.$text);
       item_rollcall.write(vote);
-      console.log (" "+vote.desc);
+//      console.log (" "+vote.desc);
     });
-    "For,Against,Abstention".split(",").map((result)=>{
+    "For,Against,Abstention,Secret".split(",").map((result)=>{
       xml.on ("startElement: Result."+result,(i) =>{
         vote.push("result",i.$name.split(".").pop().toLowerCase());
         vote.push("total",+i.$.Number);
@@ -140,7 +152,7 @@ function transformFile(d){
     });
     
     xml.on ("end",()=>{
-      console.log("xmlend");
+////      console.log("xmlend");
       resolve()});
   });
 
