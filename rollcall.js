@@ -10,7 +10,7 @@ promises = [];
 var total={};
 
 var mep_rollcall=streamCSV("./data/mep_rollcall.csv","mepid,mep,result,group,identifier");
-var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,desc,for,against,abstention,secret");
+var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,report,desc,title,for,against,abstention,title");
 
 promises.push(new Promise((resolve, reject) => {
   item_rollcall.on("close",() => resolve);
@@ -68,6 +68,8 @@ var csvParser= csv.fromPath("./data/rollcall.csv", {headers: true})
 function transformFile(d){
   const file = "./data/"+ d.code +"/" + d.baseurl.split('/').pop() + ".xml.zip";
   return new Promise((resolve, reject) => {
+    var re_report =/A8-\d{4}\/\d{4}/;
+    var re_motion =/[RC-]B8-\d{4}\/\d{4}/;
     var unzip=zlib.createGunzip({flush:zlib.Z_SYNC_FLUSH,finishFlush: zlib.Z_SYNC_FLUSH});
     unzip
       .setEncoding('utf8')
@@ -107,13 +109,38 @@ function transformFile(d){
       item_rollcall.write(vote);
       vote.pop("identifier");
       vote.pop("date");
+      vote.pop("report");
       vote.pop("desc");
+      vote.pop("title");
       "for,against,abstention,secret".split(",").map((result)=>{
         vote.pop(result);
       });
     });
+    xml.on ("updateElement: RollCallVote.Description.Title",(i) =>{
+      console.log(i);
+      vote.push("title",i.$text);
+    });
     xml.on ("updateElement: RollCallVote.Description.Text",(i) =>{
-      vote.push("desc",i.a? i.a.$.$text + " " +i.$text: i.$text);
+      if (i.a){ 
+        vote.report = i.a.$text;
+      }
+      var doc=re_report.exec(i.$text);
+      if (doc) {
+        i.$text=i.$text.replace(doc[0]+" - ","");
+        vote.report = doc[0];
+      } else {
+        var doc=re_motion.exec(i.$text);
+        if (doc) {
+          i.$text=i.$text.replace(doc[0]+" - ","");
+//          if (doc[0].startsWith("RC-")) { //the "normal"
+//            vote.report = doc[0].substring(3); //remove RC-
+//          }
+        }
+      }
+      if (i.$text.charAt(0) == '-')
+        i.$text = i.$text.substring(1);
+      vote.push("desc", i.$text.trim());
+      //reports start with "A8-0054/2017 -" or mandate with "RC-B8-0245/2017 -"
 //      console.log (" "+vote.desc);
     });
     "For,Against,Abstention,Secret".split(",").map((result)=>{
