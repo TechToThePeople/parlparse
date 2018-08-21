@@ -17,6 +17,7 @@ Match on lastname, attendnance (that use the normal id) and vote (the secret id)
 
 what's in a name? (The Earl of) Dartmouth
 
+similar names:
 On the rollcall,
 369:Keller Jan,6326
 370:Keller Ska,5908
@@ -46,6 +47,8 @@ matching on name with:
 6649,Rodríguez-Piñero Fernández,for,S&D,92926
 6357,Rozière,for,S&D,92926
 
+and you need to take into account the date of the vote too, name isn't enough
+Wadjid Khan vs Afzal KHAN
 and matching on names. What is first or last? with 
 Martin Dominique or Simon Peter
 
