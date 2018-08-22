@@ -35,6 +35,7 @@ q "select mepid,id,name from  data/attendance_manualmatch.csv m left join tmp/vo
 
 #fuck it, manual fix
 echo "6744,188624,Khan" >> data/mepidmatch.csv
+echo "0,2109,Crowley" >> data/mepidmatch.csv
 
 #list of meps with voteid
 q 'select distinct m.*, mepid as voteid from /var/www/ep/data/meps.all.csv m join data/mepidmatch.csv on epid=id' -d, -H -O > data/meps.csv
