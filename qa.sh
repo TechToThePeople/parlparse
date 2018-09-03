@@ -1,21 +1,24 @@
-q 'select mep,mepid from data/mep_rollcall.csv group by mep' -d, -H -O > data/rollcall_name.csv 
-q 'select name,id,min(date) first, max(date) last from data/mep_attendance.csv group by name,id' -d, -H -O > data/attendance_name.csv
-
-q "select mepid,id,name from data/rollcall_name.csv r join data/attendance_name.csv a where r.mep=a.name" -d, -H -O > data/mepidmatch.csv
-#deal with Jan Keller -> Keller Jan mapping
-q "select substr(name, 1, instr(name,' ') -1) first, substr(name, instr(name,' ') +1) last, name, id from data/attendance_name.csv where instr(name,' ') > 0" -d, -H -O > tmp/attendance_splitname.csv
-q "select mepid,id,name from data/rollcall_name.csv r join tmp/attendance_splitname.csv a where r.mep=last || ' ' || first" -d, -H >> data/mepidmatch.csv
-## prepare for manual fixing, for multiple firstnames
-q 'select * from data/attendance_name.csv where id in (124737)' -d, -H -O > data/attendance_manualmatch.csv
 ## prepare for manual fixing, for same lastname, but not at the same time
 q 'select name,id from data/mep_attendance.csv group by name,id' -d, -H -O > tmp/potentialdupes.csv
-q 'select name,count(*) as issue from tmp/potentialdupes.csv group by name' -d, -H
+q 'select name,count(*) as issue from tmp/potentialdupes.csv group by name order by count(*)' -d, -H -O > tmp/potentialdupesgrouped.csv
+q 'select name,issue from tmp/potentialdupesgrouped.csv where issue>1 ' -d, -H -O > tmp/dupes.csv
 
 #Khan,2 -- this one is the problem, the others have their first + last... most of the time
 #López,2
 #Mayer,2
 
-#beware, contains duplicates 
+# start working for real
+q 'select mep,mepid from data/mep_rollcall.csv group by mep' -d, -H -O > data/rollcall_name.csv 
+q 'select name,id,min(date) first, max(date) last from data/mep_attendance.csv group by name,id' -d, -H -O > data/attendance_name.csv
+#contains duplicates
+
+q "select mepid,id,name from data/rollcall_name.csv r join data/attendance_name.csv a where r.mep=a.name and name not in (select name from tmp/dupes.csv)" -d, -H -O > data/mepidmatch.csv
+#deal with Jan Keller -> Keller Jan mapping
+q "select substr(name, 1, instr(name,' ') -1) first, substr(name, instr(name,' ') +1) last, name, id from data/attendance_name.csv where instr(name,' ') > 0" -d, -H -O > tmp/attendance_splitname.csv
+q "select mepid,id,name from data/rollcall_name.csv r join tmp/attendance_splitname.csv a where r.mep=last || ' ' || first" -d, -H >> data/mepidmatch.csv
+## prepare for manual fixing, for multiple firstnames
+q 'select * from data/attendance_name.csv where id in (124737)' -d, -H -O > data/attendance_manualmatch.csv
+
 
 ## Quality and verifications
 # list of all meps that voted
@@ -36,6 +39,7 @@ q "select mepid,id,name from  data/attendance_manualmatch.csv m left join tmp/vo
 #fuck it, manual fix
 echo "6744,188624,Khan" >> data/mepidmatch.csv
 echo "0,2109,Crowley" >> data/mepidmatch.csv
+echo "6581,124962,Khan" >> data/mepidmatch.csv
 
 #list of meps with voteid
 q 'select distinct m.*, mepid as voteid from /var/www/ep/data/meps.all.csv m join data/mepidmatch.csv on epid=id' -d, -H -O > data/meps.csv
