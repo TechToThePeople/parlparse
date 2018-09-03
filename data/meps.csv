@@ -2,7 +2,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96675,Isabella,LÖVIN,false,2009-07-14,2014-10-02,1963-02-03,Sweden,F,Verts/ALE,Miljöpartiet de gröna,5862
 191693,Elsi,KATAINEN,true,2018-03-01,,1966-12-17,Finland,F,ALDE,Suomen Keskusta,6766
 1351,Miguel,ARIAS CAÑETE,false,1986-01-01,2014-10-31,1950-02-24,Spain,M,PPE,Partido Popular,1178
-28618,Valdis,DOMBROVSKIS,false,2004-07-20,2014-10-31,1971-08-05,Latvia,M,PPE,Partija "VIENOTĪBA""",5601
+28618,Valdis,DOMBROVSKIS,false,2004-07-20,2014-10-31,1971-08-05,Latvia,M,PPE,"Partija ""VIENOTĪBA""",5601
 125106,Johan,VAN OVERTVELDT,false,2014-07-01,2014-10-10,1955-08-24,Belgium,M,ECR,Nieuw-Vlaamse Alliantie,6683
 124696,Andrus,ANSIP,false,2014-07-01,2014-10-31,1956-10-01,Estonia,M,ALDE,Eesti Reformierakond,6327
 191510,Jacques,COLOMBIER,true,2018-02-02,,1952-02-17,France,M,ENF,Rassemblement national,6765
@@ -15,7 +15,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 191695,Miroslavs,MITROFANOVS,true,2018-03-05,,1966-12-18,Latvia,M,Verts/ALE,Latvijas Krievu savienība,6767
 28244,Wolf,KLINZ,true,2004-07-20,,1941-09-13,Germany,M,ALDE,Freie Demokratische Partei,5364
 33997,Corina,CREȚU,false,2007-01-01,2014-10-31,1967-06-24,Romania,F,S&D,Partidul Social Democrat,5661
-97170,Francisco,SOSA WAGNER,false,2009-07-14,2014-10-19,1946-06-10,Spain,M,ALDE,Unión, Progreso y Democracia,6174
+97170,Francisco,SOSA WAGNER,false,2009-07-14,2014-10-19,1946-06-10,Spain,M,ALDE,"Unión, Progreso y Democracia",6174
 189391,Baroness Nosheena,MOBARIK,true,2017-09-08,,1957-10-16,United Kingdom,F,ECR,Conservative Party,6752
 39713,Renate,WEBER,true,2007-12-10,,1955-08-03,Romania,F,ALDE,Independent,5770
 124822,Dietmar,KÖSTER,true,2014-07-01,,1957-01-06,Germany,M,S&D,Sozialdemokratische Partei Deutschlands,6459
@@ -62,7 +62,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 131750,Mihai,ŢURCANU,true,2015-03-02,,1975-11-02,Romania,M,PPE,Partidul Naţional Liberal,6717
 2128,Paavo,VÄYRYNEN,false,1995-01-01,2018-06-11,1946-09-02,Finland,M,ALDE,Suomen Keskusta,4550
 132925,Edward,CZESAK,true,2015-06-11,,1951-02-22,Poland,M,ECR,Prawo i Sprawiedliwość,6719
-96709,Morten,LØKKEGAARD,true,2009-07-14,,1964-12-20,Denmark,M,ALDE,Venstre, Danmarks Liberale Parti,5889
+96709,Morten,LØKKEGAARD,true,2009-07-14,,1964-12-20,Denmark,M,ALDE,"Venstre, Danmarks Liberale Parti",5889
 188718,Christelle,LECHEVALIER,true,2017-06-19,,1968-09-27,France,F,ENF,Rassemblement national,6746
 188445,André,ELISSEN,true,2017-06-13,,1960-02-12,Netherlands,M,ENF,Partij voor de Vrijheid,6741
 188945,Dennis,RADTKE,true,2017-07-24,,1979-04-29,Germany,M,PPE,Christlich Demokratische Union Deutschlands,6750
@@ -169,13 +169,13 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 124937,Peter,ERIKSSON,false,2014-07-01,2016-05-24,1958-08-03,Sweden,M,Verts/ALE,Miljöpartiet de gröna,6554
 96919,Emma,McCLARKIN,true,2009-07-14,,1978-10-09,United Kingdom,F,ECR,Conservative Party,6087
 4432,Claude,TURMES,false,1999-07-20,2018-06-19,1960-11-26,Luxembourg,M,Verts/ALE,Déi Gréng - Les Verts,4847
-124880,Ulla,TØRNÆS,false,2014-07-01,2016-02-29,1962-09-04,Denmark,F,ALDE,Venstre, Danmarks Liberale Parti,6518
+124880,Ulla,TØRNÆS,false,2014-07-01,2016-02-29,1962-09-04,Denmark,F,ALDE,"Venstre, Danmarks Liberale Parti",6518
 124953,Jude,KIRTON-DARLING,true,2014-07-01,,1977-06-02,United Kingdom,F,S&D,Labour Party,6571
 96835,Traian,UNGUREANU,true,2009-07-14,,1958-03-01,Romania,M,PPE,Partidul Naţional Liberal,6007
 124802,Siegfried,MUREŞAN,true,2014-07-01,,1981-09-20,Romania,M,PPE,Partidul Naţional Liberal,6436
 124897,Stanisław,OŻÓG,true,2014-07-01,,1953-05-27,Poland,M,ECR,Prawo i Sprawiedliwość,6536
 124956,Amjad,BASHIR,true,2014-07-01,,1952-09-17,United Kingdom,M,ECR,Conservative Party,6574
-28615,Roberts,ZĪLE,true,2004-07-20,,1958-06-20,Latvia,M,ECR,Nacionālā apvienība "Visu Latvijai!""-""Tēvzemei un Brīvībai/LNNK""",5598
+28615,Roberts,ZĪLE,true,2004-07-20,,1958-06-20,Latvia,M,ECR,"Nacionālā apvienība ""Visu Latvijai!""-""Tēvzemei un Brīvībai/LNNK""",5598
 96698,Viktor,USPASKICH,true,2009-07-14,,1959-07-24,Lithuania,M,ALDE,Darbo partija,5879
 28308,Elisa,FERREIRA,false,2004-07-20,2016-06-19,1955-10-17,Portugal,F,S&D,Partido Socialista,5427
 124702,Jaromír,ŠTĚTINA,true,2014-07-01,,1943-04-06,Czech Republic,M,PPE,TOP 09 a Starostové,6333
@@ -201,7 +201,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 1179,Michèle,ALLIOT-MARIE,true,1989-07-25,,1946-09-10,France,F,PPE,Les Républicains,1340
 96918,Derek,VAUGHAN,true,2009-07-14,,1961-05-02,United Kingdom,M,S&D,Labour Party,6086
 28135,György,SCHÖPFLIN,true,2004-07-20,,1939-11-24,Hungary,M,PPE,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,5265
-28617,Inese,VAIDERE,true,2004-07-20,,1952-09-03,Latvia,F,PPE,Partija "VIENOTĪBA""",5600
+28617,Inese,VAIDERE,true,2004-07-20,,1952-09-03,Latvia,F,PPE,"Partija ""VIENOTĪBA""",5600
 129164,Tom,VANDENKENDELAERE,true,2014-11-06,,1984-09-02,Belgium,M,PPE,Christen-Democratisch & Vlaams,6706
 96710,Jens,ROHDE,true,2009-07-14,,1970-04-18,Denmark,M,ALDE,Det Radikale Venstre,5890
 22418,Esther,HERRANZ GARCÍA,true,2002-01-21,,1969-07-03,Spain,F,PPE,Partido Popular,5018
@@ -259,7 +259,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 125023,Anja,HAZEKAMP,true,2014-07-01,,1968-01-21,Netherlands,F,GUE/NGL,Partij voor de Dieren,6628
 96806,Teresa,JIMÉNEZ-BECERRIL BARRIO,true,2009-07-14,,1961-07-24,Spain,F,PPE,Partido Popular,5978
 111014,Josef,WEIDENHOLZER,true,2011-12-01,,1950-03-06,Austria,M,S&D,Sozialdemokratische Partei Österreichs,6235
-114279,Isabelle,THOMAS,true,2012-05-16,,1961-11-26,France,F,S&D,Génération.s, le mouvement,6282
+114279,Isabelle,THOMAS,true,2012-05-16,,1961-11-26,France,F,S&D,"Génération.s, le mouvement",6282
 23894,Anna,ZÁBORSKÁ,true,2004-05-01,,1948-06-07,Slovakia,F,PPE,Kresťanskodemokratické hnutie,5189
 124877,Jadwiga,WIŚNIEWSKA,true,2014-07-01,,1963-07-02,Poland,F,ECR,Prawo i Sprawiedliwość,6515
 124713,Tomáš,ZDECHOVSKÝ,true,2014-07-01,,1979-11-02,Czech Republic,M,PPE,Křesťanská a demokratická unie - Československá strana lidová,6344
@@ -287,7 +287,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 4525,Nigel,FARAGE,true,1999-07-20,,1964-04-03,United Kingdom,M,EFDD,United Kingdom Independence Party,4929
 124808,Norbert,LINS,true,2014-07-01,,1977-12-22,Germany,M,PPE,Christlich Demokratische Union Deutschlands,6442
 28297,Jacek,SARYUSZ-WOLSKI,true,2004-07-20,,1948-09-19,Poland,M,NA/NI,Bezpartyjny,5416
-96934,Sandra,KALNIETE,true,2009-07-14,,1952-12-22,Latvia,F,PPE,Partija "VIENOTĪBA""",6095
+96934,Sandra,KALNIETE,true,2009-07-14,,1952-12-22,Latvia,F,PPE,"Partija ""VIENOTĪBA""",6095
 96829,Ádám,KÓSA,true,2009-07-14,,1975-07-01,Hungary,M,PPE,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,6001
 96852,Cornelia,ERNST,true,2009-07-14,,1956-11-30,Germany,F,GUE/NGL,DIE LINKE.,6024
 124791,Daniele,VIOTTI,true,2014-07-01,,1974-03-08,Italy,M,S&D,Partito Democratico,6425
@@ -367,7 +367,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 28497,Gerard,BATTEN,true,2004-07-20,,1954-03-27,United Kingdom,M,EFDD,United Kingdom Independence Party,5567
 28619,Tatjana,ŽDANOKA,false,2004-07-20,2018-03-04,1950-05-08,Latvia,F,Verts/ALE,Latvijas Krievu savienība,5602
 124935,Michel,REIMON,true,2014-07-01,,1971-07-11,Austria,M,Verts/ALE,Die Grünen - Die Grüne Alternative,6552
-96901,Krišjānis,KARIŅŠ,true,2009-07-14,,1964-12-13,Latvia,M,PPE,Partija "VIENOTĪBA""",6070
+96901,Krišjānis,KARIŅŠ,true,2009-07-14,,1964-12-13,Latvia,M,PPE,"Partija ""VIENOTĪBA""",6070
 35743,Dame Glenis,WILLMOTT,false,2006-01-01,2017-10-02,1951-03-04,United Kingdom,F,S&D,Labour Party,5698
 124955,Jane,COLLINS,true,2014-07-01,,1962-02-17,United Kingdom,F,EFDD,United Kingdom Independence Party,6573
 28154,Ole,CHRISTENSEN,true,2004-07-20,,1955-05-07,Denmark,M,S&D,Socialdemokratiet,5284
@@ -419,7 +419,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 125026,Angelika,MLINAR,true,2014-07-01,,1970-06-29,Austria,F,ALDE,NEOS – Das Neue Österreich,6631
 4319,Pilar,AYUSO,true,1999-07-20,,1942-06-16,Spain,F,PPE,Partido Popular,4742
 124991,Jytte,GUTELAND,true,2014-07-01,,1979-09-16,Sweden,F,S&D,Arbetarepartiet- Socialdemokraterna,6603
-124744,Guillaume,BALAS,true,2014-07-01,,1972-08-30,France,M,S&D,Génération.s, le mouvement,6378
+124744,Guillaume,BALAS,true,2014-07-01,,1972-08-30,France,M,S&D,"Génération.s, le mouvement",6378
 124871,Nikolay,BAREKOV,true,2014-07-01,,1972-10-16,Bulgaria,M,ECR,Reload Bulgaria Party,6509
 4553,Jacqueline,FOSTER,true,1999-07-20,,,United Kingdom,F,ECR,Conservative Party,4957
 124743,Artis,PABRIKS,true,2014-07-01,,1966-03-22,Latvia,M,PPE,-,6377
@@ -621,7 +621,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 124778,Marco,VALLI,true,2014-07-01,,1985-06-29,Italy,M,EFDD,Movimento 5 Stelle,6412
 125050,Ángela,VALLINA,true,2014-07-01,,1959-07-06,Spain,F,GUE/NGL,Izquierda Xunida,6656
 111589,Inês Cristina,ZUBER,false,2012-01-18,2016-01-30,1980-03-11,Portugal,F,GUE/NGL,Partido Comunista Português,6253
-125038,Maite,PAGAZAURTUNDÚA RUIZ,true,2014-07-01,,1965-02-11,Spain,F,ALDE,Unión, Progreso y Democracia,6644
+125038,Maite,PAGAZAURTUNDÚA RUIZ,true,2014-07-01,,1965-02-11,Spain,F,ALDE,"Unión, Progreso y Democracia",6644
 124927,Branislav,ŠKRIPEK,true,2014-07-01,,1970-08-30,Slovakia,M,ECR,OBYČAJNÍ ĽUDIA,6545
 97058,Guy,VERHOFSTADT,true,2009-07-14,,1953-04-11,Belgium,M,ALDE,Open Vlaamse Liberalen en Democraten,6159
 124710,Michaela,ŠOJDROVÁ,true,2014-07-01,,1963-10-28,Czech Republic,F,PPE,Křesťanská a demokratická unie - Československá strana lidová,6341
@@ -680,7 +680,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96877,Zoltán,BALCZÓ,true,2009-07-14,,1948-03-24,Hungary,M,NA/NI,Jobbik Magyarországért Mozgalom,6048
 124723,Péter,NIEDERMÜLLER,true,2014-07-01,,1952-09-03,Hungary,M,S&D,Demokratikus Koalíció,6352
 2054,Heidi,HAUTALA,true,1995-01-01,,1955-11-14,Finland,F,Verts/ALE,Vihreä liitto,4535
-124746,Andrejs,MAMIKINS,true,2014-07-01,,1976-03-11,Latvia,M,S&D,"Saskaņa"" sociāldemokrātiskā partija",6380
+124746,Andrejs,MAMIKINS,true,2014-07-01,,1976-03-11,Latvia,M,S&D,"""Saskaņa"" sociāldemokrātiskā partija",6380
 125237,Marco,ZULLO,true,2014-07-01,,1978-10-29,Italy,M,EFDD,Movimento 5 Stelle,6695
 124699,Miroslav,POCHE,true,2014-07-01,,1978-06-03,Czech Republic,M,S&D,Česká strana sociálně demokratická,6330
 125035,Lola,SÁNCHEZ CALDENTEY,true,2014-07-01,,1978-03-17,Spain,F,GUE/NGL,PODEMOS,6641

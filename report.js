@@ -6,6 +6,7 @@ const {chain}  = require('stream-chain');
 
 const options = {
 //reports + motions(?)
+  url:"http://www.europarl.europa.eu/plenary/en/texts-submitted.html",
   report:"http://www.europarl.europa.eu/plenary/en/texts-submitted.html?tabType=reports",
   motion:"http://www.europarl.europa.eu/plenary/en/texts-submitted.html?tabType=motions",
 };
@@ -17,17 +18,31 @@ promises.push(new Promise((resolve, reject) => {
   pipes['report'].on("close",() => resolve);
 }));
 
-
-//scrape(options.report,"report")
+/*
 scrape(options.motion,"motion")
 .then(()=>{
-  console.log("scraped motions");
+  console.log("scraped motions 8th term");
 });
 
 scrape(options.report,"report")
 .then(()=>{
-  console.log("scraped report");
+  console.log("scraped report 8th term");
 });
+*/
+//scrape(options.report,"report")
+////[2014,2013,2012,2010,2009].forEach (y => {
+[2014].forEach (y => {
+/*  scrape(options.motion,{leg:7,refAYear:y},"motion")
+  .then(()=>{
+    console.log("scraped motions "+y);
+  });
+*/
+  scrape(options.url,{tabActif:"tabResult",tabType:"reports",leg:7,refAYear:y},"report")
+  .then(()=>{
+    console.log("scraped report " +y);
+  });
+});
+
 Promise
   .all(promises)
   .then(() => { 
@@ -55,7 +70,7 @@ function streamCSV(file,header){
   return pipeline;
 };
 
-function scrape(docurl,type) {
+function scrape(docurl,param,type) {
 function paginate(context,data){
   var next=context.doc().get(".zone_paginate .next_page@data-page");
   if (next)
@@ -64,7 +79,8 @@ function paginate(context,data){
 }
 
 return new Promise((resolve, reject) => {
-  osmosis.post(docurl)
+  param = param || {};
+  osmosis.post(docurl,param)
 //  .log(console.log)
 .error(console.log)
     .paginate(paginate,10)

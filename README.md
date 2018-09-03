@@ -1,3 +1,4 @@
+you need the latest version of q (>1.4 to work -bug on escaping ")
 The data published by the EP needs some massaging to be extracted in a useful format.
 
 These are the steps:
