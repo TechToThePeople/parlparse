@@ -37,10 +37,11 @@ q 'select v.* from tmp/vote_unmatched.csv v left join tmp/attendance_splitname.c
 q "select mepid,id,name from  data/attendance_manualmatch.csv m left join tmp/vote_unmatched.csv v on replace(name,rtrim(name,replace(name,' ','')), '')= substr(mep, 1, instr(mep,' ') -1)" -d, -H >> data/mepidmatch.csv
 
 #fuck it, manual fix
+#voteid,epid,name
 echo "6744,188624,Khan" >> data/mepidmatch.csv
 echo "0,2109,Crowley" >> data/mepidmatch.csv
 echo "6581,124962,Khan" >> data/mepidmatch.csv
-
+echo "6648,125042,López" >> data/mepidmatch.csv
 #list of meps with voteid
 q 'select distinct m.*, mepid as voteid from /var/www/ep/data/meps.all.csv m join data/mepidmatch.csv on epid=id' -d, -H -O > data/meps.csv
 

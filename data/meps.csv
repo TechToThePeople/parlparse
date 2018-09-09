@@ -471,6 +471,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 1892,Carlos,COELHO,true,1994-01-11,,1960-05-20,pt,M,PPE,Partido Social Democrata,carlos.coelho@europarl.europa.eu,carloscoelhope,3800
 96978,Nuno,MELO,true,2009-07-14,,1966-03-18,pt,M,PPE,Partido Popular,nuno.melo@europarl.europa.eu,,6121
 125044,José,BLANCO LÓPEZ,true,2014-07-01,,1962-02-06,es,M,S&D,Partido Socialista Obrero Español,jose.blancolopez@europarl.europa.eu,,6650
+125042,Javi,LÓPEZ,true,2014-07-01,,1985-11-11,es,M,S&D,Partit dels Socialistes de Catalunya,javi.lopez@europarl.europa.eu,fjavilopez,6648
 112755,Andrej,PLENKOVIĆ,false,2013-07-01,2016-10-13,1970-04-08,hr,M,PPE,Hrvatska demokratska zajednica,,,6268
 124703,Tibor,SZANYI,true,2014-07-01,,1956-07-13,hu,M,S&D,Magyar Szocialista Párt,tibor.szanyi@europarl.europa.eu,szanyitibor,6334
 124859,Giulia,MOI,true,2014-07-01,,1971-05-24,it,F,EFDD,Movimento 5 Stelle,giulia.moi@europarl.europa.eu,,6497
