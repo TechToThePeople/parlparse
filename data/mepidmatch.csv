@@ -264,6 +264,7 @@ mepid,id,name
 5692,34728,Groote
 4032,2025,Grossetête
 5109,23785,Grzyb
+6779,193879,Gräzin
 5342,28220,Gräßle
 5963,96790,Gróbarczyk
 6063,96892,Gualtieri
@@ -278,6 +279,7 @@ mepid,id,name
 6076,96907,Hadjigeorgiou
 6358,124727,Halla-aho
 4959,4555,Hannan
+6777,193419,Hansen
 5246,28116,Harkin
 5353,28233,Harms
 4535,2054,Hautala
@@ -408,6 +410,7 @@ mepid,id,name
 5371,28251,Leichtfried
 4685,4262,Leinen
 6592,95074,Lenaers
+5809,72754,Leontini
 5105,23781,Lewandowski
 6561,124943,Lewer
 5094,23768,Liberadzki
@@ -853,6 +856,11 @@ mepid,id,name
 5770,39713,Renate Weber
 6566,124948,Siôn Simon
 5908,96734,Ska Keller
+6371,124737,Maria João Rodrigues
+6744,188624,Khan
+0,2109,Crowley
+6581,124962,Khan
+6648,125042,López
 1178,1351,Miguel Arias Cañete
 6589,124970,Miriam Dalli
 6020,96848,Mariya Gabriel
@@ -860,8 +868,3 @@ mepid,id,name
 6203,102887,Béla Kovács
 4544,2119,Olli Rehn
 4550,2128,Paavo Väyrynen
-6371,124737,Maria João Rodrigues
-6744,188624,Khan
-0,2109,Crowley
-6581,124962,Khan
-6648,125042,López

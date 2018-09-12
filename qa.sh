@@ -17,6 +17,7 @@ q "select mepid,id,name from data/rollcall_name.csv r join data/attendance_name.
 q "select substr(name, 1, instr(name,' ') -1) first, substr(name, instr(name,' ') +1) last, name, id from data/attendance_name.csv where instr(name,' ') > 0" -d, -H -O > tmp/attendance_splitname.csv
 q "select mepid,id,name from data/rollcall_name.csv r join tmp/attendance_splitname.csv a where r.mep=last || ' ' || first" -d, -H >> data/mepidmatch.csv
 ## prepare for manual fixing, for multiple firstnames
+#q 'select * from data/attendance_name.csv where id in (124737,1351,124970,96848,191693,102887,2119,2128)' -d, -H -O > data/attendance_manualmatch.csv
 q 'select * from data/attendance_name.csv where id in (124737)' -d, -H -O > data/attendance_manualmatch.csv
 
 
@@ -25,7 +26,8 @@ q 'select * from data/attendance_name.csv where id in (124737)' -d, -H -O > data
 q 'select mepid,mep,`group`,count(*) voted from data/mep_rollcall.csv group by mep,mepid' -d, -H -O > data/mep_voting.csv
 
 # missing mapping
-q 'select v.* from data/mep_voting.csv v left join data/meps.csv on mepid=voteid left join tmp/attendance_splitname.csv on  mep=first where voteid is null' -d, -H -O > tmp/vote_unmatched.csv
+#todo we are using the result (meps.csv) to get that list. does it mean we need to run twice?
+q 'select v.* from data/mep_voting.csv v left join data/meps.csv on mepid=voteid where voteid is null' -d, -H -O > tmp/vote_unmatched.csv
 
 ## add the missing ones?
 q 'select mepid,id,name from tmp/vote_unmatched.csv v join tmp/attendance_splitname.csv a on v.mep=a.last' -d, -H >> data/mepidmatch.csv
