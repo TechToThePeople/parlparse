@@ -3,6 +3,11 @@ The data published by the EP needs some massaging to be extracted in a useful fo
 
 These are the steps:
 
+0) prepare the list of meps
+cd /var/www/ep/
+gulp
+node script/aliases.js
+
 1) parse the pages to get the list of the documents
 
 - node index.js : parse and fetch all the attendance lists, votes and rollcall documents
@@ -14,7 +19,7 @@ These are the steps:
 
 3) once that's done, parse each xml to extract the data within them
 
-- node attendence.js
+- node attendance.js
 - node rollcall.js to generate data/item_rollcall.csv and data/mep_rollcall.csv
 
 pay attention to the mistakes, eg:
@@ -25,10 +30,15 @@ It means you have more registered votes than the total mentionned in the file.
 4) once that's done, use the attendance lists (that contains the "normal" meps id) to match them with the mep id used in the rollcalls (nope, they aren't the same)
 
 sh qa.sh
-
+sh qa.sh
+(yes, twice)
 
 see, that wasn't that difficult, wasn't it? (</irony>)
 
 5) before git pushing, 
 
 gzip data/mep_rollcall.csv 
+
+6) 
+cd /var/www/mepwatch
+sh update.sh

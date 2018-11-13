@@ -230,6 +230,7 @@ mepid,id,name
 5803,58758,Gardini
 6454,124817,Gasbarra
 3827,1913,Gebhardt
+6780,194391,Gehrold
 6005,96833,Geier
 6485,124847,Gentile
 6098,96940,Gerbrandy
@@ -645,6 +646,7 @@ mepid,id,name
 6659,125053,Sebastià
 5897,96718,Sehnalová
 6722,134243,Selimovic
+6781,194658,Sellström
 6655,125049,Senra Rodríguez
 6428,124794,Sernagiotto
 6375,124741,Serrão Santos
@@ -856,11 +858,6 @@ mepid,id,name
 5770,39713,Renate Weber
 6566,124948,Siôn Simon
 5908,96734,Ska Keller
-6371,124737,Maria João Rodrigues
-6744,188624,Khan
-0,2109,Crowley
-6581,124962,Khan
-6648,125042,López
 1178,1351,Miguel Arias Cañete
 6589,124970,Miriam Dalli
 6020,96848,Mariya Gabriel
@@ -868,3 +865,8 @@ mepid,id,name
 6203,102887,Béla Kovács
 4544,2119,Olli Rehn
 4550,2128,Paavo Väyrynen
+6371,124737,Maria João Rodrigues
+6744,188624,Khan
+0,2109,Crowley
+6581,124962,Khan
+6648,125042,López

@@ -10,7 +10,7 @@ promises = [];
 var total={};
 
 var mep_rollcall=streamCSV("./data/mep_rollcall.csv","mepid,mep,result,group,identifier");
-var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,report,desc,title,for,against,abstention,title");
+var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,report,desc,title,for,against,abstention");
 
 promises.push(new Promise((resolve, reject) => {
   item_rollcall.on("close",() => resolve);
@@ -74,14 +74,15 @@ function transformFile(d){
     unzip
       .setEncoding('utf8')
       .on('error',(err)=>{
-        console.log('unzip error',err);
-        this.emit('error', err);
+        console.log('unzip error file '+file,err);
+        this.emit('error file '+file, err);
     });
     var xml = new XmlStream(
       fs.createReadStream(file)
       //.pipe(zlib.createGunzip())
       .pipe(unzip)
-    )
+    );
+
     //xml.on("data",(d)=>{console.log(d)});
     var vote= {
       push: function (k,v) {
@@ -96,7 +97,7 @@ function transformFile(d){
     vote.push ("url",d.baseurl+".xml");
 
     xml.on ("error",(err)=>{
-      console.log('error',err);
+      console.log('error '+file,err);
       reject(err);
     });
     xml.on ("startElement: RollCallVote.Result",(result)=>{
