@@ -177,8 +177,16 @@ function transformFile(d){
       mep_rollcall.write(t);
     })
     xml.on ("updateElement: Member.Name",(mep)=>{
-      console.log ("WTF updateElement: Member.Name");
-      process.exit(1);
+      console.log(vote);
+      console.log(mep);
+      console.log ("WTF updateElement: Member.Name "+ mep.$text+" on " +d.reference);
+      vote.processed++;
+      var t={mepid:mep.$.MepId,mep:mep.$text};
+      ["result","group","identifier","date","desc"].map((i)=>{//group not mandatory, more QA
+        t[i]=vote[i];
+      });
+      mep_rollcall.write(t);
+      //process.exit(1);
     });
     
     xml.on ("end",()=>{

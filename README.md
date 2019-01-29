@@ -33,6 +33,10 @@ sh qa.sh
 sh qa.sh
 (yes, twice)
 
+DUPLICATE,Khan,S&D,1
+6782,Packet,ECR,530
+6371,Rodrigues Maria João,S&D,7036
+
 see, that wasn't that difficult, wasn't it? (</irony>)
 
 5) before git pushing, 
