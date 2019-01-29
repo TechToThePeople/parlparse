@@ -1,6 +1,8 @@
 epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,voteid
+111033,Kārlis,ŠADURSKIS,false,2011-12-01,2014-06-30,1959-10-11,lv,M,PPE,Vienotība,,,6246
 96675,Isabella,LÖVIN,false,2009-07-14,2014-10-02,1963-02-03,se,F,Verts/ALE,Miljöpartiet de gröna,isabella.lovin@telia.com,,5862
 192635,Danilo Oscar,LANCINI,true,2018-04-17,,1965-10-15,it,,ENF,Lega Nord,danilooscar.lancini@europarl.europa.eu,,6771
+28299,Bogusław,SONIK,false,2004-07-20,2014-06-30,1953-12-03,pl,M,PPE,Platforma Obywatelska,,,5418
 1351,Miguel,ARIAS CAÑETE,false,1986-01-01,2014-10-31,1950-02-24,es,M,PPE,Partido Popular,miguel.ariascanete@europarl.europa.eu,,1178
 28618,Valdis,DOMBROVSKIS,false,2004-07-20,2014-10-31,1971-08-05,lv,M,PPE,"Partija ""VIENOTĪBA""",valdis.dombrovskis@europarl.europa.eu,,5601
 125106,Johan,VAN OVERTVELDT,false,2014-07-01,2014-10-10,1955-08-24,be,M,ECR,Nieuw-Vlaamse Alliantie,,,6683
