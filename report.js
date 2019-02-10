@@ -31,7 +31,7 @@ scrape(options.report,"report")
 */
 //scrape(options.report,"report")
 ////[2014,2013,2012,2010,2009].forEach (y => {
-[2014].forEach (y => {
+[2019,2018,2017,2015,2014,2013,2012,2011,2010,2009].forEach (y => {
 /*  scrape(options.motion,{leg:7,refAYear:y},"motion")
   .then(()=>{
     console.log("scraped motions "+y);
