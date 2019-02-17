@@ -9,8 +9,15 @@ var config ={ "folder": "./data/" };
 promises = [];
 var total={};
 
-var mep_rollcall=streamCSV("./data/mep_rollcall.csv","mepid,mep,result,group,identifier");
-var item_rollcall=streamCSV("./data/item_rollcall.csv","identifier,date,report,desc,title,for,against,abstention");
+if (process.argv.length == 3) {
+  var file=process.argv[2];
+  console.log ("parsing " +file +" into /tmp");
+  config.folder = "/tmp/";
+}
+
+
+var mep_rollcall=streamCSV(config.folder +"mep_rollcall.csv","mepid,mep,result,group,identifier");
+var item_rollcall=streamCSV(config.folder+"item_rollcall.csv","identifier,date,report,desc,title,for,against,abstention");
 
 promises.push(new Promise((resolve, reject) => {
   item_rollcall.on("close",() => resolve);
