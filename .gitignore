@@ -1,4 +1,5 @@
 *.swp
+data/mep_rollcall.csv
 data/RCV
 data/LP
 node_modules/*

@@ -103,7 +103,7 @@ function streamCSV(file){
 function scrape(docurl,callback) {
 return new Promise((resolve, reject) => {
   osmosis.get(docurl)
-  .log(console.log)
+//  .log(console.log)
 .error(console.log)
     .paginate('.ep_boxpaginate a#nav_next',1000)
     .find('.notice')
