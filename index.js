@@ -63,7 +63,7 @@ scrape(options.finalised,(d)=>{
     }
   }).then(()=>{
     for (var b in buffer) {
-      console.log(buffer[b]);
+      //console.log(buffer[b]);
       for (var i in buffer[b]) {
         pipes[b].write(buffer[b][i]);
       }
