@@ -60,6 +60,10 @@ csv.fromPath("./data/attendance.csv", {headers: true})
 
 function transformFile(d){
   const file = "./data/"+ d.code +"/" + d.baseurl.split('/').pop() + ".xml.zip";
+  if (!fs.existsSync(file)) {
+    console.error("file missing "+file);
+    return;
+  }
   return new Promise((resolve, reject) => {
     var xml = new XmlStream(
       fs.createReadStream(file)

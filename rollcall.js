@@ -118,7 +118,9 @@ function transformFile(d){
 //      console.log (">"+vote.date);
     });
     xml.on ("endElement: RollCallVote.Result",(result)=>{
-//      console.log ("<"+vote.date);
+      if (!vote.date){
+        console.log (vote);
+      }
       item_rollcall.write(vote);
       vote.pop("identifier");
       vote.pop("date");
@@ -204,6 +206,14 @@ function transformFile(d){
       if (!mep.$ || !mep.$.MepId){
         console.log(vote);
         console.log("Error in MEP record (no id) for "+ mep.$text + " in " + d.reference);
+      }
+      if (mep.$.MepId == "UNDEFINE") {
+        console.error(d.reference+ ":missing mepid for "+mep.$text+" in "+vote.identifier);// + " "+vote.url);
+        return;
+      }
+      if (mep.$.MepId == "DUPLICATE") {
+        console.error(d.reference+ ":duplicate "+mep.$text+" in "+vote.identifier);// + " "+vote.url);
+        return;
       }
       var t={mepid:mep.$.MepId,mep:mep.$text};
       ["result","group","identifier","date","desc"].map((i)=>{//group not mandatory, more QA

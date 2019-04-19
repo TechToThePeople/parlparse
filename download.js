@@ -55,6 +55,7 @@ function downloadFile (folder,url,extension){
     }
     var dest = folder+ "/"+ url.split('/').pop() + "."+extension +".zip";
     if (fs.existsSync(dest)) {
+      console.log ("already downloaded file:"+dest);
       //do we need to return that it was cached already?
       resolve(url);
       return;
