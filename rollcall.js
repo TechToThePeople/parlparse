@@ -108,7 +108,12 @@ function transformFile(d){
       reject(err);
     });
     xml.on ("startElement: RollCallVote.Result",(result)=>{
-      vote.push("identifier",result.$.Identifier);
+      if (result.$.Identifier) {
+        vote.push("identifier",result.$.Identifier);
+      } else { 
+        //console.error ("Error in file "+d.reference+"no reference, generating it as  " + result.$.Date +"_"+result.$.Number);
+        vote.push("identifier",result.$.Date +"_"+result.$.Number);
+      }
       vote.push("date",result.$.Date);
 //      console.log (">"+vote.date);
     });
@@ -183,11 +188,23 @@ function transformFile(d){
       });
       mep_rollcall.write(t);
     })
+    xml.on("startElement: CorrectionResult.Titles",(correction) =>{
+      vote.push("correction",true);
+      //CorrectionResult.For CorrectionResult.Against CorrectionResult.Abstention if one wants to process the correction (beware, no id, terrible format(
+    });
+    xml.on("endElement: CorrectionResult.Titles",(correction) =>{
+      vote.pop("correction");
+    });
     xml.on ("updateElement: Member.Name",(mep)=>{
-      console.log(vote);
-      console.log(mep);
-      console.log ("WTF updateElement: Member.Name "+ mep.$text+" on " +d.reference);
+      if (vote.correction) {
+          //console.log("skip correction (no id) for "+ mep.$text + " in " + d.reference + ":"+vote.identifier);
+        return;
+      }
       vote.processed++;
+      if (!mep.$ || !mep.$.MepId){
+        console.log(vote);
+        console.log("Error in MEP record (no id) for "+ mep.$text + " in " + d.reference);
+      }
       var t={mepid:mep.$.MepId,mep:mep.$text};
       ["result","group","identifier","date","desc"].map((i)=>{//group not mandatory, more QA
         t[i]=vote[i];
