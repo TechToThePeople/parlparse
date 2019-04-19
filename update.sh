@@ -3,7 +3,8 @@ node index.js
 node report.js
 node download.js
 node attendance.js
-node rollcall.js
+#node rollcall.js
+node --max-old-space-size=2048 rollcall.js
 # q 'select * from data/item_rollcall.csv order by identifier' -d, -H -O
 
 sh qa.sh
