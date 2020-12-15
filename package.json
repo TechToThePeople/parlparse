@@ -10,7 +10,6 @@
   "license": "aGPL3",
   "dependencies": {
     "@fast-csv/format": "^4.3.5",
-    "fast-csv": "^2.4.1",
     "fast-xml-parser": "^3.17.5",
     "osmosis": "^1.1.8",
     "sequelize": "^5.2.12",
