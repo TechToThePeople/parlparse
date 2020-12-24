@@ -53,8 +53,8 @@ const url =
   }
 
   await init();
+  const start = new Date();
   plenary.status = "provisional";
-  console.log("result", plenary);
   let r = await db("plenaries").insert(plenary).onConflict("date").ignore();
 
   if (r[0] === 0) {
@@ -65,6 +65,7 @@ const url =
   }
 
   await roll(plenary);
+  console.info("Execution time: %dms", new Date() - start);
   //  db.destroy();
   csvStream.write({
     date: date,

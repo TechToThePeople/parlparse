@@ -1,3 +1,12 @@
+CREATE TABLE `positions` (
+  `id` integer not null primary key autoincrement,
+  `rollcall` integer not null,
+  `mep_vote` integer not null,
+  `position` varchar(20) null,
+  UNIQUE(mep_vote,rollcall)
+);
+
+
 you need the latest version of q (>1.4 to work -bug on escaping ")
 The data published by the EP needs some massaging to be extracted in a useful format.
 
