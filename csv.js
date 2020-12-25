@@ -12,7 +12,7 @@ const head = "identifier,date,report,desc,title,for,against,abstention".split(
 );
 const writeStream = fs.createWriteStream(file);
 const csvStream = format({ headers: head });
-csvStream.pipe(writeStream).on("end", () => {
+csvStream.pipe(writeStream).on("finish", () => {
   console.log("fini");
   process.exit();
 });
