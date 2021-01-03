@@ -13,6 +13,7 @@
     "@sentry/node": "^5.29.2",
     "@sentry/tracing": "^5.29.2",
     "knex": "^0.21.13",
+    "node-fetch": "^2.6.1",
     "osmosis": "^1.1.8",
     "sqlite3": "^5.0.0",
     "xml2js": "^0.4.23"
