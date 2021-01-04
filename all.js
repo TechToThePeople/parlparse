@@ -29,7 +29,7 @@ let date = end;
       console.error("can't parse the date " + date);
       process.exit(1);
     }
-    console.log("processing ", date.toISOString().substring(0, 10));
+    //    console.log("processing ", date.toISOString().substring(0, 10));
 
     await run(d);
     date.setDate(date.getDate() - 1);
@@ -54,7 +54,7 @@ async function run(d) {
   try {
     plenary = await downloadFile("RCV", url, d[0] + "-" + d[1] + "-" + d[2]);
   } catch (e) {
-    console.log("-> not a plenary, skip");
+    console.log(d.join("-") + "-> not a plenary, skip " + url + ".xml");
     //    console.log("error", e);
     return;
   }

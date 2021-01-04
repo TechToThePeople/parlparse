@@ -14,7 +14,8 @@ db.select("*")
           "name",
           "position as result",
           "eugroup",
-          "rollcall as identifier"
+          "rollcall as identifier",
+          "vote_id"
         )
         .from("positions")
         .leftJoin("meps", "meps.vote_id", "mep_vote")
