@@ -42,7 +42,7 @@ if (argv.all) {
   console.log("process all days");
   const start = new Date("2019-07-02"); //start of the 9th term
 
-  const end = new Date();
+  const end = new Date(argv.date); // ends today or at the day param
 
   all(start, end).then(() => {
     console.info("Execution time: %dms", new Date() - start);
@@ -59,6 +59,7 @@ if (argv.all) {
     process.exit(1);
   }
   const start = new Date();
+
   run(date).then(() => {
     console.info("Execution time: %dms", new Date() - start);
     process.exit(1);
