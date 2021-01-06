@@ -96,7 +96,7 @@ async function run(date) {
     name;
 
   try {
-    plenary = await downloadFile("RCV", url, date);
+    plenary = await downloadFile("RCV", url, { file: date, force: argv.force });
   } catch (e) {
     console.log("error", e);
     return;

@@ -92,7 +92,7 @@ async function run(date) {
     name;
 
   try {
-    plenary = await downloadFile("LP", url, date);
+    plenary = await downloadFile("LP", url, { file: date, force: argv.force });
   } catch (e) {
     console.log("error", e);
     return;
