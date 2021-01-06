@@ -243,6 +243,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 4560,Antonius,MANDERS,1,2019-07-02,,1956-03-14,nl,,PPE,,,,9,4964
 190713,Lukas,MANDL,1,2019-07-02,,1979-07-12,at,,PPE,,,,9,6761
 33982,Marian-Jean,MARINESCU,1,2019-07-02,,1952-08-11,ro,,PPE,,,,9,5646
+,,,1,2019-07-02,,,,,PPE,,,,9,7284
 124828,Fulvio,MARTUSCIELLO,1,2019-07-02,,1968-05-25,it,,PPE,,,,9,6465
 96936,Gabriel,MATO,1,2019-07-02,,1961-04-29,es,,PPE,,,,9,6096
 197841,Liudas,MAŽYLIS,1,2019-07-02,,1954-05-19,lt,,PPE,,,,9,7224
@@ -357,6 +358,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197555,Søren,GADE,1,2019-07-02,,1963-01-27,dk,,Renew,,,,9,6948
 197632,Claudia,GAMON,1,2019-07-02,,1988-12-23,at,,Renew,,,,9,7022
 197554,Luis,GARICANO,1,2019-07-02,,1967-04-10,es,,Renew,,,,9,6947
+,,,1,2019-07-02,,,,,Renew,,,,9,7283
 197661,Cristian,GHINEA,1,2019-07-02,,1977-07-20,ro,,Renew,,,,9,7050
 197443,Andreas,GLÜCK,1,2019-07-02,,1975-03-08,de,,Renew,,,,9,6840
 840,Charles,GOERENS,1,2019-07-02,,1952-02-06,lu,,Renew,,,,9,1793
@@ -371,6 +373,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197770,Martin,HOJSÍK,1,2019-07-02,,1977-01-27,sk,,Renew,,,,9,7154
 58789,Jan,HUITEMA,1,2019-07-02,,1984-07-05,nl,,Renew,,,,9,6622
 197624,Ivars,IJABS,1,2019-07-02,,1972-11-17,lv,,Renew,,,,9,7014
+,,,1,2019-07-02,,,,,Renew,,,,9,5385
 197447,Irena,JOVEVA,1,2019-07-02,,1989-02-26,si,,Renew,,,,9,6844
 197585,Pierre,KARLESKIND,1,2019-07-02,,1979-10-19,fr,,Renew,,,,9,6975
 197401,Karin,KARLSBRO,1,2019-07-02,,1970-09-23,se,,Renew,,,,9,6800
@@ -457,6 +460,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96891,Paolo,DE CASTRO,1,2019-07-02,,1958-02-02,it,,S&D,,,,9,6062
 197579,Klára,DOBREV,1,2019-07-02,,1972-02-02,hu,,S&D,,,,9,6969
 198329,Estrella,DURÁ FERRANDIS,1,2019-07-02,,1963-09-22,es,,S&D,,,,9,7248
+,,,1,2019-07-02,,,,,S&D,,,,9,7282
 96842,Ismail,ERTUG,1,2019-07-02,,1975-12-05,de,,S&D,,,,9,6014
 96911,Tanja,FAJON,1,2019-07-02,,1971-05-09,si,,S&D,,,,9,6080
 125046,Jonás,FERNÁNDEZ,1,2019-07-02,,1979-01-08,es,,S&D,,,,9,6652
@@ -599,6 +603,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197460,Sergey,LAGODINSKY,1,2019-07-02,,1975-12-01,de,,Verts/ALE,,,,9,6857
 197461,Katrin,LANGENSIEPEN,1,2019-07-02,,1979-10-10,de,,Verts/ALE,,,,9,6858
 197462,Erik,MARQUARDT,1,2019-07-02,,1987-10-20,de,,Verts/ALE,,,,9,6859
+,,,1,2019-07-02,,,,,Verts/ALE,,,,9,7281
 197802,Ville,NIINISTÖ,1,2019-07-02,,1976-07-30,fi,,Verts/ALE,,,,9,7187
 197889,Grace,O'SULLIVAN,1,2019-07-02,,1962-03-08,ie,,Verts/ALE,,,,9,7240
 197466,Jutta,PAULUS,1,2019-07-02,,1967-05-09,de,,Verts/ALE,,,,9,6863
@@ -686,6 +691,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197732,Manuel,PIZARRO,1,2019-07-02,,1964-02-02,pt,,S&D,,,,9,7114
 193292,Tilly,METZ,1,2019-07-02,,1967-05-26,lu,,Verts/ALE,,,,9,6776
 197464,Hannah,NEUMANN,1,2019-07-02,,1984-04-03,de,,Verts/ALE,,,,9,6861
+,,,1,2019-07-02,,,,,Verts/ALE,,,,9,6862
 124972,Ernest,URTASUN,1,2019-07-02,,1982-01-27,es,,Verts/ALE,,,,9,6591
 96706,João,FERREIRA,1,2019-07-02,,1978-11-20,pt,,GUE/NGL,,,,9,5886
 197493,Jaak,MADISON,1,2019-07-02,,1991-04-22,ee,,ID,,,,9,6886
