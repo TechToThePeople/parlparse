@@ -9,7 +9,6 @@ const csv = require("d3-dsv");
 const allMeps = csv.csvParse(fs.readFileSync("./data/meps.all.csv", "utf8"));
 
 const find = (name, eugroup) => {
-  console.log(name, eugroup);
   let r = meps.find((element) => {
     if (element.last_name.toLowerCase() === name) {
       if (
@@ -26,7 +25,7 @@ const find = (name, eugroup) => {
       if (!element.start9) return false;
       if (element.lastname.toLowerCase() === name) {
         if (element.eugroup !== eugroup) {
-          console.error("no Missmatch group", element.eugroup, eugroup);
+          console.error("Missmatch group", element.eugroup, eugroup);
         }
         return true;
       }
@@ -37,7 +36,6 @@ const find = (name, eugroup) => {
           element.firstname.toLowerCase() ===
           name
       ) {
-        console.log(element, name);
         if (element.eugroup !== eugroup)
           console.error("nu Missmatch group", element.eugroup, eugroup);
         return true;
@@ -52,13 +50,16 @@ const find = (name, eugroup) => {
       first_name: t.firstname,
       last_name: t.lastname,
       Birth: { date: t.birthdate },
+      start: t.start9,
+      end: t.end,
       constituency: { party: t.party, country: t.country },
     };
   }
   return r;
 };
 
-mep.unmatched().then(async (unmatched) => {
+//mep.unmatched().then(async (unmatched) => {
+mep.all().then(async (unmatched) => {
   //  const m = unmatched[0];
   for (const m of unmatched) {
     const found = find(m.name.toLowerCase(), m.eugroup);
@@ -66,5 +67,6 @@ mep.unmatched().then(async (unmatched) => {
     !found && console.log(m, found);
     found && (await mep.update(m.vote_id, found));
   }
+  console.log("aaa");
   process.exit(0);
 });

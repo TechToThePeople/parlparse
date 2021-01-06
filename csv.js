@@ -73,7 +73,7 @@ const mep = () => {
         "vote_id as voteid"
       )
       .from("meps")
-      .whereNotNull("ep_id");
+      .whereNotNull("vote_id");
     console.log(data);
     data.forEach((r) => {
       csvStream.write(r);
