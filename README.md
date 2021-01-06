@@ -7,6 +7,11 @@ CREATE TABLE `positions` (
 );
 
 
+//`id` integer not null primary key autoincrement, 
+CREATE TABLE `attendances` (
+
+`status` varchar(30) null, `mep_id` integer not null, `date` date not null, UNIQUE(mep_id,date));
+
 you need the latest version of q (>1.4 to work -bug on escaping ")
 The data published by the EP needs some massaging to be extracted in a useful format.
 
