@@ -7,7 +7,7 @@ db.select("*")
   .from("rollcalls")
   .then(async (votes) => {
     for (const vote of votes) {
-      fs.writeFileSync("../cards/" + vote.id + ".json", JSON.stringify(vote));
+      fs.writeFileSync("../9/cards/" + vote.id + ".json", JSON.stringify(vote));
       const positions = await db
         .select(
           "mep_vote as mepid",
