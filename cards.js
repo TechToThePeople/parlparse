@@ -5,8 +5,10 @@ const d3 = require("d3-dsv");
 
 db.select("*")
   .from("rollcalls")
+  .orderBy("id", "desc")
   .then(async (votes) => {
     for (const vote of votes) {
+      console.log("processing ", vote.id);
       fs.writeFileSync("../9/cards/" + vote.id + ".json", JSON.stringify(vote));
       const positions = await db
         .select(
@@ -20,7 +22,10 @@ db.select("*")
         .from("positions")
         .leftJoin("meps", "meps.vote_id", "mep_vote")
         .where("rollcall", vote.id);
-      fs.writeFileSync("../cards/" + vote.id + ".csv", d3.csvFormat(positions));
+      fs.writeFileSync(
+        "../9/cards/" + vote.id + ".csv",
+        d3.csvFormat(positions)
+      );
 
       //      mepid,mep,result,group,identifier
     }
