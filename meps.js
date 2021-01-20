@@ -92,6 +92,10 @@ const find = (name, eugroup, epid) => {
       constituency: { party: t.party, country: t.country },
     };
   }
+  if (inout[r.epid]) {
+  } else {
+    r.start = "2019-07-02";
+  }
   return r;
 };
 
