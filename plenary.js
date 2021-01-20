@@ -29,7 +29,7 @@ const help = (error = false) => {
     "--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)"
   );
   console.log(
-    "--force -d : retry download even if already downloaded and parse it anyway (by default, skip)"
+    "--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
   );
   process.exit(error);
 };
@@ -42,7 +42,7 @@ if (argv.all) {
   console.log("process all days");
   const start = new Date("2019-07-02"); //start of the 9th term
 
-  const end = new Date(argv.date); // ends today or at the day param
+  const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
 
   all(start, end).then(() => {
     console.info("Execution time: %dms", new Date() - start);
@@ -68,7 +68,7 @@ if (argv.all) {
 
 async function all(start, end) {
   let date = end;
-
+  console.log(date, start, end);
   while (date >= start) {
     await run(date.toISOString().substring(0, 10));
     date.setDate(date.getDate() - 1);

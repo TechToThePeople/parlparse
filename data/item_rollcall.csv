@@ -17,9 +17,9 @@ identifier,date,report,desc,title,for,against,abstention
 108568,2019-09-18,A9-0004/2019,,John Howarth - Résolution 18/09/2019 12:05:54.000,614,69,10
 108569,2019-09-18,A9-0005/2019,,John Howarth - Vote unique 18/09/2019 12:03:45.000,601,40,12
 108570,2019-09-18,A9-0006/2019,,John Howarth - Vote unique 18/09/2019 12:06:44.000,649,19,30
-108579,2019-09-16,Ordre,,du jour du mardi - demande des groupes Verts/ALE et GUE/NGL 16/09/2019 17:26:03.000,192,228,13
-108580,2019-09-16,Ordre,,du jour du mardi - demande des groupes ID et GUE/NGL 16/09/2019 17:32:45.000,175,274,10
-108581,2019-09-16,Ordre,,du jour du mercredi - demande du groupe PPE 16/09/2019 17:40:06.000,234,178,31
+108579,2019-09-16,,,Ordre du jour du mardi - demande des groupes Verts/ALE et GUE/NGL 16/09/2019 17:26:03.000,192,228,13
+108580,2019-09-16,,,Ordre du jour du mardi - demande des groupes ID et GUE/NGL 16/09/2019 17:32:45.000,175,274,10
+108581,2019-09-16,,,Ordre du jour du mercredi - demande du groupe PPE 16/09/2019 17:40:06.000,234,178,31
 108643,2019-09-18,B9-0038/2019,,§ 4/2 18/09/2019 12:07:45.000,541,149,11
 108645,2019-09-18,B9-0038/2019,,§ 12/1 18/09/2019 12:08:00.000,504,167,28
 108660,2019-09-18,B9-0038/2019,,Résolution 18/09/2019 12:09:24.000,544,126,38
@@ -51,7 +51,7 @@ identifier,date,report,desc,title,for,against,abstention
 108836,2019-10-10 11:53:47,A9-0016/2019,,Yana Toom - § 1/2,364,228,57
 108837,2019-10-10 11:53:59,A9-0016/2019,,Yana Toom - § 1/3,296,317,43
 108838,2019-10-10 11:54:15,A9-0016/2019,,Yana Toom - Proposition de résolution,422,131,101
-108840,2019-10-10 11:41:12,B9-0103/2019,,Proposition de r��solution,402,222,39
+108840,2019-10-10 11:41:12,B9-0103/2019,,Proposition de résolution,402,222,39
 108842,2019-10-10 11:41:33,B9-0104/2019,,Proposition de résolution,417,200,40
 108844,2019-10-10 11:42:10,B9-0105/2019,,Proposition de résolution,426,208,20
 108846,2019-10-10 11:42:26,B9-0106/2019,,Proposition de résolution,435,207,18
@@ -76,8 +76,8 @@ identifier,date,report,desc,title,for,against,abstention
 108877,2019-10-10 11:43:24,B9-0108/2019,,Am 2,436,126,92
 108878,2019-10-10 11:44:47,B9-0108/2019,,Am 3,347,282,34
 108879,2019-10-10 11:47:32,B9-0108/2019,,Am 11S,320,306,35
-108885,2019-10-09 15:29:42,Ordre,,du jour du mercredi - demande des groupes GUE/NGL et Verts/ALE,398,56,25
-108886,2019-10-09 15:34:35,Ordre,,du jour de mercredi - demande du groupe PPE ,508,9,19
+108885,2019-10-09 15:29:42,,,Ordre du jour du mercredi - demande des groupes GUE/NGL et Verts/ALE,398,56,25
+108886,2019-10-09 15:34:35,,,Ordre du jour de mercredi - demande du groupe PPE ,508,9,19
 108941,2019-10-22 12:34:54,A9-0018/2019,,Johan Van Overtveldt - procédure d'approbation,543,30,46
 108942,2019-10-22 12:35:26,COM(2019)0396,,Proposition de règlement ( - C9-0108/2019- ),618,0,6
 108943,2019-10-22 12:34:19,A9-0014/2019,,Chris Davies - Vote unique,574,24,2
@@ -85,11 +85,11 @@ identifier,date,report,desc,title,for,against,abstention
 108948,2019-10-23 12:46:24,A9-0010/2019,,Isabel García Muñoz - Résolution,662,24,9
 108952,2019-10-23 12:45:58,A9-0011/2019,,Petri Sarvamaa - Résolution,694,2,2
 109037,2019-10-23 12:45:29,A9-0017/2019,,Monika Hohlmeier et  Eider Gardiazabal Rubial - Résolution,529,130,43
-109061,2019-10-21 17:14:54,Ordre,,du jour du lundi: demande du groupe S&D,339,86,9
-109062,2019-10-21 17:17:45,Ordre,,du jour du lundi: demande du groupe PPE,424,9,4
-109063,2019-10-21 17:19:26,Ordre,,du jour du lundi: demande du groupe GUE/NGL,106,293,38
-109064,2019-10-21 17:28:49,Ordre,,du jour du mardi: demande du groupe GUE/NGL,109,301,21
-109065,2019-10-21 17:32:53,Ordre,,du jour du mercredi: demande du groupe ID,205,222,14
+109061,2019-10-21 17:14:54,,,Ordre du jour du lundi: demande du groupe S&D,339,86,9
+109062,2019-10-21 17:17:45,,,Ordre du jour du lundi: demande du groupe PPE,424,9,4
+109063,2019-10-21 17:19:26,,,Ordre du jour du lundi: demande du groupe GUE/NGL,106,293,38
+109064,2019-10-21 17:28:49,,,Ordre du jour du mardi: demande du groupe GUE/NGL,109,301,21
+109065,2019-10-21 17:32:53,,,Ordre du jour du mercredi: demande du groupe ID,205,222,14
 109081,2019-10-23 12:28:53,A9-0017/2019,,Monika Hohlmeier et  Eider Gardiazabal Rubial - Am 2,115,545,22
 109085,2019-10-23 12:29:54,A9-0017/2019,,Monika Hohlmeier et  Eider Gardiazabal Rubial - Am 34,109,532,59
 109086,2019-10-23 12:30:13,A9-0017/2019,,Monika Hohlmeier et  Eider Gardiazabal Rubial - Am 75,133,485,76
@@ -127,21 +127,21 @@ identifier,date,report,desc,title,for,against,abstention
 109129,2019-10-23 12:44:51,A9-0017/2019,,Monika Hohlmeier et  Eider Gardiazabal Rubial - Am 16,124,536,33
 109161,2019-10-24 12:16:55,A9-0020/2019,,Younous Omarjee - Vote unique,511,64,66
 109166,2019-10-23 12:47:28,B9-0149/2019,,Résolution,533,67,100
-109313,2019-10-23 12:04:12,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 1,515,135,26
-109347,2019-10-23 12:09:39,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 2,550,98,49
-109352,2019-10-23 12:10:18,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1201,550,118,21
-109358,2019-10-23 12:10:49,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1002,96,570,33
-109362,2019-10-23 12:11:21,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 3,547,104,49
-109375,2019-10-23 12:14:30,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 561,108,562,28
-109376,2019-10-23 12:14:51,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1000PC2,119,542,40
-109378,2019-10-23 12:15:14,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 4,545,125,26
-109407,2019-10-23 12:18:28,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 5,541,112,46
-109415,2019-10-23 12:19:20,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 579,128,518,54
-109425,2019-10-23 12:20:10,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 592,142,548,10
-109426,2019-10-23 12:20:27,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1075,138,494,62
-109432,2019-10-23 12:21:50,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 6,551,130,20
-109433,2019-10-23 12:22:07,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 595,123,547,20
-109469,2019-10-23 12:26:57,Projet,,de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 15,548,80,73
+109313,2019-10-23 12:04:12,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 1,515,135,26
+109347,2019-10-23 12:09:39,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 2,550,98,49
+109352,2019-10-23 12:10:18,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1201,550,118,21
+109358,2019-10-23 12:10:49,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1002,96,570,33
+109362,2019-10-23 12:11:21,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 3,547,104,49
+109375,2019-10-23 12:14:30,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 561,108,562,28
+109376,2019-10-23 12:14:51,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1000PC2,119,542,40
+109378,2019-10-23 12:15:14,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 4,545,125,26
+109407,2019-10-23 12:18:28,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 5,541,112,46
+109415,2019-10-23 12:19:20,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 579,128,518,54
+109425,2019-10-23 12:20:10,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 592,142,548,10
+109426,2019-10-23 12:20:27,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 1075,138,494,62
+109432,2019-10-23 12:21:50,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 6,551,130,20
+109433,2019-10-23 12:22:07,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Am 595,123,547,20
+109469,2019-10-23 12:26:57,,,Projet de budget général de l'Union européenne pour l'exercice 2020 - toutes sections - Bloc 15,548,80,73
 109582,2019-10-24 12:22:47,B9-0117/2019,,Résolution,572,42,21
 109583,2019-10-24 12:18:23,B9-0151/2019,,Résolution,301,295,45
 109601,2019-10-24 12:23:44,RC-B9-0123/2019,,Am 13,96,516,25
@@ -286,12 +286,12 @@ identifier,date,report,desc,title,for,against,abstention
 109889,2019-11-14 11:57:57,B9-0166/2019,,Am 21,137,470,51
 109894,2019-11-14 11:58:42,B9-0166/2019,,Considérant P,475,106,61
 109895,2019-11-14 11:59:11,B9-0166/2019,,Résolution,471,128,57
-109923,2019-11-13 16:46:37,Ordre,,du jour de mercredi - demande du groupe GUE/NGL ,41,234,88
-109925,2019-11-13 16:54:18,Ordre,,du jour de mercredi - demande des groupes S&D et GUE/NGL,187,155,44
-109926,2019-11-13 16:54:43,Ordre,,du jour de mercredi - demande du groupe GUE/NGL,167,201,18
-109927,2019-11-13 16:57:39,Ordre,,du jour de mercredi - demande du groupe ID - le secteur de l’acier dans l’UE,292,78,10
-109928,2019-11-13 16:59:53,Ordre,,du jour de mercredi - demande du groupe ID - la situation au Cachemire,82,274,16
-109929,2019-11-13 17:03:04,Ordre,,du jour de mercredi - demande du groupe ID - les violences à l’encontre des femmes et la situation des femmes refugiées,79,264,22
+109923,2019-11-13 16:46:37,,,Ordre du jour de mercredi - demande du groupe GUE/NGL ,41,234,88
+109925,2019-11-13 16:54:18,,,Ordre du jour de mercredi - demande des groupes S&D et GUE/NGL,187,155,44
+109926,2019-11-13 16:54:43,,,Ordre du jour de mercredi - demande du groupe GUE/NGL,167,201,18
+109927,2019-11-13 16:57:39,,,Ordre du jour de mercredi - demande du groupe ID - le secteur de l’acier dans l’UE,292,78,10
+109928,2019-11-13 16:59:53,,,Ordre du jour de mercredi - demande du groupe ID - la situation au Cachemire,82,274,16
+109929,2019-11-13 17:03:04,,,Ordre du jour de mercredi - demande du groupe ID - les violences à l’encontre des femmes et la situation des femmes refugiées,79,264,22
 109961,2019-11-26 12:31:22,A9-0024/2019,,Enikő Győri - procédure d'approbation,444,128,74
 109962,2019-11-26 12:32:04,A9-0034/2019,,Paul Tang - Vote unique,528,78,61
 109963,2019-11-26 12:32:29,A9-0030/2019,,Olivier Chastel - nomination de Joëlle Elvinger,,,
@@ -299,10 +299,10 @@ identifier,date,report,desc,title,for,against,abstention
 109965,2019-11-26 12:33:18,A9-0028/2019,,Tomáš Zdechovský - nomination de Alex Brenninkmeijer,,,
 109966,2019-11-26 12:33:39,A9-0027/2019,,Sándor Rónai - nomination de Nikolaos Milionis,,,
 109967,2019-11-26 12:34:00,A9-0029/2019,,Tomáš Zdechovský - nomination de Klaus-Heiner Lehne,,,
-109968,2019-11-27 12:24:21,Élection,,de la Commission,461,157,89
+109968,2019-11-27 12:24:21,,,Élection de la Commission,461,157,89
 109969,2019-11-27 12:29:46,A9-0035/2019,,"Monika Hohlmeier, Eider Gardiazabal Rubial - Projet commun",543,136,23
-110121,2019-11-25 17:17:33,Ordre,,du jour de mardi - demande du groupe GUE/NGL,248,146,17
-110122,2019-11-25 17:19:18,Ordre,,du jour de mardi - demande du groupe ID,64,339,15
+110121,2019-11-25 17:17:33,,,Ordre du jour de mardi - demande du groupe GUE/NGL,248,146,17
+110122,2019-11-25 17:19:18,,,Ordre du jour de mardi - demande du groupe ID,64,339,15
 110141,2019-11-26 12:34:31,B9-0178/2019,,Résolution,128,497,40
 110142,2019-11-26 12:34:49,B9-0179/2019,,Résolution,128,523,20
 110143,2019-11-26 12:35:07,B9-0180/2019,,Am 15,210,417,42
@@ -536,8 +536,8 @@ identifier,date,report,desc,title,for,against,abstention
 111153,2020-01-15 13:11:53,A9-0051/2019,,Isabel Wiseler-Lima - Résolution,496,113,103
 111166,2020-01-16 12:35:14,A9-0032/2019,,Peter Jahr - Résolution,563,3,63
 111206,2020-01-15 13:25:09,A9-0052/2019,,Arnaud Danjean - Résolution,364,266,77
-111241,2020-01-13 17:15:24,Ordre,,du jour du lundi - demande du groupe PPE,187,258,20
-111244,2020-01-13 17:21:41,Ordre,,du jour du mercredi - demande du groupe GUE/NGL,220,237,24
+111241,2020-01-13 17:15:24,,,Ordre du jour du lundi - demande du groupe PPE,187,258,20
+111244,2020-01-13 17:21:41,,,Ordre du jour du mercredi - demande du groupe GUE/NGL,220,237,24
 111268,2020-01-15 13:13:42,A9-0054/2019,,David McAllister - § 44,426,225,50
 111283,2020-01-15 13:16:11,A9-0052/2019,,Arnaud Danjean - Am 21,114,558,35
 111284,2020-01-15 13:16:39,A9-0052/2019,,Arnaud Danjean - § 10,555,98,52
@@ -742,7 +742,7 @@ identifier,date,report,desc,title,for,against,abstention
 112048,2020-01-16 12:18:46,RC-B9-0048/2020,,Résolution,471,101,103
 112064,2020-01-16 12:15:57,RC-B9-0056/2020,,Considérant F/2,608,41,23
 112065,2020-01-16 12:16:11,RC-B9-0056/2020,,Considérant I,629,39,6
-112101,2020-01-29 18:35:28,Accord,,sur le retrait du Royaume-Uni de Grande-Bretagne et d'Irlande du Nord de l'Union européenne et de la Communauté européenne de l'énergie atomique,621,49,13
+112101,2020-01-29 18:35:28,,,Accord sur le retrait du Royaume-Uni de Grande-Bretagne et d'Irlande du Nord de l'Union européenne et de la Communauté européenne de l'énergie atomique,621,49,13
 112107,2020-01-30 12:00:37,RC-B9-0070/2020,,Am 1,160,343,157
 112108,2020-01-30 12:00:53,RC-B9-0070/2020,,Résolution,582,40,37
 112117,2020-01-30 12:01:21,B9-0069/2020,,Résolution,78,528,50
@@ -761,14 +761,14 @@ identifier,date,report,desc,title,for,against,abstention
 112155,2020-01-30 12:06:55,B9-0073/2020,,Am 15/2,125,501,29
 112158,2020-01-30 12:07:24,B9-0073/2020,,Am 5,304,295,59
 112160,2020-01-30 12:07:49,B9-0073/2020,,Résolution,493,82,79
-112241,2020-01-30 11:52:11,Calendrier,,des périodes de session du Parlement – 2021 - AM 1S,228,382,52
+112241,2020-01-30 11:52:11,,,Calendrier des périodes de session du Parlement – 2021 - AM 1S,228,382,52
 112242,2020-01-30 11:58:56,A9-0008/2020,,Irene Tinagli - nomination de Gerry Cross,,,
 112243,2020-01-30 11:57:40,A9-0009/2020,,Irene Tinagli - nomination de Pedro Machado,,,
 112244,2020-01-30 11:58:32,A9-0010/2020,,Irene Tinagli - nomination de Jan de Carpentier,,,
 112245,2020-01-30 11:58:05,A9-0011/2020,,Irene Tinagli - nomination de Jesús Saurina,,,
-112247,2020-01-29 16:27:46,Ordre,,du jour du mercredi - demande du groupe ID ,0,0,0
-112249,2020-01-29 16:33:29,Ordre,,du jour du mercredi - demande du groupe GUE/NGL ,141,313,28
-112250,2020-01-29 16:35:57,Ordre,,du jour du jeudi - demande du groupe S&D,136,302,31
+112247,2020-01-29 16:27:46,,,Ordre du jour du mercredi - demande du groupe ID ,0,0,0
+112249,2020-01-29 16:33:29,,,Ordre du jour du mercredi - demande du groupe GUE/NGL ,141,313,28
+112250,2020-01-29 16:35:57,,,Ordre du jour du jeudi - demande du groupe S&D,136,302,31
 112263,2020-01-30 11:54:32,A9-0015/2020,,Lucy Nethsingha - décision,523,6,135
 112321,2020-02-12 12:05:58,A9-0003/2020,,Geert Bourgeois - Procédure d'approbation,401,192,40
 112338,2020-02-12 12:08:39,A9-0017/2020,,Geert Bourgeois - Résolution,416,187,44
@@ -776,11 +776,11 @@ identifier,date,report,desc,title,for,against,abstention
 112341,2020-02-12 12:09:37,A9-0014/2020,,Geert Bourgeois - Résolution,406,184,58
 112343,2020-02-13 12:13:54,A9-0022/2019,,Roberta Metsola - Am 2,592,33,3
 112371,2020-02-12 12:32:40,A9-0016/2020,,Costas Mavrides - Résolution,452,142,53
-112406,2020-02-10 17:19:01,Ordre,,du jour du mardi - demande du groupe ID,77,278,7
-112407,2020-02-10 17:28:45,Ordre,,du jour du mercredi - demande du groupe GUE/NGL,110,246,9
-112408,2020-02-10 17:29:06,Ordre,,du jour du mercredi - demande du groupe Verts/ALE,121,231,12
-112409,2020-02-10 17:30:40,Ordre,,du jour du mercredi - demande du groupe PPE,283,59,23
-112410,2020-02-10 17:35:44,Ordre,,du jour du jeudi - demande du groupe GUE/NGL,164,195,8
+112406,2020-02-10 17:19:01,,,Ordre du jour du mardi - demande du groupe ID,77,278,7
+112407,2020-02-10 17:28:45,,,Ordre du jour du mercredi - demande du groupe GUE/NGL,110,246,9
+112408,2020-02-10 17:29:06,,,Ordre du jour du mercredi - demande du groupe Verts/ALE,121,231,12
+112409,2020-02-10 17:30:40,,,Ordre du jour du mercredi - demande du groupe PPE,283,59,23
+112410,2020-02-10 17:35:44,,,Ordre du jour du jeudi - demande du groupe GUE/NGL,164,195,8
 112421,2020-02-12 12:09:21,A9-0014/2020,,Geert Bourgeois - Am 1,178,439,28
 112422,2020-02-12 12:07:04,A9-0017/2020,,Geert Bourgeois - Am 14,164,432,47
 112423,2020-02-12 12:07:19,A9-0017/2020,,Geert Bourgeois - Am 15,181,415,45
@@ -869,9 +869,9 @@ identifier,date,report,desc,title,for,against,abstention
 112906,2020-06-18 12:56:33,A9-0022/2020,,Stéphanie Yon-Courtin - § 57,504,181,12
 112916,2020-06-18 12:56:33,A9-0022/2020,,Stéphanie Yon-Courtin - Am 3,137,526,32
 112927,2020-06-18 12:56:33,A9-0022/2020,,Stéphanie Yon-Courtin - § 18,226,405,66
-112986,2020-03-26 11:00:00,Demande,,d'application de la procédure d'urgence: Règles communes en ce qui concerne l’attribution des créneaux horaires dans les aéroports de la Communauté - C9-0082/2020,687,0,0
-112987,2020-03-26 11:00:00,Demande,,d'application de la procédure d'urgence: Mesures spécifiques visant à mobiliser des investissements dans les systèmes de soins de santé des États membres et dans d’autres secteurs de leur économie en réaction à la propagation du COVID-19 - C9-0083/2020,686,1,0
-112989,2020-03-26 11:00:00,Demande,,d'application de la procédure d'urgence: Aide financière aux États membres et aux pays dont l’adhésion à l’Union est en cours de négociation qui sont gravement touchés par une urgence de santé publique majeure - C9-0084/2020,684,1,2
+112986,2020-03-26 11:00:00,,,Demande d'application de la procédure d'urgence: Règles communes en ce qui concerne l’attribution des créneaux horaires dans les aéroports de la Communauté - C9-0082/2020,687,0,0
+112987,2020-03-26 11:00:00,,,Demande d'application de la procédure d'urgence: Mesures spécifiques visant à mobiliser des investissements dans les systèmes de soins de santé des États membres et dans d’autres secteurs de leur économie en réaction à la propagation du COVID-19 - C9-0083/2020,686,1,0
+112989,2020-03-26 11:00:00,,,Demande d'application de la procédure d'urgence: Aide financière aux États membres et aux pays dont l’adhésion à l’Union est en cours de négociation qui sont gravement touchés par une urgence de santé publique majeure - C9-0084/2020,684,1,2
 112990,2020-03-26 18:30:00,C9-0082/2020,,Am 1,689,1,2
 112991,2020-03-26 21:00:00,C9-0082/2020,,Vote final,686,0,2
 112992,2020-03-26 18:30:00,C9-0083/2020,,Am 2,82,597,11
@@ -1025,15 +1025,15 @@ identifier,date,report,desc,title,for,against,abstention
 113181,2020-04-17 09:00:00,C9-0093/2020,,am 12,613,76,2
 113182,2020-04-17 09:00:00,C9-0093/2020,,am 13,608,69,14
 113183,2020-04-17 09:00:00,C9-0093/2020,,am 14,612,66,13
-113184,2020-04-17 09:00:00,,,C9-0093/2020 - am 4,75,590,26
+113184,2020-04-17 09:00:00,,, C9-0093/2020 - am 4,75,590,26
 113185,2020-04-17 09:00:00,C9-0093/2020,,am 15,619,68,4
 113186,2020-04-17 09:00:00,C9-0093/2020,,am 5,607,81,3
 113187,2020-04-17 09:00:00,C9-0093/2020,,am 6,604,73,14
 113188,2020-04-17 09:00:00,C9-0093/2020,,am 7,661,26,4
-113189,2020-04-17 09:00:00,,,C9-0093/2020 - am 8 ,606,66,17
+113189,2020-04-17 09:00:00,,, C9-0093/2020 - am 8 ,606,66,17
 113190,2020-04-17 09:00:00,C9-0093/2020,,am 16,108,536,46
 113191,2020-04-17 12:30:00,2020/0059(COD),,Vote final: Mesures spécifiques visant à atténuer les effets de la pandémie de COVID-19 dans le secteur de la pêche et de l’aquaculture - C9-0093/2020 (),671,10,15
-113192,2020-04-17 09:00:00,,,C9-0098/2020 - am 1,685,3,3
+113192,2020-04-17 09:00:00,,, C9-0098/2020 - am 1,685,3,3
 113193,2020-04-17 09:00:00,C9-0098/2020,,am 2,685,4,2
 113194,2020-04-17 09:00:00,C9-0098/2020,,am 3,685,4,2
 113195,2020-04-17 09:00:00,C9-0098/2020,,am 4S,686,2,3
@@ -1361,20 +1361,20 @@ identifier,date,report,desc,title,for,against,abstention
 114446,2020-05-15 17:00:00,2020/0068(COD),,"Vote final: Mesures temporaires concernant la validité de certains certificats, licences et agréments (omnibus) - C9-0126/2020 - ",669,11,8
 114456,2020-05-15 09:30:00,C9-0124/2020,,am 8= 27=,519,165,10
 114457,2020-05-15 17:00:00,2020/0069(COD),,Vote final: Mesures temporaires relatives à l'exploitation de services aériens - C9-0124/2020 - ,641,29,17
-114463,2020-05-15 09:30:00,,,C9-0125/2020 - am 18S= 29S=,640,25,28
+114463,2020-05-15 09:30:00,,, C9-0125/2020 - am 18S= 29S=,640,25,28
 114470,2020-05-15 17:00:00,2020/0071(COD),,Vote final: 4e paquet ferroviaire: prorogation du délai de transposition - C9-0125/2020 -  ,644,6,38
-114472,2020-05-15 09:30:00,,,C9-0123/2020 - am 1,151,531,11
+114472,2020-05-15 09:30:00,,, C9-0123/2020 - am 1,151,531,11
 114477,2020-05-15 09:30:00,C9-0123/2020,,am 6= 13=,331,348,15
-114478,2020-05-15 09:30:00,,,C9-0123/2020 - am 7= 14=,339,347,8
-114479,2020-05-15 09:30:00,,,C9-0123/2020 - am 17,99,585,8
-114480,2020-05-15 09:30:00,,,C9-0123/2020 - am 2= 4= 8= 10= 15= ,657,23,14
+114478,2020-05-15 09:30:00,,, C9-0123/2020 - am 7= 14=,339,347,8
+114479,2020-05-15 09:30:00,,, C9-0123/2020 - am 17,99,585,8
+114480,2020-05-15 09:30:00,,, C9-0123/2020 - am 2= 4= 8= 10= 15= ,657,23,14
 114481,2020-05-15 17:00:00,2020/0067(COD),,Vote final: Redevances d’infrastructure portuaire - C9-0123/2020 - ,531,141,16
 114482,2020-05-15 17:00:00,A9-0101/2020,,Elsi Katainen - Décision de la commission AGRI,549,124,15
-114483,2020-05-15 09:30:00,,,C9-0125/2020 - am 4rev= 14= 25= ,599,82,12
-114484,2020-05-15 09:30:00,,,C9-0125/2020 - am 5rev= 15= 26= ,537,117,39
-114485,2020-05-15 09:30:00,,,C9-0125/2020 - am 6rev= 16= 27= ,559,94,40
+114483,2020-05-15 09:30:00,,, C9-0125/2020 - am 4rev= 14= 25= ,599,82,12
+114484,2020-05-15 09:30:00,,, C9-0125/2020 - am 5rev= 15= 26= ,537,117,39
+114485,2020-05-15 09:30:00,,, C9-0125/2020 - am 6rev= 16= 27= ,559,94,40
 114486,2020-05-15 09:30:00,C9-0125/2020,,am 7rev= 17= 28=,536,117,40
-114487,2020-05-15 09:30:00,,,C9-0125/2020 - am 8rev= 19= 30=,598,80,15
+114487,2020-05-15 09:30:00,,, C9-0125/2020 - am 8rev= 19= 30=,598,80,15
 114488,2020-05-15 09:30:00,C9-0125/2020,,am 9rev= 20= 31=,535,94,63
 114489,2020-05-15 09:30:00,C9-0125/2020,,am 10rev= 21= 32=,537,93,63
 114490,2020-05-15 09:30:00,C9-0125/2020,,am 1rev= 11= 22=,600,86,7
@@ -1389,9 +1389,9 @@ identifier,date,report,desc,title,for,against,abstention
 114521,2020-05-15 09:30:00,C9-0124/2020,,am 4= 12=  18= 24=,683,7,4
 114522,2020-05-15 09:30:00,C9-0124/2020,,am 5S= 13S= 19S= 25S=,668,18,8
 114523,2020-05-15 09:30:00,C9-0124/2020,,am 6S= 14S= 20S= 26S=,669,15,10
-114524,2020-05-15 09:30:00,,,C9-0123/2020 - am 16,151,535,7
-114525,2020-05-15 09:30:00,,,C9-0123/2020 - am 3= 5= 9= 11= ,541,141,12
-114526,2020-05-15 09:30:00,,,C9-0123/2020 - am 12,327,360,7
+114524,2020-05-15 09:30:00,,, C9-0123/2020 - am 16,151,535,7
+114525,2020-05-15 09:30:00,,, C9-0123/2020 - am 3= 5= 9= 11= ,541,141,12
+114526,2020-05-15 09:30:00,,, C9-0123/2020 - am 12,327,360,7
 114527,2020-05-15 09:30:00,C9-0125/2020,,am 3rev= 13S= 24S=,663,22,8
 114581,2020-06-18 17:20:07,A9-0110/2020,,Pierre Larrouturou - Am 24,133,548,5
 114582,2020-06-18 17:20:07,A9-0110/2020,,Pierre Larrouturou - Am 7,246,437,4
@@ -1619,8 +1619,8 @@ identifier,date,report,desc,title,for,against,abstention
 114899,2020-06-17 19:38:29,B9-0123/2020,,Am 1,206,479,8
 114900,2020-06-17 19:38:29,B9-0123/2020,,Am 5,688,4,4
 114905,2020-06-19 16:39:39,B9-0165/2020,,Am 7,97,562,14
-114906,2020-06-19 16:39:39,Resolutions:,,Schengen - After § 10 - am: 8,102,570,1
-114907,2020-06-19 16:39:39,Resolutions:,,Schengen - After § 10 - am: 9,94,557,22
+114906,2020-06-19 16:39:39,,,Resolutions: Schengen - After § 10 - am: 8,102,570,1
+114907,2020-06-19 16:39:39,,,Resolutions: Schengen - After § 10 - am: 9,94,557,22
 114913,2020-06-19 16:39:39,B9-0165/2020,,Am 4,90,537,48
 114924,2020-06-19 16:39:39,RC-B9-0169/2020,,Am 8,53,575,42
 114925,2020-06-19 16:39:39,RC-B9-0169/2020,,Am 9,41,598,31
@@ -3299,12 +3299,12 @@ Commission Valdis Dombrovskis",,,
 118657,2020-10-20 17:08:27,A9-0186/2020,,Iban García del Blanco - Am 3,545,94,55
 118658,2020-10-20 17:08:27,A9-0186/2020,,Iban García del Blanco - Am 4,157,509,29
 118659,2020-10-20 17:08:27,A9-0186/2020,,Iban García del Blanco - Am 5,46,641,8
-118681,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Am 2,310,360,17
-118682,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Am 3,314,354,19
-118683,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Am 4,294,369,24
-118684,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Am 5,459,214,14
-118685,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Am 6,400,268,19
-118686,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Am 1,391,277,19
+118681,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Am 2,310,360,17
+118682,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Am 3,314,354,19
+118683,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Am 4,294,369,24
+118684,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Am 5,459,214,14
+118685,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Am 6,400,268,19
+118686,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Am 1,391,277,19
 118688,2020-10-20 22:19:11,A9-0020/2020,,Sven Mikser - Am 6,46,636,8
 118689,2020-10-20 22:19:11,A9-0020/2020,,Sven Mikser - Am 17,98,558,32
 118690,2020-10-20 22:19:11,A9-0020/2020,,Sven Mikser - Am 29,303,299,88
@@ -3471,64 +3471,64 @@ Commission Valdis Dombrovskis",,,
 118865,2020-10-20 22:19:11,A9-0167/2020,,Petras Auštrevičius - Am 11,89,577,17
 118870,2020-10-20 12:15:30,A9-0188/2020,,Tomáš Zdechovský - Am 1,434,183,69
 118875,2020-10-20 12:15:30,A9-0189/2020,,Tomáš Zdechovský - Am 1,422,211,55
-118884,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 266,543,118,31
-118885,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 232,638,14,40
-118887,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 257,485,152,55
-118888,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 267PC1,168,511,13
-118889,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 258S,499,141,52
-118890,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 267PC2,172,492,28
-118891,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 259,655,32,5
-118892,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 260/rev,664,11,17
-118893,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 261,651,23,18
-118894,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 233,676,4,12
-118895,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 234,664,21,7
-118898,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 262/rev,230,414,48
-118899,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 72,471,182,39
-118900,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 255,90,599,1
-118903,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 80,659,25,8
-118904,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 81,628,57,7
-118905,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 268,111,537,44
-118906,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 82,541,93,58
-118907,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 236,656,17,19
-118909,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 263/rev,653,26,13
-118911,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 237,657,28,7
-118913,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 269,314,303,75
-118915,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 270,114,455,123
-118916,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 110,627,24,41
-118917,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 231,72,539,81
-118918,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 238,656,9,27
-118920,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 239,658,25,9
-118923,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 240,658,9,25
-118924,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 241,650,8,34
-118925,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 242,581,76,34
-118928,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 272S,162,501,29
-118929,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 123,625,42,25
-118930,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 243,654,8,30
-118931,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 273,156,465,71
-118932,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 126,667,6,19
-118933,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 244,666,6,20
-118935,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 245,675,9,8
-118937,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 246,603,75,14
-118939,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 150,521,139,32
-118940,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 247,578,94,20
-118941,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 248,646,39,7
-118942,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 249,645,19,28
-118945,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 250,663,8,21
-118948,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 264,243,399,49
-118949,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 165,284,379,27
-118950,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 254,85,556,49
-118951,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 278,537,29,126
-118953,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 251,663,12,17
-118956,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 252,660,14,18
-118959,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 253,670,14,8
-118963,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 229,316,339,36
-118964,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 3,582,15,95
-118965,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 265,281,384,27
-118966,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 279,151,519,21
-118967,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 280,264,416,12
-118968,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 230,110,571,10
-118969,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 8,613,5,74
-118970,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 256,652,27,12
+118884,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 266,543,118,31
+118885,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 232,638,14,40
+118887,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 257,485,152,55
+118888,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 267PC1,168,511,13
+118889,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 258S,499,141,52
+118890,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 267PC2,172,492,28
+118891,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 259,655,32,5
+118892,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 260/rev,664,11,17
+118893,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 261,651,23,18
+118894,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 233,676,4,12
+118895,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 234,664,21,7
+118898,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 262/rev,230,414,48
+118899,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 72,471,182,39
+118900,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 255,90,599,1
+118903,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 80,659,25,8
+118904,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 81,628,57,7
+118905,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 268,111,537,44
+118906,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 82,541,93,58
+118907,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 236,656,17,19
+118909,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 263/rev,653,26,13
+118911,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 237,657,28,7
+118913,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 269,314,303,75
+118915,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 270,114,455,123
+118916,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 110,627,24,41
+118917,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 231,72,539,81
+118918,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 238,656,9,27
+118920,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 239,658,25,9
+118923,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 240,658,9,25
+118924,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 241,650,8,34
+118925,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 242,581,76,34
+118928,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 272S,162,501,29
+118929,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 123,625,42,25
+118930,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 243,654,8,30
+118931,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 273,156,465,71
+118932,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 126,667,6,19
+118933,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 244,666,6,20
+118935,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 245,675,9,8
+118937,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 246,603,75,14
+118939,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 150,521,139,32
+118940,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 247,578,94,20
+118941,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 248,646,39,7
+118942,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 249,645,19,28
+118945,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 250,663,8,21
+118948,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 264,243,399,49
+118949,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 165,284,379,27
+118950,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 254,85,556,49
+118951,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 278,537,29,126
+118953,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 251,663,12,17
+118956,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 252,660,14,18
+118959,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 253,670,14,8
+118963,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 229,316,339,36
+118964,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 3,582,15,95
+118965,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 265,281,384,27
+118966,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 279,151,519,21
+118967,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 280,264,416,12
+118968,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 230,110,571,10
+118969,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 8,613,5,74
+118970,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 256,652,27,12
 118974,2020-10-20 22:19:11,A9-0020/2020,,"Sven Mikser - § 1, point j/1",608,6,76
 118975,2020-10-20 22:19:11,A9-0020/2020,,"Sven Mikser - § 1, point j/2",419,221,50
 118977,2020-10-20 22:19:11,A9-0020/2020,,"Sven Mikser - § 1, point w/1",294,289,107
@@ -3669,39 +3669,39 @@ Commission Valdis Dombrovskis",,,
 119244,2020-10-21 17:20:08,A9-0183/2020,,Klára Dobrev - Considérant M/2,399,265,30
 119246,2020-10-21 17:20:08,A9-0183/2020,,Klára Dobrev - Considérant AB/1,656,9,29
 119247,2020-10-21 17:20:08,A9-0183/2020,,Klára Dobrev - Considérant AB/2,365,319,10
-119249,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 1/1,536,86,65
-119250,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 1/2,357,179,151
-119252,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 5/1,555,37,94
-119253,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 5/2,476,148,62
-119255,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 7/1,620,26,41
-119256,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 7/2,339,326,22
-119257,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 9,362,278,47
-119259,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 11/1,522,145,20
-119260,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 11/2,471,147,68
-119262,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 13/1,659,20,8
-119263,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 13/2,479,140,66
-119265,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 16/1,530,144,13
-119266,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 16/2,364,292,30
-119268,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 17/1,522,146,19
-119269,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 17/2,354,316,17
-119271,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 19/1,512,72,102
-119272,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 19/2,604,34,49
-119274,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 29/1,511,74,102
-119275,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 29/2,326,343,18
-119277,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 39/1,566,72,48
-119278,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 39/2,478,141,67
-119280,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 40/1,488,111,87
-119281,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 40/2,459,146,80
-119282,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - § 40/3,382,266,38
-119284,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant C/1,579,65,43
-119285,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant C/2,370,280,37
-119287,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant E/1,544,68,75
-119288,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant E/2,378,258,51
-119290,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant G/1,660,19,8
-119291,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant G/2,484,138,64
-119292,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant S,445,164,76
-119294,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant V/1,535,107,45
-119295,2020-10-22 16:33:37,A9-0145/2020,,Ernest Urtasun - Considérant V/2,473,152,60
+119249,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 1/1,536,86,65
+119250,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 1/2,357,179,151
+119252,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 5/1,555,37,94
+119253,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 5/2,476,148,62
+119255,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 7/1,620,26,41
+119256,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 7/2,339,326,22
+119257,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 9,362,278,47
+119259,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 11/1,522,145,20
+119260,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 11/2,471,147,68
+119262,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 13/1,659,20,8
+119263,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 13/2,479,140,66
+119265,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 16/1,530,144,13
+119266,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 16/2,364,292,30
+119268,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 17/1,522,146,19
+119269,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 17/2,354,316,17
+119271,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 19/1,512,72,102
+119272,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 19/2,604,34,49
+119274,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 29/1,511,74,102
+119275,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 29/2,326,343,18
+119277,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 39/1,566,72,48
+119278,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 39/2,478,141,67
+119280,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 40/1,488,111,87
+119281,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 40/2,459,146,80
+119282,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - § 40/3,382,266,38
+119284,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant C/1,579,65,43
+119285,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant C/2,370,280,37
+119287,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant E/1,544,68,75
+119288,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant E/2,378,258,51
+119290,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant G/1,660,19,8
+119291,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant G/2,484,138,64
+119292,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant S,445,164,76
+119294,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant V/1,535,107,45
+119295,2020-10-22 16:33:37,,,A9-0145/2020 - Ernest Urtasun - Considérant V/2,473,152,60
 119684,2020-10-19 21:55:03,A9-0190/2020,,Maria Grapini - Vote unique,677,4,6
 119685,2020-10-19 21:55:03,A9-0192/2020,,Valérie Hayer - Vote unique,645,33,9
 119687,2020-10-19 21:55:03,A9-0188/2020,,Tomáš Zdechovský - Décision,618,1,68
@@ -3709,25 +3709,25 @@ Commission Valdis Dombrovskis",,,
 119702,2020-10-22 00:20:17,A9-0179/2020,,Delara Burkhardt - Considérant J/1,636,5,46
 119703,2020-10-22 00:20:17,A9-0179/2020,,Delara Burkhardt - Considérant J/2,281,395,11
 119704,2020-10-20 17:08:27,A9-0181/2020,,"Alexander Matthew Agius Saliba - Annexe, point III, sous-point 6",493,163,39
-120360,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 1-2 4-7 9 11-55 57 59-70 73-74 77-78 83 85-88 91-101 103-108 111-113 115-116 118-119 121 124-125 127 130-131 133-149 151-152 155-157 159-164 166-170 172-179 182 185-186 189-204 206-211 213-228,657,16,19
-120361,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 10,576,99,17
-120362,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 56,490,164,38
-120363,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 58,315,328,49
-120364,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 75,590,84,18
-120365,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 76,555,121,16
-120367,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 102/1,556,115,21
-120368,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 102/2,516,132,44
-120370,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 120/1,579,102,11
-120371,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 120/2,558,125,9
-120372,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 132,190,437,65
-120373,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 171,386,290,16
-120375,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 205/1,575,106,11
-120376,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 205/2,522,161,9
-120377,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 212,573,77,42
-120378,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 274/rev,275,343,74
-120380,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 275/1,110,524,58
-120385,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 276/rev,330,346,16
-120387,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - Am 277/rev,321,333,37
+120360,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 1-2 4-7 9 11-55 57 59-70 73-74 77-78 83 85-88 91-101 103-108 111-113 115-116 118-119 121 124-125 127 130-131 133-149 151-152 155-157 159-164 166-170 172-179 182 185-186 189-204 206-211 213-228,657,16,19
+120361,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 10,576,99,17
+120362,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 56,490,164,38
+120363,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 58,315,328,49
+120364,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 75,590,84,18
+120365,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 76,555,121,16
+120367,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 102/1,556,115,21
+120368,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 102/2,516,132,44
+120370,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 120/1,579,102,11
+120371,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 120/2,558,125,9
+120372,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 132,190,437,65
+120373,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 171,386,290,16
+120375,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 205/1,575,106,11
+120376,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 205/2,522,161,9
+120377,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 212,573,77,42
+120378,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 274/rev,275,343,74
+120380,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 275/1,110,524,58
+120385,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 276/rev,330,346,16
+120387,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - Am 277/rev,321,333,37
 120662,2020-10-22 00:20:17,A9-0179/2020,,Delara Burkhardt - Am 46,372,283,31
 120666,2020-10-21 12:43:18,B9-0338/2020,,Am 2,111,520,61
 120667,2020-10-21 12:43:18,B9-0338/2020,,Am 1,132,549,13
@@ -4272,260 +4272,260 @@ Commission Valdis Dombrovskis",,,
 122841,2020-10-22 00:20:17,A8-0200/2019,,Peter Jahr - Am 1078,96,572,17
 122842,2020-10-22 00:20:17,A8-0200/2019,,Peter Jahr - Am 1278,244,421,22
 122844,2020-10-22 00:20:17,A8-0200/2019,,Peter Jahr - Am 1279,117,545,25
-123091,2020-10-22 22:08:05,A8-0199/2019,,"Ulrike Müller - Am 2-10, 12, 14-18, 23, 25-29, 32, 39-50, 63, 74-75, 78, 80, 83, 85-92, 95-104, 109-110, 121-127, 132, 141, 146-152, 159-182, 203-205",635,15,36
-123093,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 233,76,602,6
-123095,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 207,61,540,85
-123097,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 240,84,547,53
-123098,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 76,636,25,25
-123099,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 241,85,553,46
-123100,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 77,657,24,5
-123101,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 79S= 242S=,613,62,11
-123102,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 243+245,78,599,7
-123103,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 81,638,38,10
-123104,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 82= 244=,593,25,68
-123105,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 246,27,599,58
-123106,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 84S= 247S=,621,56,9
-123108,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 248,259,421,4
-123110,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 249,54,600,30
-123111,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 93,645,12,29
-123112,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 250,88,565,31
-123113,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 94,598,58,30
-123114,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 251,44,610,30
-123115,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 252,88,595,1
-123117,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 257,260,420,4
-123119,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 288,124,544,17
-123121,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 289,274,395,17
-123123,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 227,656,20,10
-123125,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 183= 211PC1= 283PC1=,622,33,31
-123126,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 290,219,456,11
-123127,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 211PC2,317,302,67
-123128,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 283PC2,294,302,90
-123129,2020-10-22 22:08:05,A8-0199/2019,,"Ulrike Müller - Am 184, 185, 186, 187, 188S= 211PC3= 283PC3=",649,29,8
-123130,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 292,149,524,13
-123131,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 211PC4,291,333,61
-123132,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 291,356,322,8
-123133,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 189 211PC5= 283PC4=,604,62,20
-123134,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am  283PC5,312,362,12
-123135,2020-10-22 22:08:05,A8-0199/2019,,"Ulrike Müller - Am 190, 191= 211PC6S=",424,254,8
-123137,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 212PC1= 293=,339,334,13
-123138,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 212PC2= 294=,344,330,12
-123139,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 228,472,205,9
-123141,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 213,181,492,13
-123142,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 259,16,604,64
-123143,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 258,16,602,66
-123144,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 260,69,594,21
-123146,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 298,114,560,12
-123147,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 261,82,589,13
-123148,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 262,128,544,12
-123149,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 202,505,176,5
-123151,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 230,655,19,12
-123153,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 263,307,370,7
-123154,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 264,308,369,7
-123156,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 284,383,294,9
-123159,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 231,48,628,8
-123160,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 232,244,390,50
-123161,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 13,657,24,5
-123162,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 299,367,299,20
-123163,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 209= 285=,347,329,9
-123164,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 210= 286=,362,313,11
-123166,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 287,287,386,13
-123167,2020-10-22 22:08:05,A8-0199/2019,,Ulrike Müller - Am 31,522,108,56
+123091,2020-10-22 22:08:05,,,"A8-0199/2019 - Ulrike Müller - Am 2-10, 12, 14-18, 23, 25-29, 32, 39-50, 63, 74-75, 78, 80, 83, 85-92, 95-104, 109-110, 121-127, 132, 141, 146-152, 159-182, 203-205",635,15,36
+123093,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 233,76,602,6
+123095,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 207,61,540,85
+123097,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 240,84,547,53
+123098,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 76,636,25,25
+123099,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 241,85,553,46
+123100,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 77,657,24,5
+123101,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 79S= 242S=,613,62,11
+123102,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 243+245,78,599,7
+123103,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 81,638,38,10
+123104,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 82= 244=,593,25,68
+123105,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 246,27,599,58
+123106,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 84S= 247S=,621,56,9
+123108,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 248,259,421,4
+123110,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 249,54,600,30
+123111,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 93,645,12,29
+123112,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 250,88,565,31
+123113,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 94,598,58,30
+123114,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 251,44,610,30
+123115,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 252,88,595,1
+123117,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 257,260,420,4
+123119,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 288,124,544,17
+123121,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 289,274,395,17
+123123,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 227,656,20,10
+123125,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 183= 211PC1= 283PC1=,622,33,31
+123126,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 290,219,456,11
+123127,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 211PC2,317,302,67
+123128,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 283PC2,294,302,90
+123129,2020-10-22 22:08:05,,,"A8-0199/2019 - Ulrike Müller - Am 184, 185, 186, 187, 188S= 211PC3= 283PC3=",649,29,8
+123130,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 292,149,524,13
+123131,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 211PC4,291,333,61
+123132,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 291,356,322,8
+123133,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 189 211PC5= 283PC4=,604,62,20
+123134,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am  283PC5,312,362,12
+123135,2020-10-22 22:08:05,,,"A8-0199/2019 - Ulrike Müller - Am 190, 191= 211PC6S=",424,254,8
+123137,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 212PC1= 293=,339,334,13
+123138,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 212PC2= 294=,344,330,12
+123139,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 228,472,205,9
+123141,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 213,181,492,13
+123142,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 259,16,604,64
+123143,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 258,16,602,66
+123144,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 260,69,594,21
+123146,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 298,114,560,12
+123147,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 261,82,589,13
+123148,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 262,128,544,12
+123149,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 202,505,176,5
+123151,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 230,655,19,12
+123153,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 263,307,370,7
+123154,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 264,308,369,7
+123156,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 284,383,294,9
+123159,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 231,48,628,8
+123160,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 232,244,390,50
+123161,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 13,657,24,5
+123162,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 299,367,299,20
+123163,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 209= 285=,347,329,9
+123164,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 210= 286=,362,313,11
+123166,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 287,287,386,13
+123167,2020-10-22 22:08:05,,,A8-0199/2019 - Ulrike Müller - Am 31,522,108,56
 123171,2020-10-21 17:20:08,A9-0167/2020,,Petras Auštrevičius – Résolution,602,44,44
 123172,2020-10-21 17:20:08,A9-0020/2020,,Sven Mikser - Résolution,641,5,47
 123174,2020-10-22 00:20:17,B9-0338/2020,,Final votes - Third voting session - Education (),593,58,36
 123175,2020-10-22 00:20:17,B9-0339/2020,,Final votes - Third voting session - Visa reciprocity (),376,269,43
 123176,2020-10-22 00:20:17,A9-0193/2020,,Joachim Schuster - Résolution,218,435,33
 123177,2020-10-22 00:20:17,A9-0183/2020,,Klára Dobrev - Résolution,466,189,32
-123766,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1114,273,412,11
-123768,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1174,284,365,47
-123769,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1175,364,308,24
-123771,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1176,288,352,56
-123773,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 563,684,8,4
-123774,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1307,265,423,8
-123776,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 832PC1,545,144,7
-123778,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1308,266,416,14
-123779,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 961,150,528,18
-123780,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 567,385,278,33
-123782,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 962,145,537,14
-123783,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 832PC3,333,348,15
-123784,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1309,182,500,13
-123785,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 963,170,522,4
-123786,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1310,265,419,12
-123787,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 964,154,531,11
-123788,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 832PC4,370,319,7
-123790,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1177,352,328,15
-123792,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 734PC1,278,399,18
-123793,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 965= 1311= 1312PC1=,295,342,59
-123794,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 571= 734PC2=,545,142,9
-123795,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1312PC2,278,408,10
-123796,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 966= 1312PC3=,222,437,37
-123797,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 572= 734PC3=,583,87,26
-123798,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 734PC4,281,404,11
-123799,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1312PC4,160,525,10
-123800,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 573= 734PC5=,624,36,36
-123801,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 967,170,512,14
-123802,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1312PC5,254,437,5
-123803,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 574= 734PC6=,593,85,18
-123804,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 968,163,519,14
-123805,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1312PC6,155,528,12
-123806,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 575= 734PC7=,581,109,6
-123807,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 969,148,533,15
-123808,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 734PC8,252,433,11
-123809,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 576= 734PC9=,610,52,34
-123810,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 577= 970= 1312PC7=,469,217,10
-123812,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1313,281,403,12
-123813,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 971,282,405,9
-123814,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 972= 1314=,277,403,16
-123815,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1315,283,397,16
-123816,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1316,178,509,8
-123818,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1317,294,390,12
-123820,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 973= 1318=,286,401,9
-123821,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 974= 1319=,289,392,15
-123822,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 975,307,370,18
-123823,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1111,211,435,49
-123824,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1324,290,392,13
-123825,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 976= 1320=,284,402,10
-123827,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 591/1,578,100,18
-123828,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 591/2,469,219,8
-123830,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1322,306,374,16
-123831,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 978= 1323=,284,391,21
-123832,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1112,412,269,15
-123834,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1113,423,263,10
-123835,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 835,517,129,50
-123837,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 836,451,227,18
-123839,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1153PC1,521,169,6
-123841,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1325,283,400,13
-123842,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 619,555,93,48
-123843,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 979,280,406,9
-123845,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1143/1,339,348,8
-123847,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 980= 1326=,321,369,6
-123848,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 981= 1327=,172,492,32
-123849,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 982= 1328=,282,404,10
-123850,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1329,282,399,15
-123851,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1153PC2,528,155,13
-123852,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1330,282,402,10
-123853,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 620= 1153PC3S= 1331=,577,44,75
-123854,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1332S,273,411,12
-123855,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1153PC4,651,17,28
-123856,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 621= 983= 1153PC5= 1333=,679,7,10
-123857,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 622= 984=,255,437,4
-123858,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 1153PC6=,642,39,15
-123859,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 623= 985= 1153PC7=,601,85,10
-123861,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 735PC1,664,13,18
-123863,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 625= 735PC2=,685,6,5
-123864,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 626= 735PC3=,673,18,5
-123865,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am  627= 735PC4=,682,10,4
-123866,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 628= 735PC5=,690,1,5
-123868,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 631,513,176,7
-123870,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 736PC2,616,51,29
-123871,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 632= 736PC3=,529,150,17
-123872,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 633= 736PC4=,582,100,14
-123873,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 736PC5=,624,64,8
-123874,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am 634= 736PC6=,529,105,62
-123875,2020-10-22 11:34:08,A8-0200/2019,,Peter Jahr - Am  635S= 736PC7S=,600,86,10
-123877,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 644= 986=,186,491,18
-123879,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 677,515,163,17
-123880,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1334,245,440,10
-123882,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 987= 1335=,373,314,8
-123883,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 988= 1336=,367,318,10
-123884,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1337,291,396,8
-123886,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1338,293,392,10
-123887,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 989= 1339=,323,357,15
-123888,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 699,570,117,8
-123889,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1340,377,312,6
-123890,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1341,183,506,6
-123891,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1178,160,516,19
-123893,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1092= 1146= 1179=,471,178,46
-123894,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1097= 1125= 1180=,571,82,42
-123896,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 716,223,412,60
-123898,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1154/1,329,326,38
-123899,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1154/2,433,200,61
-123911,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1142,277,361,57
-123912,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 725,476,174,44
-123913,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 844,371,311,13
-123914,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1342,301,385,9
-123915,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1155,362,303,29
-123920,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 776/1,624,65,6
-123921,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 776/2,511,181,3
-123922,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 847,450,237,8
-123923,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 737,200,478,16
-123924,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1098,285,378,32
-123925,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 990,109,582,2
-123926,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 991,145,538,10
-123927,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1099,289,364,42
-123928,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 13,401,273,21
-123932,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 849,325,358,12
-123933,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 850,287,398,10
-123934,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 993,108,573,12
-123935,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 738,54,498,142
-123936,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 779,647,42,6
-123937,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 994,115,576,2
-123938,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 995S,87,572,34
-123940,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 18/1,565,125,5
-123941,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 18/2,541,148,6
-123943,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 851,270,363,61
-123944,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 727,291,397,7
-123945,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 852,287,349,59
-123946,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 853,506,155,34
-123947,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 781,582,108,5
-123948,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 854,321,364,10
-123949,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 996,121,568,4
-123951,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 782/1,548,142,5
-123952,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 782/2,377,310,8
-123953,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 21= 783=,642,42,11
-123954,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 784,569,70,56
-123955,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1100,349,339,7
-123956,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 997,120,570,3
-123957,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 998S,89,570,34
-123958,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 855,277,406,11
-123959,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 728,353,321,21
-123961,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 785,674,16,4
-123962,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 999S,70,576,47
-123963,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 22,443,241,11
-123967,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 787,295,395,5
-123968,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 1101,309,337,49
-123969,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 788,297,392,6
-123970,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 28= 791=,636,52,7
-123971,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 29,445,121,129
-123972,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 792,555,128,12
-123973,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 30S,584,104,7
-123975,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 33,557,135,3
-123977,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 729,469,197,29
-123979,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 794/1,396,295,4
-123980,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 794/2,307,383,5
-123981,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 856,511,178,5
-123982,2020-10-22 16:33:37,A8-0200/2019,,Peter Jahr - Am 795,588,104,3
-123983,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 857,272,400,14
-123984,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1000,106,569,8
-123985,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 796,607,73,5
-123986,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1001,53,627,3
-123987,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1002= 1183=,208,453,25
-123988,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1003,50,627,7
-123989,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 797,380,299,7
-123990,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 858,333,284,67
-123991,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1004S,85,592,7
-123992,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 798,509,160,16
-123993,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 799,279,400,7
-123994,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 730,454,202,30
-123996,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 800/1,377,304,5
-123997,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 800/2,105,569,12
-123998,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 801,404,274,8
-123999,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 859,279,400,7
-124001,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 802/1,616,58,12
-124002,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 802/2,516,156,14
-124003,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 803,384,294,8
-124005,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1144/1,408,262,16
-124006,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 1144/2,337,334,15
-124007,2020-10-22 22:08:05,A8-0200/2019,,Peter Jahr - Am 860,146,477,63
-124011,2020-10-22 16:33:37,A9-0179/2020,,Delara Burkhardt - Résolution,377,75,243
-124013,2020-10-23 12:05:35,A9-0145/2020,,Ernest Urtasun - Résolution,477,112,94
-124015,2020-10-23 16:26:39,A8-0200/2019,,Peter Jahr - Proposition de la Commission,425,212,51
-124016,2020-10-23 16:26:39,A8-0200/2019,,"Peter Jahr - Renvoi (article 59, paragraphe 4 du règlement)",474,189,24
-124017,2020-10-23 16:26:39,A8-0199/2019,,Ulrike Müller - Proposition de la Commission,434,185,69
-124018,2020-10-23 16:26:39,A8-0199/2019,,"Ulrike Müller - Renvoi (article 59, paragraphe 4 du règlement)",586,79,23
-124019,2020-10-23 16:26:39,A8-0198/2019,,Eric Andrieu - Proposition de la Commission,463,133,92
-124020,2020-10-23 16:26:39,A8-0198/2019,,"Eric Andrieu - Renvoi (article 59, paragraphe 4 du règlement)",621,42,24
-124031,2020-10-23 12:05:35,A8-0198/2019,,Eric Andrieu - 235/rev,625,34,7
+123766,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1114,273,412,11
+123768,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1174,284,365,47
+123769,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1175,364,308,24
+123771,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1176,288,352,56
+123773,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 563,684,8,4
+123774,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1307,265,423,8
+123776,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 832PC1,545,144,7
+123778,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1308,266,416,14
+123779,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 961,150,528,18
+123780,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 567,385,278,33
+123782,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 962,145,537,14
+123783,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 832PC3,333,348,15
+123784,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1309,182,500,13
+123785,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 963,170,522,4
+123786,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1310,265,419,12
+123787,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 964,154,531,11
+123788,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 832PC4,370,319,7
+123790,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1177,352,328,15
+123792,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 734PC1,278,399,18
+123793,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 965= 1311= 1312PC1=,295,342,59
+123794,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 571= 734PC2=,545,142,9
+123795,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1312PC2,278,408,10
+123796,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 966= 1312PC3=,222,437,37
+123797,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 572= 734PC3=,583,87,26
+123798,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 734PC4,281,404,11
+123799,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1312PC4,160,525,10
+123800,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 573= 734PC5=,624,36,36
+123801,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 967,170,512,14
+123802,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1312PC5,254,437,5
+123803,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 574= 734PC6=,593,85,18
+123804,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 968,163,519,14
+123805,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1312PC6,155,528,12
+123806,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 575= 734PC7=,581,109,6
+123807,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 969,148,533,15
+123808,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 734PC8,252,433,11
+123809,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 576= 734PC9=,610,52,34
+123810,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 577= 970= 1312PC7=,469,217,10
+123812,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1313,281,403,12
+123813,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 971,282,405,9
+123814,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 972= 1314=,277,403,16
+123815,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1315,283,397,16
+123816,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1316,178,509,8
+123818,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1317,294,390,12
+123820,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 973= 1318=,286,401,9
+123821,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 974= 1319=,289,392,15
+123822,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 975,307,370,18
+123823,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1111,211,435,49
+123824,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1324,290,392,13
+123825,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 976= 1320=,284,402,10
+123827,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 591/1,578,100,18
+123828,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 591/2,469,219,8
+123830,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1322,306,374,16
+123831,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 978= 1323=,284,391,21
+123832,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1112,412,269,15
+123834,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1113,423,263,10
+123835,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 835,517,129,50
+123837,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 836,451,227,18
+123839,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1153PC1,521,169,6
+123841,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1325,283,400,13
+123842,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 619,555,93,48
+123843,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 979,280,406,9
+123845,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1143/1,339,348,8
+123847,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 980= 1326=,321,369,6
+123848,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 981= 1327=,172,492,32
+123849,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 982= 1328=,282,404,10
+123850,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1329,282,399,15
+123851,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1153PC2,528,155,13
+123852,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1330,282,402,10
+123853,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 620= 1153PC3S= 1331=,577,44,75
+123854,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1332S,273,411,12
+123855,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1153PC4,651,17,28
+123856,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 621= 983= 1153PC5= 1333=,679,7,10
+123857,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 622= 984=,255,437,4
+123858,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 1153PC6=,642,39,15
+123859,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 623= 985= 1153PC7=,601,85,10
+123861,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 735PC1,664,13,18
+123863,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 625= 735PC2=,685,6,5
+123864,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 626= 735PC3=,673,18,5
+123865,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am  627= 735PC4=,682,10,4
+123866,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 628= 735PC5=,690,1,5
+123868,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 631,513,176,7
+123870,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 736PC2,616,51,29
+123871,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 632= 736PC3=,529,150,17
+123872,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 633= 736PC4=,582,100,14
+123873,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 736PC5=,624,64,8
+123874,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am 634= 736PC6=,529,105,62
+123875,2020-10-22 11:34:08,,,A8-0200/2019 - Peter Jahr - Am  635S= 736PC7S=,600,86,10
+123877,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 644= 986=,186,491,18
+123879,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 677,515,163,17
+123880,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1334,245,440,10
+123882,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 987= 1335=,373,314,8
+123883,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 988= 1336=,367,318,10
+123884,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1337,291,396,8
+123886,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1338,293,392,10
+123887,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 989= 1339=,323,357,15
+123888,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 699,570,117,8
+123889,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1340,377,312,6
+123890,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1341,183,506,6
+123891,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1178,160,516,19
+123893,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1092= 1146= 1179=,471,178,46
+123894,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1097= 1125= 1180=,571,82,42
+123896,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 716,223,412,60
+123898,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1154/1,329,326,38
+123899,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1154/2,433,200,61
+123911,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1142,277,361,57
+123912,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 725,476,174,44
+123913,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 844,371,311,13
+123914,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1342,301,385,9
+123915,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1155,362,303,29
+123920,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 776/1,624,65,6
+123921,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 776/2,511,181,3
+123922,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 847,450,237,8
+123923,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 737,200,478,16
+123924,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1098,285,378,32
+123925,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 990,109,582,2
+123926,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 991,145,538,10
+123927,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1099,289,364,42
+123928,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 13,401,273,21
+123932,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 849,325,358,12
+123933,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 850,287,398,10
+123934,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 993,108,573,12
+123935,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 738,54,498,142
+123936,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 779,647,42,6
+123937,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 994,115,576,2
+123938,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 995S,87,572,34
+123940,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 18/1,565,125,5
+123941,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 18/2,541,148,6
+123943,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 851,270,363,61
+123944,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 727,291,397,7
+123945,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 852,287,349,59
+123946,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 853,506,155,34
+123947,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 781,582,108,5
+123948,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 854,321,364,10
+123949,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 996,121,568,4
+123951,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 782/1,548,142,5
+123952,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 782/2,377,310,8
+123953,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 21= 783=,642,42,11
+123954,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 784,569,70,56
+123955,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1100,349,339,7
+123956,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 997,120,570,3
+123957,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 998S,89,570,34
+123958,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 855,277,406,11
+123959,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 728,353,321,21
+123961,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 785,674,16,4
+123962,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 999S,70,576,47
+123963,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 22,443,241,11
+123967,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 787,295,395,5
+123968,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 1101,309,337,49
+123969,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 788,297,392,6
+123970,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 28= 791=,636,52,7
+123971,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 29,445,121,129
+123972,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 792,555,128,12
+123973,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 30S,584,104,7
+123975,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 33,557,135,3
+123977,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 729,469,197,29
+123979,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 794/1,396,295,4
+123980,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 794/2,307,383,5
+123981,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 856,511,178,5
+123982,2020-10-22 16:33:37,,,A8-0200/2019 - Peter Jahr - Am 795,588,104,3
+123983,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 857,272,400,14
+123984,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1000,106,569,8
+123985,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 796,607,73,5
+123986,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1001,53,627,3
+123987,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1002= 1183=,208,453,25
+123988,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1003,50,627,7
+123989,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 797,380,299,7
+123990,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 858,333,284,67
+123991,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1004S,85,592,7
+123992,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 798,509,160,16
+123993,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 799,279,400,7
+123994,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 730,454,202,30
+123996,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 800/1,377,304,5
+123997,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 800/2,105,569,12
+123998,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 801,404,274,8
+123999,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 859,279,400,7
+124001,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 802/1,616,58,12
+124002,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 802/2,516,156,14
+124003,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 803,384,294,8
+124005,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1144/1,408,262,16
+124006,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 1144/2,337,334,15
+124007,2020-10-22 22:08:05,,,A8-0200/2019 - Peter Jahr - Am 860,146,477,63
+124011,2020-10-22 16:33:37,,,A9-0179/2020 - Delara Burkhardt - Résolution,377,75,243
+124013,2020-10-23 12:05:35,,,A9-0145/2020 - Ernest Urtasun - Résolution,477,112,94
+124015,2020-10-23 16:26:39,,,A8-0200/2019 - Peter Jahr - Proposition de la Commission,425,212,51
+124016,2020-10-23 16:26:39,,,"A8-0200/2019 - Peter Jahr - Renvoi (article 59, paragraphe 4 du règlement)",474,189,24
+124017,2020-10-23 16:26:39,,,A8-0199/2019 - Ulrike Müller - Proposition de la Commission,434,185,69
+124018,2020-10-23 16:26:39,,,"A8-0199/2019 - Ulrike Müller - Renvoi (article 59, paragraphe 4 du règlement)",586,79,23
+124019,2020-10-23 16:26:39,,,A8-0198/2019 - Eric Andrieu - Proposition de la Commission,463,133,92
+124020,2020-10-23 16:26:39,,,"A8-0198/2019 - Eric Andrieu - Renvoi (article 59, paragraphe 4 du règlement)",621,42,24
+124031,2020-10-23 12:05:35,,,A8-0198/2019 - Eric Andrieu - 235/rev,625,34,7
 124262,2020-11-11 19:48:59,A9-0128/2020,,Manuel Pizarro - Am 28,627,28,31
 124264,2020-11-11 19:48:59,A9-0093/2020,,Niclas Herbst - Am 20,587,22,77
 124265,2020-11-12 11:00:00,A9-0184/2020,,Caroline Roose - Am 3,208,400,77
@@ -4647,7 +4647,7 @@ Commission Valdis Dombrovskis",,,
 124450,2020-11-12 16:40:43,A9-0196/2020,,Cristian Bușoi - Am 29/2,571,81,37
 124452,2020-11-12 16:40:43,A9-0196/2020,,Cristian Bușoi - Am 33/1,614,43,32
 124453,2020-11-12 16:40:43,A9-0196/2020,,Cristian Bușoi - Am 33/2,552,105,32
-124461,2020-11-12 11:00:00,Budget,,2021 – Ajustements techniques,635,46,5
+124461,2020-11-12 11:00:00,,,Budget 2021 – Ajustements techniques,635,46,5
 124488,2020-11-13 11:54:42,B9-0343/2020,,Am 8,141,538,8
 124489,2020-11-13 11:54:42,B9-0343/2020,,Am 2,273,349,65
 124490,2020-11-13 11:54:42,B9-0343/2020,,Am 18,441,148,96
@@ -4699,109 +4699,109 @@ Commission Valdis Dombrovskis",,,
 124552,2020-11-13 11:54:42,B9-0343/2020,,Considérant AD/2,536,104,46
 124554,2020-11-13 11:54:42,B9-0343/2020,,Considérant AE/1,677,7,2
 124555,2020-11-13 11:54:42,B9-0343/2020,,Considérant AE/2,548,96,42
-124561,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 1,570,27,89
-124562,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1064,632,48,5
-124564,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 503 ,117,542,26
-124565,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 502,121,541,23
-124566,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1101,564,94,27
-124568,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 16 ,134,497,54
-124569,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 180 ,133,541,11
-124570,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1094,578,71,36
-124572,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1095,578,70,37
-124574,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 2,531,73,81
-124575,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 554,69,608,7
-124576,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 556,110,566,8
-124577,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 25,98,537,49
-124578,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 457,95,452,137
-124579,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 563,61,574,49
-124580,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 989,487,164,33
-124581,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 227,213,441,30
-124582,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 228,213,441,30
-124583,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 229,135,509,40
-124584,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 3,545,63,77
-124585,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1021,517,106,61
-124588,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 500,176,504,4
-124589,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 485,213,434,37
-124592,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 576,163,435,86
-124593,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 999,532,120,32
-124595,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 225,322,305,57
-124596,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 907,520,137,27
-124598,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1038,517,155,12
-124600,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 673,99,571,13
-124601,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 232,634,44,7
-124603,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 4 ,602,57,26
-124604,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 469,415,192,76
-124605,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 595,241,434,9
-124606,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 596,239,439,6
-124607,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 592,153,504,27
-124608,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1044,583,83,18
-124611,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1045,582,86,16
-124613,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 5,529,95,61
-124617,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 683,130,549,4
-124618,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1054,542,131,11
-124621,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 6,572,41,71
-124622,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 534,186,494,4
-124623,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 504PC1 ,167,511,6
-124624,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 535,179,500,5
-124625,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 504PC2,164,512,8
-124626,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 536,176,499,9
-124627,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 505PC1,162,512,9
-124628,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1057,436,222,26
-124632,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1058,434,229,21
-124636,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1059,437,222,25
-124640,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 7 ,555,103,27
-124641,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 693,83,596,4
-124642,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 357,597,45,41
-124644,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 377,598,44,41
-124646,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 358,597,43,43
-124648,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 510,67,562,54
-124649,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 526,83,542,58
-124650,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 525,81,542,60
-124651,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 527,81,541,61
-124652,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 529,81,541,61
-124653,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 530,82,586,15
-124654,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1016,567,99,17
-124656,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 701,81,597,3
-124657,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 702,80,593,8
-124658,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 8,558,67,58
-124659,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 470,248,432,3
-124660,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 713,98,573,10
-124661,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 725,96,580,5
-124662,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 471,128,505,51
-124663,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 486,153,476,54
-124664,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 726,150,520,11
-124665,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 727,147,519,15
-124666,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 731,151,519,11
-124667,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 205,133,499,51
-124668,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 9,550,119,14
-124669,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 600,148,527,8
-124670,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 601,147,528,8
-124671,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 619,101,525,55
-124672,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 613,542,126,15
-124674,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 629,99,575,6
-124675,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 633,99,573,9
-124676,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 639,137,531,13
-124677,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 641,141,529,11
-124678,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 10,557,115,11
-124679,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 11,595,82,6
-124680,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 12,537,136,10
-124681,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 789,464,143,76
-124683,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 13,535,136,12
-124684,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 14,575,88,20
-124685,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 15,559,113,11
-124686,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 16,522,114,47
-124687,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 814,550,120,13
-124689,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 771,82,551,48
-124690,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 815,558,116,9
-124692,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 816,444,116,123
-124694,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 774,94,532,55
-124695,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 775,85,549,47
-124696,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 444,513,160,10
-124698,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 820,556,117,10
-124700,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 778,120,556,5
-124701,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 779,82,549,49
-124702,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 17,585,59,40
-124703,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 18,560,73,51
+124561,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 1,570,27,89
+124562,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1064,632,48,5
+124564,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 503 ,117,542,26
+124565,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 502,121,541,23
+124566,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1101,564,94,27
+124568,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 16 ,134,497,54
+124569,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 180 ,133,541,11
+124570,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1094,578,71,36
+124572,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1095,578,70,37
+124574,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 2,531,73,81
+124575,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 554,69,608,7
+124576,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 556,110,566,8
+124577,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 25,98,537,49
+124578,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 457,95,452,137
+124579,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 563,61,574,49
+124580,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 989,487,164,33
+124581,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 227,213,441,30
+124582,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 228,213,441,30
+124583,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 229,135,509,40
+124584,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 3,545,63,77
+124585,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1021,517,106,61
+124588,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 500,176,504,4
+124589,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 485,213,434,37
+124592,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 576,163,435,86
+124593,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 999,532,120,32
+124595,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 225,322,305,57
+124596,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 907,520,137,27
+124598,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1038,517,155,12
+124600,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 673,99,571,13
+124601,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 232,634,44,7
+124603,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 4 ,602,57,26
+124604,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 469,415,192,76
+124605,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 595,241,434,9
+124606,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 596,239,439,6
+124607,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 592,153,504,27
+124608,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1044,583,83,18
+124611,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1045,582,86,16
+124613,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 5,529,95,61
+124617,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 683,130,549,4
+124618,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1054,542,131,11
+124621,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 6,572,41,71
+124622,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 534,186,494,4
+124623,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 504PC1 ,167,511,6
+124624,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 535,179,500,5
+124625,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 504PC2,164,512,8
+124626,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 536,176,499,9
+124627,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 505PC1,162,512,9
+124628,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1057,436,222,26
+124632,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1058,434,229,21
+124636,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1059,437,222,25
+124640,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 7 ,555,103,27
+124641,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 693,83,596,4
+124642,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 357,597,45,41
+124644,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 377,598,44,41
+124646,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 358,597,43,43
+124648,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 510,67,562,54
+124649,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 526,83,542,58
+124650,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 525,81,542,60
+124651,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 527,81,541,61
+124652,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 529,81,541,61
+124653,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 530,82,586,15
+124654,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1016,567,99,17
+124656,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 701,81,597,3
+124657,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 702,80,593,8
+124658,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 8,558,67,58
+124659,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 470,248,432,3
+124660,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 713,98,573,10
+124661,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 725,96,580,5
+124662,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 471,128,505,51
+124663,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 486,153,476,54
+124664,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 726,150,520,11
+124665,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 727,147,519,15
+124666,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 731,151,519,11
+124667,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 205,133,499,51
+124668,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 9,550,119,14
+124669,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 600,148,527,8
+124670,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 601,147,528,8
+124671,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 619,101,525,55
+124672,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 613,542,126,15
+124674,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 629,99,575,6
+124675,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 633,99,573,9
+124676,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 639,137,531,13
+124677,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 641,141,529,11
+124678,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 10,557,115,11
+124679,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 11,595,82,6
+124680,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 12,537,136,10
+124681,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 789,464,143,76
+124683,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 13,535,136,12
+124684,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 14,575,88,20
+124685,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 15,559,113,11
+124686,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 16,522,114,47
+124687,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 814,550,120,13
+124689,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 771,82,551,48
+124690,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 815,558,116,9
+124692,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 816,444,116,123
+124694,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 774,94,532,55
+124695,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 775,85,549,47
+124696,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 444,513,160,10
+124698,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 820,556,117,10
+124700,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 778,120,556,5
+124701,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 779,82,549,49
+124702,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 17,585,59,40
+124703,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Bloc 18,560,73,51
 124722,2020-11-11 19:48:59,A9-0175/2020,,Emmanuel Maurel - Vote unique,604,33,49
 124723,2020-11-11 19:48:59,B9-0346/2020,,Résolution,483,178,25
 124724,2020-11-11 19:48:59,B9-0349/2020,,Résolution,476,186,24
@@ -4814,10 +4814,10 @@ Commission Valdis Dombrovskis",,,
 124731,2020-11-11 19:48:59,A9-0200/2020,,Irene Tinagli - Vote unique,641,17,27
 124733,2020-11-12 16:40:43,A9-0206/2020,,"Pierre Larrouturou, Olivier Chastel - Résolution",471,102,116
 124734,2020-11-12 16:40:43,A9-0184/2020,,Caroline Roose - Résolution,597,37,55
-124735,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1022/1,608,26,50
-124736,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1022/2,377,266,41
-124737,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1051/1,569,99,17
-124738,2020-11-12 11:00:00,Projet,,de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1051/2,573,59,53
+124735,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1022/1,608,26,50
+124736,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1022/2,377,266,41
+124737,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1051/1,569,99,17
+124738,2020-11-12 11:00:00,,,Projet de budget général de l’Union européenne pour l’exercice 2021 - toutes sections - Am 1051/2,573,59,53
 124763,2020-11-13 11:54:42,A9-0203/2020,,"José Manuel Fernandes, Irene Tinagli - Am 6",128,518,42
 124764,2020-11-13 11:54:42,A9-0203/2020,,"José Manuel Fernandes, Irene Tinagli - Am 7",125,516,47
 124767,2020-11-13 11:54:42,A9-0203/2020,,"José Manuel Fernandes, Irene Tinagli - Am 8",64,512,112
@@ -5656,3 +5656,95 @@ Commission Valdis Dombrovskis",,,
 126354,2020-12-18 15:29:02,C9-0398/2020,,Proposition de la Commisssion,680,3,4
 126355,2020-12-18 15:29:02,C9-0397/2020,,Proposition de la Commission,680,3,4
 126356,2020-12-18 15:29:02,C9-0396/2020,,Proposition de la Commission,677,4,6
+126365,2021-01-19 16:07:46,,,A9-0251/2020 - Jens Gieseke - Am 1,174,504,13
+126366,2021-01-19 16:07:46,,,A9-0251/2020 - Jens Gieseke - Am 2,174,507,10
+126381,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 5,128,549,14
+126382,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 6,107,545,39
+126383,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 7S,94,559,38
+126384,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 8,129,558,4
+126385,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 9,153,534,3
+126386,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 10,131,549,11
+126387,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 11,137,548,5
+126388,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 12,164,511,15
+126389,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 13S,146,534,11
+126390,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 14,116,531,44
+126391,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 15,140,544,7
+126392,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 16,309,259,10
+126393,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 17,122,552,17
+126394,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 18,63,547,81
+126395,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 1,112,542,36
+126396,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 2,98,588,4
+126397,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 3,146,535,10
+126398,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Am 4,138,543,10
+126404,2021-01-19 16:07:46,,,A9-0133/2020 - Marie-Pierre Vedrenne - Am 24,653,10,30
+126406,2021-01-19 16:07:46,,,A9-0133/2020 - Marie-Pierre Vedrenne - Am 25,678,7,8
+126407,2021-01-19 16:07:46,,,A9-0133/2020 - Marie-Pierre Vedrenne - Am 26,660,6,27
+126410,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 2,286,371,36
+126411,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 3,141,543,9
+126412,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 4,287,398,8
+126413,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 5,156,517,19
+126414,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 6,161,516,15
+126415,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 1,129,521,43
+126416,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 7,271,409,13
+126417,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 8,369,311,13
+126418,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 9,369,299,25
+126419,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 10,412,259,22
+126420,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Am 11,135,536,22
+126422,2021-01-19 16:07:46,,,A9-0210/2020 - Dace Melbārde - Am 1,90,586,15
+126425,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - Am 1,223,454,16
+126452,2021-01-19 16:07:46,,,"A9-0173/2020 - Alexandra Geese, Othmar Karas, Dragoș Pîslaru - Am 2",540,75,77
+126503,2021-01-19 16:07:46,,,A9-0227/2020 - Caroline Nagtegaal - Am 2,592,3,98
+126561,2021-01-19 16:07:46,,,A9-0268/2020 - Pascal Canfin - Procédure d'approbation,689,1,2
+126563,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 22/1,668,2,23
+126564,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 22/2,386,253,54
+126566,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 28/1,396,257,39
+126567,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 28/2,571,71,51
+126568,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 33,396,274,23
+126570,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 34/1,664,8,19
+126571,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 34/2,360,314,19
+126572,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 37,362,301,30
+126573,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 50,417,215,61
+126575,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 56/1,556,103,34
+126576,2021-01-19 16:07:46,,,A9-0001/2021 - Gilles Lebreton - § 56/2,345,323,25
+126648,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 2/1,680,4,8
+126649,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 2/2,550,104,39
+126651,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 5/1,660,14,18
+126652,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 5/2,547,98,48
+126654,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 9/1,661,18,14
+126655,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 9/2,500,180,13
+126657,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 11/1,554,101,38
+126658,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 11/2,522,164,7
+126660,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 17/1,656,20,16
+126661,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 17/2,533,143,17
+126662,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 18,512,157,24
+126663,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 19,539,126,28
+126664,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 22,533,135,25
+126666,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 24/1,614,36,43
+126667,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 24/2,556,122,15
+126668,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 24/3,545,114,34
+126669,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 24/4,567,87,39
+126671,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 30/1,637,33,23
+126672,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 30/2,548,112,33
+126674,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant M/1,618,62,12
+126675,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant M/2,556,114,21
+126676,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant M/3,542,100,51
+126677,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant M/4,543,99,50
+126678,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant M/5,514,114,65
+126680,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant N/1,648,33,12
+126681,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - Considérant N/2,511,157,25
+126683,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 14/1,503,132,55
+126684,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 14/2,479,197,15
+126685,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 14/3,492,144,56
+126686,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 14/4,494,176,20
+126688,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 32/1,636,32,25
+126689,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 32/2,392,278,23
+126691,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 34/1,612,63,17
+126692,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 34/2,557,119,16
+126693,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - § 36,534,144,15
+126695,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Considérant I/1,537,145,11
+126696,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Considérant I/2,536,117,40
+126698,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Considérant O/1,587,85,21
+126699,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Considérant O/2,500,125,67
+126701,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Considérant S/1,618,29,46
+126702,2021-01-19 16:07:46,,,A9-0248/2020 - Javier Zarzalejos - Considérant S/2,545,138,10
+126954,2021-01-19 16:07:46,,,A9-0270/2020 - Sabrina Pignedoli - § 11/3,584,80,29
