@@ -3,6 +3,23 @@ const db = require("./lib/db.js");
 const fs = require("fs");
 const d3 = require("d3-dsv");
 
+let argv = require("minimist")(process.argv.slice(2), {
+  alias: { h: "help", f: "force" },
+});
+
+const help = (error = false) => {
+  console.log(argv);
+  error && console.error("parameter missing");
+  console.log(
+    "--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
+  );
+  process.exit(error);
+};
+
+if (argv.help) {
+  help();
+}
+
 const writePositions = async (id) => {
   const positions = await db
     .select(
@@ -16,6 +33,7 @@ const writePositions = async (id) => {
     .from("positions")
     .leftJoin("meps", "meps.vote_id", "mep_vote")
     .where("rollcall", id);
+
   fs.writeFileSync("../9/cards/" + id + ".csv", d3.csvFormat(positions));
 };
 
@@ -25,8 +43,20 @@ db.select(db.raw("rollcalls.*,title,url"))
   .orderBy("rollcalls.id", "desc")
   .then(async (votes) => {
     for (const vote of votes) {
+      try {
+        fs.accessSync(
+          "../9/cards/" + vote.id + ".csv",
+          fs.constants.R_OK | fs.constants.W_OK
+        );
+        if (!argv.force) {
+          continue;
+        }
+      } catch (err) {
+        // nothing special to do, let's create the card that doesn't exist
+      }
+
       fs.writeFileSync("../9/cards/" + vote.id + ".json", JSON.stringify(vote));
-      //writePositions(vote.id);
+      await writePositions(vote.id);
       //      mepid,mep,result,group,identifier
     }
   });

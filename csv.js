@@ -7,7 +7,6 @@ const fs = require("fs");
 const { format } = require("@fast-csv/format");
 
 const rollcall = () => {
-  console.log("aaa");
   return new Promise(async (resolve, reject) => {
     const file = "./data/item_rollcall.csv";
     const head = "identifier,date,report,desc,title,for,against,abstention".split(
