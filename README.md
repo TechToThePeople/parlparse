@@ -6,6 +6,7 @@ CREATE TABLE `positions` (
   UNIQUE(mep_vote,rollcall)
 );
 
+CREATE UNIQUE INDEX IF NOT EXISTS position_mep ON positions(mepwatch_mep, rollcall);
 
 //`id` integer not null primary key autoincrement, 
 CREATE TABLE `attendances` (

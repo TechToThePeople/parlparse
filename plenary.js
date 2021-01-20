@@ -96,7 +96,10 @@ async function run(date) {
     name;
 
   try {
-    plenary = await downloadFile("RCV", url, { file: date, force: argv.force });
+    plenary = await downloadFile("RCV", url, {
+      file: date,
+      force: argv.force === "download",
+    });
   } catch (e) {
     console.log("error", e);
     return;
@@ -105,7 +108,6 @@ async function run(date) {
   await init();
   plenary.status = "provisional";
   let r = await db("plenaries").insert(plenary).onConflict("date").ignore();
-
   if (r[0] === 0) {
     if (!argv.force) {
       console.log("->skip, add --force to process anyway");
