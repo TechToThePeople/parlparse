@@ -30,9 +30,11 @@ for (const id of Object.keys(inout)) {
       //  meps.push(inout[id]);
     }
   } else {
-    const mep = meps.find((element) => element.epid === +id);
-    if (!mep || mep.end !== inout[id].end) {
+    const i = meps.findIndex((element) => element.epid === +id);
+    if (i === -1) {
       pushMEP(inout[id]);
+    } else if (inout[id].end) {
+      meps[i].end = inout[id].end;
     }
   }
 }
