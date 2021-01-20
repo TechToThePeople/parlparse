@@ -3,30 +3,30 @@ const db = require("./lib/db.js");
 const fs = require("fs");
 const d3 = require("d3-dsv");
 
-db.select("*")
+const writePositions = async (id) => {
+  const positions = await db
+    .select(
+      "mep_vote as mepid",
+      "name",
+      "position as result",
+      "eugroup",
+      "rollcall as identifier",
+      "vote_id"
+    )
+    .from("positions")
+    .leftJoin("meps", "meps.vote_id", "mep_vote")
+    .where("rollcall", id);
+  fs.writeFileSync("../9/cards/" + id + ".csv", d3.csvFormat(positions));
+};
+
+db.select(db.raw("rollcalls.*,title,url"))
   .from("rollcalls")
-  .orderBy("id", "desc")
+  .leftJoin("reports", "rollcalls.ref", "reports.reference")
+  .orderBy("rollcalls.id", "desc")
   .then(async (votes) => {
     for (const vote of votes) {
-      console.log("processing ", vote.id);
       fs.writeFileSync("../9/cards/" + vote.id + ".json", JSON.stringify(vote));
-      const positions = await db
-        .select(
-          "mep_vote as mepid",
-          "name",
-          "position as result",
-          "eugroup",
-          "rollcall as identifier",
-          "vote_id"
-        )
-        .from("positions")
-        .leftJoin("meps", "meps.vote_id", "mep_vote")
-        .where("rollcall", vote.id);
-      fs.writeFileSync(
-        "../9/cards/" + vote.id + ".csv",
-        d3.csvFormat(positions)
-      );
-
+      //writePositions(vote.id);
       //      mepid,mep,result,group,identifier
     }
   });
