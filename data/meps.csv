@@ -266,7 +266,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197542,Janina,OCHOJSKA,1,2019-07-17,,1955-03-12,pl,,PPE,Independent,,,9,6935
 28288,Jan,OLBRYCHT,1,2019-07-02,,1952-09-21,pl,,PPE,Platforma Obywatelska,,,9,5407
 36392,Aldo,PATRICIELLO,1,2019-07-02,,1957-09-27,it,,PPE,Forza Italia,,,9,5702
-197420,Kris,PEETERS,1,2019-07-02,,1962-05-18,be,,PPE,Christen-Democratisch & Vlaams,,,9,6819
+197420,Kris,PEETERS,1,2019-07-02,2021-01-11,1962-05-18,be,,PPE,Christen-Democratisch & Vlaams,,,9,6819
 197738,Lídia,PEREIRA,1,2019-07-02,,1991-07-26,pt,,PPE,Partido Social Democrata,,,9,7120
 28224,Markus,PIEPER,1,2019-07-02,,1963-05-15,de,,PPE,Christlich Demokratische Union Deutschlands,,,9,5346
 40599,a,PIETIKÄINEN,1,2019-07-02,,1959-04-19,fi,,PPE,Kansallinen Kokoomus,,,9,5788
@@ -359,7 +359,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197632,Claudia,GAMON,1,2019-07-02,,1988-12-23,at,,Renew,NEOS – Das Neue Österreich,,,9,7022
 197554,Luis,GARICANO,1,2019-07-02,,1967-04-10,es,,Renew,Ciudadanos – Partido de la Ciudadanía,,,9,6947
 209140,Vlad,GHEORGHE,1,2020-11-10,,,ro,,Renew,Uniunea Salvați România,,,9,7283
-197661,Cristian,GHINEA,1,2019-07-02,,1977-07-20,ro,,Renew,USR-PLUS,,,9,7050
+197661,Cristian,GHINEA,1,2019-07-02,2020-12-22,1977-07-20,ro,,Renew,USR-PLUS,,,9,7050
 197443,Andreas,GLÜCK,1,2019-07-02,,1975-03-08,de,,Renew,Freie Demokratische Partei,,,9,6840
 840,Charles,GOERENS,1,2019-07-02,,1952-02-06,lu,,Renew,Parti démocratique,,,9,1793
 204419,Sandro,GOZI,1,2020-02-01,,1968-03-25,fr,,Renew,Liste Renaissance,,,9,7273
@@ -697,16 +697,16 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197493,Jaak,MADISON,1,2019-07-02,,1991-04-22,ee,,ID,Eesti Konservatiivne Rahvaerakond,,,9,6886
 197737,Ioannis,LAGOS,1,2019-07-14,,1972-09-07,gr,,NI,Independent,,,9,7119
 197839,Radan,KANEV,1,2019-07-02,,1975-09-30,bg,,PPE,Democrats for Strong Bulgaria,,,9,7222
-124989,Fredrick,FEDERLEY,1,2019-07-02,,1978-05-06,se,,Renew,Centerpartiet,,,9,6601
+124989,Fredrick,FEDERLEY,1,2019-07-02,2020-12-12,1978-05-06,se,,Renew,Centerpartiet,,,9,6601
 96776,Róża,THUN UND HOHENSTEIN,1,2019-07-02,,1954-04-13,pl,,PPE,Platforma Obywatelska,,,9,5949
 197525,Ewa,KOPACZ,1,2019-07-02,,1956-12-03,pl,,PPE,Platforma Obywatelska,,,9,6918
-23821,József,SZÁJER,1,2019-07-02,,1961-09-07,hu,,PPE,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,5143
+23821,József,SZÁJER,1,2019-07-02,2021-01-01,1961-09-07,hu,,PPE,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,5143
 197629,Maxette,PIRBAKAS,1,2019-07-02,,1975-04-14,fr,,ID,Rassemblement national,,,9,7020
 96681,Vilija,BLINKEVIČIŪTĖ,1,2019-07-02,,1960-03-03,lt,,S&D,Lietuvos socialdemokratų partija,,,9,5867
-197664,Clotilde,ARMAND,1,2019-07-02,,1973-06-28,ro,,Renew,Uniunea Salvați România,,,9,7053
-124970,Miriam,DALLI,1,2019-07-02,,1976-05-19,mt,,S&D,Partit Laburista,,,9,6589
-28115,Mairead,McGUINNESS,1,2019-07-02,,1959-06-13,ie,,PPE,Fine Gael Party,,,9,5245
-197471,Petra,DE SUTTER,1,2019-07-02,,1963-06-10,be,,Verts/ALE,Groen,,,9,6868
+197664,Clotilde,ARMAND,1,2019-07-02,2020-11-03,1973-06-28,ro,,Renew,Uniunea Salvați România,,,9,7053
+124970,Miriam,DALLI,1,2019-07-02,2020-10-18,1976-05-19,mt,,S&D,Partit Laburista,,,9,6589
+28115,Mairead,McGUINNESS,1,2019-07-02,2020-10-11,1959-06-13,ie,,PPE,Fine Gael Party,,,9,5245
+197471,Petra,DE SUTTER,1,2019-07-02,2020-09-30,1963-06-10,be,,Verts/ALE,Groen,,,9,6868
 124818,Klaus,BUCHNER,1,2019-07-02,2020-07-15,1941-02-06,de,,Verts/ALE,Ökologisch-Demokratische Partei,,,9,6455
 111011,Anthea McINTYRE,,1,2019-07-02,2020-01-31,1954-06-29,gb,,ECR,Conservative Party,,,9,6234
 189391,Baroness Nosheena,MOBARIK,1,2019-07-02,2020-01-31,1957-10-16,gb,,ECR,Conservative Party,,,9,6752
