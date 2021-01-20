@@ -93,12 +93,11 @@ const find = (name, eugroup, epid) => {
   return r;
 };
 
-mep.unmatched().then(async (unmatched) => {
-  //mep.all().then(async (unmatched) => {
+//mep.unmatched().then(async (unmatched) => {
+mep.all().then(async (unmatched) => {
   //  const m = unmatched[0];
   for (const m of unmatched) {
     const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
-    console.log(m, found);
     !found && console.log(m, found);
     found && (await mep.update(m.vote_id, found));
   }
