@@ -35,14 +35,17 @@ if (argv.help) {
   help();
 }
 
+log.time("plenary");
+
 if (argv.all) {
-  console.log("process all days");
   const start = new Date("2019-07-02"); //start of the 9th term
 
   const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
 
+  console.note("process all days: ", start, end);
+
   all(start, end).then(() => {
-    console.info("Execution time: %dms", new Date() - start);
+    log.timeEnd("plenary");
     process.exit(1);
   });
 } else {
@@ -52,27 +55,25 @@ if (argv.all) {
     : (date = argv.date);
   const d = date.split("-");
   if (d.length !== 3) {
-    console.error("can't parse the date " + date);
+    log.error("can't parse the date", date);
     process.exit(1);
   }
   const start = new Date();
 
   run(date).then(() => {
-    log.timeEnd();
-    console.info("Execution time: %dms", new Date() - start);
+    log.timeEnd("plenary");
     process.exit(1);
   });
 }
 
 async function all(start, end) {
   let date = end;
-  console.log(date, start, end);
   while (date >= start) {
     await run(date.toISOString().substring(0, 10));
     date.setDate(date.getDate() - 1);
   }
 
-  console.log("finished");
+  log.success("finished");
 }
 
 async function run(date) {
@@ -100,7 +101,7 @@ async function run(date) {
     });
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
-      console.log("no plenary with rollcalls published on " + date);
+      log.warn("no plenary with rollcalls published on " + date);
       return;
     }
     console.log(e);
@@ -112,7 +113,7 @@ async function run(date) {
   let r = await db("plenaries").insert(plenary).onConflict("date").ignore();
   if (r[0] === 0) {
     if (!argv.force) {
-      console.log(
+      log.info(
         "plenary on " +
           date +
           "->skip because already processed. Add --force to process anyway"
@@ -125,6 +126,9 @@ async function run(date) {
     plenary.id = r[0];
   }
 
-  await roll(plenary);
+  const processed = await roll(plenary);
+  log.success(processed.votes, "votes processed");
+  if (processed.added !== processed.votes)
+    log.info(processed.added, "new votes");
   //  db.destroy();
 }
