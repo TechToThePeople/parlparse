@@ -101,7 +101,11 @@ async function run(date) {
       force: argv.force === "download",
     });
   } catch (e) {
-    console.log("error", e);
+    if (e.statusCode && e.statusCode === 404) {
+      console.log("no plenary on " + date);
+      return;
+    }
+    console.log(e);
     return;
   }
 
