@@ -10,7 +10,7 @@ const downloadFile = require("./lib/download.js");
 const roll = require("./lib/rollcall.js");
 const { init } = require("./lib/mep.js");
 const db = require("./lib/db.js");
-
+const log = require("./lib/log.js");
 const { format } = require("@fast-csv/format");
 
 const head = "date,code,status,reference,name,baseurl,extensions".split(",");
@@ -22,14 +22,11 @@ let argv = require("minimist")(process.argv.slice(2), {
   alias: { h: "help", a: "all", f: "force", d: "date" },
 });
 const help = (error = false) => {
-  console.log(argv);
-  error && console.error("parameter missing");
-  console.log("--all -a : process all days or:");
-  console.log(
-    "--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)"
-  );
-  console.log(
-    "--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
+  error && log.fatal("parameter missing");
+  log.info(
+    "\n--all -a : process all days or:",
+    "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
+    "\n--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
   );
   process.exit(error);
 };
@@ -61,6 +58,7 @@ if (argv.all) {
   const start = new Date();
 
   run(date).then(() => {
+    log.timeEnd();
     console.info("Execution time: %dms", new Date() - start);
     process.exit(1);
   });
@@ -102,7 +100,7 @@ async function run(date) {
     });
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
-      console.log("no plenary on " + date);
+      console.log("no plenary with rollcalls published on " + date);
       return;
     }
     console.log(e);
@@ -114,7 +112,11 @@ async function run(date) {
   let r = await db("plenaries").insert(plenary).onConflict("date").ignore();
   if (r[0] === 0) {
     if (!argv.force) {
-      console.log("->skip, add --force to process anyway");
+      console.log(
+        "plenary on " +
+          date +
+          "->skip because already processed. Add --force to process anyway"
+      );
       return;
     }
     r = await db("plenaries").select("id").where({ date: plenary.date });

@@ -17,6 +17,7 @@
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.1",
     "osmosis": "^1.1.8",
+    "signale": "^1.4.0",
     "sqlite3": "^5.0.0",
     "xml2js": "^0.4.23"
   },
