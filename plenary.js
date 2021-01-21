@@ -99,6 +99,10 @@ async function run(date) {
       file: date,
       force: argv.force === "download",
     });
+    if (!plenary.fresh) {
+      log.info("same file already processed");
+      return;
+    }
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
       log.warn("no plenary with rollcalls published on " + date);
