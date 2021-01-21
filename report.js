@@ -19,7 +19,6 @@ if (process.argv[2]) {
 (async function run() {
   //  await init();
   const start = new Date();
-  console.log(ref);
   if (!ref) {
     r = await report.fromRoll();
   } else {
