@@ -114,6 +114,7 @@ async function run(date) {
 
   await init();
   plenary.status = "provisional";
+  delete plenary.fresh;
   let r = await db("plenaries").insert(plenary).onConflict("date").ignore();
   if (r[0] === 0) {
     if (!argv.force) {
