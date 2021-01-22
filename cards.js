@@ -2,6 +2,7 @@
 const db = require("./lib/db.js");
 const fs = require("fs");
 const d3 = require("d3-dsv");
+const log = require("./lib/log.js");
 
 let argv = require("minimist")(process.argv.slice(2), {
   alias: { h: "help", f: "force" },
@@ -37,30 +38,34 @@ const writePositions = async (id) => {
   fs.writeFileSync("../9/cards/" + id + ".csv", d3.csvFormat(positions));
 };
 
+log.time("cards");
+let written = 0;
 db.select(db.raw("rollcalls.*,title,url"))
   .from("rollcalls")
   .leftJoin("reports", "rollcalls.ref", "reports.reference")
   .orderBy("rollcalls.id", "desc")
   .then(async (votes) => {
     for (const vote of votes) {
+      const csv = "../9/cards/" + vote.id + ".csv";
       try {
-        fs.accessSync(
-          "../9/cards/" + vote.id + ".csv",
-          fs.constants.R_OK | fs.constants.W_OK
-        );
+        fs.existsSync(csv);
         if (!argv.force) {
           continue;
         }
       } catch (err) {
         // nothing special to do, let's create the card that doesn't exist
       }
-
-      fs.writeFileSync("../9/cards/" + vote.id + ".json", JSON.stringify(vote));
+      written++;
+      const dest = "../9/cards/" + vote.id + ".json";
+      fs.writeFileSync(dest, JSON.stringify(vote));
       await writePositions(vote.id);
       //      mepid,mep,result,group,identifier
     }
+    log.success(votes.length, "votes processed");
+    if (votes.length !== written) log.info(written, "new votes");
+    log.timeEnd("cards");
+    process.exit(1);
   });
-
 /*
   {
     id: 109161,
