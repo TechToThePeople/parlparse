@@ -19,6 +19,7 @@
     "osmosis": "^1.1.8",
     "signale": "^1.4.0",
     "sqlite3": "^5.0.0",
+    "xlsx": "^0.16.9",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
