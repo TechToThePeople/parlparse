@@ -6,6 +6,10 @@ const db = require("./lib/db.js");
 const fs = require("fs");
 const { format } = require("@fast-csv/format");
 
+const types = require("pg").types;
+types.setTypeParser(1184, (val) => val.slice(0, -3));
+types.setTypeParser(1082, (val) => val);
+
 const rollcall = () => {
   return new Promise(async (resolve, reject) => {
     const file = "./data/item_rollcall.csv";

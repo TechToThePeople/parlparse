@@ -42,7 +42,7 @@ if (argv.all) {
 
   const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
 
-  console.note("process all days: ", start, end);
+  log.note("process all days: ", start, end);
 
   all(start, end).then(() => {
     log.timeEnd("plenary");
@@ -84,7 +84,7 @@ async function run(date) {
   let plenary = null;
 
   const name = "P9_PV(" + d[0] + ")" + d[1] + "-" + d[2] + "(RCV)_XC";
-  const url =
+  /*  const oldurl =
     "https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/" +
     d[0] +
     "/" +
@@ -93,15 +93,18 @@ async function run(date) {
     d[2] +
     "/liste_presence/" +
     name;
+*/
+  const url =
+    "https://www.europarl.europa.eu/doceo/document/PV-9-" + date + "-RCV_FR";
 
   try {
+    log.info("downloading", url);
     plenary = await downloadFile("RCV", url, {
       file: date,
       force: argv.force === "download",
     });
     if (!plenary.fresh) {
       log.info("same file already processed");
-      return;
     }
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
