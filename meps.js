@@ -88,7 +88,7 @@ const find = (name, eugroup, epid) => {
       last_name: t.lastname,
       Birth: { date: t.birthdate },
       start: t.start9,
-      end: t.end,
+      end: t.end || null,
       constituency: { party: t.party, country: t.country },
     };
   }
@@ -105,7 +105,11 @@ mep.all().then(async (unmatched) => {
   for (const m of unmatched) {
     const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
     !found && console.log(m, found);
-    found && (await mep.update(m.vote_id, found));
+    try {
+      found && (await mep.update(m.vote_id, found));
+    } catch (e) {
+      console.log(found, e);
+    }
   }
   process.exit(0);
 });
