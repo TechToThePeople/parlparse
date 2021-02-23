@@ -48,8 +48,8 @@ db.select(db.raw("rollcalls.*,title,url"))
     for (const vote of votes) {
       const csv = "../9/cards/" + vote.id + ".csv";
       try {
-        fs.existsSync(csv);
-        if (!argv.force) {
+        const exists = fs.existsSync(csv);
+        if (exists && !argv.force) {
           continue;
         }
       } catch (err) {

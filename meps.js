@@ -5,6 +5,7 @@ const file = "./data/meps.json";
 const meps = JSON.parse(fs.readFileSync(file, "utf8"));
 const inout = JSON.parse(fs.readFileSync("./data/inout.json", "utf8"));
 const eugroups = { EPP: "PPE", "Greens/EFA": "Verts/ALE", NA: "NI" };
+const log = require("./lib/log.js");
 
 const pushMEP = (d) => {
   d.epid = d.id;
