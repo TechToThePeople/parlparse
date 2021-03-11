@@ -105,6 +105,7 @@ async function run(date) {
     });
     if (!plenary.fresh) {
       log.info("same file already processed");
+      if (!argv.force || argv.force === "download") return;
     }
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
