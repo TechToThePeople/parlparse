@@ -8,24 +8,24 @@ date,code,status,reference,name,baseurl,extensions
 const https = require("https");
 const report = require("./lib/report.js");
 const db = require("./lib/db.js");
+const log = require("./lib/log.js");
 
+log.time("report");
 let ref = "";
 if (process.argv[2]) {
   ref = process.argv[2];
 } else {
-  console.log("processing all reports");
+  log.info("processing all reports");
 }
 
 (async function run() {
   //  await init();
-  const start = new Date();
   if (!ref) {
     r = await report.fromRoll();
   } else {
     r = await report.process(ref);
   }
-  console.info("Execution time: %dms", new Date() - start);
+  log.timeEnd("report");
+  process.exit(1);
   //  db.destroy();
 })();
-
-console.log("finished");
