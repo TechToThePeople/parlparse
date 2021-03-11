@@ -36,12 +36,14 @@ const processing = async (file) => {
         log.fatal("no identifier", d);
         process.exit(1);
       }
-      if (!d.topic) return;
+      //      if (!d.topic) return;
       try {
+        log.info("processing", d);
         //    { report: 'A9-0174/2020', committee: 'EMPL', topic: 'EU FUNDS' }
         const r = await db("reports")
           .where("reference", d.report)
-          .update("topic", d.topic);
+          .update({ topic: d.topic, committee: d.committee });
+        log.info("updated", r);
       } catch (e) {
         log.error(d, e);
       }

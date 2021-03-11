@@ -134,7 +134,7 @@ async function run(date) {
     plenary.id = r[0];
   }
 
-  const processed = await roll(plenary);
+  const processed = await roll(plenary, argv.force);
   log.success(processed.votes, "votes processed");
   if (processed.added !== processed.votes)
     log.info(processed.added, "new votes");
