@@ -1,11 +1,7 @@
 identifier,date,report,desc,title,for,against,abstention
 127275,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 7,328,338,31
-127276,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 8,77,523,97
-127277,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 9,83,476,138
 127278,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 10,174,385,138
-127279,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 1,190,493,14
 127280,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 11,174,354,169
-127281,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 21,157,492,43
 127282,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 24,201,336,159
 127283,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 12,307,386,4
 127537,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - § 19/1,540,33,124
@@ -28,97 +24,76 @@ identifier,date,report,desc,title,for,against,abstention
 127296,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 3,278,389,30
 127297,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 25,367,284,46
 127298,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 4,355,331,11
-127463,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 32/2,379,306,12
-127465,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 33/1,606,62,29
-127466,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 33/2,400,288,9
-127468,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 34/1,692,4,1
-127469,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 34/2,434,209,54
-127471,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 36/1,642,50,5
-127472,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 36/2,417,275,5
-127474,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 38/1,636,54,7
-127475,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 38/2,366,319,12
-127477,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 53/1,564,77,56
-127478,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 53/2,405,250,42
-127480,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 63/1,651,8,38
-127481,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 63/2,525,144,28
-127227,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - Am 1,358,312,27
-127495,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 6/2",554,111,31
-127496,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 6/3",560,130,7
-127497,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 6/4",577,102,18
-127242,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 10rev",210,255,225
 127271,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 6,148,455,94
 127499,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 21/1",666,6,25
 127500,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 21/2",585,40,71
+127232,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 1",125,518,52
+127234,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 3",163,516,16
+127508,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 41",368,271,55
+127272,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 26,368,291,38
+127274,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 27,322,342,33
+127047,2021-01-21 12:20:53,RC-B9-0056/2021,,Am 8,40,605,42
+127463,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 32/2,379,306,12
+127465,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 33/1,606,62,29
+127468,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 34/1,692,4,1
+127469,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 34/2,434,209,54
+127471,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 36/1,642,50,5
+127474,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 38/1,636,54,7
+127475,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 38/2,366,319,12
+127478,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 53/2,405,250,42
+127480,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 63/1,651,8,38
+127227,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - Am 1,358,312,27
+127496,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 6/3",560,130,7
+127497,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 6/4",577,102,18
 127502,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 22/1",675,13,9
 127503,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 22/2",495,143,56
 127504,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 25",511,106,77
-127232,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 1",125,518,52
 127233,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 2S",138,523,34
 127506,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 37/1",612,47,38
-127507,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 37/2",356,307,34
-127234,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 3",163,516,16
-127508,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 41",368,271,55
 127510,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 44/1",657,15,25
 127511,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 44/2",550,100,45
-127513,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 46/1",688,5,4
 127514,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 46/2",568,127,2
-127413,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 37,429,193,73
-127272,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 26,368,291,38
-127273,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 20,178,477,38
-127274,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 27,322,342,33
 127520,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 55/2",659,20,18
 127522,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 56/1",656,6,35
 127523,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 56/2",477,203,17
-127047,2021-01-21 12:20:53,RC-B9-0056/2021,,Am 8,40,605,42
+127413,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 37,429,193,73
 127526,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 59/1",606,68,22
 127527,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 59/2",539,100,58
-127235,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 6",340,347,10
-127529,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 60/1",680,14,3
 127530,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 60/2",582,32,83
 127236,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 7",193,483,21
-127237,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 8",186,500,9
-127532,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 68/1",645,16,36
-127533,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 68/2",480,199,17
-127534,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 68/3",589,93,14
-127238,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 9",170,508,19
-127239,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 4S",161,521,13
 127535,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 72",364,311,21
 127240,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 5",169,521,5
-127545,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 4/2,532,113,50
 127243,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 2,164,516,15
 127244,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 6,158,523,11
 127245,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 1,163,524,8
 127246,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 7,120,531,41
 127247,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 8,170,521,1
 127248,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 9,148,535,9
-127547,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 16/1,532,150,12
-127548,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 16/2,510,163,22
 127249,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 3,154,518,23
-127550,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 19/1,674,6,15
-127551,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 19/2,521,123,49
 127250,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 10,174,516,2
-127552,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 22,518,163,14
 127251,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 4,150,529,12
 127252,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - Am 5,149,532,10
 127382,2021-02-09 15:24:53,A9-0004/2021,,Accès du public aux documents - rapports annuels 2016 à 2018 - Public access to documents for the years 2016-2018 - Zugang der Öffentlichkeit zu Dokumenten in den Jahren 2016–2018 -  - Ioan-Rareş Bogdan - Am 2,147,527,19
 127383,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 10,658,28,10
-127384,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 3,164,504,23
 127483,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - § 13/1,685,6,5
-127484,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - § 13/2,576,98,22
-127385,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 4S,432,252,10
 127386,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 5,659,11,26
 127387,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 11,130,555,11
-127388,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 12,649,22,25
 127488,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - § 37,566,83,47
-127389,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 6,369,323,4
-127390,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 1,644,39,12
 127391,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 13,643,23,29
-127392,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 14,132,554,9
-127393,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 15,132,555,8
-127394,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 7,325,334,36
-127395,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 8,129,558,8
-127396,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 9,132,555,8
 127571,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 4/1,648,8,39
+127445,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 103/1,628,23,45
+127237,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 8",186,500,9
+127532,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 68/1",645,16,36
+127533,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 68/2",480,199,17
+127238,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 9",170,508,19
+127239,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 4S",161,521,13
+127545,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 4/2,532,113,50
+127548,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 16/2,510,163,22
+127550,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 19/1,674,6,15
+127552,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 22,518,163,14
+127385,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 4S,432,252,10
+127389,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 6,369,323,4
+127394,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 7,325,334,36
 127572,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 4/2,453,191,48
 127405,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 20/1,395,249,52
 127406,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 20/2,319,320,57
@@ -127,24 +102,12 @@ identifier,date,report,desc,title,for,against,abstention
 127410,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 33/2,355,332,9
 127411,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 34,376,295,24
 127412,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 36,410,176,109
-127517,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 49/2",582,108,7
-127519,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 55/1",686,5,6
-127432,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 67/1,528,93,75
 127433,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 67/2,368,287,40
 127435,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 71/1,441,227,28
 127436,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 71/2,594,68,34
-127437,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 72,614,60,22
-127445,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 103/1,628,23,45
 127446,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 103/2,481,189,26
-127447,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 103/3,396,257,43
 127449,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 108/1,621,5,70
 127450,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 108/2,385,229,82
-127452,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 110/1,650,23,22
-127453,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 110/2,350,310,34
-127455,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 111/1,639,28,28
-127456,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 111/2,386,264,45
-127457,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 111/3,426,227,42
-127459,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - Considérant BK/1,598,81,16
 127460,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - Considérant BK/2,388,259,48
 127602,2021-02-09 15:24:53,B9-0115/2021,,L’incidence de la COVID-19 sur la jeunesse et le sport - The impact of Covid-19 on youth and on sport - Die Auswirkungen von COVID-19 auf junge Menschen und Sport -  - § 1,673,8,13
 127604,2021-02-09 15:24:53,B9-0115/2021,,§ 5/1,658,17,20
@@ -158,11 +121,7 @@ identifier,date,report,desc,title,for,against,abstention
 127615,2021-02-09 15:24:53,B9-0115/2021,,§ 16/2,672,18,5
 127616,2021-02-09 15:24:53,B9-0115/2021,,§ 16/3,547,140,8
 127617,2021-02-09 15:24:53,B9-0115/2021,,§ 16/4,571,20,104
-127270,2021-02-09 15:24:53,A9-0002/2021,,"Banque centrale européenne - rapport annuel 2021 - European Central Bank – annual report 2020
- - Europäische Zentralbank – Jahresbericht 2020 -  - Sven Simon - Am 5",223,441,33
-127462,2021-02-09 15:24:53,A9-0008/2021,,Nouveau plan d’action en faveur de l'économie circulaire - New Circular Economy Action Plan - Neuer Aktionsplan für die Kreislaufwirtschaft -  - Jan Huitema - § 32/1,667,8,21
 127494,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - ",673,6,18
-127221,2021-02-09 15:24:53,A9-0006/2021,,Am 1 - Özlem Demirel,93,592,11
 127301,2021-02-09 14:53:59,A9-0010/2021,,Contrôle de l'acquisition et de la détention d'armes (codification) - Control of the acquisition and possession of weapons (codification) - Kontrolle des Erwerbs und des Besitzes von Waffen (kodifizierter Text) -  - Magdalena Adamowicz - Vote unique,601,77,14
 127595,2021-02-09 14:53:59,2021/0012(COD),,Demande d'application de la procédure d'urgence - ,678,10,4
 127594,2021-02-09 14:53:59,2020/0358(COD),,Demande d'application de la procédure d'urgence - ,678,10,4
@@ -172,25 +131,9 @@ identifier,date,report,desc,title,for,against,abstention
 127002,2021-01-21 12:20:53,A9-0264/2020,,Caroline Roose - Am 5,346,304,38
 127516,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 49/1",661,8,28
 127524,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 57",562,127,8
-127544,2021-02-09 15:24:53,A9-0005/2021,,Mise en œuvre de l’article 43 de la directive relative aux procédures d'asile - Implementation of Article 43 of the Asylum Procedures Directive - Umsetzung von Artikel 43 der Asylverfahrensrichtlinie -  - Erik Marquardt - § 4/1,532,103,59
 127414,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 38,468,171,57
-127415,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 40,380,225,90
-127416,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 41,409,199,87
 127418,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 42/1,626,41,29
-127419,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 42/2,408,254,34
 127421,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 48/1,661,20,15
-127422,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 48/2,442,230,24
-127423,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 48/3,549,71,76
-127424,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 50,538,135,22
-127426,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 56/1,646,20,30
-127427,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 56/2,463,127,105
-127429,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 64/1,567,69,60
-127430,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 64/2,349,316,31
-127438,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 82,451,188,57
-127440,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 83/1,679,9,8
-127441,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 83/2,591,75,30
-127442,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 90,383,297,16
-127443,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 102,341,267,88
 127609,2021-02-09 15:24:53,B9-0115/2021,,§ 11/2,542,138,14
 127003,2021-01-21 12:20:53,A9-0264/2020,,Caroline Roose - Am 6,325,318,44
 127004,2021-01-21 12:20:53,A9-0264/2020,,Caroline Roose - Am 7,443,230,16
@@ -209,6 +152,26 @@ identifier,date,report,desc,title,for,against,abstention
 127045,2021-01-21 12:20:53,RC-B9-0056/2021,,Am 4,70,595,22
 127046,2021-01-21 12:20:53,RC-B9-0056/2021,,Am 7,39,555,93
 127085,2021-01-21 12:20:53,RC-B9-0056/2021,,§ 2,511,47,128
+127221,2021-02-09 15:24:53,A9-0006/2021,,Am 1 - Özlem Demirel,93,592,11
+127415,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 40,380,225,90
+127416,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 41,409,199,87
+127419,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 42/2,408,254,34
+127422,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 48/2,442,230,24
+127423,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 48/3,549,71,76
+127424,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 50,538,135,22
+127426,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 56/1,646,20,30
+127427,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 56/2,463,127,105
+127429,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 64/1,567,69,60
+127430,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 64/2,349,316,31
+127438,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 82,451,188,57
+127440,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 83/1,679,9,8
+127441,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 83/2,591,75,30
+127443,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 102,341,267,88
+127452,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 110/1,650,23,22
+127453,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 110/2,350,310,34
+127456,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 111/2,386,264,45
+127457,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 111/3,426,227,42
+127459,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - Considérant BK/1,598,81,16
 127086,2021-01-21 12:20:53,RC-B9-0056/2021,,§ 3,609,34,44
 127048,2021-01-21 12:20:53,RC-B9-0056/2021,,Am 9,286,367,33
 127087,2021-01-21 12:20:53,RC-B9-0056/2021,,§ 4,650,15,22
@@ -6329,77 +6292,55 @@ Commission Valdis Dombrovskis",,,
 127824,2021-02-10 15:29:03,C9-0004/2021,,Am 1/3,568,108,17
 127825,2021-02-10 15:29:03,C9-0004/2021,,Am 1/4,568,109,16
 127826,2021-02-10 15:29:03,C9-0004/2021,,Am 1/5,638,39,16
-127304,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 13,595,15,73
-127305,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 40,28,570,85
 127306,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 41,43,587,53
 127307,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 14,592,71,20
 127308,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 15,582,74,27
 127309,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 42S,99,572,11
-127310,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 43S,83,583,16
 127311,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 16,587,75,21
-127312,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 44S,97,573,12
 127313,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 45S,87,584,12
 127314,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 17,567,30,84
 127315,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 46,69,584,30
-127316,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 47S,49,597,36
 127317,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 48,441,152,88
-127318,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 49,285,289,106
 127319,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 50,28,585,70
-127320,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 51,33,601,48
 127321,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 18,586,74,23
 127322,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 52,32,607,44
 127323,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 53S,62,590,31
-127324,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 54S,59,604,20
 127325,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 55S,62,582,37
 127326,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 19,589,63,30
-127327,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 56,48,605,29
-127329,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 1,334,322,27
-127330,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 2,577,70,36
-127331,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 57,36,562,83
+127304,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 13,595,15,73
+127305,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 40,28,570,85
 127332,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 5,535,104,42
 127333,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 58,59,588,35
-127560,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 59/1,628,15,40
 127561,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 59/2,239,332,112
 127335,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 60S,60,605,17
-127336,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 61,61,582,40
 127337,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 6,531,106,44
 127338,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 62,47,599,36
 127339,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 63,66,598,19
-127340,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 21,585,76,22
 127341,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 64,53,526,104
 127343,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 65,31,586,66
 127344,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 22,628,18,37
-127345,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 66S,37,591,55
 127346,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 23,618,15,49
 127347,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 24,564,55,64
 127348,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 25,652,7,24
 127562,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - § 80,549,91,42
-127349,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 67,93,551,39
 127350,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 68,587,25,70
 127351,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 26,657,21,4
 127352,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 27,600,17,65
-127353,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 69,86,535,60
 127725,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 70,79,577,26
 127587,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 72/1,478,113,91
-127588,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 72/2,97,474,111
 127567,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - § 109/1,583,76,23
 127568,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - § 109/2,484,121,74
 127358,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 74,58,584,40
 127359,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 28,596,36,50
-127360,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 75S,41,605,37
 127361,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 76,70,604,9
-127362,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 77,57,587,39
 127364,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 79S,66,572,44
-127365,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 29,69,568,46
 127366,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 30,68,564,51
 127367,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 7,562,26,95
 127368,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 8,624,14,45
-127369,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 32,31,605,47
 127569,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Considérant B,575,82,25
 127370,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 33,23,622,37
 127371,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 9,597,30,55
 127372,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 10,633,7,43
-127373,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 34S,19,638,26
 127374,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 35,71,586,26
 127375,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 36,72,587,24
 127376,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 37,31,611,41
@@ -6408,7 +6349,6 @@ Commission Valdis Dombrovskis",,,
 127379,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 4,546,87,50
 127380,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 39,52,597,33
 127688,2021-02-10 15:29:03,B9-0108/2021,,§ 2/2,595,85,12
-127689,2021-02-10 15:29:03,B9-0108/2021,,§ 13,340,295,57
 127691,2021-02-10 15:29:03,B9-0108/2021,,§ 15/1,678,3,11
 127692,2021-02-10 15:29:03,B9-0108/2021,,§ 15/2,592,10,90
 127694,2021-02-10 15:29:03,B9-0108/2021,,§ 18/1,520,91,80
@@ -6431,34 +6371,9 @@ Commission Valdis Dombrovskis",,,
 127719,2021-02-10 15:29:03,B9-0108/2021,,Considérant L/1,601,34,57
 127720,2021-02-10 15:29:03,B9-0108/2021,,Considérant L/2,365,322,5
 127722,2021-02-10 15:29:03,B9-0108/2021,,Considérant T/1,687,3,2
-127942,2021-02-11 12:05:13,RC-B9-0119/2021,,Situation humanitaire et politique au Yémen - Humanitarian and political situation in Yemen - Humanitäre und politische Lage in Jemen -  - § 6/1,643,11,36
-127943,2021-02-11 12:05:13,RC-B9-0119/2021,,§ 6/2,637,14,39
-127944,2021-02-11 12:05:13,RC-B9-0119/2021,,§ 6/3,422,230,38
-127849,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 19,325,350,15
 127947,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 17/1,626,24,40
-127948,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 17/2,398,239,53
-127851,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 7,231,317,142
 127949,2021-02-11 12:05:13,RC-B9-0119/2021,,§ 11,407,114,168
-127852,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 15,333,286,71
-127853,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 8,58,588,44
-127854,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 9,56,598,36
-127855,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 10,44,613,33
-127856,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 11,41,639,10
-127857,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 12,45,598,47
-127858,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 18,345,297,48
-127859,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 1,40,607,43
-127860,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 2,44,600,46
-127861,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 16,326,311,53
-127862,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 3,85,597,8
-127863,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 4,60,579,51
-127864,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 5,61,581,48
-127865,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 6,95,563,32
-127866,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 13,297,347,46
 127958,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant P/1,601,51,37
-127959,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant P/2,386,260,43
-127867,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 14,98,550,42
-127961,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant T/1,671,17,2
-127962,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant T/2,645,22,23
 127836,2021-02-11 12:05:13,RC-B9-0116/2021,,Situation au Myanmar/en Birmanie - The situation in Myanmar - Lage in Myanmar/Birma -  - Am 1,170,512,7
 127837,2021-02-11 12:05:13,RC-B9-0116/2021,,Am 2,92,577,20
 127838,2021-02-11 12:05:13,RC-B9-0116/2021,,Am 3,105,562,21
@@ -6469,13 +6384,6 @@ Commission Valdis Dombrovskis",,,
 127917,2021-02-11 12:05:13,RC-B9-0130/2021,,Am 3,116,494,80
 127918,2021-02-11 12:05:13,RC-B9-0130/2021,,Am 1,435,240,16
 127919,2021-02-11 12:05:13,RC-B9-0130/2021,,Am 2,121,469,101
-127902,2021-02-11 12:05:13,RC-B9-0144/2021,,Situation des droits de l’homme au Kazakhstan - Human rights situation in Kazakhstan - Die Menschenrechtslage in Kasachstan -  - Am 3,405,271,14
-127903,2021-02-11 12:05:13,RC-B9-0144/2021,,Am 1,391,230,69
-127904,2021-02-11 12:05:13,RC-B9-0144/2021,,Am 2,172,442,75
-127966,2021-02-11 12:05:13,RC-B9-0138/2021,,Situation politique en Ouganda - Political situation in Uganda - Die politische Lage in Uganda -  - § 15/1,654,18,19
-127967,2021-02-11 12:05:13,RC-B9-0138/2021,,§ 15/2,605,47,39
-127968,2021-02-11 12:05:13,RC-B9-0138/2021,,§ 15/3,488,151,52
-127929,2021-02-11 12:05:13,RC-B9-0138/2021,,Am 1,150,534,5
 127969,2021-02-11 12:05:13,RC-B9-0138/2021,,§ 18,626,31,34
 127972,2021-02-11 15:54:24,B9-0109/2021,,Sécurité de la centrale nucléaire d'Ostrovels (Biélorussie) - Safety of the nuclear power plant in Ostrovets (Belarus) - Sicherheit des Kernkraftwerks Astrawez (Belarus) -  - Proposition de résolution,642,29,21
 127973,2021-02-11 15:54:24,RC-B9-0119/2021,,Situation humanitaire et politique au Yémen - Humanitarian and political situation in Yemen - Humanitäre und politische Lage in Jemen -  - Proposition de résolution,638,12,44
@@ -6494,6 +6402,26 @@ Commission Valdis Dombrovskis",,,
 127730,2021-02-10 22:24:31,B9-0114/2021,,/rev1 - § 5/2,553,23,114
 127731,2021-02-10 22:24:31,B9-0114/2021,,/rev1 - § 5/3,549,90,50
 127732,2021-02-10 22:24:31,B9-0114/2021,,/rev1 - § 7,515,110,64
+127943,2021-02-11 12:05:13,RC-B9-0119/2021,,§ 6/2,637,14,39
+127944,2021-02-11 12:05:13,RC-B9-0119/2021,,§ 6/3,422,230,38
+127849,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 19,325,350,15
+127948,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 17/2,398,239,53
+127852,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 15,333,286,71
+127853,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 8,58,588,44
+127854,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 9,56,598,36
+127856,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 11,41,639,10
+127858,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 18,345,297,48
+127860,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 2,44,600,46
+127862,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 3,85,597,8
+127864,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 5,61,581,48
+127865,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 6,95,563,32
+127867,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 14,98,550,42
+127962,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant T/2,645,22,23
+127902,2021-02-11 12:05:13,RC-B9-0144/2021,,Situation des droits de l’homme au Kazakhstan - Human rights situation in Kazakhstan - Die Menschenrechtslage in Kasachstan -  - Am 3,405,271,14
+127903,2021-02-11 12:05:13,RC-B9-0144/2021,,Am 1,391,230,69
+127904,2021-02-11 12:05:13,RC-B9-0144/2021,,Am 2,172,442,75
+127967,2021-02-11 12:05:13,RC-B9-0138/2021,,§ 15/2,605,47,39
+127968,2021-02-11 12:05:13,RC-B9-0138/2021,,§ 15/3,488,151,52
 128088,2021-03-09 16:47:58,A9-0018/2021,,Lara Wolters - Am 10,142,514,39
 127735,2021-02-10 22:24:31,B9-0114/2021,,/rev1 - § 9/2,489,147,50
 127737,2021-02-10 22:24:31,B9-0114/2021,,/rev1 - § 9/4,461,145,80
@@ -6962,15 +6890,10 @@ Commission Valdis Dombrovskis",,,
 128854,2021-03-10 22:23:24,B9-0161/2021,,"Objection formulée conformément à l'article 112, paragraphes 2 et 3: maïs génétiquement modifié MZIR098 (SYN-ØØØ98-3) - Objection pursuant to Rule 112(2) and (3): Genetically modified maize MZIR098 (SYN-ØØØ98-3) - Einwand gemäß Artikel 112 Absätze 2 und 3 (GO): genetisch veränderter Mais der Sorte MZIR098 (SYN-ØØØ98-3) -  - Proposition de résolution",495,181,19
 128855,2021-03-10 22:23:24,A9-0013/2021,,Activités du Médiateur européen – rapport annuel 2019 - Activities of the European Ombudsman - annual report 2019 - Tätigkeit des Europäischen Bürgerbeauftragten – Jahresbericht 2019 -  - Sylvie Guillaume - Proposition de résolution,576,11,108
 127684,2021-02-10 15:29:03,C9-0420/2020,,Am 1,689,3,1
-128963,2021-03-11 12:12:48,RC-B9-0183/2021,,§ 17/1,632,21,43
 128964,2021-03-11 12:12:48,RC-B9-0183/2021,,§ 17/2,457,227,12
 128912,2021-03-11 12:12:48,RC-B9-0183/2021,,Am 4,40,609,47
 128965,2021-03-11 12:12:48,RC-B9-0183/2021,,§ 21,359,240,97
 128913,2021-03-11 12:12:48,RC-B9-0183/2021,,Am 3,94,572,30
-127581,2021-02-10 15:29:03,A9-0219/2020,,Accord d’association entre l'Union européenne et l'Ukraine - EU Association Agreement with Ukraine - Assoziierungsabkommen zwischen der EU und der Ukraine -  - Michael Gahler - Am 12,587,63,33
-127328,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 20,666,14,3
-127342,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 3,617,48,18
-127363,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 78S,75,561,47
 127687,2021-02-10 15:29:03,B9-0108/2021,,"Stratégie européenne en matière de compétences en faveur de la compétitivité durable, de l'équité sociale et de la résilience - European Skills Agenda for sustainable competitiveness, social fairness and resilience - Europäische Kompetenzagenda für nachhaltige Wettbewerbsfähigkeit, soziale Gerechtigkeit und Resilienz -  - § 2/1",665,12,15
 127704,2021-02-10 15:29:03,B9-0108/2021,,§ 22/2,599,86,7
 127723,2021-02-10 15:29:03,B9-0108/2021,,Considérant T/2,625,54,13
@@ -7002,7 +6925,6 @@ Commission Valdis Dombrovskis",,,
 114183,2020-05-15 17:00:00,2020/0065(COD),,Vote final: Assistance macrofinancière à des partenaires de l'élargissement et du voisinage dans le contexte de la crise engendrée par la pandémie de COVID-19 - C9-0119/2020 - ,547,93,47
 114514,2020-05-15 09:30:00,B9-0158/2020,,Résolution,505,119,69
 114444,2020-05-15 09:30:00,C9-0126/2020,,article 5 - am 4PC= 5PC= 6PC= 9PC= 10PC= 11PC=,675,10,9
-128882,2021-03-11 12:12:48,B9-0173/2021,,"La situation dans l'est de la République démocratique du Congo et l'assassinat de Luca Attanasio, ambassadeur d'Italie, et de son entourage - Situation in Eastern Democratic Republic of Congo and the assassination of the Italian Ambassador Luca Attanasio and his entourage - Lage im Osten der Demokratischen Republik Kongo und Tötung des italienischen Botschafters Luca Attanasio und seiner Begleiter -  - Am 4",172,441,83
 128953,2021-03-11 12:12:48,RC-B9-0173/2021,,§ 19/1,657,13,25
 128954,2021-03-11 12:12:48,RC-B9-0173/2021,,§ 19/2,601,39,56
 128883,2021-03-11 12:12:48,RC-B9-0173/2021,,Am 1,152,525,19
@@ -7018,7 +6940,10 @@ Commission Valdis Dombrovskis",,,
 128960,2021-03-11 12:12:48,RC-B9-0183/2021,,§ 16/1,389,230,77
 128961,2021-03-11 12:12:48,RC-B9-0183/2021,,§ 16/2,346,287,63
 128911,2021-03-11 12:12:48,RC-B9-0183/2021,,Am 6,85,575,36
-128924,2021-03-11 12:12:48,RC-B9-0177/2021,,Le conflit syrien - dix ans après le soulèvement - The Syrian conflict - 10 years after the uprising - Der Konflikt in Syrien: 10 Jahre nach dem Aufstand -  - Am 2,85,565,40
+127328,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 20,666,14,3
+127342,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 3,617,48,18
+127363,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 78S,75,561,47
+127581,2021-02-10 15:29:03,A9-0219/2020,,Accord d’association entre l'Union européenne et l'Ukraine - EU Association Agreement with Ukraine - Assoziierungsabkommen zwischen der EU und der Ukraine -  - Michael Gahler - Am 12,587,63,33
 128925,2021-03-11 12:12:48,RC-B9-0177/2021,,Am 3,88,558,44
 128926,2021-03-11 12:12:48,RC-B9-0177/2021,,Am 4,56,597,37
 128927,2021-03-11 12:12:48,RC-B9-0177/2021,,Am 5,41,587,62
@@ -7037,7 +6962,6 @@ Commission Valdis Dombrovskis",,,
 128940,2021-03-11 12:12:48,RC-B9-0177/2021,,Am 1,83,588,19
 128941,2021-03-11 12:12:48,RC-B9-0177/2021,,Am 9,185,484,21
 128955,2021-03-11 12:12:48,RC-B9-0177/2021,,Considérant Y,357,285,47
-128699,2021-03-11 12:12:48,B9-0166/2021,,Proclamation de l'UE comme zone de liberté LGBTI - Declaration of the EU as an LGBTIQ Freedom Zone - Ausrufung der EU zum Freiheitsraum für LGBTI-Personen -  - Am 43,129,517,15
 128700,2021-03-11 12:12:48,B9-0166/2021,,Am 5,238,110,182
 128701,2021-03-11 12:12:48,B9-0166/2021,,Am 6,154,514,17
 128702,2021-03-11 12:12:48,B9-0166/2021,,Am 7,120,523,42
@@ -7107,7 +7031,89 @@ Commission Valdis Dombrovskis",,,
 128654,2021-03-11 12:12:48,B9-0164/2021,,Am 5,300,357,36
 128655,2021-03-11 12:12:48,B9-0164/2021,,Am 7,152,526,15
 128656,2021-03-11 12:12:48,B9-0164/2021,,Am 8,366,246,81
+128882,2021-03-11 12:12:48,RC-B9-0173/2021,,"La situation dans l'est de la République démocratique du Congo et l'assassinat de Luca Attanasio, ambassadeur d'Italie, et de son entourage - Situation in Eastern Democratic Republic of Congo and the assassination of the Italian Ambassador Luca Attanasio and his entourage - Lage im Osten der Demokratischen Republik Kongo und Tötung des italienischen Botschafters Luca Attanasio und seiner Begleiter -  - Am 4",172,441,83
+128963,2021-03-11 12:12:48,RC-B9-0183/2021,,§ 17/1,632,21,43
+128924,2021-03-11 12:12:48,RC-B9-0177/2021,,Le conflit syrien - dix ans après le soulèvement - The Syrian conflict - 10 years after the uprising - Der Konflikt in Syrien: 10 Jahre nach dem Aufstand -  - Am 2,85,565,40
+128699,2021-03-11 12:12:48,B9-0166/2021,,Proclamation de l'UE comme zone de liberté LGBTI - Declaration of the EU as an LGBTIQ Freedom Zone - Ausrufung der EU zum Freiheitsraum für LGBTI-Personen -  - Am 43,129,517,15
 128657,2021-03-11 12:12:48,B9-0164/2021,,Am 9,175,395,119
 128658,2021-03-11 12:12:48,B9-0164/2021,,Am 6,360,324,9
 128967,2021-03-11 12:12:48,A9-0036/2021,,Semestre européen: stratégie annuelle pour une croissance durable 2021 - European Semester: Annual Sustainable Growth Strategy 2021 - Europäisches Semester: Jährliche Strategie für nachhaltiges Wachstum 2021 -  - Markus Ferber - Proposition de résolution,400,103,186
 128968,2021-03-11 12:12:48,A9-0026/2021,,Mise en œuvre du règlement sur les produits de construction - Implementation of the Construction Products Regulation - Umsetzung der Bauprodukteverordnung -  - Gálvez Muñoz - Proposition de résolution,508,121,64
+128970,2021-03-11 15:50:21,RC-B9-0173/2021,,"La situation dans l'est de la République démocratique du Congo et l'assassinat de Luca Attanasio, ambassadeur d'Italie, et de son entourage - Situation in Eastern Democratic Republic of Congo and the assassination of the Italian Ambassador Luca Attanasio and his entourage - Lage im Osten der Demokratischen Republik Kongo und Tötung des italienischen Botschafters Luca Attanasio und seiner Begleiter -  - Proposition de résolution",669,4,17
+128971,2021-03-11 15:50:21,RC-B9-0190/2021,,"La situation des droits de l'homme au Royaume de Bahreïn, en particulier le cas des détenus condamnés à mort et des défenseurs des droits de l'homme - The human rights situation in the Kingdom of Bahrain, in particular the cases of death row inmates and human rights defenders - Die Menschenrechtslage im Königreich Bahrain, insbesondere im Hinblick auf zum Tode Verurteilte und Menschenrechtsverteidiger -  - Proposition de résolution",633,11,45
+128972,2021-03-11 15:50:21,RC-B9-0183/2021,,Les procès de masse contre l'opposition et la société civile au Cambodge - The mass trials against opposition and civil society in Cambodia - Die Massenprozesse gegen die Opposition und die Zivilgesellschaft in Kambodscha -  - Proposition de résolution,610,43,37
+128973,2021-03-11 15:50:21,RC-B9-0177/2021,,Le conflit syrien - dix ans après le soulèvement - The Syrian conflict - 10 years after the uprising - Der Konflikt in Syrien: 10 Jahre nach dem Aufstand -  - Proposition de résolution,568,79,37
+128974,2021-03-11 15:50:21,B9-0166/2021,,Proclamation de l'UE comme zone de liberté LGBTI - Declaration of the EU as an LGBTIQ Freedom Zone - Ausrufung der EU zum Freiheitsraum für LGBTI-Personen -  - Proposition de résolution,492,141,46
+128975,2021-03-11 15:50:21,B9-0164/2021,,Droits des enfants - Children's Rights - Rechte des Kindes -  - Proposition de résolution,545,24,119
+127273,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 20,178,477,38
+127270,2021-02-09 15:24:53,A9-0002/2021,,"Banque centrale européenne - rapport annuel 2021 - European Central Bank – annual report 2020
+ - Europäische Zentralbank – Jahresbericht 2020 -  - Sven Simon - Am 5",223,441,33
+127276,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 8,77,523,97
+127277,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 9,83,476,138
+127281,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 21,157,492,43
+127466,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 33/2,400,288,9
+127472,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 36/2,417,275,5
+127477,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 53/1,564,77,56
+127481,2021-02-09 15:24:53,A9-0008/2021,,Jan Huitema - § 63/2,525,144,28
+127495,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 6/2",554,111,31
+127242,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 10rev",210,255,225
+127513,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 46/1",688,5,4
+127517,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 49/2",582,108,7
+127519,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 55/1",686,5,6
+127529,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 60/1",680,14,3
+127534,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 68/3",589,93,14
+127544,2021-02-09 15:24:53,A9-0005/2021,,Mise en œuvre de l’article 43 de la directive relative aux procédures d'asile - Implementation of Article 43 of the Asylum Procedures Directive - Umsetzung von Artikel 43 der Asylverfahrensrichtlinie -  - Erik Marquardt - § 4/1,532,103,59
+127547,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 16/1,532,150,12
+127551,2021-02-09 15:24:53,A9-0005/2021,,Erik Marquardt - § 19/2,521,123,49
+127384,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 3,164,504,23
+127484,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - § 13/2,576,98,22
+127388,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 12,649,22,25
+127390,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 1,644,39,12
+127393,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 15,132,555,8
+127395,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 8,129,558,8
+127396,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 9,132,555,8
+127432,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 67/1,528,93,75
+127437,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 72,614,60,22
+127442,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 90,383,297,16
+127447,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 103/3,396,257,43
+127455,2021-02-09 15:24:53,A9-0006/2021,,Özlem Demirel - § 111/1,639,28,28
+127310,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 43S,83,583,16
+127312,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 44S,97,573,12
+127316,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 47S,49,597,36
+127318,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 49,285,289,106
+127320,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 51,33,601,48
+127324,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 54S,59,604,20
+127327,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 56,48,605,29
+127329,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 1,334,322,27
+127331,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 57,36,562,83
+127560,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 59/1,628,15,40
+127336,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 61,61,582,40
+127340,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 21,585,76,22
+127345,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 66S,37,591,55
+127349,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 67,93,551,39
+127353,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 69,86,535,60
+127588,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 72/2,97,474,111
+127279,2021-02-09 15:24:53,A9-0002/2021,,Sven Simon - Am 1,190,493,14
+127462,2021-02-09 15:24:53,A9-0008/2021,,Nouveau plan d’action en faveur de l'économie circulaire - New Circular Economy Action Plan - Neuer Aktionsplan für die Kreislaufwirtschaft -  - Jan Huitema - § 32/1,667,8,21
+127507,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - § 37/2",356,307,34
+127235,2021-02-09 15:24:53,A9-0011/2021,,"Juan Fernando López Aguilar, María Soraya Rodríguez Ramos - Am 6",340,347,10
+127392,2021-02-09 15:24:53,A9-0004/2021,,Ioan-Rareş Bogdan - Am 14,132,554,9
+127330,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 2,577,70,36
+127360,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 75S,41,605,37
+127362,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 77,57,587,39
+127365,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 29,69,568,46
+127369,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 32,31,605,47
+127373,2021-02-10 15:29:03,A9-0219/2020,,Michael Gahler - Am 34S,19,638,26
+127689,2021-02-10 15:29:03,B9-0108/2021,,§ 13,340,295,57
+127942,2021-02-11 12:05:13,RC-B9-0119/2021,,Situation humanitaire et politique au Yémen - Humanitarian and political situation in Yemen - Humanitäre und politische Lage in Jemen -  - § 6/1,643,11,36
+127851,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 7,231,317,142
+127855,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 10,44,613,33
+127857,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 12,45,598,47
+127859,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 1,40,607,43
+127861,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 16,326,311,53
+127863,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 4,60,579,51
+127866,2021-02-11 12:05:13,RC-B9-0119/2021,,Am 13,297,347,46
+127959,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant P/2,386,260,43
+127961,2021-02-11 12:05:13,RC-B9-0119/2021,,Considérant T/1,671,17,2
+127966,2021-02-11 12:05:13,RC-B9-0138/2021,,Situation politique en Ouganda - Political situation in Uganda - Die politische Lage in Uganda -  - § 15/1,654,18,19
+127929,2021-02-11 12:05:13,RC-B9-0138/2021,,Am 1,150,534,5

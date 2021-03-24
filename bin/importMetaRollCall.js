@@ -30,33 +30,22 @@ const processing = async (file) => {
     workbook.Sheets[workbook.SheetNames[0]],
     { FS: "***", strip: true }
   );
-  return new Promise(async (resolve, reject) => {
-    for (const d of parsed) {
-      if (!d.report) {
-        log.fatal("no identifier", d);
-        process.exit(1);
-      }
-      //      if (!d.topic) return;
-      try {
-        //        log.info("processing", d);
-        //    { report: 'A9-0174/2020', committee: 'EMPL', topic: 'EU FUNDS' }
-        const r = await db("reports")
-          .where("reference", d.report)
-          .update({ topic: d.topic, committee: d.committee });
-        log.info("updated", r);
-      } catch (e) {
-        log.error("error", d, e);
-      }
+  parsed.forEach(async (rollcall) => {
+    if (!rollcall.identifier) {
+      log.fatal("no identifier", rollcall);
     }
-    resolve({ total: parsed.length });
-    log.info("report", d.report);
+    try {
+      const r = await db("rollcalls")
+        .where("id", rollcall.identifier)
+        .update("green_remark", rollcall.remark);
+      log.success("update", rollcall.identifier, rollcall.remark);
+    } catch (e) {
+      console.log(e);
+    }
   });
 };
 
 const file = argv._[0];
 log.time("import");
-processing(file).then((d) => {
-  log.info("processed", d);
-  log.timeEnd();
-  process.exit(0);
-});
+processing(file);
+log.timeEnd();
