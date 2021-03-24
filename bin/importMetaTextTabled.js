@@ -31,24 +31,25 @@ const processing = async (file) => {
     { FS: "***", strip: true }
   );
   return new Promise(async (resolve, reject) => {
-    parsed.forEach(async (d) => {
+    for (const d of parsed) {
       if (!d.report) {
         log.fatal("no identifier", d);
         process.exit(1);
       }
       //      if (!d.topic) return;
       try {
-        log.info("processing", d);
+        //        log.info("processing", d);
         //    { report: 'A9-0174/2020', committee: 'EMPL', topic: 'EU FUNDS' }
         const r = await db("reports")
           .where("reference", d.report)
           .update({ topic: d.topic, committee: d.committee });
         log.info("updated", r);
       } catch (e) {
-        log.error(d, e);
+        log.error("error", d, e);
       }
-    });
+    }
     resolve({ total: parsed.length });
+    log.info("report", d.report);
   });
 };
 
