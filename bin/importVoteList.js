@@ -30,23 +30,31 @@ const processing = async (file) => {
     workbook.Sheets[workbook.SheetNames[0]],
     { FS: "***", strip: true }
   );
-  parsed.forEach(async (rollcall) => {
-    console.log(rollcall);
+  for (const rollcall of parsed) {
     if (!rollcall.identifier) {
       log.fatal("no identifier", rollcall);
     }
     try {
-      const r = await db("rollcalls")
-        .where("id", rollcall.identifier)
-        .update("green_remark", rollcall.remarks);
+      const r = await db("notes")
+        .insert({
+          id: rollcall.identifier,
+          author: "green",
+          rollcall: rollcall.identifier,
+          comment: rollcall.remarks,
+        })
+        .onConflict("id", "rollcall")
+        .ignore();
+      log.info("inserted", rollcall.identifier, rollcall.remarks);
     } catch (e) {
       console.log(e);
     }
-    process.exit(1);
-  });
+  }
+  return parsed.count;
 };
 
 const file = argv._[0];
 log.time("import");
-processing(file);
-log.timeEnd();
+processing(file).then((r) => {
+  log.timeEnd();
+  process.exit();
+});
