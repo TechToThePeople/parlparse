@@ -21,50 +21,53 @@ let initialised = false;
 let argv = require("minimist")(process.argv.slice(2), {
   alias: { h: "help", a: "all", f: "force", d: "date" },
 });
-const help = (error = false) => {
-  error && log.fatal("parameter missing");
-  log.info(
-    "\n--all -a : process all days or:",
-    "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
-    "\n--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
-  );
-  process.exit(error);
-};
 
-if (argv.help) {
-  help();
-}
+const main = (argv) => {
+  const help = (error = false) => {
+    error && log.fatal("parameter missing");
+    log.info(
+      "\n--all -a : process all days or:",
+      "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
+      "\n--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
+    );
+    process.exit(error);
+  };
 
-log.time("plenary");
-
-if (argv.all) {
-  const start = new Date("2019-07-02"); //start of the 9th term
-
-  const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
-
-  log.note("process all days: ", start, end);
-
-  all(start, end).then(() => {
-    log.timeEnd("plenary");
-    process.exit(1);
-  });
-} else {
-  !argv.date && help(true);
-  argv.date === true
-    ? (date = new Date().toISOString().substring(0, 10))
-    : (date = argv.date);
-  const d = date.split("-");
-  if (d.length !== 3) {
-    log.error("can't parse the date", date);
-    process.exit(1);
+  if (argv.help) {
+    help();
   }
-  const start = new Date();
 
-  run(date).then(() => {
-    log.timeEnd("plenary");
-    process.exit(1);
-  });
-}
+  log.time("plenary");
+
+  if (argv.all) {
+    const start = new Date("2019-07-02"); //start of the 9th term
+
+    const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
+
+    log.note("process all days: ", start, end);
+
+    all(start, end).then(() => {
+      log.timeEnd("plenary");
+      process.exit(1);
+    });
+  } else {
+    !argv.date && help(true);
+    argv.date === true
+      ? (date = new Date().toISOString().substring(0, 10))
+      : (date = argv.date);
+    const d = date.split("-");
+    if (d.length !== 3) {
+      log.error("can't parse the date", date);
+      process.exit(1);
+    }
+    const start = new Date();
+
+    run(date).then(() => {
+      log.timeEnd("plenary");
+      process.exit(1);
+    });
+  }
+};
 
 async function all(start, end) {
   let date = end;
@@ -140,4 +143,10 @@ async function run(date) {
   if (processed.added !== processed.votes)
     log.info(processed.added, "new votes");
   //  db.destroy();
+}
+
+if (require.main === module) {
+  main(argv);
+} else {
+  exports = run;
 }
