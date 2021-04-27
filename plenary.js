@@ -143,10 +143,11 @@ async function run(date) {
   if (processed.added !== processed.votes)
     log.info(processed.added, "new votes");
   //  db.destroy();
+  return processed.added;
 }
 
 if (require.main === module) {
   main(argv);
 } else {
-  exports = run;
+  module.exports = run;
 }

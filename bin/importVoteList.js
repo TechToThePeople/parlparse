@@ -31,6 +31,9 @@ const processing = async (file) => {
     { FS: "***", strip: true }
   );
   for (const rollcall of parsed) {
+    if (!rollcall.identifier && rollcall.reference)
+      rollcall.identifier = rollcall.reference;
+
     if (!rollcall.identifier) {
       log.fatal("no identifier", rollcall);
     }
