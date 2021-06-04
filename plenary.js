@@ -19,7 +19,7 @@ const csvStream = format({ headers: head });
 let date = null;
 let initialised = false;
 let argv = require("minimist")(process.argv.slice(2), {
-  alias: { h: "help", a: "all", f: "force", d: "date" },
+  alias: { h: "help", a: "all", u: "update", f: "force", d: "date" },
 });
 
 const main = (argv) => {
@@ -28,7 +28,8 @@ const main = (argv) => {
     log.info(
       "\n--all -a : process all days or:",
       "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
-      "\n--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
+      "\n--update -u : retry download even if already downloaded and parse it if different",
+      "\n--force -f : parse again (by default, skip)"
     );
     process.exit(error);
   };
@@ -104,11 +105,11 @@ async function run(date) {
     log.info("downloading", url);
     plenary = await downloadFile("RCV", url, {
       file: date,
-      force: argv.force === "download",
+      force: argv.update,
     });
     if (!plenary.fresh) {
       log.info("same file already processed");
-      if (!argv.force || argv.force === "download") return;
+      if (!argv.force) return;
     }
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
