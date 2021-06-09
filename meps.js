@@ -90,6 +90,7 @@ const find = (name, eugroup, epid) => {
       Birth: { date: t.birthdate },
       start: t.start9,
       end: t.end || null,
+      eugroup: t.eugroup,
       constituency: { party: t.party, country: t.country },
     };
   }

@@ -202,7 +202,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197667,Barbara,THALER,1,2019-07-02,,1982-02-16,at,,PPE,Österreichische Volkspartei,,,9,7056
 197665,Dragoş,TUDORACHE,1,2019-07-02,,1975-01-14,ro,,Renew,"Partidul Libertate, Unitate și Solidaritate",,,9,7054
 197664,Clotilde,ARMAND,1,2019-07-02,2020-11-03,1973-06-28,ro,,Renew,Uniunea Salvați România,,,9,7053
-197663,Dragoș,PÎSLARU,1,2019-07-02,,1976-03-23,ro,,Renew,"Partidul Libertate, Unitate și Solidaritate",,,9,7052
+197663,Dragoş,PÎSLARU,1,2019-07-02,,1976-03-23,ro,,Renew,"Partidul Libertate, Unitate și Solidaritate",,,9,7052
 197662,Vangelis,MEIMARAKIS,1,2019-07-02,,1953-12-14,gr,,PPE,Nea Demokratia,,,9,7051
 197661,Cristian,GHINEA,1,2019-07-02,2020-12-22,1977-07-20,ro,,Renew,USR-PLUS,,,9,7050
 197658,Adrian-Dragoş,BENEA,1,2019-07-02,,1975-12-18,ro,,S&D,Partidul Social Democrat,,,9,7047
@@ -362,7 +362,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197482,Joachim,KUHS,1,2019-07-02,,1956-06-25,de,,ID,Alternative für Deutschland,,,9,6879
 197481,Maximilian,KRAH,1,2019-07-02,,1977-01-28,de,,ID,Alternative für Deutschland,,,9,6878
 197480,Nicolaus,FEST,1,2019-07-02,,1962-07-01,de,,ID,Alternative für Deutschland,,,9,6877
-197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ID,Alternative für Deutschland,,,9,6875
+197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ID,Independent,,,9,6875
 197475,Christine,ANDERSON,1,2019-07-02,,1968-07-29,de,,ID,Alternative für Deutschland,,,9,6872
 197473,Christian,DOLESCHAL,1,2019-07-02,,1988-04-27,de,,PPE,Christlich-Soziale Union in Bayern e.V.,,,9,6870
 197472,Filip,DE MAN,1,2019-07-02,,1955-11-11,be,,ID,Vlaams Belang,,,9,6869
@@ -669,7 +669,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96787,Herbert,DORFMANN,1,2019-07-02,,1969-03-04,it,,PPE,Südtiroler Volkspartei,,,9,5960
 96780,Monika,HOHLMEIER,1,2019-07-02,,1962-07-02,de,,PPE,Christlich-Soziale Union in Bayern e.V.,,,9,5953
 96779,Danuta Maria,HÜBNER,1,2019-07-02,,1948-04-08,pl,,PPE,Platforma Obywatelska,,,9,5952
-96776,Róża,THUN UND HOHENSTEIN,1,2019-07-02,,1954-04-13,pl,,PPE,Platforma Obywatelska,,,9,5949
+96776,Róża,THUN UND HOHENSTEIN,1,2019-07-02,,1954-04-13,pl,,PPE,Independent,,,9,5949
 96772,Peter,JAHR,1,2019-07-02,,1959-04-24,de,,PPE,Christlich Demokratische Union Deutschlands,,,9,5945
 96771,Jarosław,KALINOWSKI,1,2019-07-02,,1962-04-12,pl,,PPE,Polskie Stronnictwo Ludowe,,,9,5944
 96761,Axel,VOSS,1,2019-07-02,,1963-04-07,de,,PPE,Christlich Demokratische Union Deutschlands,,,9,5934
