@@ -102,14 +102,16 @@ async function run(date) {
     "https://www.europarl.europa.eu/doceo/document/PV-9-" + date + "-RCV_FR";
 
   try {
-    log.info("downloading", url);
+    if (argv.update) log.warn("downloading", url + ".xml");
     plenary = await downloadFile("RCV", url, {
       file: date,
       force: argv.update,
     });
     if (!plenary.fresh) {
-      log.info("same file already processed");
+      log.info("./data/RCV/" + date + ".xml.zip already processed");
       if (!argv.force) return;
+    } else {
+      log.info("processing", url, ".xml");
     }
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
