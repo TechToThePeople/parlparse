@@ -28,6 +28,7 @@ const main = (argv) => {
     log.info(
       "\n--all -a : process all days or:",
       "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
+      "\n--date=-1 -d=-1 : process yesterday (n days before)",
       "\n--update -u : retry download even if already downloaded and parse it if different",
       "\n--force -f : parse again (by default, skip)"
     );
@@ -54,8 +55,12 @@ const main = (argv) => {
   } else {
     !argv.date && help(true);
     argv.date === true
-      ? (date = new Date().toISOString().substring(0, 10))
+      ? (date = new Date().toISOString().substring(0, 10)) // today
       : (date = argv.date);
+    if (argv.date <= 0) {
+      const t = new Date(new Date().valueOf() + 1000 * 3600 * 24 * argv.date);
+      date = t.toISOString().substring(0, 10);
+    }
     const d = date.split("-");
     if (d.length !== 3) {
       log.error("can't parse the date", date);
@@ -102,7 +107,7 @@ async function run(date) {
     "https://www.europarl.europa.eu/doceo/document/PV-9-" + date + "-RCV_FR";
 
   try {
-    if (argv.update) log.warn("downloading", url + ".xml");
+    if (argv.update) log.await("downloading", url + ".xml");
     plenary = await downloadFile("RCV", url, {
       file: date,
       force: argv.update,
