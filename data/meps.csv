@@ -71,7 +71,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197827,Idoia,VILLANUEVA RUIZ,1,2019-07-02,,1980-07-17,es,,GUE/NGL,PODEMOS,,,9,7212
 197826,Matteo,ADINOLFI,1,2019-07-02,,1963-12-24,it,,ID,Lega,,,9,7211
 197825,Raffaele,STANCANELLI,1,2019-07-02,,1950-06-30,it,,ECR,Fratelli d'Italia,,,9,7210
-197824,Giuseppe,MILAZZO,1,2019-07-02,,1977-08-21,it,,EPP,Forza Italia,,,9,7209
+197824,Giuseppe,MILAZZO,1,2019-07-02,,1977-08-21,it,,ECR,Forza Italia,,,9,7209
 197822,Francesca,DONATO,1,2019-07-02,,1969-08-25,it,,ID,Lega,,,9,7207
 197820,Nicola,PROCACCINI,1,2019-07-02,,1976-01-21,it,,ECR,Fratelli d'Italia,,,9,7205
 197819,Alexis,GEORGOULIS,1,2019-07-02,,1974-10-06,gr,,GUE/NGL,Coalition of the Radical Left,,,9,7204
@@ -102,7 +102,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197794,Chiara,GEMMA,1,2019-07-02,,1968-09-20,it,,NA,Movimento 5 Stelle,,,9,7179
 197792,Daniela,RONDINELLI,1,2019-07-02,,1967-08-19,it,,NA,Movimento 5 Stelle,,,9,7177
 197791,Massimiliano,SMERIGLIO,1,2019-07-02,,1966-05-08,it,,S&D,Partito Democratico,,,9,7176
-197790,Luisa,REGIMENTI,1,2019-07-02,,1958-06-05,it,,ID,Lega,,,9,7175
+197790,Luisa,REGIMENTI,1,2019-07-02,,1958-06-05,it,,NA,Lega,,,9,7175
 197789,Simona,BALDASSARRE,1,2019-07-02,,1970-11-12,it,,ID,Lega,,,9,7174
 197788,Anna,BONFRISCO,1,2019-07-02,,1962-10-12,it,,ID,Lega,,,9,7172
 197787,Antonio Maria,RINALDI,1,2019-07-02,,1955-02-27,it,,ID,Lega,,,9,7171
@@ -362,7 +362,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197482,Joachim,KUHS,1,2019-07-02,,1956-06-25,de,,ID,Alternative für Deutschland,,,9,6879
 197481,Maximilian,KRAH,1,2019-07-02,,1977-01-28,de,,ID,Alternative für Deutschland,,,9,6878
 197480,Nicolaus,FEST,1,2019-07-02,,1962-07-01,de,,ID,Alternative für Deutschland,,,9,6877
-197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,NA,Independent,,,9,6875
+197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ECR,Independent,,,9,6875
 197475,Christine,ANDERSON,1,2019-07-02,,1968-07-29,de,,ID,Alternative für Deutschland,,,9,6872
 197473,Christian,DOLESCHAL,1,2019-07-02,,1988-04-27,de,,EPP,Christlich-Soziale Union in Bayern e.V.,,,9,6870
 197472,Filip,DE MAN,1,2019-07-02,,1955-11-11,be,,ID,Vlaams Belang,,,9,6869
