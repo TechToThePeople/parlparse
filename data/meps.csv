@@ -1,4 +1,5 @@
 epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid
+221463,,Ilčić,1,,,,,,ECR,,,,9,7290
 218349,Michiel,HOOGEVEEN,1,2021-04-15,,,nl,,ECR,JA21,,,9,7289
 218347,Thijs,REUTEN,1,2021-04-15,,,nl,,S&D,Partij van de Arbeid,,,9,7288
 214839,Emma,WIESNER,1,2021-02-04,,,se,,Renew,Centerpartiet,,,9,7287
@@ -467,6 +468,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 183793,Angelo,CIOCCA,1,2019-07-02,,1975-06-28,it,,ID,Lega,,,9,6731
 183338,Jakop G.,DALUNDE,1,2020-02-01,,1984-02-02,se,,Greens/EFA,Miljöpartiet de gröna,,,9,6730
 182995,Annika,BRUNA,1,2019-07-02,,1956-11-26,fr,,ID,Rassemblement national,,,9,7076
+136236,,Pimenta Lopes,1,,,,,,The Left,,,,9,6727
 135511,Valérie,HAYER,1,2019-07-02,,1986-04-06,fr,,Renew,La République en marche,,,9,6959
 134605,Ramona,STRUGARIU,1,2019-07-02,,1979-08-06,ro,,Renew,"Partidul Libertate, Unitate și Solidaritate",,,9,7058
 132191,Gunnar,BECK,1,2019-07-02,,1965-05-01,de,,ID,Alternative für Deutschland,,,9,6874

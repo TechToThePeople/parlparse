@@ -643,45 +643,6 @@ identifier,date,report,desc,title,for,against,abstention
 126447,2021-01-19 22:53:15,A9-0259/2020,,Isabel Santos - Am 4,528,53,100
 126448,2021-01-19 22:53:15,A9-0259/2020,,Isabel Santos - Am 8,346,313,21
 126449,2021-01-19 22:53:15,A9-0259/2020,,Isabel Santos - Am 19,376,295,10
-126293,2020-12-18 11:50:40,B9-0425/2020,,§ 2,629,30,27
-126294,2020-12-18 11:50:40,B9-0425/2020,,§ 3,633,6,46
-126295,2020-12-18 11:50:40,B9-0425/2020,,§ 4,632,27,27
-126296,2020-12-18 11:50:40,B9-0425/2020,,§ 8,643,8,35
-126297,2020-12-18 11:50:40,B9-0425/2020,,§ 10,676,3,7
-126298,2020-12-18 11:50:40,B9-0425/2020,,§ 11,674,4,8
-126299,2020-12-18 11:50:40,B9-0425/2020,,§ 12,622,5,58
-126300,2020-12-18 11:50:40,B9-0425/2020,,§ 13,630,26,29
-126301,2020-12-18 11:50:40,B9-0425/2020,,§ 14,630,11,45
-126303,2020-12-18 11:50:40,B9-0425/2020,,§ 15/1,531,80,74
-126304,2020-12-18 11:50:40,B9-0425/2020,,§ 15/2,556,71,58
-126305,2020-12-18 11:50:40,B9-0425/2020,,§ 15/3,474,147,64
-126306,2020-12-18 11:50:40,B9-0425/2020,,§ 17,594,49,41
-126307,2020-12-18 11:50:40,B9-0425/2020,,Considérant B,647,26,13
-126308,2020-12-18 11:50:40,B9-0425/2020,,Considérant C,647,26,13
-126309,2020-12-18 11:50:40,B9-0425/2020,,Considérant D,601,28,57
-126310,2020-12-18 11:50:40,B9-0425/2020,,Considérant F,624,3,59
-126311,2020-12-18 11:50:40,B9-0425/2020,,Considérant H,635,5,46
-126312,2020-12-18 11:50:40,B9-0425/2020,,Considérant K,603,16,67
-126313,2020-12-18 11:50:40,B9-0425/2020,,Considérant M,672,4,10
-126314,2020-12-18 11:50:40,B9-0425/2020,,Considérant N,665,7,13
-126161,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 1",203,404,79
-126162,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 2",120,544,22
-126163,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 7",106,522,55
-126164,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 8",87,541,56
-126165,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 4",112,555,16
-126166,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 3",264,365,57
-126167,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 5",100,570,12
-126168,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 6",97,579,8
-126285,2020-12-18 11:50:40,C9-0399/2020,,Am 1,680,1,5
-126283,2020-12-18 11:50:40,C9-0398/2020,,Am 1,678,1,6
-126281,2020-12-18 11:50:40,C9-0397/2020,,Am 1,680,1,5
-126287,2020-12-18 11:50:40,C9-0396/2020,,Am 1,105,568,9
-126352,2020-12-18 15:29:02,RC-B9-0426/2020,,Résolution,434,49,202
-126342,2020-12-18 15:29:02,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Résolution",540,77,70
-126353,2020-12-18 15:29:02,C9-0399/2020,,Proposition de la Commission,680,4,3
-126354,2020-12-18 15:29:02,C9-0398/2020,,Proposition de la Commisssion,680,3,4
-126355,2020-12-18 15:29:02,C9-0397/2020,,Proposition de la Commission,680,3,4
-126356,2020-12-18 15:29:02,C9-0396/2020,,Proposition de la Commission,677,4,6
 126202,2020-12-17 11:57:23,B9-0424/2020,,Résolution,61,609,24
 126171,2020-12-17 11:57:23,RC-B9-0432/2020,,Am 7,60,608,22
 126172,2020-12-17 11:57:23,RC-B9-0432/2020,,Am 1,22,639,29
@@ -720,6 +681,42 @@ identifier,date,report,desc,title,for,against,abstention
 125690,2020-12-17 11:57:23,A9-0194/2020,,Gabriele Bischoff - Am 9,602,35,59
 125946,2020-12-17 11:57:23,B9-0422/2020,,§ 1/1,615,35,46
 125947,2020-12-17 11:57:23,B9-0422/2020,,§ 1/2,551,140,5
+126313,2020-12-18 11:50:40,B9-0425/2020,,Considérant M,672,4,10
+126314,2020-12-18 11:50:40,B9-0425/2020,,Considérant N,665,7,13
+126161,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 1",203,404,79
+126162,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 2",120,544,22
+126163,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 7",106,522,55
+126164,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 8",87,541,56
+126165,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 4",112,555,16
+126166,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 3",264,365,57
+126167,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 5",100,570,12
+126294,2020-12-18 11:50:40,B9-0425/2020,,§ 3,633,6,46
+126295,2020-12-18 11:50:40,B9-0425/2020,,§ 4,632,27,27
+126296,2020-12-18 11:50:40,B9-0425/2020,,§ 8,643,8,35
+126297,2020-12-18 11:50:40,B9-0425/2020,,§ 10,676,3,7
+126298,2020-12-18 11:50:40,B9-0425/2020,,§ 11,674,4,8
+126299,2020-12-18 11:50:40,B9-0425/2020,,§ 12,622,5,58
+126300,2020-12-18 11:50:40,B9-0425/2020,,§ 13,630,26,29
+126301,2020-12-18 11:50:40,B9-0425/2020,,§ 14,630,11,45
+126303,2020-12-18 11:50:40,B9-0425/2020,,§ 15/1,531,80,74
+126304,2020-12-18 11:50:40,B9-0425/2020,,§ 15/2,556,71,58
+126305,2020-12-18 11:50:40,B9-0425/2020,,§ 15/3,474,147,64
+126306,2020-12-18 11:50:40,B9-0425/2020,,§ 17,594,49,41
+126307,2020-12-18 11:50:40,B9-0425/2020,,Considérant B,647,26,13
+126308,2020-12-18 11:50:40,B9-0425/2020,,Considérant C,647,26,13
+126309,2020-12-18 11:50:40,B9-0425/2020,,Considérant D,601,28,57
+126310,2020-12-18 11:50:40,B9-0425/2020,,Considérant F,624,3,59
+126312,2020-12-18 11:50:40,B9-0425/2020,,Considérant K,603,16,67
+126168,2020-12-18 11:50:40,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Am 6",97,579,8
+126285,2020-12-18 11:50:40,C9-0399/2020,,Am 1,680,1,5
+126283,2020-12-18 11:50:40,C9-0398/2020,,Am 1,678,1,6
+126281,2020-12-18 11:50:40,C9-0397/2020,,Am 1,680,1,5
+126287,2020-12-18 11:50:40,C9-0396/2020,,Am 1,105,568,9
+126352,2020-12-18 15:29:02,RC-B9-0426/2020,,Résolution,434,49,202
+126353,2020-12-18 15:29:02,C9-0399/2020,,Proposition de la Commission,680,4,3
+126354,2020-12-18 15:29:02,C9-0398/2020,,Proposition de la Commisssion,680,3,4
+126355,2020-12-18 15:29:02,C9-0397/2020,,Proposition de la Commission,680,3,4
+126356,2020-12-18 15:29:02,C9-0396/2020,,Proposition de la Commission,677,4,6
 125857,2020-12-17 11:57:23,B9-0422/2020,,Am 1,354,333,9
 125949,2020-12-17 11:57:23,B9-0422/2020,,§ 14/1,680,12,4
 125950,2020-12-17 11:57:23,B9-0422/2020,,§ 14/2,565,122,9
@@ -9678,8 +9675,71 @@ careers - Förderung der Gleichstellung von Frauen und Männern in Ausbildung un
 134041,2021-06-23 19:50:12,A9-0174/2021,, Statut et conditions générales d’exercice des fonctions du Médiateur européen - Regulations and general conditions governing the performance of the Ombudsman’s duties - Regelungen und allgemeine Bedingungen für die Ausübung der Aufgaben des Bürgerbeauftragten -  - Paulo Rangel - Proposition de résolution,623,9,61
 133981,2021-06-23 19:50:12,A9-0180/2021,,Accord UE/Thaïlande: modification des concessions pour l’ensemble des contingents tarifaires de la liste CLXXV de l’Union européenne à la suite du retrait du Royaume-Uni de l’Union européenne - EU/Thailand Agreement: modification of concessions on all the tariff-rate quotas included in the EU Schedule CLXXV as a consequence of the United Kingdom's withdrawal from the European Union - Abkommen zwischen der EU und Thailand: Änderung der Zugeständnisse für alle in der EU-Liste CLXXV aufgeführten Zollkontingente infolge des Austritts des Vereinigten Königreichs aus der Europäischen Union -  - Heidi Hautala - Procédure d'approbation,638,49,6
 134024,2021-06-23 19:50:12,A9-0182/2021,,Accord UE/Indonésie: modification des concessions pour l’ensemble des contingents tarifaires de la liste CLXXV de l’UE à la suite du retrait du Royaume-Uni de l’Union européenne - EU/Indonesia Agreement: modification of concessions on all the tariff-rate quotas included in the EU Schedule CLXXV as a consequence of the United Kingdom's withdrawal from the European Union - Abkommen zwischen der EU und Indonesien: Änderung der Zugeständnisse für alle in der EU-Liste CLXXV aufgeführten Zollkontingente infolge des Austritts des Vereinigten Königreichs aus der Europäischen Union -  - Heidi Hautala - Procédure d'approbation,685,3,5
+134885,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 39/1,659,23,13
+134886,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 39/2,463,171,61
 134025,2021-06-23 19:50:12,A9-0175/2021,,Accord UE/Argentine: modification des concessions pour l’ensemble des contingents tarifaires de la liste CLXXV de l’UE à la suite du retrait du Royaume-Uni de l’Union européenne - Official controls on animals and products of animal origin in order to ensure compliance with the prohibition of certain uses of antimicrobials - Abkommen zwischen der EU und Argentinien: Änderung der Zugeständnisse für alle in der EU-Liste CLXXV aufgeführten Zollkontingente infolge des Austritts des Vereinigten Königreichs aus der Europäischen Union -  - Jordi Cañas - Procédure d'approbation,604,52,37
 134021,2021-06-23 19:50:12,A9-0170/2021,,Défis et perspectives pour le secteur de la pêche en mer Noire - Challenges and opportunities for the fishing sector in the Black Sea - Herausforderungen und Chancen für die Fischerei im Schwarzen Meer -  - Ivo Hristov - Vote unique,598,3,92
 134333,2021-06-23 19:50:12,A9-0151/2021,,"Le rôle de la coopération au développement et de l’aide humanitaire de l’Union européenne dans la lutte contre les conséquences de la pandémie de COVID-19 - The role of the EU's development cooperation and humanitarian assistance in addressing the consequences of the COVID-19 pandemic - Die Rolle der Entwicklungszusammenarbeit und humanitären Hilfe der EU bei der Bewältigung der Folgen der COVID-19-Pandemie -  - Hildegard Bentele, Norbert Neuser - Proposition de résolution",443,40,209
 134120,2021-06-23 19:50:12,A9-0195/2021,,Contrôles officiels effectués sur les animaux et les produits d’origine animale afin de garantir le respect de l’interdiction de certaines utilisations d’antimicrobiens - Official controls on animals and products of animal origin in order to ensure compliance with the prohibition of certain uses of antimicrobials - Darlehensfazilität für den öffentlichen Sektor im Rahmen des Mechanismus für einen gerechten Übergang -  - Pascal Canfin - Am 1-7,683,3,6
 134123,2021-06-23 19:50:12,A9-0195/2021,,Pascal Canfin - Am 8= 10= 11=,465,206,21
+126293,2020-12-18 11:50:40,B9-0425/2020,,§ 2,629,30,27
+126311,2020-12-18 11:50:40,B9-0425/2020,,Considérant H,635,5,46
+126342,2020-12-18 15:29:02,A9-0267/2020,,"Pierre Larrouturou, Olivier Chastel - Résolution",540,77,70
+134463,2021-07-06 15:36:08,A9-0258/2020,,Utilisation de technologies pour le traitement de données aux fins de la lutte contre les abus sexuels commis contre des enfants en ligne (dérogation temporaire à la directive 2002/58/CE) - Use of technologies for the processing of data for the purpose of combating online child sexual abuse (temporary derogation from Directive 2002/58/EC) - Verwendung von Technik zur Verarbeitung von Daten zwecks Bekämpfung des sexuellen Missbrauchs von Kindern im Internet (vorübergehende Ausnahme von der Richtlinie 2002/58/EG) -  - Birgit Sippel - Am 39 ,537,133,24
+134542,2021-07-06 15:36:08,A9-0210/2021,,Reconnaissance des certificats de pays tiers dans le domaine de la navigation intérieure - Recognition of third countries certificates in inland navigation - Anerkennung von Zeugnissen aus Drittländern in der Binnenschifffahrt -  - Andris Ameriks - Vote unique  ,646,24,25
+134562,2021-07-06 15:36:08,A9-0218/2021,,Projet de budget rectificatif n° 3/2021: excédent de l’exercice 2020 - Draft amending budget No 3/2021: surplus of the financial year 2020 - Entwurf des Berichtigungshaushaltsplans Nr. 3/2021: Haushaltsüberschuss 2020 -  - Pierre Larrouturou - Vote unique ,641,36,18
+134582,2021-07-06 15:36:08,A9-0227/2021,,Agence des droits fondamentaux de l’Union européenne - European Union Agency for Fundamental Rights - Agentur der Europäischen Union für Grundrechte -  - Lukas Mandl - Procédure d'approbation ,546,69,79
+134514,2021-07-06 15:36:08,A9-0176/2021,,Accord Interbus: protocole concernant le transport international régulier et régulier spécial de voyageurs par autocar ou par autobus - Interbus agreement: Protocol on international regular and special regular carriage of passengers by coach and bus - Interbus-Übereinkommen: Protokoll über die Personenbeförderung im grenzüberschreitenden Linienverkehr und in Sonderformen des grenzüberschreitenden Linienverkehrs mit Kraftomnibussen -  - Maria Grapini - Procédure d'approbation  ,613,29,53
+134616,2021-07-06 15:36:08,A9-0209/2021,,Protection des intérêts financiers de l'UE - lutte contre la fraude - rapport annuel 2019 - Protection of the EU’s financial interests - combatting fraud - annual report 2019 - Schutz der finanziellen Interessen der EU - Betrugsbekämpfung - Jahresbericht 2019 -  - Caterina Chinnici - Am 3,653,4,38
+134888,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 40/1,664,23,8
+134889,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 40/2,464,170,61
+134891,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 51/1,648,26,21
+134892,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 51/2,391,192,112
+134617,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - Am 4,327,312,56
+134859,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 65,427,146,120
+134861,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 70/1,576,31,88
+134862,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - § 70/2,401,201,93
+134618,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - Am 2,646,29,20
+134619,2021-07-06 15:36:08,A9-0209/2021,,Caterina Chinnici - Am 1,564,17,114
+134654,2021-07-06 15:36:08,A9-0221/2021,,Fonds pour la sécurité intérieure - Internal Security Fund -  Fonds für die innere Sicherheit -  - Monika Hohlmeier - Am 1= 2=,132,558,4
+134559,2021-07-06 15:36:08,A9-0214/2021,,"Modifications au règlement intérieur du Parlement - Amendments to Parliament's Rules of Procedure - Änderung der Geschäftsordnung des Parlaments -  - Gabriele Bischoff -  Am 1-2, 6-13, 15-18",669,14,12
+134710,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 3,480,180,35
+134712,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 4/1,677,14,3
+134713,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 4/2,401,103,187
+134714,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 4/3,360,129,202
+134560,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 19,159,527,7
+134715,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 5,340,168,184
+134716,2021-07-06 15:36:08,A9-0214/2021,,Gabriele Bischoff - Am 14,538,142,15
+134718,2021-07-06 15:36:08,A9-0200/2021,,Activités financières de la Banque européenne d'investissement - rapport annuel 2020 - Financial Activities of the European Investment Bank - annual report 2020 -  Finanztätigkeit der Europäischen Investitionsbank – Jahresbericht 2020 -  - Pedro Silva Pereira - § 6/1,535,83,77
+134719,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 6/2,604,44,47
+134720,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 6/3,536,148,11
+134721,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 6/4,681,4,10
+134723,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 8/1,552,113,30
+134724,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 8/2,676,14,5
+134725,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 8/3,548,120,27
+134441,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 3,154,535,4
+134727,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 17/1,659,26,10
+134728,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 17/2,658,26,11
+134729,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 17/3,561,118,16
+134442,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 4,163,516,14
+134730,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 66,593,59,43
+134731,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 68,582,60,53
+134443,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 5,113,529,51
+134733,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 1/1,491,176,28
+134734,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 1/2,387,179,129
+134736,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 86/1,545,53,97
+134737,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - § 86/2,544,51,100
+134445,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 6,135,544,13
+134446,2021-07-06 15:36:08,A9-0200/2021,,Pedro Silva Pereira - Am 2,143,531,18
+134547,2021-07-06 15:36:08,A9-0215/2021,,Contrôle des activités financières de la Banque européenne d'investissement - rapport annuel 2019 - Control of the financial activities of the European Investment Bank - annual report 2019 -   Kontrolle der Finanztätigkeit der Europäischen Investitionsbank – Jahresbericht 2019 -  - Bas Eickhout - Am 1,252,408,35
+134548,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 2,171,450,74
+134549,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 3,319,347,29
+134550,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 4S,281,377,37
+134551,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 9,146,387,157
+134552,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 5,258,418,19
+134553,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 10,84,605,4
+134554,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 11,187,343,158
+134555,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 6,197,493,4
+134556,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 7,259,394,42
+134557,2021-07-06 15:36:08,A9-0215/2021,,Bas Eickhout - Am 8,255,410,30
+134449,2021-07-06 15:36:08,A9-0222/2021,,"Fonds européen pour les affaires maritimes, la pêche et l'aquaculture - European Maritime, Fisheries and Aquaculture Fund - Europäischer Meeres-, Fischerei- und Aquakulturfonds -  - Gabriel Mato - Am 1",143,516,35
