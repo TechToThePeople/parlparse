@@ -1,5 +1,5 @@
 epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid
-221463,,Ilčić,1,,,,,,ECR,,,,9,7290
+221463,Ladislav,ILČIĆ,1,2021-07-01,,,hr,,ECR,Pokret za uspješnu Hrvatsku,,,9,7290
 218349,Michiel,HOOGEVEEN,1,2021-04-15,,,nl,,ECR,JA21,,,9,7289
 218347,Thijs,REUTEN,1,2021-04-15,,,nl,,S&D,Partij van de Arbeid,,,9,7288
 214839,Emma,WIESNER,1,2021-02-04,,,se,,Renew,Centerpartiet,,,9,7287
@@ -363,7 +363,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197482,Joachim,KUHS,1,2019-07-02,,1956-06-25,de,,ID,Alternative für Deutschland,,,9,6879
 197481,Maximilian,KRAH,1,2019-07-02,,1977-01-28,de,,ID,Alternative für Deutschland,,,9,6878
 197480,Nicolaus,FEST,1,2019-07-02,,1962-07-01,de,,ID,Alternative für Deutschland,,,9,6877
-197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ECR,Independent,,,9,6875
+197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ECR,Liberal-Conservative Refomists,,,9,6875
 197475,Christine,ANDERSON,1,2019-07-02,,1968-07-29,de,,ID,Alternative für Deutschland,,,9,6872
 197473,Christian,DOLESCHAL,1,2019-07-02,,1988-04-27,de,,EPP,Christlich-Soziale Union in Bayern e.V.,,,9,6870
 197472,Filip,DE MAN,1,2019-07-02,,1955-11-11,be,,ID,Vlaams Belang,,,9,6869
@@ -468,7 +468,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 183793,Angelo,CIOCCA,1,2019-07-02,,1975-06-28,it,,ID,Lega,,,9,6731
 183338,Jakop G.,DALUNDE,1,2020-02-01,,1984-02-02,se,,Greens/EFA,Miljöpartiet de gröna,,,9,6730
 182995,Annika,BRUNA,1,2019-07-02,,1956-11-26,fr,,ID,Rassemblement national,,,9,7076
-136236,,Pimenta Lopes,1,,,,,,The Left,,,,9,6727
+136236,João,PIMENTA LOPES,1,2021-07-06,,1980-04-12,pt,,GUE/NGL,Partido Comunista Português,,,9,6727
 135511,Valérie,HAYER,1,2019-07-02,,1986-04-06,fr,,Renew,La République en marche,,,9,6959
 134605,Ramona,STRUGARIU,1,2019-07-02,,1979-08-06,ro,,Renew,"Partidul Libertate, Unitate și Solidaritate",,,9,7058
 132191,Gunnar,BECK,1,2019-07-02,,1965-05-01,de,,ID,Alternative für Deutschland,,,9,6874
@@ -569,7 +569,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 124784,Dan,NICA,1,2019-07-02,,1960-07-02,ro,,S&D,Partidul Social Democrat,,,9,6418
 124781,Alfred,SANT,1,2019-07-02,,1948-02-28,mt,,S&D,Partit Laburista,,,9,6415
 124780,Marco,ZANNI,1,2019-07-02,,1986-07-11,it,,ID,Lega,,,9,6414
-124779,Eleonora,EVI,1,2019-07-02,,1983-11-20,it,,Greens/EFA,Independent,,,9,6413
+124779,Eleonora,EVI,1,2019-07-02,,1983-11-20,it,,Greens/EFA,Europa Verde,,,9,6413
 124777,Tiziana,BEGHIN,1,2019-07-02,,1971-02-04,it,,NA,Movimento 5 Stelle,,,9,6411
 124771,Dominique,BILDE,1,2019-07-02,,1953-08-01,fr,,ID,Rassemblement national,,,9,6405
 124770,Jean-François,JALKH,1,2019-07-02,,1957-05-23,fr,,ID,Rassemblement national,,,9,6404
@@ -603,7 +603,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 122978,Alicia,HOMS GINEL,1,2019-07-02,,1993-10-15,es,,S&D,Partido Socialista Obrero Español,,,9,7122
 120478,Martina,MICHELS,1,2019-07-02,,1955-12-01,de,,GUE/NGL,DIE LINKE.,,,9,6310
 119434,Dubravka,ŠUICA,1,2019-07-02,2019-11-30,,hr,,EPP,Hrvatska demokratska zajednica,,,9,6301
-119431,Ruža,TOMAŠIĆ,1,2019-07-02,,1958-05-10,hr,,ECR,Hrvatska konzervativna stranka,,,9,6300
+119431,Ruža,TOMAŠIĆ,1,2019-07-02,2021-06-30,1958-05-10,hr,,ECR,Hrvatska konzervativna stranka,,,9,6300
 118949,Ondřej,KOVAŘÍK,1,2019-07-02,,1980-08-21,cz,,Renew,ANO 2011,,,9,6917
 118859,Roberta,METSOLA,1,2019-07-02,,1979-01-18,mt,,EPP,Partit Nazzjonalista,,,9,6297
 114268,Nils,TORVALDS,1,2019-07-02,,1945-08-07,fi,,Renew,Svenska folkpartiet,,,9,6281
@@ -688,7 +688,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96713,Evžen,TOŠENOVSKÝ,1,2019-07-02,,1956-02-26,cz,,ECR,Občanská demokratická strana,,,9,5892
 96711,Pascal,CANFIN,1,2019-07-02,,1974-08-22,fr,,Renew,Liste Renaissance,,,9,5891
 96709,Morten,LØKKEGAARD,1,2019-07-02,,1964-12-20,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,9,5889
-96706,João,FERREIRA,1,2019-07-02,,1978-11-20,pt,,GUE/NGL,Partido Comunista Português,,,9,5886
+96706,João,FERREIRA,1,2019-07-02,2021-07-05,1978-11-20,pt,,The Left,Partido Comunista Português,,,9,5886
 96698,Viktor,USPASKICH,1,2019-07-02,,1959-07-24,lt,,NA,Darbo partija,,,9,5879
 96697,Valdemar,TOMAŠEVSKI,1,2019-07-02,,1965-03-03,lt,,ECR,Lietuvos lenkų rinkimų akcija – Krikščioniškų šeimų sąjunga,,,9,5878
 96681,Vilija,BLINKEVIČIŪTĖ,1,2019-07-02,,1960-03-03,lt,,S&D,Lietuvos socialdemokratų partija,,,9,5867
