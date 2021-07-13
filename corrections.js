@@ -1,3 +1,5 @@
+// find data/RCV -exec zgrep -l 'Intentions' {} \; | sed -En "s/data\/RCV\/(.*).xml.zip/\1/p" | xargs -I{} node plenary.js -d {} --correction-only
+
 "use strict";
 const db = require("./lib/db.js");
 const fs = require("fs");
