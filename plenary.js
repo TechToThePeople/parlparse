@@ -19,7 +19,14 @@ const csvStream = format({ headers: head });
 let date = null;
 let initialised = false;
 let argv = require("minimist")(process.argv.slice(2), {
-  alias: { h: "help", a: "all", u: "update", f: "force", d: "date" },
+  alias: {
+    h: "help",
+    a: "all",
+    u: "update",
+    f: "force",
+    d: "date",
+    c: "correction-only",
+  },
 });
 
 const main = (argv) => {
@@ -30,7 +37,8 @@ const main = (argv) => {
       "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
       "\n--date=-1 -d=-1 : process yesterday (n days before)",
       "\n--update -u : retry download even if already downloaded and parse it if different",
-      "\n--force -f : parse again (by default, skip)"
+      "\n--force -f : parse again (by default, skip)",
+      "\n--correction-only -c : check if correction only"
     );
     process.exit(error);
   };
@@ -114,7 +122,7 @@ async function run(date) {
     });
     if (!plenary.fresh) {
       log.info("./data/RCV/" + date + ".xml.zip already processed");
-      if (!argv.force) return;
+      if (!argv.force && !argv["correction-only"]) return;
     } else {
       log.info("processing", url, ".xml");
     }
@@ -146,8 +154,12 @@ async function run(date) {
     plenary.id = r[0];
   }
 
-  const processed = await roll(plenary, argv.force);
+  const processed = await roll(plenary, {
+    force: argv.force,
+    correction: argv["correction-only"],
+  });
   log.success(processed.votes, "votes processed");
+  if (processed.corrected) log.info(processed.corrected, "corrected votes");
   if (processed.added !== processed.votes)
     log.info(processed.added, "new votes");
   //  db.destroy();
