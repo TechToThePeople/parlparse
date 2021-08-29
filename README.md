@@ -13,6 +13,12 @@ CREATE TABLE `attendances` (
 
 `status` varchar(30) null, `mep_id` integer not null, `date` date not null, UNIQUE(mep_id,date));
 
+CREATE UNIQUE INDEX IF NOT EXISTS position_group ON groupmajority ( eugroup, rollcall);
+
+
+insert into groupmajority( majority,cohesion,rollcall,eugroup,total,"for",against, abstention) (select case when ("for" >= against and "for" >= abstention) then 'for' when (against >= "for" and against >= abstention) then 'against' when (abstention >= against and abstention >= "for") then 'abstention' end as majority, round(100.0* GREATEST("for",against,abstention)/total) cohesion, rollcall,eugroups.id eugroup,total,"for",against, abstention from ( select rollcall, eugroup, count(*) as total, sum (case when position = 'for' then 1 else 0 end) as for,sum (case when position = 'against' then 1 else 0 end) as against,sum (case when position = 'abstention' then 1 else 0 end) as abstention from positions join meps on mep_vote=meps.vote_id group by rollcall, eugroup) q left join eugroups on eugroups.name=eugroup) on conflict do nothing;
+
+
 you need the latest version of q (>1.4 to work -bug on escaping ")
 The data published by the EP needs some massaging to be extracted in a useful format.
 
