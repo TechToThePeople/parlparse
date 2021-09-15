@@ -27,7 +27,7 @@ const writePositions = async (id) => {
       "mep_vote as mepid",
       "name",
       "position as result",
-      "eugroup",
+      "meps.eugroup",
       "rollcall as identifier",
       "vote_id"
     )
