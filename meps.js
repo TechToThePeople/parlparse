@@ -4,7 +4,13 @@ const mep = require("./lib/mep.js");
 const file = "./data/meps.json";
 const meps = JSON.parse(fs.readFileSync(file, "utf8"));
 const inout = JSON.parse(fs.readFileSync("./data/inout.json", "utf8"));
-const eugroups = { EPP: "PPE", "Greens/EFA": "Verts/ALE", NA: "NI" };
+const eugroups = {
+  "The Left": "GUE/NGL",
+  EPP: "PPE",
+  "Greens/EFA": "Verts/ALE",
+  NA: "NI",
+};
+const fixgroups = { "The Left": "GUE/NGL" };
 const log = require("./lib/log.js");
 
 const pushMEP = (d) => {
@@ -106,6 +112,9 @@ mep.all().then(async (unmatched) => {
   //  const m = unmatched[0];
   for (const m of unmatched) {
     const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
+    if (fixgroups[found.eugroup]) {
+      found.eugroup = fixgroups[found.eugroup];
+    }
     !found && console.log(m, found);
     try {
       found && (await mep.update(m.vote_id, found));
