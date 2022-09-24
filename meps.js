@@ -93,12 +93,16 @@ const find = (name, eugroup, epid) => {
       epid: t.epid,
       first_name: t.firstname,
       last_name: t.lastname,
-      Birth: { date: t.birthdate },
       start: t.start9,
+      Birth: { date: "1970-01-01" },
       end: t.end || null,
       eugroup: t.eugroup,
       constituency: { party: t.party, country: t.country },
     };
+    if (t.birthdate !== "") r.Birth = { date: t.birthdate };
+    else {
+      r.Birth = {};
+    }
   }
   if (inout[r.epid]) {
   } else {
@@ -112,6 +116,10 @@ mep.all().then(async (unmatched) => {
   //  const m = unmatched[0];
   for (const m of unmatched) {
     const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
+    if (found.Birth && found.Birth.date === "") {
+      console.log("missing birth info " + m.name.toLowerCase() + " " + m.ep_id);
+      found.Birth.date = null;
+    }
     if (fixgroups[found.eugroup]) {
       found.eugroup = fixgroups[found.eugroup];
     }
