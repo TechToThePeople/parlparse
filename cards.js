@@ -66,7 +66,6 @@ db.select(db.raw("rollcalls.*,title,url"))
       try {
         const exists = fs.existsSync(csv);
         if (exists && !date && !argv.force) {
-          console.log("skip");
           continue;
         }
         if (date && !argv.force) {
