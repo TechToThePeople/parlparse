@@ -48,7 +48,7 @@ const processing = async (file) => {
           comment: rollcall.remarks,
         })
         .onConflict("id", "rollcall")
-        .ignore();
+        .merge();
       log.info("inserted", rollcall.identifier, rollcall.remarks);
     } catch (e) {
       console.log(e);

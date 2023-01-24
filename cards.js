@@ -5,20 +5,36 @@ const d3 = require("d3-dsv");
 const log = require("./lib/log.js");
 
 let argv = require("minimist")(process.argv.slice(2), {
-  alias: { h: "help", f: "force" },
+  alias: { h: "help", f: "force", d: "date" },
 });
+let date = null;
 
 const help = (error = false) => {
   console.log(argv);
   error && console.error("parameter missing");
   console.log(
-    "--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
+    "--force -f : retry download even if already downloaded and parse it anyway (by default, skip)",
+    "\n--date=2020-04-09 -d=2020-04-09 : process a single day"
   );
   process.exit(error);
 };
 
 if (argv.help) {
   help();
+}
+if (argv.date) {
+  if (argv.date <= 0) {
+    const t = new Date(new Date().valueOf() + 1000 * 3600 * 24 * argv.date);
+    date = t.toISOString().substring(0, 10);
+  } else {
+    date = argv.date;
+  }
+  const d = date.split("-");
+  if (d.length !== 3) {
+    log.error("can't parse the date", date);
+    process.exit(1);
+  }
+  console.log("processing only " + date);
 }
 
 const writePositions = async (id) => {
@@ -27,7 +43,7 @@ const writePositions = async (id) => {
       "mep_vote as mepid",
       "name",
       "position as result",
-      "eugroup",
+      "meps.eugroup",
       "rollcall as identifier",
       "vote_id"
     )
@@ -49,8 +65,13 @@ db.select(db.raw("rollcalls.*,title,url"))
       const csv = "../9/cards/" + vote.id + ".csv";
       try {
         const exists = fs.existsSync(csv);
-        if (exists && !argv.force) {
+        if (exists && !date && !argv.force) {
+          console.log("skip");
           continue;
+        }
+        if (date && !argv.force) {
+          const vdate = vote.date.toISOString().substring(0, 10);
+          if (vdate !== date) continue;
         }
       } catch (err) {
         // nothing special to do, let's create the card that doesn't exist
