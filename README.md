@@ -28,15 +28,24 @@ tables and structures:
 - rollcalls: each "thing" being voted. it can be a report (law), a specific amendment, a bunch of amendments...
 - positions: each individual MEP vote -for, against, abstain- (key:  MEP+rollcall)
 
-notes: 
+_notes: 
 - I never found a list of the text of each of these votes (beside the reports), eg finding what is the amendment text. Please let me know if you find it 
 - the EP use different IDs for MEPs in their voting system than everywhere else. It's getting better, but you might still have a bit of logic/magic to connect the two IDs
 - there are a lot of exceptions, for instance rollcalls that aren't publishing individual votes
+- votes are related to a report (specific legislation), but some aren't (eg. budget or agenda)
 - we parse the french version, that used to be more complete or faster updated. pretty much irrelevant because...
-- the name of each rollcall is a mess, for instance the reports contain the full name of the report in 3 languages, and the name of the rapporteur, in a format that isn't parsable (one single string)
+- the name of each rollcall is a mess, for instance the reports contain the full name of the report in 3 languages, and the name of the rapporteur, in a format that isn't parsable (one single string)_
 
+## reports
 
+Most of the votes are related to a report, A9-xx or B9-xx.
+Some of the analysis are depending on the committee that was the source of that report, and in general extra information about it.
+
+The key is their ref A9-xxx or B9-xxx
+ 
 node report.js
+
+## generate the static files and publish them
 node csv.js
 node cards.js
 sh prod.sh
