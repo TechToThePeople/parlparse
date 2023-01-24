@@ -6,34 +6,67 @@ this will be used after to show for each mep when they voted with their group of
 
 ## big script to update:
 
-
-insert into groupmajority
-( majority,cohesion,rollcall,eugroup,total,"for",against, abstention)
-select case when ("for" >= against and "for" >= abstention) then 'for' when (against >= "for" and against >= abstention) then 'against'
- when (abstention >= against and abstention >= "for") then 'abstention' end as majority, round(100.0* GREATEST("for",against,abstention)/total) cohesion
-, rollcall,eugroups.id eugroup,total,"for",against, abstention
-from ( select rollcall, meps.eugroup, count(*) as total, sum (case when position = 'for' then 1 else 0 end) as for,
-sum (case when position = 'against' then 1 else 0 end) as against,
-sum (case when position = 'abstention' then 1 else 0 end) as abstention
-from positions 
-join meps on mep_vote=meps.vote_id group by rollcall, meps.eugroup) q
-left join eugroups on eugroups.name=eugroup on conflict do nothing;
+``` sql
+INSERT INTO groupmajority (majority, cohesion, rollcall, eugroup, total, "for", against, abstention)
+SELECT 
+	CASE
+		WHEN ("for" >= against AND "for" >= abstention) THEN 'for'
+		WHEN (against >= "for" AND against >= abstention) THEN 'against'
+		WHEN (abstention >= against AND abstention >= "for") THEN 'abstention'
+	END AS majority,
+	round(100.0* GREATEST("for", against, abstention)/total) cohesion,
+	rollcall,
+	eugroups.id eugroup,
+	total,
+	"for",
+	against,
+	abstention
+FROM (
+	SELECT
+		rollcall,
+		meps.eugroup,
+		count(*) AS total,
+		SUM (
+			CASE
+				WHEN POSITION = 'for' THEN 1
+				ELSE 0
+			END
+		) AS FOR,
+		SUM (
+			CASE
+				WHEN POSITION = 'against' THEN 1
+				ELSE 0
+			END
+		) AS against,
+		SUM (
+			CASE
+				WHEN POSITION = 'abstention' THEN 1
+				ELSE 0
+			END
+		) AS abstention
+	FROM positions
+	JOIN meps ON mep_vote=meps.vote_id
+	GROUP BY rollcall, meps.eugroup
+) q
+LEFT JOIN eugroups ON eugroups.name=eugroup ON CONFLICT DO NOTHING;
+```
 
 (note: "for" is a terrible name for a column, it needs to be quoted otherwise sql panic)
 
 ## query to use:
 
 
-    const d= knex
-      .select(knex.raw("eugroups.name, count(*), sum(case when (position != majority) then 1 else 0 end) as diff"))
-      .from("groupmajority")
-      .join("positions","positions.rollcall","groupmajority.rollcall")
-      .join("meps","positions.mep_vote","meps.vote_id")
-      .joinRaw("join eugroups on meps.eugroup = eugroups.name or eugroups.code='greens/efa'")
-      .whereRaw("groupmajority.eugroup = eugroups.id")
-      .andWhere("ep_id",id)
-      .groupBy("eugroups.name");
-
+``` js
+const d = knex
+	.select(knex.raw("eugroups.name, count(*), sum(case when (position != majority) then 1 else 0 end) as diff"))
+	.from("groupmajority")
+	.join("positions","positions.rollcall","groupmajority.rollcall")
+	.join("meps","positions.mep_vote","meps.vote_id")
+	.joinRaw("join eugroups on meps.eugroup = eugroups.name or eugroups.code='greens/efa'")
+	.whereRaw("groupmajority.eugroup = eugroups.id")
+	.andWhere("ep_id",id)
+	.groupBy("eugroups.name");
+```
 
 /var/www/greenvote/api/mep/controllers/mep.js
 
