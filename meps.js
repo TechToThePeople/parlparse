@@ -1,8 +1,23 @@
 "use strict";
 const fs = require("fs");
 const mep = require("./lib/mep.js");
-const file = "./data/meps.json";
-const meps = JSON.parse(fs.readFileSync(file, "utf8"));
+
+const meps = JSON.parse(fs.readFileSync("./data/meps.json", "utf8")).map(
+  function (r) {
+    // fix meps with missing lastname
+    if (!(r.last_name || "").trim()) {
+      let names = { first: [], last: [] };
+      r.first_name.split(/\s+/g).forEach(function (n) {
+        const c = n.replace(/Mc/g, "MC").replace(/ß/g, "SS"); // account for exemptions to uppercase rule: Mc and ß
+        names[c === c.toUpperCase() ? "last" : "first"].push(n);
+      });
+      r.last_name = names.last.join(" ");
+      r.first_name = names.first.join(" ");
+    }
+    return r;
+  }
+);
+
 const inout = JSON.parse(fs.readFileSync("./data/inout.json", "utf8"));
 const eugroups = {
   "The Left": "GUE/NGL",
@@ -20,7 +35,8 @@ const pushMEP = (d) => {
 
   const names = d.fullName.split(" ");
   names.map((n) => {
-    const index = n === n.toUpperCase() ? "last_name" : "first_name";
+    const c = n.replace(/Mc/g, "MC").replace(/ß/g, "SS"); // exemptions to uppercase rule: Mc and ß
+    const index = c === c.toUpperCase() ? "last_name" : "first_name";
     d[index].push(n);
   });
   d.first_name = d.first_name.join(" ");
