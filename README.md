@@ -1,3 +1,51 @@
+# how does it fit together?
+
+This scrapes the rollcalls of votes in the European Parliament as used in [mepwatch](https://mepwatch.eu). It is using a database to store the data in their intermediary form, but the end result as used by the data visualisation is all based on static files.
+
+## MEPs
+
+The rollcalls do not contain much information about each MEP we use for some analysis (eg no information about their country or their national party).
+
+Before each plenary week, we should update the list of MEPs so the votes are all matching complete informations of the MEPs. We use the data from tttp.eu (itself an aggreate between the data on parltrack, wikimedia and a bunch of external sources).
+
+_note: sometimes, MEPs vote before their profile is published on the EP website, we are trying to handle it by creating "placeholder" MEPs that are updated later_
+
+## parsing the plenary rollcalls
+
+Each rollcall is not published separately, but there is one file per day containing all the votes of the day (up to 600). The parliament doesn't notify nor publish on a timely fashion when there is a new plenary vote, but fortunately, each vote has a unique url that is easy to guess.
+
+So the parser is checking regularly for each day if there is a file published (usually early in the PM on plenary days). If there is more than one voting session per day, the EP does update the file, so we check both for today (to get the votes as soon as possible) and yesterday (to catch potential updates of a second voting session).
+
+    $node plenary.js --help
+
+    $node plenary.js -d -u
+    $node plenary.js -d-1 -u
+
+plenary.js is containing the logic of finding the xml files, the parsing and processing of the xml is in lib/rollcall.js
+
+tables and structures:
+- plenaries: one record per day in the plenary that has votes (with rollcalls). In general, monday (very few votes) to thu in the plenary weeks, but with a lot of exceptions
+- rollcalls: each "thing" being voted. it can be a report (law), a specific amendment, a bunch of amendments...
+- positions: each individual MEP vote -for, against, abstain- (key:  MEP+rollcall)
+
+notes: 
+- I never found a list of the text of each of these votes (beside the reports), eg finding what is the amendment text. Please let me know if you find it 
+- the EP use different IDs for MEPs in their voting system than everywhere else. It's getting better, but you might still have a bit of logic/magic to connect the two IDs
+- there are a lot of exceptions, for instance rollcalls that aren't publishing individual votes
+- we parse the french version, that used to be more complete or faster updated. pretty much irrelevant because...
+- the name of each rollcall is a mess, for instance the reports contain the full name of the report in 3 languages, and the name of the rapporteur, in a format that isn't parsable (one single string)
+
+
+node report.js
+node csv.js
+node cards.js
+sh prod.sh
+
+
+
+
+# notes
+
 CREATE TABLE `positions` (
   `id` integer not null primary key autoincrement,
   `rollcall` integer not null,
