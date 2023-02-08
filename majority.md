@@ -48,7 +48,7 @@ FROM (
 	JOIN meps ON mep_vote=meps.vote_id
 	GROUP BY rollcall, meps.eugroup
 ) q
-LEFT JOIN eugroups ON eugroups.name=eugroup ON CONFLICT DO NOTHING;
+LEFT JOIN eugroups ON eugroups.name=eugroup AND "PRIMARY"=true ON CONFLICT DO NOTHING;
 ```
 
 (note: "for" is a terrible name for a column, it needs to be quoted otherwise sql panic)
