@@ -85,7 +85,12 @@ const find = (name, eugroup, epid) => {
       if (!element.start9) return false;
       if (element.lastname.toLowerCase() === name) {
         if (element.eugroup !== eugroup) {
-          console.error("Missmatch group", element.eugroup, eugroup);
+          console.error(
+            element.lastname,
+            "Missmatch group",
+            element.eugroup,
+            eugroup
+          );
         }
         return true;
       }
