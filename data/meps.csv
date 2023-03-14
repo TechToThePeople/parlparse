@@ -1,40 +1,40 @@
 epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid
-240478,Beatrice,COVASSI,1,2022-12-06,,,it,,S&D,Partito Democratico,,,9,7321
-239973,Bergur Løkke,RASMUSSEN,1,2022-11-22,,,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,9,7319
-239972,Erik,POULSEN,1,2022-11-22,,,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,9,7318
-239271,Eleni,STAVROU,1,2022-11-02,,,cy,,EPP,Democratic Rally,,,9,7317
-239262,Elisabetta,DE BLASIS,1,2022-11-02,,,it,,ID,Lega,,,9,7316
-239260,Denis,NESCI,1,2022-11-02,,,it,,ECR,FRATELLI D' ITALIA,,,9,7315
-239258,Maria Angela,DANZÌ,1,2022-11-02,,,it,,NA,Movimento 5 Stelle,,,9,7314
-239257,Achille,VARIATI,1,2022-11-02,,,it,,S&D,Partito Democratico,,,9,7313
-239256,Paola,GHIDONI,1,2022-11-02,,,it,,ID,Lega,,,9,7312
-239255,Matteo,GAZZINI,1,2022-11-02,,,it,,ID,Lega,,,9,7311
-238674,Theresa,MUIGG,1,2022-10-10,,,at,,S&D,Sozialdemokratische Partei Österreichs,,,9,7310
-238639,Johan,NISSINEN,1,2022-10-11,,,se,,ECR,Sverigedemokraterna,,,9,7309
-237779,Carina,OHLSSON,1,2022-09-26,,,se,,S&D,Arbetarepartiet- Socialdemokraterna,,,9,7308
-237465,Matthias,ECKE,1,2022-10-03,,,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,7307
-237320,Eva Maria,POPTCHEVA,1,2022-09-15,,,es,,Renew,Ciudadanos – Partido de la Ciudadanía,,,9,7306
-237224,João,ALBUQUERQUE,1,2022-09-13,,,pt,,S&D,Partido Socialista,,,9,7305
-236053,Marina,MESURE,1,2022-07-29,,,fr,,GUE/NGL,La France Insoumise,,,9,7303
-236052,Patricia,CHAGNON,1,2022-07-29,,,fr,,ID,Rassemblement national,,,9,7302
-236051,Eric,MINARDI,1,2022-07-29,,,fr,,ID,Rassemblement national,,,9,7301
-236050,Marie,DAUCHY,1,2022-07-29,,,fr,,ID,Rassemblement national,,,9,7300
-234344,Max,ORVILLE,1,2022-05-20,,,fr,,Renew,Mouvement Démocrate,,,9,7299
-233862,Matjaž,NEMEC,1,2022-05-18,,,si,,S&D,Socialni demokrati,,,9,7298
-230085,Camilla,LAURETI,1,2022-01-12,,,it,,S&D,Partito Democratico,,,9,7297
-229839,René,REPASI,1,2022-02-02,,,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,7296
-229519,Catharina,RINZEMA,1,2022-01-18,,,nl,,Renew,Volkspartij voor Vrijheid en Democratie,,,9,7295
-229352,Malte,GALLÉE,1,2021-12-22,,,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,7294
+240478,Beatrice,COVASSI,1,2022-12-06,,1968-12-01,it,,S&D,Partito Democratico,,,9,7321
+239973,Bergur Løkke,RASMUSSEN,1,2022-11-22,,1990-03-04,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,9,7319
+239972,Erik,POULSEN,1,2022-11-22,,1967-06-16,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,9,7318
+239271,Eleni,STAVROU,1,2022-11-02,,1975-07-04,cy,,EPP,Democratic Rally,,,9,7317
+239262,Elisabetta,DE BLASIS,1,2022-11-02,,1974-04-30,it,,ID,Lega,,,9,7316
+239260,Denis,NESCI,1,2022-11-02,,1981-07-25,it,,ECR,FRATELLI D' ITALIA,,,9,7315
+239258,Maria Angela,DANZÌ,1,2022-11-02,,1957-07-05,it,,NA,Movimento 5 Stelle,,,9,7314
+239257,Achille,VARIATI,1,2022-11-02,,1953-01-19,it,,S&D,Partito Democratico,,,9,7313
+239256,Paola,GHIDONI,1,2022-11-02,,1963-07-08,it,,ID,Lega,,,9,7312
+239255,Matteo,GAZZINI,1,2022-11-02,,1985-07-09,it,,ID,Lega,,,9,7311
+238674,Theresa,BIELOWSKI,1,2022-10-10,,1984-06-15,at,,S&D,Sozialdemokratische Partei Österreichs,,,9,7310
+238639,Johan,NISSINEN,1,2022-10-11,,1989-05-17,se,,ECR,Sverigedemokraterna,,,9,7309
+237779,Carina,OHLSSON,1,2022-09-26,,1957-06-14,se,,S&D,Arbetarepartiet- Socialdemokraterna,,,9,7308
+237465,Matthias,ECKE,1,2022-10-03,,1983-04-12,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,7307
+237320,Eva Maria,POPTCHEVA,1,2022-09-15,,1979-10-17,es,,Renew,Ciudadanos – Partido de la Ciudadanía,,,9,7306
+237224,João,ALBUQUERQUE,1,2022-09-13,,1986-12-25,pt,,S&D,Partido Socialista,,,9,7305
+236053,Marina,MESURE,1,2022-07-29,,1989-07-12,fr,,GUE/NGL,La France Insoumise,,,9,7303
+236052,Patricia,CHAGNON,1,2022-07-29,,1963-11-20,fr,,ID,Rassemblement national,,,9,7302
+236051,Eric,MINARDI,1,2022-07-29,,1956-03-18,fr,,ID,Rassemblement national,,,9,7301
+236050,Marie,DAUCHY,1,2022-07-29,,1987-02-05,fr,,ID,Rassemblement national,,,9,7300
+234344,Max,ORVILLE,1,2022-05-20,,1962-06-19,fr,,Renew,Mouvement Démocrate,,,9,7299
+233862,Matjaž,NEMEC,1,2022-05-18,,1980-04-10,si,,S&D,Socialni demokrati,,,9,7298
+230085,Camilla,LAURETI,1,2022-01-12,,1975-05-20,it,,S&D,Partito Democratico,,,9,7297
+229839,René,REPASI,1,2022-02-02,,1979-11-08,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,7296
+229519,Catharina,RINZEMA,1,2022-01-18,,1985-07-04,nl,,Renew,Volkspartij voor Vrijheid en Democratie,,,9,7295
+229352,Malte,GALLÉE,1,2021-12-22,,1993-09-05,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,7294
 228604,Ilan,DE BASSO,1,2021-12-13,,,se,,S&D,Arbetarepartiet- Socialdemokraterna,,,9,7293
-228286,Karsten,LUCKE,1,2022-01-11,,,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,7292
-226260,Karolin,BRAUNSBERGER-REINHOLD,1,2021-10-07,,,de,,EPP,Christlich Demokratische Union Deutschlands,,,9,7291
-221463,Ladislav,ILČIĆ,1,2022-03-22,,,hr,,ECR,Hrvatski suverenisti,,,9,7290
+228286,Karsten,LUCKE,1,2022-01-11,,1974-12-29,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,7292
+226260,Karolin,BRAUNSBERGER-REINHOLD,1,2021-10-07,,1986-11-03,de,,EPP,Christlich Demokratische Union Deutschlands,,,9,7291
+221463,Ladislav,ILČIĆ,1,2022-03-22,,1970-08-04,hr,,ECR,Hrvatski suverenisti,,,9,7290
 218349,Michiel,HOOGEVEEN,1,2021-04-15,,,nl,,ECR,JA21,,,9,7289
 218347,Thijs,REUTEN,1,2021-04-15,,,nl,,S&D,Partij van de Arbeid,,,9,7288
-214839,Emma,WIESNER,1,2021-02-04,,,se,,Renew,Centerpartiet,,,9,7287
+214839,Emma,WIESNER,1,2021-02-04,,1992-11-11,se,,Renew,Centerpartiet,,,9,7287
 213330,Ernő,SCHALLER-BAROSS,1,2021-01-10,,,hu,,NA,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,7286
-212855,Alin,MITUȚA,1,2022-05-31,,,ro,,Renew,Reînnoim Proiectul European al României,,,9,7285
-209896,Colm,MARKEY,1,2020-11-20,,,ie,,EPP,Fine Gael Party,,,9,7284
+212855,Alin,MITUȚA,1,2022-05-31,,1984-05-24,ro,,Renew,Reînnoim Proiectul European al României,,,9,7285
+209896,Colm,MARKEY,1,2020-11-20,,1972-01-03,ie,,EPP,Fine Gael Party,,,9,7284
 209140,Vlad,GHEORGHE,1,2020-11-10,,1985-02-22,ro,,Renew,Uniunea Salvați România,,,9,7283
 209091,Cyrus,ENGERER,1,2020-11-05,,1981-09-28,mt,,S&D,Partit Laburista,,,9,7282
 208722,Sara,MATTHIEU,1,2020-10-08,,1981-05-21,be,,Greens/EFA,Groen,,,9,7281
@@ -72,7 +72,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 198183,Mihai,TUDOSE,1,2019-07-02,,1967-03-06,ro,,S&D,Partidul Social Democrat,,,9,7247
 198176,Roman,HAIDER,1,2019-07-02,,1967-04-13,at,,ID,Freiheitliche Partei Österreichs,,,9,7246
 198096,Mazaly,AGUILAR,1,2019-07-02,,1949-09-20,es,,ECR,VOX,,,9,7244
-198063,Márton,GYÖNGYÖSI,1,2019-07-02,,1977-06-08,hu,,NA,Jobbik Magyarországért Mozgalom,,,9,7243
+198063,Márton,GYÖNGYÖSI,1,2019-07-02,,1977-06-08,hu,,NA,Jobbik – Konzervatívok,,,9,7243
 197935,Ivan Vilibor,SINČIĆ,1,2019-07-02,,1990-08-28,hr,,NA,KLJUČ Hrvatske,,,9,7242
 197894,László,TRÓCSÁNYI,1,2019-07-02,,1956-03-06,hu,,NA,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,7241
 197889,Grace,O'SULLIVAN,1,2019-07-02,,1962-03-08,ie,,Greens/EFA,Green Party,,,9,7240
@@ -129,8 +129,8 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197797,Andrea,CAROPPO,1,2019-07-02,2022-10-12,1979-06-26,it,,EPP,Forza Italia,,,9,7182
 197796,Massimo,CASANOVA,1,2019-07-02,,1970-08-31,it,,ID,Lega,,,9,7181
 197795,Mario,FURORE,1,2019-07-02,,1988-12-25,it,,NA,Movimento 5 Stelle,,,9,7180
-197794,Chiara,GEMMA,1,2019-07-02,,1968-09-20,it,,NA,Independent,,,9,7179
-197792,Daniela,RONDINELLI,1,2019-07-02,,1967-08-19,it,,NA,Independent,,,9,7177
+197794,Chiara,GEMMA,1,2019-07-02,,1968-09-20,it,,ECR,Independent,,,9,7179
+197792,Daniela,RONDINELLI,1,2019-07-02,,1967-08-19,it,,S&D,Partito Democratico,,,9,7177
 197791,Massimiliano,SMERIGLIO,1,2019-07-02,,1966-05-08,it,,S&D,Partito Democratico,,,9,7176
 197790,Luisa,REGIMENTI,1,2019-07-02,,1958-06-05,it,,EPP,Forza Italia,,,9,7175
 197789,Simona,BALDASSARRE,1,2019-07-02,,1970-11-12,it,,ID,Lega,,,9,7174
@@ -149,7 +149,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197776,Rob,ROOKEN,1,2019-07-02,,1969-10-05,nl,,ECR,JA21,,,9,7160
 197773,Bert-Jan,RUISSEN,1,2019-07-02,,1972-03-22,nl,,ECR,Staatkundig Gereformeerde Partij,,,9,7157
 197772,Tineke,STRIK,1,2019-07-02,,1961-09-28,nl,,Greens/EFA,GroenLinks,,,9,7156
-197771,Vladimír,BILČÍK,1,2019-07-02,,1975-05-27,sk,,EPP,SPOLU – občianska demokracia,,,9,7155
+197771,Vladimír,BILČÍK,1,2019-07-02,,1975-05-27,sk,,EPP,Modrá koalícia,,,9,7155
 197770,Martin,HOJSÍK,1,2019-07-02,,1977-01-27,sk,,Renew,Progresívne Slovensko,,,9,7154
 197769,Michal,WIEZIK,1,2019-07-02,,1979-06-14,sk,,Renew,Progresívne Slovensko,,,9,7153
 197767,Eugen,JURZYCA,1,2019-07-02,,1958-02-08,sk,,ECR,Sloboda a Solidarita,,,9,7151
@@ -157,14 +157,14 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197765,Peter,POLLÁK,1,2019-07-02,,1973-04-20,sk,,EPP,Obyčajní ľudia a nezávislé osobnosti,,,9,7149
 197764,Miroslav,RADAČOVSKÝ,1,2019-07-02,,1953-09-24,sk,,NA,Slovak PATRIOT,,,9,7148
 197763,Milan,UHRÍK,1,2019-07-02,,1984-12-21,sk,,NA,Hnutie Republika,,,9,7147
-197761,Miroslav,ČÍŽ,1,2019-07-02,,1954-02-11,sk,,S&D,SMER-Sociálna demokracia,,,9,7145
+197761,Miroslav,ČÍŽ,1,2019-07-02,2022-12-29,1954-02-11,sk,,S&D,SMER-Sociálna demokracia,,,9,7145
 197760,Martin Edward,DAUBNEY,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7144
 197759,Rupert,LOWE,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7143
 197758,Jackie,JONES,1,2019-07-02,2020-01-31,,gb,,S&D,Labour Party,,,9,7142
 197757,James,WELLS,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7141
 197756,Vera,TAX,1,2019-07-02,,1972-02-08,nl,,S&D,Partij van de Arbeid,,,9,7140
 197755,Martin,HORWOOD,1,2019-07-02,2020-01-31,,gb,,Renew,Liberal Democrats,,,9,7139
-197754,Sandra,PEREIRA,1,2019-07-02,,1977-02-18,pt,,GUE/NGL,Partido Comunista Português,,,9,7138
+197754,Sandra,PEREIRA,1,2019-07-02,,1977-03-18,pt,,GUE/NGL,Partido Comunista Português,,,9,7138
 197752,Christina Sheila,JORDAN,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7136
 197751,James Alexander,GLANCY,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7134
 197749,Caroline,VOADEN,1,2019-07-02,2020-01-31,,gb,,Renew,Liberal Democrats,,,9,7132
@@ -219,7 +219,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197684,Pernando,BARRENA ARZA,1,2019-07-02,2022-09-02,1965-11-01,es,,GUE/NGL,EH BILDU,,,9,7072
 197683,Gilbert,COLLARD,1,2019-07-02,,1948-02-03,fr,,NA,Reconquête!,,,9,7071
 197682,Hannes,HEIDE,1,2019-07-02,,1966-10-17,at,,S&D,Sozialdemokratische Partei Österreichs,,,9,7070
-197681,,REGO,1,2019-07-02,,1973-11-20,es,,GUE/NGL,Izquierda Unida,,,9,7069
+197681,Sira,REGO,1,2019-07-02,,1973-11-20,es,,GUE/NGL,Izquierda Unida,,,9,7069
 197680,Aurélia,BEIGNEUX,1,2019-07-02,,1980-06-02,fr,,ID,Rassemblement national,,,9,7068
 197679,Isabel,BENJUMEA BENJUMEA,1,2019-07-02,,1982-09-05,es,,EPP,Partido Popular,,,9,7067
 197678,Bettina,VOLLATH,1,2019-07-02,2022-10-09,1962-10-29,at,,S&D,Sozialdemokratische Partei Österreichs,,,9,7066
@@ -365,7 +365,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197514,Andrzej,HALICKI,1,2019-07-02,,1961-11-26,pl,,EPP,Platforma Obywatelska,,,9,6907
 197513,Tomasz,FRANKOWSKI,1,2019-07-02,,1974-08-16,pl,,EPP,Platforma Obywatelska,,,9,6906
 197512,Benoît,BITEAU,1,2019-07-02,,1967-04-07,fr,,Greens/EFA,Europe Écologie,,,9,6905
-197511,Salima,YENBOU,1,2019-07-02,,1971-03-14,fr,,Renew,Europe Écologie,,,9,6904
+197511,Salima,YENBOU,1,2019-07-02,,1971-03-14,fr,,Renew,Renaissance,,,9,6904
 197510,Jarosław,DUDA,1,2019-07-02,,1964-04-29,pl,,EPP,Platforma Obywatelska,,,9,6903
 197508,Stéphane,SÉJOURNÉ,1,2019-07-02,,1985-03-26,fr,,Renew,La République en marche,,,9,6902
 197507,Włodzimierz,CIMOSZEWICZ,1,2019-07-02,,1950-09-13,pl,,S&D,Sojusz Lewicy Demokratycznej - Unia Pracy,,,9,6901
@@ -392,7 +392,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197482,Joachim,KUHS,1,2019-07-02,,1956-06-25,de,,ID,Alternative für Deutschland,,,9,6879
 197481,Maximilian,KRAH,1,2019-07-02,,1977-01-28,de,,ID,Alternative für Deutschland,,,9,6878
 197480,Nicolaus,FEST,1,2019-07-02,,1962-07-01,de,,ID,Alternative für Deutschland,,,9,6877
-197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ECR,Liberal-Conservative Refomists,,,9,6875
+197478,Lars Patrick,BERG,1,2019-07-02,,1966-01-22,de,,ECR,Bündnis Deutschland,,,9,6875
 197475,Christine,ANDERSON,1,2019-07-02,,1968-07-29,de,,ID,Alternative für Deutschland,,,9,6872
 197473,Christian,DOLESCHAL,1,2019-07-02,,1988-04-27,de,,EPP,Christlich-Soziale Union in Bayern e.V.,,,9,6870
 197472,Filip,DE MAN,1,2019-07-02,,1955-11-11,be,,ID,Vlaams Belang,,,9,6869
@@ -402,7 +402,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197468,Özlem,DEMIREL,1,2019-07-02,,1984-03-10,de,,GUE/NGL,DIE LINKE.,,,9,6865
 197467,Geert,BOURGEOIS,1,2019-07-02,,1951-07-06,be,,ECR,Nieuw-Vlaamse Alliantie,,,9,6864
 197466,Jutta,PAULUS,1,2019-07-02,,1967-05-09,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6863
-197465,Niklas NIENAß,,1,2019-07-02,,1992-04-14,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6862
+197465,Niklas,NIENAß,1,2019-07-02,,1992-04-14,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6862
 197464,Hannah,NEUMANN,1,2019-07-02,,1984-04-03,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6861
 197463,Olivier,CHASTEL,1,2019-07-02,,1964-11-22,be,,Renew,Mouvement Réformateur,,,9,6860
 197462,Erik,MARQUARDT,1,2019-07-02,,1987-10-20,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6859
@@ -517,7 +517,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 125214,Bronis,ROPĖ,1,2019-07-02,,1955-04-14,lt,,Greens/EFA,Lietuvos valstiečių ir žaliųjų sąjunga,,,9,6694
 125128,Iskra,MIHAYLOVA,1,2019-07-02,,1957-09-07,bg,,Renew,Movement for Rights and Freedoms,,,9,6690
 125110,Nikos,ANDROULAKIS,1,2019-07-02,,1979-02-07,gr,,S&D,PASOK-KINAL,,,9,6687
-125109,Eva,KAILI,1,2019-07-02,,1978-10-26,gr,,S&D,Independent,,,9,6686
+125109,Eva,KAILI,1,2019-07-02,,1978-10-26,gr,,NA,Independent,,,9,6686
 125106,Johan,VAN OVERTVELDT,1,2019-07-02,,1955-08-24,be,,ECR,Nieuw-Vlaamse Alliantie,,,9,6683
 125104,Romana,TOMC,1,2019-07-02,,1965-11-02,si,,EPP,Slovenska demokratska stranka,,,9,6681
 125093,Kostas,PAPADAKIS,1,2019-07-02,,1975-04-18,gr,,NA,Communist Party of Greece,,,9,6676
@@ -565,7 +565,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 124887,Karol,KARSKI,1,2019-07-02,,1966-05-13,pl,,ECR,Prawo i Sprawiedliwość,,,9,6525
 124884,Kosma,ZŁOTOWSKI,1,2019-07-02,,1964-01-14,pl,,ECR,Prawo i Sprawiedliwość,,,9,6522
 124877,Jadwiga,WIŚNIEWSKA,1,2019-07-02,,1963-07-02,pl,,ECR,Prawo i Sprawiedliwość,,,9,6515
-124875,Anders,VISTISEN,1,2022-11-22,,,dk,,ID,Dansk Folkeparti,,,9,6513
+124875,Anders,VISTISEN,1,2022-11-22,,1987-11-12,dk,,ID,Dansk Folkeparti,,,9,6513
 124873,Angel,DZHAMBAZKI,1,2019-07-02,,1979-03-21,bg,,ECR,VMRO,,,9,6511
 124872,Morten,PETERSEN,1,2019-07-02,,1966-09-14,dk,,Renew,Det Radikale Venstre,,,9,6510
 124867,Brando,BENIFEI,1,2019-07-02,,1986-01-01,it,,S&D,Partito Democratico,,,9,6505
@@ -644,7 +644,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 112744,Tonino,PICULA,1,2019-07-02,,1961-08-31,hr,,S&D,Socijaldemokratska partija Hrvatske,,,9,6261
 112611,Petri,SARVAMAA,1,2019-07-02,,1960-09-15,fi,,EPP,Kansallinen Kokoomus,,,9,6259
 112014,Phil,BENNION,1,2019-07-02,2020-01-31,,gb,,Renew,Liberal Democrats,,,9,6256
-111011,Anthea McINTYRE,,1,2019-07-02,2020-01-31,1954-06-29,gb,,ECR,Conservative Party,,,9,6234
+111011,Anthea,McINTYRE,1,2019-07-02,2020-01-31,1954-06-29,gb,,ECR,Conservative Party,,,9,6234
 107212,Andrey,NOVAKOV,1,2019-07-02,,1988-07-07,bg,,EPP,Citizens for European Development of Bulgaria,,,9,6709
 106936,Daniel,FREUND,1,2019-07-02,,1984-10-14,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6851
 103746,Michal,ŠIMEČKA,1,2019-07-02,,1984-05-10,sk,,Renew,Progresívne Slovensko,,,9,7152
@@ -678,7 +678,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96892,Roberto,GUALTIERI,1,2019-07-02,2019-09-05,,it,,S&D,Partito Democratico,,,9,6063
 96891,Paolo,DE CASTRO,1,2019-07-02,,1958-02-02,it,,S&D,Partito Democratico,,,9,6062
 96885,Dominique,RIQUET,1,2019-07-02,,1946-09-18,fr,,Renew,Mouvement Radical Social-Libéral,,,9,6056
-96880,Andrea,COZZOLINO,1,2019-07-02,,1962-08-03,it,,S&D,Partito Democratico,,,9,6051
+96880,Andrea,COZZOLINO,1,2019-07-02,,1962-08-03,it,,NA,Partito Democratico,,,9,6051
 96868,Karima,DELLI,1,2019-07-02,,1979-03-04,fr,,Greens/EFA,Europe Écologie,,,9,6040
 96867,Maria da Graça,CARVALHO,1,2019-07-02,,1955-04-09,pt,,EPP,Partido Social Democrata,,,9,6039
 96852,Cornelia,ERNST,1,2019-07-02,,1956-11-30,de,,GUE/NGL,DIE LINKE.,,,9,6024
@@ -721,10 +721,10 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96709,Morten,LØKKEGAARD,1,2019-07-02,,1964-12-20,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,9,5889
 96706,João,FERREIRA,1,2019-07-02,2021-07-05,1978-11-20,pt,,GUE/NGL,Partido Comunista Português,,,9,5886
 96698,Viktor,USPASKICH,1,2019-07-02,,1959-07-24,lt,,NA,Darbo partija,,,9,5879
-96697,Valdemar,TOMAŠEVSKI,1,2019-07-02,,1965-03-03,lt,,ECR,Lietuvos lenkų rinkimų akcija – Krikščioniškų šeimų sąjunga,,,9,5878
+96697,Waldemar,TOMASZEWSKI,1,2019-07-02,,1965-03-03,lt,,ECR,Lietuvos lenkų rinkimų akcija – Krikščioniškų šeimų sąjunga,,,9,5878
 96681,Vilija,BLINKEVIČIŪTĖ,1,2019-07-02,,1960-03-03,lt,,S&D,Lietuvos socialdemokratų partija,,,9,5867
 96668,Seán,KELLY,1,2019-07-02,,1952-04-26,ie,,EPP,Fine Gael Party,,,9,5855
-96653,,Roth Neveďalová,1,,,,,,S&D,,,,9,5842
+96653,Katarína,ROTH NEVEĎALOVÁ,1,2022-12-30,,1982-11-10,sk,,S&D,SMER-Sociálna demokracia,,,9,5842
 96648,Philippe,LAMBERTS,1,2019-07-02,,1963-03-14,be,,Greens/EFA,Ecologistes Confédérés pour l'Organisation de Luttes Originales,,,9,5838
 96646,Helmut,SCHOLZ,1,2019-07-02,,1954-06-21,de,,GUE/NGL,DIE LINKE.,,,9,5837
 95074,Jeroen,LENAERS,1,2019-07-02,,1984-04-29,nl,,EPP,Christen Democratisch Appèl,,,9,6592
@@ -734,8 +734,8 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 86793,Anna,CAVAZZINI,1,2019-07-02,,1982-12-12,de,,Greens/EFA,Bündnis 90/Die Grünen,,,9,6847
 72779,Nadine,MORANO,1,2019-07-02,,1963-11-06,fr,,EPP,Les Républicains,,,9,6368
 58789,Jan,HUITEMA,1,2019-07-02,,1984-07-05,nl,,Renew,Volkspartij voor Vrijheid en Democratie,,,9,6622
-58766,Nicolae,ŞTEFĂNUȚĂ,1,2019-07-02,,1982-01-03,ro,,Greens/EFA,,,,9,7055
-40599,a,PIETIKÄINEN,1,2019-07-02,,1959-04-19,fi,,EPP,Kansallinen Kokoomus,,,9,5788
+58766,Nicolae,ŞTEFĂNUȚĂ,1,2019-07-02,,1982-01-03,ro,,Greens/EFA,Uniunea Salvați România,,,9,7055
+40599,Sirpa,PIETIKÄINEN,1,2019-07-02,,1959-04-19,fi,,EPP,Kansallinen Kokoomus,,,9,5788
 39725,Iuliu,WINKLER,1,2019-07-02,,1964-03-14,ro,,EPP,Uniunea Democrată Maghiară din România,,,9,5782
 38595,Rovana,PLUMB,1,2019-07-02,,1960-06-22,ro,,S&D,Partidul Social Democrat,,,9,5731
 38542,Johan,DANIELSSON,1,2019-07-02,2021-11-29,1982-06-30,se,,S&D,Arbetarepartiet- Socialdemokraterna,,,9,6806
@@ -750,9 +750,9 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 34578,Robert,HAJŠEL,1,2019-07-02,,1967-03-28,sk,,S&D,Independent,,,9,7146
 33997,Corina,CREȚU,1,2019-07-02,,1967-06-24,ro,,S&D,PRO Romania,,,9,5661
 33982,Marian-Jean,MARINESCU,1,2019-07-02,,1952-08-11,ro,,EPP,Partidul Naţional Liberal,,,9,5646
-30490,Aileen McLEOD,,1,2019-07-02,2020-01-31,1971-08-24,gb,,Greens/EFA,Scottish National Party,,,9,7028
+30490,Aileen,McLEOD,1,2019-07-02,2020-01-31,1971-08-24,gb,,Greens/EFA,Scottish National Party,,,9,7028
 30482,Younous,OMARJEE,1,2019-07-02,,1969-09-30,fr,,GUE/NGL,La France Insoumise,,,9,6250
-29579,Marc,TARABELLA,1,2019-07-02,,1963-03-11,be,,S&D,Parti Socialiste,,,9,5624
+29579,Marc,TARABELLA,1,2019-07-02,,1963-03-11,be,,NA,Parti Socialiste,,,9,5624
 28619,Tatjana,ŽDANOKA,1,2019-07-02,,1950-05-08,lv,,NA,Latvijas Krievu savienība,,,9,5602
 28617,Inese,VAIDERE,1,2019-07-02,,1952-09-03,lv,,EPP,"Partija ""VIENOTĪBA""",,,9,5600
 28615,Roberts,ZĪLE,1,2019-07-02,,1958-06-20,lv,,ECR,"Nacionālā apvienība ""Visu Latvijai!""-""Tēvzemei un Brīvībai/LNNK""",,,9,5598
@@ -782,7 +782,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 28150,Kinga,GÁL,1,2019-07-02,,1970-09-06,hu,,NA,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,5280
 28141,Lívia,JÁRÓKA,1,2019-07-02,,1974-10-06,hu,,NA,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,5271
 28122,David,CASA,1,2019-07-02,,1968-11-16,mt,,EPP,Partit Nazzjonalista,,,9,5252
-28115,Mairead McGUINNESS,,1,2019-07-02,2020-10-11,1959-06-13,ie,,EPP,Fine Gael Party,,,9,5245
+28115,Mairead,McGUINNESS,1,2019-07-02,2020-10-11,1959-06-13,ie,,EPP,Fine Gael Party,,,9,5245
 27714,Edina,TÓTH,1,2019-07-02,,1975-03-11,hu,,NA,Fidesz-Magyar Polgári Szövetség-Kereszténydemokrata Néppárt,,,9,6965
 26837,Lefteris,CHRISTOFOROU,1,2019-07-02,2022-11-01,1963-08-31,cy,,EPP,Democratic Rally,,,9,5236
 24942,Ana,MIRANDA,1,2022-09-05,,1971-05-02,es,,Greens/EFA,Bloque Nacionalista Galego,,,9,6251
@@ -798,7 +798,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 23712,Jan,ZAHRADIL,1,2019-07-02,,1963-03-20,cz,,ECR,Občanská demokratická strana,,,9,5052
 23699,Kateřina,KONEČNÁ,1,2019-07-02,,1981-01-20,cz,,GUE/NGL,Komunistická strana Čech a Moravy,,,9,5039
 22858,Fabienne,KELLER,1,2019-07-02,,1959-10-20,fr,,Renew,Agir - La Droite constructive,,,9,5021
-5729,Kathleen,VAN BREMPT,1,2019-07-02,,1969-11-18,be,,S&D,Socialistische Partij.Anders,,,9,4990
+5729,Kathleen,VAN BREMPT,1,2019-07-02,,1969-11-18,be,,S&D,Vooruit,,,9,4990
 5565,Brice,HORTEFEUX,1,2019-07-02,,1958-05-11,fr,,EPP,Les Républicains,,,9,4987
 5392,Lara,WOLTERS,1,2019-07-04,,1986-04-12,nl,,S&D,Partij van de Arbeid,,,9,7249
 4746,Sergio,BERLATO,1,2020-02-01,,1959-07-27,it,,ECR,Fratelli d'Italia,,,9,4978
