@@ -173,7 +173,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 197752,Christina Sheila,JORDAN,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7136
 197751,James Alexander,GLANCY,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7134
 197749,Caroline,VOADEN,1,2019-07-02,2020-01-31,,gb,,Renew,Liberal Democrats,,,9,7132
-197746,Álvaro,AMARO,1,2019-07-02,,1953-05-25,pt,,EPP,Partido Social Democrata,,,9,7129
+197746,Álvaro,AMARO,1,2019-07-02,2023-07-06,1953-05-25,pt,,EPP,Partido Social Democrata,,,9,7129
 197744,Ann,WIDDECOMBE,1,2019-07-02,2020-01-31,,gb,,NI,The Brexit Party,,,9,7127
 197743,Petros,KOKKALIS,1,2019-07-02,,1970-02-26,gr,,GUE/NGL,Coalition of the Radical Left,,,9,7126
 197742,Isabel,GARCÍA MUÑOZ,1,2019-07-02,,1977-03-03,es,,S&D,Partido Socialista Obrero Español,,,9,7125
@@ -834,7 +834,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 1917,Markus,FERBER,1,2019-07-02,,1965-01-15,de,,EPP,Christlich-Soziale Union in Bayern e.V.,,,9,3833
 1913,Evelyne,GEBHARDT,1,2019-07-02,2022-02-01,1954-01-19,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,3827
 1909,Bernd,LANGE,1,2019-07-02,,1955-11-14,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,3823
-1892,,Coelho,1,,,,,,PPE,,,,9,3800
+1892,Carlos,COELHO,1,2023-07-07,,1960-05-20,pt,,EPP,Partido Social Democrata,,,9,3800
 1854,Constanze,KREHL,1,2019-07-02,2022-10-02,1956-10-14,de,,S&D,Sozialdemokratische Partei Deutschlands,,,9,3761
 1394,Bill,NEWTON DUNN,1,2019-07-02,2020-01-31,,gb,,Renew,Liberal Democrats,,,9,1141
 840,Charles,GOERENS,1,2019-07-02,,1952-02-06,lu,,Renew,Parti démocratique,,,9,1793
