@@ -5,7 +5,7 @@ const { init } = require("./lib/mep.js");
 const db = require("./lib/db.js");
 const fs = require("fs");
 const { format } = require("@fast-csv/format");
-
+const term = 10;
 const types = require("pg").types;
 types.setTypeParser(1184, (val) => val.slice(0, -3));
 types.setTypeParser(1082, (val) => val);
@@ -34,6 +34,7 @@ const rollcall = () => {
         "name as title",
         "ref as report"
       )
+      .where("term", term)
       .from("rollcalls");
     rcv.forEach((r) => {
       csvStream.write(r);

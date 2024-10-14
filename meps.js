@@ -137,26 +137,43 @@ const find = (name, eugroup, epid) => {
   return r;
 };
 
-//mep.unmatched().then(async (unmatched) => {
-mep.all().then(async (unmatched) => {
-  //  const m = unmatched[0];
-  for (const m of unmatched) {
-    const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
-    console.log(unmatched, found);
-    process.exit(1);
-    if (found.Birth && found.Birth.date === "") {
-      console.log("missing birth info " + m.name.toLowerCase() + " " + m.ep_id);
-      found.Birth.date = null;
-    }
-    if (fixgroups[found.eugroup]) {
-      found.eugroup = fixgroups[found.eugroup];
-    }
-    !found && console.log(m, found);
+async function importMEPs() {
+  for (const d of meps) {
     try {
-      found && (await mep.update(m.vote_id, found));
+      const r = await mep.insert(d);
+      if (!r) console.log("already imported", d.epid, d.last_name);
     } catch (e) {
-      console.log(found, e);
+      throw e;
     }
   }
-  process.exit(0);
-});
+}
+
+(async () => {
+  // Call the main function in a Node CLI
+  await importMEPs();
+
+  mep.unmatched().then(async (unmatched) => {
+    //mep.all().then(async (unmatched) => {
+    console.log("unmatched", unmatched);
+    const m = unmatched[0];
+    for (const m of unmatched) {
+      const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
+      if (found.Birth && found.Birth.date === "") {
+        console.log(
+          "missing birth info " + m.name.toLowerCase() + " " + m.ep_id
+        );
+        found.Birth.date = null;
+      }
+      if (fixgroups[found.eugroup]) {
+        found.eugroup = fixgroups[found.eugroup];
+      }
+      !found && console.log(m, found);
+      try {
+        found && (await mep.update(m.vote_id, found));
+      } catch (e) {
+        console.log(found, e);
+      }
+    }
+    process.exit(0);
+  });
+})();

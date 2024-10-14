@@ -3,6 +3,7 @@ const db = require("./lib/db.js");
 const fs = require("fs");
 const d3 = require("d3-dsv");
 const log = require("./lib/log.js");
+const term = 10;
 
 let argv = require("minimist")(process.argv.slice(2), {
   alias: { h: "help", f: "force", d: "date" },
@@ -51,7 +52,10 @@ const writePositions = async (id) => {
     .leftJoin("meps", "meps.vote_id", "mep_vote")
     .where("rollcall", id);
 
-  fs.writeFileSync("../9/cards/" + id + ".csv", d3.csvFormat(positions));
+  fs.writeFileSync(
+    "../" + term + "/cards/" + id + ".csv",
+    d3.csvFormat(positions)
+  );
 };
 
 log.time("cards");
@@ -62,7 +66,7 @@ db.select(db.raw("rollcalls.*,title,url"))
   .orderBy("rollcalls.id", "desc")
   .then(async (votes) => {
     for (const vote of votes) {
-      const csv = "../9/cards/" + vote.id + ".csv";
+      const csv = "../" + term + "/cards/" + vote.id + ".csv";
       try {
         const exists = fs.existsSync(csv);
         if (exists && !date && !argv.force) {
@@ -76,7 +80,7 @@ db.select(db.raw("rollcalls.*,title,url"))
         // nothing special to do, let's create the card that doesn't exist
       }
       written++;
-      const dest = "../9/cards/" + vote.id + ".json";
+      const dest = "../" + term + "/cards/" + vote.id + ".json";
       fs.writeFileSync(dest, JSON.stringify(vote));
       await writePositions(vote.id);
       //      mepid,mep,result,group,identifier
