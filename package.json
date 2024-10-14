@@ -12,6 +12,7 @@
     "@fast-csv/format": "^4.3.5",
     "@sentry/node": "^5.29.2",
     "@sentry/tracing": "^5.29.2",
+    "better-sqlite3": "^11.3.0",
     "d3-dsv": "^2.0.0",
     "fast-csv": "^4.3.6",
     "figures": "^3.2.0",

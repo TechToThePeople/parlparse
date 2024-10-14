@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 const fs = require("fs");
 const mep = require("./lib/mep.js");
@@ -19,13 +20,16 @@ const meps = JSON.parse(fs.readFileSync("./data/meps.json", "utf8")).map(
 );
 
 const inout = JSON.parse(fs.readFileSync("./data/inout.json", "utf8"));
-const eugroups = {
+const eugroups = {};
+
+const _eugroups = {
   "The Left": "GUE/NGL",
   EPP: "PPE",
   "Greens/EFA": "Verts/ALE",
   NA: "NI",
 };
-const fixgroups = { "The Left": "GUE/NGL" };
+const _fixgroups = { "The Left": "GUE/NGL" };
+const fixgroups = {};
 const log = require("./lib/log.js");
 
 const pushMEP = (d) => {
@@ -82,7 +86,7 @@ const find = (name, eugroup, epid) => {
   });
   if (!r) {
     const t = allMeps.find((element) => {
-      if (!element.start9) return false;
+      if (!element.start10) return false;
       if (element.lastname.toLowerCase() === name) {
         if (element.eugroup !== eugroup) {
           console.error(
@@ -114,7 +118,8 @@ const find = (name, eugroup, epid) => {
       epid: t.epid,
       first_name: t.firstname,
       last_name: t.lastname,
-      start: t.start9,
+      term: 10,
+      start: t.start10,
       Birth: { date: "1970-01-01" },
       end: t.end || null,
       eugroup: t.eugroup,
@@ -127,7 +132,7 @@ const find = (name, eugroup, epid) => {
   }
   if (inout[r.epid]) {
   } else {
-    r.start = "2019-07-02";
+    r.start = "2024-07-02";
   }
   return r;
 };
@@ -137,6 +142,8 @@ mep.all().then(async (unmatched) => {
   //  const m = unmatched[0];
   for (const m of unmatched) {
     const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
+    console.log(unmatched, found);
+    process.exit(1);
     if (found.Birth && found.Birth.date === "") {
       console.log("missing birth info " + m.name.toLowerCase() + " " + m.ep_id);
       found.Birth.date = null;
