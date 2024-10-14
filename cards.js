@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 const db = require("./lib/db.js");
 const fs = require("fs");
@@ -64,6 +65,7 @@ db.select(db.raw("rollcalls.*,title,url"))
   .from("rollcalls")
   .leftJoin("reports", "rollcalls.ref", "reports.reference")
   .orderBy("rollcalls.id", "desc")
+  .where("rollcalls.term", term)
   .then(async (votes) => {
     for (const vote of votes) {
       const csv = "../" + term + "/cards/" + vote.id + ".csv";

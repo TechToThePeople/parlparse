@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 //identifier,date,report,desc,title,for,against,abstention
 
 const roll = require("./lib/rollcall.js");
@@ -19,7 +20,7 @@ const rollcall = () => {
     const writeStream = fs.createWriteStream(file);
     const csvStream = format({ headers: head });
     csvStream.pipe(writeStream).on("finish", () => {
-      console.log("fini rollcall");
+      console.log("written", file);
       resolve();
       //    process.exit();
     });
@@ -56,7 +57,7 @@ const mep = () => {
     const writeStream = fs.createWriteStream(file);
     const csvStream = format({ headers: head });
     csvStream.pipe(writeStream).on("finish", () => {
-      console.log("fini mep");
+      console.log("written", file);
       resolve();
       //    process.exit();
     });
@@ -71,16 +72,17 @@ const mep = () => {
         "end",
         "birthdate",
         "country",
+        "term",
         db.raw("'' as gender"),
         "eugroup",
         "party",
         db.raw("'' as email"),
         db.raw("'' as twitter"),
-        db.raw("9 as term"),
+        db.raw("10 as term10"),
         "vote_id as voteid"
       )
       .from("meps")
-      .whereNotNull("vote_id")
+      .whereNotNull("ep_id")
       .orderBy("ep_id", "desc");
     data.forEach((r) => {
       csvStream.write(r);
@@ -101,6 +103,7 @@ const textTabled = () => {
     const writeStream = fs.createWriteStream(file);
     const csvStream = format({ headers: head });
     csvStream.pipe(writeStream).on("finish", () => {
+      console.log("written", file);
       resolve();
       //    process.exit();
     });
