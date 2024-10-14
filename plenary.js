@@ -1,10 +1,11 @@
+#!/usr/bin/env node
 /*
 date,code,status,reference,name,baseurl,extensions
 019-04-18,RCV,final,P8_PV(2019)04-18(RCV),"Procès-verbal- Votes par appel nominal - Jeudi, 18 avril 2019",http://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/2019/04-18/liste_presence/P8_PV(2019)04-18(RCV)_XC,pdf|xml|docx
 */
 
 //https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/yyyy/mm-dd/liste_presence/Pl_PV(yyyy)mm-dd(RCV)_XC.xml
-
+const term = 10;
 const https = require("https");
 const downloadFile = require("./lib/download.js");
 const roll = require("./lib/rollcall.js");
@@ -50,7 +51,7 @@ const main = (argv) => {
   log.time("plenary");
 
   if (argv.all) {
-    const start = new Date("2019-07-02"); //start of the 9th term
+    const start = new Date("2024-07-16"); //start of the 10th term
 
     const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
 
@@ -100,7 +101,8 @@ async function run(date) {
   const d = date.split("-");
   let plenary = null;
 
-  const name = "P9_PV(" + d[0] + ")" + d[1] + "-" + d[2] + "(RCV)_XC";
+  const name =
+    "P" + term + "_PV(" + d[0] + ")" + d[1] + "-" + d[2] + "(RCV)_XC";
   /*  const oldurl =
     "https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/" +
     d[0] +
@@ -112,7 +114,11 @@ async function run(date) {
     name;
 */
   const url =
-    "https://www.europarl.europa.eu/doceo/document/PV-9-" + date + "-RCV_FR";
+    "https://www.europarl.europa.eu/doceo/document/PV-" +
+    term +
+    "-" +
+    date +
+    "-RCV_FR";
 
   try {
     if (argv.update) log.await("downloading", url + ".xml");
