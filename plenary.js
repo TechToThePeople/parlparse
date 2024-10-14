@@ -25,11 +25,11 @@ let argv = require("minimist")(process.argv.slice(2), {
     a: "all",
     u: "update",
     f: "force",
+    p: "force-position",
     d: "date",
     c: "correction-only",
   },
 });
-
 const main = (argv) => {
   const help = (error = false) => {
     error && log.fatal("parameter missing");
@@ -39,6 +39,7 @@ const main = (argv) => {
       "\n--date=-1 -d=-1 : process yesterday (n days before)",
       "\n--update -u : retry download even if already downloaded and parse it if different",
       "\n--force -f : parse again (by default, skip)",
+      "\n--force-position -p : parse again even the positions (by default, skip)",
       "\n--correction-only -c : check if correction only"
     );
     process.exit(error);
@@ -162,6 +163,7 @@ async function run(date) {
 
   const processed = await roll(plenary, {
     force: argv.force,
+    position: argv["force-position"],
     correction: argv["correction-only"],
   });
   log.success(processed.votes, "votes processed");
