@@ -50,7 +50,7 @@ const writePositions = async (id) => {
       "vote_id"
     )
     .from("positions")
-    .leftJoin("meps", "meps.vote_id", "mep_vote")
+    .leftJoin("meps", "meps.ep_id", "mep_vote")
     .where("rollcall", id);
 
   fs.writeFileSync(
