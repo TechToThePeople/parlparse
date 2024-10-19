@@ -30,6 +30,7 @@
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.3.0",
+    "node-html-parser": "^6.1.13",
     "prettier": "^2.2.1"
   }
 }
