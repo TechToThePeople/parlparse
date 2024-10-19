@@ -119,7 +119,8 @@ async function run(date) {
     term +
     "-" +
     date +
-    "-RCV_FR";
+    "-RCV_EN";
+  //    "-RCV_FR";
 
   try {
     if (argv.update) log.await("downloading", url + ".xml");
