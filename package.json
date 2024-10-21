@@ -12,7 +12,6 @@
     "@fast-csv/format": "^4.3.5",
     "@sentry/node": "^5.29.2",
     "@sentry/tracing": "^5.29.2",
-    "better-sqlite3": "^11.3.0",
     "d3-dsv": "^2.0.0",
     "fast-csv": "^4.3.6",
     "figures": "^3.2.0",
@@ -22,7 +21,7 @@
     "osmosis": "^1.1.8",
     "pg": "^8.5.1",
     "signale": "^1.4.0",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "^5.1.7",
     "xlsx": "^0.16.9",
     "xml2js": "^0.4.23"
   },
