@@ -37,11 +37,11 @@ const rollcall = () => {
       )
       .where("term", term)
       .from("rollcalls");
+    console.log("rollcalls", rcv.length);
     rcv.forEach((r) => {
       csvStream.write(r);
     });
     //console.log(rcv);
-    console.log("read");
     csvStream.end();
 
     //csvStream.pipe(process.stdout).on("end", () => process.exit());
