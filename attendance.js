@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*
 date,code,status,reference,name,baseurl,extensions
 */
@@ -6,7 +7,7 @@ date,code,status,reference,name,baseurl,extensions
 
 const https = require("https");
 const downloadFile = require("./lib/download.js");
-const roll = require("./lib/rollcall.js");
+const attendance = require("./lib/attendance.js");
 const { init } = require("./lib/mep.js");
 const db = require("./lib/db.js");
 
@@ -34,7 +35,7 @@ if (argv.help) {
 
 if (argv.all) {
   console.log("process all days");
-  const start = new Date("2019-07-02"); //start of the 9th term
+  const start = new Date("2024-07-16"); //start of the 9th term
 
   const end = new Date(argv.date); // ends today or at the day param
 
@@ -43,10 +44,7 @@ if (argv.all) {
     process.exit(1);
   });
 } else {
-  !argv.date && help(true);
-  argv.date === true
-    ? (date = new Date().toISOString().substring(0, 10))
-    : (date = argv.date);
+  date = argv.date || new Date().toISOString().substring(0, 10);
   const d = date.split("-");
   if (d.length !== 3) {
     console.error("can't parse the date " + date);
@@ -78,19 +76,12 @@ async function run(date) {
   const d = date.split("-");
   let plenary = null;
 
-  const name = "P9_PV(" + d[0] + ")" + d[1] + "-" + d[2] + "(LP)_FR";
+  const name = "PV-10-" + d[0] + "-" + d[1] + "-" + d[2] + "-ATT_EN";
 
   //https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/2020/12-18/liste_presence/P9_PV(2020)12-18(LP)_FR.xml
-  const url =
-    "https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/" +
-    d[0] +
-    "/" +
-    d[1] +
-    "-" +
-    d[2] +
-    "/liste_presence/" +
-    name;
-
+  //https://www.europarl.europa.eu/doceo/document/PV-10-2024-10-21-ATT_EN.xml
+  const url = "https://www.europarl.europa.eu/doceo/document/" + name;
+  console.log(url);
   try {
     plenary = await downloadFile("LP", url, { file: date, force: argv.force });
   } catch (e) {
@@ -98,10 +89,11 @@ async function run(date) {
     return;
   }
 
-  console.log(plenary);
-  process.exit(1);
   await init();
 
-  //  await attendance(plenary);
+  const processed = await attendance(plenary, {
+    force: argv.force,
+  });
+  console.log(processed);
   //  db.destroy();
 }

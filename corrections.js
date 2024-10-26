@@ -5,7 +5,7 @@ const db = require("./lib/db.js");
 const fs = require("fs");
 const d3 = require("d3-dsv");
 const log = require("./lib/log.js");
-
+const term = 10;
 let argv = require("minimist")(process.argv.slice(2), {
   alias: { h: "help", f: "force" },
 });
@@ -24,7 +24,7 @@ if (argv.help) {
 }
 
 const writeCorrection = async (id) => {
-  const fileName = (id) => "../9/cards/correction." + id + ".csv";
+  const fileName = (id) => "../" + term + "/cards/correction." + id + ".csv";
 
   const positions = await db
     .select(
