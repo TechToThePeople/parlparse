@@ -152,6 +152,7 @@ async function importMEPs() {
   // Call the main function in a Node CLI
   //await importMEPs();
   const nocountry = await mep.missingCountry();
+  console.log("nocountry", nocountry);
   nocountry.forEach(async (incomplete) => {
     const found = meps.find((element) => element.epid === incomplete.ep_id);
     found && (await mep.update(incomplete.ep_id, found));
