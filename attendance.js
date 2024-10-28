@@ -97,6 +97,5 @@ async function run(date) {
   } catch (e) {
     console.log(e);
   }
-  process.exit(1);
   //  db.destroy();
 }
