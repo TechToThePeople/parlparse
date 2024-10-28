@@ -35,14 +35,14 @@ if (argv.help) {
 
 if (argv.all) {
   console.log("process all days");
-  const start = new Date("2024-07-16"); //start of the 9th term
+  const start = new Date("2024-07-16"); //start of the 10th term
 
-  const end = new Date(argv.date); // ends today or at the day param
-
-  all(start, end).then(() => {
+  const end = argv.date ? new Date(argv.date) : new Date(); // ends today or at the day param
+  (async () => {
+    await all(start, end);
     console.info("Execution time: %dms", new Date() - start);
-    process.exit(1);
-  });
+    process.exit(0);
+  })();
 } else {
   date = argv.date || new Date().toISOString().substring(0, 10);
   const d = date.split("-");
@@ -60,7 +60,6 @@ if (argv.all) {
 
 async function all(start, end) {
   let date = end;
-
   while (date >= start) {
     await run(date.toISOString().substring(0, 10));
     date.setDate(date.getDate() - 1);
@@ -85,15 +84,19 @@ async function run(date) {
   try {
     plenary = await downloadFile("LP", url, { file: date, force: argv.force });
   } catch (e) {
-    console.log("error", e);
+    console.log("no plenary on", date);
     return;
   }
 
   await init();
-
-  const processed = await attendance(plenary, {
-    force: argv.force,
-  });
-  console.log(processed);
+  try {
+    const processed = await attendance(plenary, {
+      force: argv.force,
+    });
+    console.log("processed", processed);
+  } catch (e) {
+    console.log(e);
+  }
+  process.exit(1);
   //  db.destroy();
 }
