@@ -75,14 +75,13 @@ async function run(date) {
   const d = date.split("-");
   let plenary = null;
 
-  const name = "PV-10-" + d[0] + "-" + d[1] + "-" + d[2] + "-ATT_EN";
+  const name = "PV-10-" + d[0] + "-" + d[1] + "-" + d[2] + "-VOT_EN";
 
-  //https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/2020/12-18/liste_presence/P9_PV(2020)12-18(LP)_FR.xml
-  //https://www.europarl.europa.eu/doceo/document/PV-10-2024-10-21-ATT_EN.xml
+  //https://www.europarl.europa.eu/doceo/document/PV-10-2024-10-24-VOT_FR.xml
   const url = "https://www.europarl.europa.eu/doceo/document/" + name;
   console.log(url);
   try {
-    plenary = await downloadFile("LP", url, { file: date, force: argv.force });
+    plenary = await downloadFile("VOT", url, { file: date, force: argv.force });
   } catch (e) {
     console.log("no plenary on", date);
     return;
