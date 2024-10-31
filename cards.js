@@ -6,6 +6,13 @@ const d3 = require("d3-dsv");
 const log = require("./lib/log.js");
 const term = 10;
 
+const groupAlias = {
+  //  PPE: "EPP",
+  NI: "NA",
+  //  "The Left": "GUE/NGL",
+  "GUE/NGL": "The Left",
+};
+
 let argv = require("minimist")(process.argv.slice(2), {
   alias: { h: "help", f: "force", d: "date" },
 });
@@ -39,19 +46,36 @@ if (argv.date) {
   console.log("processing only " + date);
 }
 
-const writePositions = async (id) => {
+const writePositions = async (id, date) => {
   const positions = await db
     .select(
       "mep_vote as mepid",
-      "name",
+      //      "name",
       "position as result",
-      "meps.eugroup",
-      "rollcall as identifier",
-      "vote_id"
+      "eugroup",
+      "rollcall as identifier"
     )
     .from("positions")
-    .leftJoin("meps", "meps.ep_id", "mep_vote")
+    //  .leftJoin("meps", "meps.ep_id", "mep_id")
     .where("rollcall", id);
+
+  const _positions = new Set(positions.map((d) => d.mepid));
+  const attendances = await db("attendances")
+    .select("mep_id", "attendances.status", "eugroup")
+    .join("plenaries", "plenaries.sitting_id", "attendances.sitting_id")
+    .leftJoin("meps", "meps.ep_id", "mep_id")
+    .where("plenaries.date", date);
+
+  attendances.forEach((a) => {
+    if (!_positions.has(a.mep_id)) {
+      positions.push({
+        mepid: a.mep_id,
+        result: a.status,
+        eugroup: a.eugroup,
+        identifier: id,
+      });
+    }
+  });
 
   fs.writeFileSync(
     "../" + term + "/cards/" + id + ".csv",
@@ -69,13 +93,14 @@ db.select(db.raw("rollcalls.*,title,url"))
   .then(async (votes) => {
     for (const vote of votes) {
       const csv = "../" + term + "/cards/" + vote.id + ".csv";
+      const vdate = vote.date.substring(0, 10);
+      console.log(vdate);
       try {
         const exists = fs.existsSync(csv);
         if (exists && !date && !argv.force) {
           continue;
         }
         if (date && !argv.force) {
-          const vdate = vote.date.toISOString().substring(0, 10);
           if (vdate !== date) continue;
         }
       } catch (err) {
@@ -84,7 +109,7 @@ db.select(db.raw("rollcalls.*,title,url"))
       written++;
       const dest = "../" + term + "/cards/" + vote.id + ".json";
       fs.writeFileSync(dest, JSON.stringify(vote));
-      await writePositions(vote.id);
+      await writePositions(vote.id, vdate);
       //      mepid,mep,result,group,identifier
     }
     log.success(votes.length, "votes processed");
