@@ -136,7 +136,7 @@ async function run(date) {
     }
   } catch (e) {
     if (e.statusCode && e.statusCode === 404) {
-      log.warn("no plenary with rollcalls published on " + date);
+      log.warn("no plenary with rollcalls published on " + date, url + ".xml");
       return;
     }
     console.log(e);
