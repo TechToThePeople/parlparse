@@ -44,7 +44,14 @@ if (argv.all) {
     process.exit(0);
   })();
 } else {
-  date = argv.date || new Date().toISOString().substring(0, 10);
+  argv.date === true
+    ? (date = new Date().toISOString().substring(0, 10)) // today
+    : (date = argv.date);
+  if (argv.date <= 0) {
+    const t = new Date(new Date().valueOf() + 1000 * 3600 * 24 * argv.date);
+    date = t.toISOString().substring(0, 10);
+  }
+  //  date = argv.date || new Date().toISOString().substring(0, 10);
   const d = date.split("-");
   if (d.length !== 3) {
     console.error("can't parse the date " + date);
