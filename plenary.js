@@ -155,6 +155,8 @@ async function run(date) {
           "->skip because already processed. Add --force to process anyway"
       );
       return;
+    } else {
+      log.info("processing again", url);
     }
     r = await db("plenaries").select("id").where({ date: plenary.date });
     plenary.id = r[0].id;
