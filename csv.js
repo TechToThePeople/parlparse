@@ -67,7 +67,7 @@ const mep = () => {
         "ep_id as epid",
         "first_name as firstname",
         db.raw("coalesce(last_name,name) as lastname"),
-        db.raw("1 as active"),
+        //        db.raw("1 as active"),
         "start",
         "end",
         "birthdate",
