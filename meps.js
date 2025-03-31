@@ -158,6 +158,15 @@ async function importMEPs() {
     found && (await mep.update(incomplete.ep_id, found));
   });
 
+  Object.values(inout).forEach(async (io) => {
+    const found = meps.find((element) => element.epid === io.id);
+
+    if (io.file === "outgoing") {
+      //end && !found.end) {
+      console.log("an mep left", found, io);
+      //    found && (await mep.update(io.id, found));
+    }
+  });
   mep.unmatched().then(async (unmatched) => {
     //    mep.all().then(async (unmatched) => {
     console.log("unmatched", unmatched);
