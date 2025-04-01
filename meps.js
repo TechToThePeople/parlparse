@@ -70,6 +70,8 @@ const csv = require("d3-dsv");
 const allMeps = csv.csvParse(fs.readFileSync("./data/meps.all.csv", "utf8"));
 
 const find = (name, eugroup, epid) => {
+  console.log("unused");
+  process.exit(1);
   let r = meps.find((element) => {
     if (epid) {
       return epid == element.epid;
@@ -158,13 +160,14 @@ async function importMEPs() {
     found && (await mep.update(incomplete.ep_id, found));
   });
 
+  const db = await mep.fetch(10);
   Object.values(inout).forEach(async (io) => {
-    const found = meps.find((element) => element.epid === io.id);
-
-    if (io.file === "outgoing") {
+    const found = db.find((element) => element.epid === io.id);
+    if (io.file === "outgoing" && found && !found.end) {
       //end && !found.end) {
-      console.log("an mep left", found, io);
-      //    found && (await mep.update(io.id, found));
+      console.log("need to end", found, io);
+      const r = await mep.end(io.id, io.end);
+      console.log("ended", found);
     }
   });
   mep.unmatched().then(async (unmatched) => {
