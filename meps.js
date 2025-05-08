@@ -70,22 +70,23 @@ const csv = require("d3-dsv");
 const allMeps = csv.csvParse(fs.readFileSync("./data/meps.all.csv", "utf8"));
 
 const find = (name, eugroup, epid) => {
-  console.log("unused");
-  process.exit(1);
-  let r = meps.find((element) => {
-    if (epid) {
-      return epid == element.epid;
-    }
-    if (element.last_name.toLowerCase() === name) {
-      if (
-        element.eugroup !== eugroup &&
-        eugroups[element.eugroup] !== eugroup
-      ) {
-        console.error("active Missmatch group", element.eugroup, eugroup);
+  let r;
+  if (epid) {
+    r = meps.find((element) => epid == element.epid);
+  }
+  if (!r) {
+    r = meps.find((element) => {
+      if (element.last_name.toLowerCase() === name) {
+        if (
+          element.eugroup !== eugroup &&
+          eugroups[element.eugroup] !== eugroup
+        ) {
+          console.error("active Missmatch group", element.eugroup, eugroup);
+        }
+        return true;
       }
-      return true;
-    }
-  });
+    });
+  }
   if (!r) {
     const t = allMeps.find((element) => {
       if (!element.start10) return false;
@@ -170,15 +171,15 @@ async function importMEPs() {
       console.log("ended", found);
     }
   });
-  mep.unmatched().then(async (unmatched) => {
-    //    mep.all().then(async (unmatched) => {
-    console.log("unmatched", unmatched);
+  //mep.unmatched().then(async (unmatched) => {
+  mep.all().then(async (unmatched) => {
+    //    console.log("unmatched", unmatched);
     const m = unmatched[0];
     for (const m of unmatched) {
-      const found = find(m.name.toLowerCase(), m.eugroup, +m.ep_id);
+      const found = find(m.name?.toLowerCase(), m.eugroup, +m.ep_id);
       if (found.Birth && found.Birth.date === "") {
         console.log(
-          "missing birth info " + m.name.toLowerCase() + " " + m.ep_id
+          "missing birth info " + m.name?.toLowerCase() + " " + m.ep_id
         );
         found.Birth.date = null;
       }
@@ -187,7 +188,9 @@ async function importMEPs() {
       }
       !found && console.log(m, found);
       try {
-        found && (await mep.update(m.vote_id, found));
+        if (found.eugroup != m.eugroup) console.log(m.eugroup, found.eugroup);
+        //continue;
+        found && (await mep.update(m.ep_id, found));
       } catch (e) {
         console.log(found, e);
       }
