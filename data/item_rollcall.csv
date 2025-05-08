@@ -901,16 +901,32 @@ identifier,date,report,desc,title,for,against,abstention
 173005,2025-03-13 12:10:19,RC-B10-0177/2025,,§ 7/1,464,115,39
 173006,2025-03-13 12:10:29,RC-B10-0177/2025,,§ 7/2,496,42,75
 173008,2025-03-13 12:12:30,RC-B10-0177/2025,,Proposition de résolution (ensemble du texte),523,3,84
+173686,2025-04-02 12:30:34,A10-0027/2025,,Jaroslav Bžoch - Projet de décision du Conseil,619,9,45
+173687,2025-04-02 12:29:16,A10-0028/2025,,Eric Sargiacomo - Projet de décision du Conseil,518,104,61
+173688,2025-04-02 12:27:26,A10-0036/2025,,Željana Zovko - Projet de décision du Conseil,528,121,32
 173690,2025-04-01 12:15:12,A10-0038/2025,,Céline Imart - Proposition de la Commission,571,59,46
 173691,2025-04-01 12:11:33,A10-0019/2025,,Dimitris Tsiodras - Proposition de la Commission et amendements,482,110,81
 173693,2025-04-01 12:12:31,A10-0020/2025,,Dimitris Tsiodras - Proposition de la Commission et amendements,486,171,18
 173695,2025-04-01 12:09:49,A10-0018/2025,,Dimitris Tsiodras - Proposition de la Commission et amendements,481,170,22
+173708,2025-04-02 12:32:41,A10-0041/2025,,Malik Azmani - Proposition de la Commission,377,279,16
+173801,2025-04-02 12:26:58,A10-0042/2025,,Andrzej Halicki - Proposition de résolution (ensemble du texte),441,173,70
+173897,2025-04-02 13:41:03,A10-0012/2025,,Isabel Wiseler-Lima - Proposition de résolution (ensemble du texte),390,116,126
+173903,2025-04-02 12:30:10,A10-0040/2025,,Eric Sargiacomo - Proposition de résolution (ensemble du texte),605,68,10
+174053,2025-04-02 13:22:11,A10-0011/2025,,Nicolás Pascual de la Parte - Proposition de résolution (ensemble du texte),399,198,71
 174055,2025-04-01 12:27:15,A10-0034/2025,,Bernd Lange - Accord provisoire - Am 1,593,7,35
+174220,2025-04-02 13:01:14,A10-0010/2025,,David McAllister - Proposition de résolution (ensemble du texte),378,188,105
 174273,2025-04-01 12:25:50,A10-0037/2025,,Céline Imart - Proposition de la Commission et amendements,452,182,40
 174285,2025-03-31 17:14:51,Ordre du jour de mardi,,Demande du groupe Verts/ALE,82,357,11
 174286,2025-03-31 17:15:34,Ordre du jour de mardi,,Demande du groupe PfE,118,326,7
 174287,2025-03-31 17:18:40,Ordre du jour de mercredi,,Demande du groupe The Left,110,335,6
 174288,2025-04-01 12:07:25,C10-0038/2025,,Demande de décision d'urgence,427,221,14
+174290,2025-04-02 12:31:18,A10-0041/2025,,Malik Azmani - Amendements de la commission compétente - votes séparés - Am 8,432,202,25
+174291,2025-04-02 12:31:30,A10-0041/2025,,"Malik Azmani - Article 3, § 2, alinéa 2 - Am 26",205,460,10
+174292,2025-04-02 12:31:44,A10-0041/2025,,"Malik Azmani - Article 6, § 1, après le point e - Am 27",205,463,8
+174293,2025-04-02 12:31:53,A10-0041/2025,,Malik Azmani - Après le considérant 2 - Am 28,125,536,10
+174294,2025-04-02 12:32:03,A10-0041/2025,,Malik Azmani - Après le considérant 4 - Am 29,184,479,8
+174295,2025-04-02 12:32:18,A10-0041/2025,,Malik Azmani - Considérant 23 - Am 24,208,465,5
+174296,2025-04-02 12:29:51,A10-0040/2025,,Eric Sargiacomo - Après le § 10 - Am 2,192,446,40
 174301,2025-04-01 12:18:30,A10-0037/2025,,Céline Imart - Amendements de la commission compétente - votes séparés - Am 5/3,434,234,3
 174305,2025-04-01 12:19:01,A10-0037/2025,,Céline Imart - Amendements de la commission compétente - votes séparés - Am 7/2,443,226,0
 174307,2025-04-01 12:19:17,A10-0037/2025,,Céline Imart - Amendements de la commission compétente - votes séparés - Am 7/4,423,232,19
@@ -939,3 +955,533 @@ identifier,date,report,desc,title,for,against,abstention
 174335,2025-04-01 12:25:08,A10-0037/2025,,Céline Imart - Considérant 22 - Am 41,302,335,30
 174336,2025-04-01 12:25:20,A10-0037/2025,,Céline Imart - Considérant 28 - Am 42,327,311,37
 174337,2025-04-01 12:25:33,A10-0037/2025,,Céline Imart - Après le considérant 28 - Am 33,232,389,49
+174339,2025-04-02 12:33:05,A10-0010/2025,,David McAllister - § 1 - Am 14,197,463,10
+174342,2025-04-02 12:34:01,A10-0010/2025,,"David McAllister - § 4, après le tiret 6 - Am 27",548,60,64
+174343,2025-04-02 12:34:14,A10-0010/2025,,"David McAllister - § 4, tiret 7 - Am 145",192,448,11
+174346,2025-04-02 12:34:29,A10-0010/2025,,"David McAllister - § 4, tiret 7/2",282,340,46
+174347,2025-04-02 12:34:45,A10-0010/2025,,"David McAllister - § 4, tiret 8",664,5,8
+174351,2025-04-02 12:35:05,A10-0010/2025,,"David McAllister - § 4, après le tiret 8 - Am 147",172,445,22
+174355,2025-04-02 12:35:53,A10-0010/2025,,"David McAllister - § 4, tiret 20 - Am 149",187,469,14
+174356,2025-04-02 12:36:04,A10-0010/2025,,"David McAllister - § 4, tiret 20",528,61,85
+174363,2025-04-02 12:38:11,A10-0010/2025,,David McAllister - § 8 - Am 30/1,246,379,52
+174364,2025-04-02 12:38:24,A10-0010/2025,,David McAllister - § 8 - Am 30/2,130,463,77
+174369,2025-04-02 12:38:47,A10-0010/2025,,David McAllister - Après le § 9 - Am 31,121,500,52
+174370,2025-04-02 12:38:57,A10-0010/2025,,David McAllister - Après le § 9 - Am 32,70,565,38
+174371,2025-04-02 12:39:13,A10-0010/2025,,David McAllister - Après le § 9 - Am 34,106,518,42
+174372,2025-04-02 12:39:26,A10-0010/2025,,David McAllister - Après le § 9 - Am 35,102,486,40
+174373,2025-04-02 12:40:46,A10-0010/2025,,David McAllister - § 28 - Am 18,237,339,97
+174374,2025-04-02 12:40:57,A10-0010/2025,,David McAllister - § 28 - Am 154,185,445,20
+174378,2025-04-02 12:41:28,A10-0010/2025,,David McAllister - § 28/3,308,332,35
+174379,2025-04-02 12:41:40,A10-0010/2025,,David McAllister - § 28/4,290,339,33
+174381,2025-04-02 12:41:58,A10-0010/2025,,David McAllister - Après le § 28 - Am 36,114,532,28
+174383,2025-04-02 12:42:26,A10-0010/2025,,David McAllister - Après le § 28 - Am 106/1,406,227,39
+174384,2025-04-02 12:42:39,A10-0010/2025,,David McAllister - Après le § 28 - Am 106/2,537,77,57
+174388,2025-04-02 12:43:02,A10-0010/2025,,David McAllister - Après le § 29 - Am 37,114,517,40
+174389,2025-04-02 12:43:13,A10-0010/2025,,David McAllister - Après le § 29 - Am 38,196,420,49
+174390,2025-04-02 12:43:24,A10-0010/2025,,David McAllister - Après le § 29 - Am 39,258,347,69
+174394,2025-04-02 12:44:19,A10-0010/2025,,David McAllister - § 30 - Am 19,284,355,34
+174396,2025-04-02 12:44:36,A10-0010/2025,,David McAllister - § 30/1,603,31,45
+174397,2025-04-02 12:44:46,A10-0010/2025,,David McAllister - § 30/2,357,95,209
+174398,2025-04-02 12:44:56,A10-0010/2025,,David McAllister - § 30/3,571,43,57
+174399,2025-04-02 12:45:07,A10-0010/2025,,David McAllister - § 30/4,614,42,15
+174400,2025-04-02 12:45:18,A10-0010/2025,,David McAllister - § 30/5,509,39,119
+174401,2025-04-02 12:45:30,A10-0010/2025,,David McAllister - § 30/6,620,40,3
+174406,2025-04-02 12:46:10,A10-0010/2025,,David McAllister - Après le § 35 - Am 45/1,451,140,74
+174407,2025-04-02 12:46:21,A10-0010/2025,,David McAllister - Après le § 35 - Am 45/2,439,181,43
+174409,2025-04-02 12:46:55,A10-0010/2025,,David McAllister - Après le § 37 - Am 46,291,335,42
+174413,2025-04-02 12:47:26,A10-0010/2025,,David McAllister - § 41 - Am 159,134,450,72
+174414,2025-04-02 12:47:40,A10-0010/2025,,David McAllister - Après le § 41 - Am 48,239,409,23
+174415,2025-04-02 12:48:33,A10-0010/2025,,David McAllister - § 43 - Am 15,228,429,11
+174417,2025-04-02 12:48:55,A10-0010/2025,,David McAllister - § 44 - Am 49,205,403,71
+174420,2025-04-02 12:49:12,A10-0010/2025,,David McAllister - § 44/2,381,275,19
+174421,2025-04-02 12:49:23,A10-0010/2025,,David McAllister - § 45 - Am 16,239,418,16
+174423,2025-04-02 12:49:36,A10-0010/2025,,David McAllister - § 45/1,345,305,26
+174424,2025-04-02 12:49:48,A10-0010/2025,,David McAllister - § 45/2,547,81,39
+174425,2025-04-02 12:49:58,A10-0010/2025,,David McAllister - § 45/3,339,299,32
+174426,2025-04-02 12:50:10,A10-0010/2025,,David McAllister - § 45/4,369,267,41
+174427,2025-04-02 12:50:24,A10-0010/2025,,David McAllister - § 45/5,362,283,30
+174430,2025-04-02 12:50:53,A10-0010/2025,,David McAllister - § 48/2,415,251,11
+174431,2025-04-02 12:51:08,A10-0010/2025,,David McAllister - § 50 - Am 50,92,536,44
+174438,2025-04-02 12:52:02,A10-0010/2025,,David McAllister - Après le § 51 - Am 17,196,445,30
+174439,2025-04-02 12:52:16,A10-0010/2025,,David McAllister - Après le § 51 - Am 51,206,396,71
+174442,2025-04-02 12:52:48,A10-0010/2025,,David McAllister - § 70/2,410,238,29
+174443,2025-04-02 12:53:01,A10-0010/2025,,David McAllister - Après le § 70 - Am 52,133,450,77
+174444,2025-04-02 12:53:24,A10-0010/2025,,David McAllister - § 74 - Am 164,194,472,11
+174446,2025-04-02 12:53:45,A10-0010/2025,,David McAllister - § 76 - Am 53,266,324,88
+174447,2025-04-02 12:54:00,A10-0010/2025,,David McAllister - § 76 - Am 64,230,320,125
+174448,2025-04-02 12:54:14,A10-0010/2025,,David McAllister - § 76 - Am 1,265,254,146
+174451,2025-04-02 12:54:31,A10-0010/2025,,David McAllister - Après le § 76 - Am 54,127,480,60
+174452,2025-04-02 12:54:44,A10-0010/2025,,David McAllister - Après le § 76 - Am 55,273,344,52
+174454,2025-04-02 12:55:04,A10-0010/2025,,David McAllister - § 81 - Am 65,349,288,29
+174455,2025-04-02 12:55:18,A10-0010/2025,,David McAllister - Après le § 87 - Am 7,566,36,67
+174460,2025-04-02 12:56:06,A10-0010/2025,,"David McAllister - § 97, tiret 3 - Am 9",242,404,22
+174468,2025-04-02 12:58:21,A10-0010/2025,,David McAllister - Après le considérant L - Am 21,243,353,76
+174469,2025-04-02 12:58:42,A10-0010/2025,,David McAllister - Après le considérant L - Am 24,237,340,95
+174470,2025-04-02 12:59:02,A10-0010/2025,,David McAllister - Considérant Q - Am 12,141,464,70
+174471,2025-04-02 12:59:13,A10-0010/2025,,David McAllister - Après le considérant Q - Am 13,92,554,23
+174472,2025-04-02 12:59:37,A10-0010/2025,,David McAllister - Considérant U - Am 26,75,533,58
+174473,2025-04-02 13:00:07,A10-0010/2025,,David McAllister - Considérant Z,403,237,35
+174478,2025-04-02 13:22:41,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 1 - Am 7,183,466,12
+174479,2025-04-02 13:23:00,A10-0012/2025,,Isabel Wiseler-Lima - § 3 - Am 51,194,460,13
+174480,2025-04-02 13:25:11,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 4 - Am 33,109,494,45
+174481,2025-04-02 13:25:25,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 4 - Am 34,128,418,93
+174485,2025-04-02 13:25:48,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 5 - Am 52,192,458,12
+174486,2025-04-02 13:26:09,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 8 - Am 73,240,394,28
+174487,2025-04-02 13:26:22,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 10 - Am 74,250,377,32
+174488,2025-04-02 13:26:33,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 12 - Am 36,104,528,24
+174491,2025-04-02 13:26:52,A10-0012/2025,,Isabel Wiseler-Lima - § 14/2,410,241,10
+174492,2025-04-02 13:27:02,A10-0012/2025,,Isabel Wiseler-Lima - § 14/3,357,271,27
+174498,2025-04-02 13:27:55,A10-0012/2025,,Isabel Wiseler-Lima - § 19 - Am 76/1,566,51,45
+174499,2025-04-02 13:28:07,A10-0012/2025,,Isabel Wiseler-Lima - § 19 - Am 76/2,190,422,46
+174503,2025-04-02 13:28:44,A10-0012/2025,,Isabel Wiseler-Lima - § 23 - Am 54,180,468,14
+174506,2025-04-02 13:29:04,A10-0012/2025,,Isabel Wiseler-Lima - § 23/2,430,186,46
+174507,2025-04-02 13:29:18,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 23 - Am 11,158,483,24
+174508,2025-04-02 13:29:30,A10-0012/2025,,Isabel Wiseler-Lima - § 24 - Am 79,199,403,61
+174509,2025-04-02 13:30:00,A10-0012/2025,,Isabel Wiseler-Lima - § 27 - Am 80,137,395,127
+174510,2025-04-02 13:30:18,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 29 - Am 12,106,461,98
+174514,2025-04-02 13:30:53,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 29 - Am 41,108,491,58
+174515,2025-04-02 13:31:10,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 29 - Am 43,58,509,94
+174516,2025-04-02 13:31:24,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 30 - Am 44,93,489,72
+174522,2025-04-02 13:32:06,A10-0012/2025,,Isabel Wiseler-Lima - § 32 - Am 13,172,440,41
+174523,2025-04-02 13:32:59,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 40 - Am 14,181,474,5
+174524,2025-04-02 13:33:27,A10-0012/2025,,Isabel Wiseler-Lima - § 41 - Am 55,190,453,21
+174529,2025-04-02 13:34:22,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 43 - Am 46,366,222,64
+174530,2025-04-02 13:34:37,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 43 - Am 57,182,458,16
+174531,2025-04-02 13:34:52,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 43 - Am 90,218,246,150
+174532,2025-04-02 13:35:08,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 44 - Am 58,189,385,61
+174533,2025-04-02 13:35:22,A10-0012/2025,,Isabel Wiseler-Lima - § 45 - Am 91,220,431,10
+174536,2025-04-02 13:35:39,A10-0012/2025,,Isabel Wiseler-Lima - § 45/2,468,102,88
+174537,2025-04-02 13:35:51,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 45 - Am 16,185,456,19
+174538,2025-04-02 13:36:03,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 45 - Am 59,200,431,29
+174539,2025-04-02 13:36:16,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 45 - Am 60,198,445,15
+174540,2025-04-02 13:36:27,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 45 - Am 61,211,411,28
+174542,2025-04-02 13:36:50,A10-0012/2025,,Isabel Wiseler-Lima - § 50 - Am 17,106,479,80
+174543,2025-04-02 13:37:02,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 52 - Am 18,200,434,26
+174544,2025-04-02 13:37:15,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 52 - Am 62,231,404,17
+174545,2025-04-02 13:37:34,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 52 - Am 64,209,287,16
+174546,2025-04-02 13:37:48,A10-0012/2025,,Isabel Wiseler-Lima - § 54 - Am 19,193,462,7
+174547,2025-04-02 13:38:02,A10-0012/2025,,Isabel Wiseler-Lima - § 55 - Am 20,186,458,12
+174549,2025-04-02 13:38:17,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 56 - Am 92,153,467,36
+174550,2025-04-02 13:38:33,A10-0012/2025,,Isabel Wiseler-Lima - Après le § 58 - Am 65,201,457,5
+174554,2025-04-02 13:38:53,A10-0012/2025,,Isabel Wiseler-Lima - § 61 - Am 21,156,502,5
+174555,2025-04-02 13:39:31,A10-0012/2025,,Isabel Wiseler-Lima - Après le considérant J - Am 67,252,305,87
+174559,2025-04-02 13:40:21,A10-0012/2025,,Isabel Wiseler-Lima - Après le considérant R - Am 5,174,438,37
+174561,2025-04-02 13:40:34,A10-0012/2025,,Isabel Wiseler-Lima - Après le considérant R - Am 70/1,551,55,45
+174562,2025-04-02 13:40:45,A10-0012/2025,,Isabel Wiseler-Lima - Après le considérant R - Am 70/2,137,440,61
+174563,2025-04-02 12:08:21,A10-0042/2025,,Andrzej Halicki - Avant le § 1 - Am 3,84,467,69
+174564,2025-04-02 12:08:36,A10-0042/2025,,Andrzej Halicki - Avant le § 1 - Am 4,63,507,70
+174565,2025-04-02 12:08:49,A10-0042/2025,,Andrzej Halicki - Avant le § 1 - Am 6,68,475,110
+174566,2025-04-02 12:09:05,A10-0042/2025,,Andrzej Halicki - Après le § 1 - Am 34,181,442,21
+174567,2025-04-02 12:09:16,A10-0042/2025,,Andrzej Halicki - Après le § 2 - Am 49,188,443,20
+174568,2025-04-02 12:09:27,A10-0042/2025,,Andrzej Halicki - Après le § 3 - Am 35,218,425,2
+174569,2025-04-02 12:09:38,A10-0042/2025,,Andrzej Halicki - Après le § 3 - Am 50,210,434,5
+174573,2025-04-02 12:09:57,A10-0042/2025,,Andrzej Halicki - Après le § 4 - Am 7,116,520,28
+174574,2025-04-02 12:10:09,A10-0042/2025,,Andrzej Halicki - Après le § 4 - Am 36,192,456,19
+174575,2025-04-02 12:10:21,A10-0042/2025,,Andrzej Halicki - Après le § 4 - Am 51,193,464,7
+174576,2025-04-02 12:10:33,A10-0042/2025,,Andrzej Halicki - Après le § 6 - Am 8,100,505,71
+174577,2025-04-02 12:10:44,A10-0042/2025,,Andrzej Halicki - Après le § 6 - Am 9,66,568,40
+174578,2025-04-02 12:10:54,A10-0042/2025,,Andrzej Halicki - Après le § 6 - Am 10,93,517,67
+174579,2025-04-02 12:11:04,A10-0042/2025,,Andrzej Halicki - Après le § 7 - Am 11,77,586,8
+174580,2025-04-02 12:11:18,A10-0042/2025,,Andrzej Halicki - Après le § 10 - Am 14,158,475,37
+174581,2025-04-02 12:11:29,A10-0042/2025,,Andrzej Halicki - § 11 - Am 37,151,468,47
+174582,2025-04-02 12:11:41,A10-0042/2025,,Andrzej Halicki - § 11 - Am 29,342,310,22
+174583,2025-04-02 12:11:54,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 15,172,428,76
+174584,2025-04-02 12:12:05,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 38,172,465,37
+174585,2025-04-02 12:12:16,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 52,212,448,11
+174586,2025-04-02 12:12:26,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 53,210,453,12
+174587,2025-04-02 12:12:37,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 54,178,473,19
+174588,2025-04-02 12:12:47,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 55,213,450,8
+174589,2025-04-02 12:12:58,A10-0042/2025,,Andrzej Halicki - Après le § 11 - Am 56,321,318,11
+174590,2025-04-02 12:13:12,A10-0042/2025,,Andrzej Halicki - § 12 - Am 24,221,420,25
+174591,2025-04-02 12:13:24,A10-0042/2025,,Andrzej Halicki - § 12 - Am 30,328,297,55
+174593,2025-04-02 12:15:04,A10-0042/2025,,Andrzej Halicki - Après le § 12 - Am 25,231,411,26
+174598,2025-04-02 12:15:20,A10-0042/2025,,Andrzej Halicki - Après le § 12 - Am 57,206,453,12
+174599,2025-04-02 12:15:31,A10-0042/2025,,Andrzej Halicki - Après le § 12 - Am 58,195,466,9
+174600,2025-04-02 12:15:42,A10-0042/2025,,Andrzej Halicki - Après le § 13 - Am 39,206,457,12
+174601,2025-04-02 12:15:57,A10-0042/2025,,Andrzej Halicki - § 14 - Am 13,139,443,96
+174602,2025-04-02 12:16:07,A10-0042/2025,,Andrzej Halicki - Après le § 14 - Am 16,155,437,86
+174603,2025-04-02 12:16:18,A10-0042/2025,,Andrzej Halicki - Après le § 14 - Am 17,318,246,114
+174604,2025-04-02 12:16:30,A10-0042/2025,,Andrzej Halicki - Après le § 15 - Am 40,225,439,5
+174605,2025-04-02 12:16:46,A10-0042/2025,,Andrzej Halicki - Après le § 15 - Am 61,131,513,28
+174606,2025-04-02 12:17:22,A10-0042/2025,,Andrzej Halicki - Après le § 17 - Am 81,129,499,18
+174607,2025-04-02 12:17:33,A10-0042/2025,,Andrzej Halicki - § 18 - Am 79,308,309,55
+174612,2025-04-02 12:18:13,A10-0042/2025,,Andrzej Halicki - Après le § 18 - Am 41,189,471,14
+174613,2025-04-02 12:18:23,A10-0042/2025,,Andrzej Halicki - Après le § 19 - Am 33,372,279,29
+174614,2025-04-02 12:18:35,A10-0042/2025,,Andrzej Halicki - Après le § 19 - Am 62,191,463,5
+174615,2025-04-02 12:18:46,A10-0042/2025,,Andrzej Halicki - Après le § 20 - Am 18,106,523,53
+174616,2025-04-02 12:19:01,A10-0042/2025,,Andrzej Halicki - Après le § 21 - Am 19,75,519,86
+174617,2025-04-02 12:19:12,A10-0042/2025,,Andrzej Halicki - Après le § 21 - Am 42,160,481,42
+174618,2025-04-02 12:19:24,A10-0042/2025,,Andrzej Halicki - Après le § 21 - Am 63,127,497,54
+174619,2025-04-02 12:19:34,A10-0042/2025,,Andrzej Halicki - Après le § 21 - Am 80,252,381,41
+174620,2025-04-02 12:19:45,A10-0042/2025,,Andrzej Halicki - § 22 - Am 64,337,311,11
+174621,2025-04-02 12:19:56,A10-0042/2025,,Andrzej Halicki - Après le § 22 - Am 65,326,315,15
+174622,2025-04-02 12:20:08,A10-0042/2025,,Andrzej Halicki - Après le § 22 - Am 82,145,529,10
+174623,2025-04-02 12:20:18,A10-0042/2025,,Andrzej Halicki - Après le § 22 - Am 83,125,524,31
+174624,2025-04-02 12:20:37,A10-0042/2025,,Andrzej Halicki - Après le § 22 - Am 86,118,549,14
+174625,2025-04-02 12:20:56,A10-0042/2025,,Andrzej Halicki - Après le § 24 - Am 20,184,412,81
+174626,2025-04-02 12:21:08,A10-0042/2025,,Andrzej Halicki - Après le § 24 - Am 66,182,466,25
+174627,2025-04-02 12:21:21,A10-0042/2025,,Andrzej Halicki - Après le § 25 - Am 22,309,304,65
+174628,2025-04-02 12:21:38,A10-0042/2025,,Andrzej Halicki - Après le § 25 - Am 90,143,478,60
+174629,2025-04-02 12:21:49,A10-0042/2025,,Andrzej Halicki - Après le § 25 - Am 91,137,478,62
+174630,2025-04-02 12:22:01,A10-0042/2025,,Andrzej Halicki - Après le § 25 - Am 92,118,522,32
+174631,2025-04-02 12:22:16,A10-0042/2025,,Andrzej Halicki - Après le § 26 - Am 67,191,472,10
+174632,2025-04-02 12:22:28,A10-0042/2025,,Andrzej Halicki - Après le § 26 - Am 68,186,484,4
+174633,2025-04-02 12:22:41,A10-0042/2025,,Andrzej Halicki - Après le § 26 - Am 69,193,472,8
+174634,2025-04-02 12:22:51,A10-0042/2025,,Andrzej Halicki - Après le § 26 - Am 70,195,468,13
+174635,2025-04-02 12:23:21,A10-0042/2025,,Andrzej Halicki - § 27 - Am 43,96,484,105
+174636,2025-04-02 12:23:32,A10-0042/2025,,Andrzej Halicki - § 28 - Am 44,97,525,57
+174637,2025-04-02 12:23:44,A10-0042/2025,,Andrzej Halicki - Après le § 28 - Am 71,132,474,59
+174638,2025-04-02 12:23:55,A10-0042/2025,,Andrzej Halicki - Après le § 28 - Am 72,130,505,41
+174642,2025-04-02 12:24:14,A10-0042/2025,,Andrzej Halicki - § 31/3,497,135,50
+174643,2025-04-02 12:24:27,A10-0042/2025,,Andrzej Halicki - Après le § 31 - Am 45,90,579,13
+174644,2025-04-02 12:25:00,A10-0042/2025,,Andrzej Halicki - Après le § 32 - Am 46,179,490,12
+174645,2025-04-02 12:25:31,A10-0042/2025,,Andrzej Halicki - Après le § 33 - Am 47,149,486,28
+174647,2025-04-02 12:25:49,A10-0042/2025,,Andrzej Halicki - Après le § 34 - Am 73,187,469,25
+174648,2025-04-02 12:26:02,A10-0042/2025,,Andrzej Halicki - Après le § 36 - Am 74,115,485,85
+174649,2025-04-02 12:26:25,A10-0042/2025,,Andrzej Halicki - Après le § 41 - Am 75,216,453,12
+174650,2025-04-02 12:26:36,A10-0042/2025,,Andrzej Halicki - Après le § 42 - Am 76,181,477,17
+174651,2025-04-03 12:26:55,B10-0209/2025,,§ 1 - Am 18,194,407,10
+174655,2025-04-03 12:29:15,B10-0209/2025,,Après le § 1 - Am 19,182,414,7
+174656,2025-04-03 12:29:24,B10-0209/2025,,Après le § 1 - Am 20,209,386,11
+174658,2025-04-03 12:30:06,B10-0209/2025,,§ 3 - Am 10,300,248,59
+174662,2025-04-03 12:30:31,B10-0209/2025,,§ 6 - Am 23,178,421,7
+174663,2025-04-03 12:30:51,B10-0209/2025,,§ 6 - Am 11,112,454,49
+174665,2025-04-03 12:31:08,B10-0209/2025,,§ 6 - Am 15/1,282,309,24
+174669,2025-04-03 12:31:54,B10-0209/2025,,§ 6 - Am 15/5,357,226,16
+174671,2025-04-03 12:32:11,B10-0209/2025,,§ 6 - Am 15/7,372,226,12
+174681,2025-04-03 12:32:27,B10-0209/2025,,Après le § 6 - Am 12,204,370,31
+174683,2025-04-03 12:33:01,B10-0209/2025,,§ 7 - Am 16/1,430,129,44
+174684,2025-04-03 12:33:09,B10-0209/2025,,§ 7 - Am 16/2,369,219,10
+174685,2025-04-03 12:33:19,B10-0209/2025,,§ 7 - Am 16/3,386,211,9
+174686,2025-04-03 12:33:52,B10-0209/2025,,Considérant A - Am 7,236,370,7
+174690,2025-04-03 12:34:17,B10-0209/2025,,Considérant B/2,453,127,32
+174691,2025-04-03 12:34:28,B10-0209/2025,,Après le considérant B - Am 8,348,260,3
+174692,2025-04-03 12:34:38,B10-0209/2025,,Considérant D - Am 9,165,417,32
+174697,2025-04-02 13:01:50,A10-0011/2025,,Nicolás Pascual de la Parte - § 1 - Am 65,237,416,12
+174698,2025-04-02 13:02:02,A10-0011/2025,,Nicolás Pascual de la Parte - § 1 - Am 65,448,169,42
+174699,2025-04-02 13:02:18,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 1 - Am 66,85,517,63
+174700,2025-04-02 13:02:32,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 1 - Am 68,81,567,14
+174701,2025-04-02 13:02:44,A10-0011/2025,,Nicolás Pascual de la Parte - § 2 - Am 69,112,488,59
+174702,2025-04-02 13:03:08,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 4 - Am 70,512,84,73
+174706,2025-04-02 13:03:57,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 7 - Am 73,224,355,88
+174707,2025-04-02 13:04:17,A10-0011/2025,,Nicolás Pascual de la Parte - § 9 - Am 125,90,534,46
+174708,2025-04-02 13:04:36,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 9 - Am 21,489,108,71
+174709,2025-04-02 13:04:52,A10-0011/2025,,Nicolás Pascual de la Parte - § 10 - Am 1,79,541,40
+174711,2025-04-02 13:05:08,A10-0011/2025,,Nicolás Pascual de la Parte - § 10 - Am 74/1,230,424,14
+174712,2025-04-02 13:05:20,A10-0011/2025,,Nicolás Pascual de la Parte - § 10 - Am 74/2,113,483,60
+174714,2025-04-02 13:05:52,A10-0011/2025,,Nicolás Pascual de la Parte - § 11 - Am 77,49,548,65
+174715,2025-04-02 13:06:28,A10-0011/2025,,Nicolás Pascual de la Parte - § 13 - Am 79,113,517,36
+174721,2025-04-02 13:07:33,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 17 - Am 30/1,459,120,86
+174722,2025-04-02 13:07:44,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 17 - Am 30/2,494,134,30
+174723,2025-04-02 13:08:02,A10-0011/2025,,Nicolás Pascual de la Parte - § 18 - Am 137,115,531,22
+174725,2025-04-02 13:08:38,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 24 - Am 2,183,451,28
+174726,2025-04-02 13:08:51,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 24 - Am 84,216,406,39
+174727,2025-04-02 13:09:03,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 24 - Am 119,310,341,18
+174732,2025-04-02 13:10:19,A10-0011/2025,,Nicolás Pascual de la Parte - § 31 - Am 130,187,456,23
+174733,2025-04-02 13:10:40,A10-0011/2025,,Nicolás Pascual de la Parte - § 33 - Am 131,198,444,29
+174734,2025-04-02 13:11:04,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 44 - Am 132,463,169,37
+174736,2025-04-02 13:11:25,A10-0011/2025,,Nicolás Pascual de la Parte - § 49 - Am 85,263,374,31
+174737,2025-04-02 13:11:37,A10-0011/2025,,Nicolás Pascual de la Parte - § 49 - Am 140,219,428,14
+174738,2025-04-02 13:11:50,A10-0011/2025,,Nicolás Pascual de la Parte - § 49 - Am 133,206,442,15
+174740,2025-04-02 13:12:03,A10-0011/2025,,Nicolás Pascual de la Parte - § 49/1,398,249,18
+174741,2025-04-02 13:12:15,A10-0011/2025,,Nicolás Pascual de la Parte - § 49/2,373,275,12
+174742,2025-04-02 13:12:28,A10-0011/2025,,Nicolás Pascual de la Parte - § 49/3,386,214,64
+174743,2025-04-02 13:12:39,A10-0011/2025,,Nicolás Pascual de la Parte - § 49/4,369,269,23
+174747,2025-04-02 13:13:21,A10-0011/2025,,Nicolás Pascual de la Parte - § 56 - Am 141,306,313,26
+174750,2025-04-02 13:13:40,A10-0011/2025,,Nicolás Pascual de la Parte - § 56/2,481,112,74
+174751,2025-04-02 13:14:11,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 57 - Am 101,303,289,62
+174752,2025-04-02 13:14:29,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 57 - Am 121,409,188,66
+174753,2025-04-02 13:15:06,A10-0011/2025,,Nicolás Pascual de la Parte - § 68 - Am 86,118,516,24
+174754,2025-04-02 13:15:31,A10-0011/2025,,Nicolás Pascual de la Parte - § 69 - Am 88,207,445,14
+174767,2025-04-02 13:16:49,A10-0011/2025,,Nicolás Pascual de la Parte - § 92/2,458,127,75
+174769,2025-04-02 13:17:14,A10-0011/2025,,Nicolás Pascual de la Parte - § 118 - Am 122/1,361,298,7
+174770,2025-04-02 13:17:27,A10-0011/2025,,Nicolás Pascual de la Parte - § 118 - Am 122/2,224,428,12
+174774,2025-04-02 13:17:44,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 124 - Am 145,113,489,58
+174775,2025-04-02 13:17:55,A10-0011/2025,,Nicolás Pascual de la Parte - § 125 - Am 146,322,305,7
+174776,2025-04-02 13:19:03,A10-0011/2025,,Nicolás Pascual de la Parte - § 135 - Am 147,198,457,5
+174783,2025-04-02 13:19:43,A10-0011/2025,,Nicolás Pascual de la Parte - § 143 - Am 148,279,318,48
+174784,2025-04-02 13:20:00,A10-0011/2025,,Nicolás Pascual de la Parte - Après le § 145 - Am 96,217,430,11
+174785,2025-04-02 13:20:31,A10-0011/2025,,Nicolás Pascual de la Parte - § 151 - Am 149,180,365,116
+174786,2025-04-02 13:20:56,A10-0011/2025,,Nicolás Pascual de la Parte - Après le visa 3 - Am 61,105,366,190
+174801,2025-04-02 12:16:58,A10-0042/2025,,Andrzej Halicki - Après le § 16 - Am 26,194,387,90
+174802,2025-04-02 12:17:09,A10-0042/2025,,Andrzej Halicki - § 17 - Am 27,151,442,83
+174803,2025-04-02 12:26:14,A10-0042/2025,,Andrzej Halicki - § 39 - Am 28,198,434,43
+174829,2025-04-02 12:41:13,A10-0010/2025,,David McAllister - § 28/2,341,201,107
+174834,2025-04-03 12:31:44,B10-0209/2025,,§ 6 - Am 15/4,352,214,42
+174835,2025-04-03 12:32:02,B10-0209/2025,,§ 6 - Am 15/6,376,229,7
+174841,2025-04-03 12:40:16,RC-B10-0211/2025,,Considérant Q/2,502,51,6
+174875,2025-04-03 12:20:57,A10-0048/2025,,Matjaž Nemec - Proposition de résolution (ensemble du texte),432,127,54
+174880,2025-04-03 12:10:32,A10-0043/2025,,Veronika Vrecionová - Décision d'engager des négociations interinstitutionnelles,411,191,13
+174881,2025-04-03 12:09:52,A10-0045/2025,,Abir Al-Sahlani - Décision d'engager des négociations interinstitutionnelles,327,229,50
+174922,2025-04-03 12:13:25,A10-0048/2025,,Matjaž Nemec - § 2 - Am 11,122,475,15
+174923,2025-04-03 12:13:36,A10-0048/2025,,Matjaž Nemec - §3 - Am 12,108,460,34
+174924,2025-04-03 12:13:45,A10-0048/2025,,Matjaž Nemec - Après le § 6 - Am 13,146,447,17
+174925,2025-04-03 12:13:55,A10-0048/2025,,Matjaž Nemec - Après le § 8 - Am 14,169,423,9
+174926,2025-04-03 12:14:16,A10-0048/2025,,Matjaž Nemec - § 15 - Am 17,174,426,11
+174929,2025-04-03 12:14:49,A10-0048/2025,,Matjaž Nemec - Après le § 19 - Am 3,143,366,107
+174930,2025-04-03 12:14:59,A10-0048/2025,,Matjaž Nemec - Après le § 19 - Am 19,155,412,31
+174933,2025-04-03 12:15:43,A10-0048/2025,,Matjaž Nemec - Après le § 27 - Am 31,138,443,28
+174934,2025-04-03 12:15:53,A10-0048/2025,,Matjaž Nemec - Après le § 27 - Am 32,133,438,23
+174935,2025-04-03 12:16:03,A10-0048/2025,,Matjaž Nemec - § 29 - Am 23,142,426,42
+174937,2025-04-03 12:16:19,A10-0048/2025,,Matjaž Nemec - Après le § 29 - Am 24,123,456,34
+174938,2025-04-03 12:16:28,A10-0048/2025,,Matjaž Nemec - § 30 - Am 25,102,453,48
+174939,2025-04-03 12:16:36,A10-0048/2025,,Matjaž Nemec - Après le § 31 - Am 5,113,433,51
+174941,2025-04-03 12:17:11,A10-0048/2025,,Matjaž Nemec - § 35,559,3,31
+174944,2025-04-03 12:17:55,A10-0048/2025,,Matjaž Nemec - Après le § 39 - Am 6,77,451,39
+174945,2025-04-03 12:18:03,A10-0048/2025,,Matjaž Nemec - Après le § 39 - Am 7,71,463,51
+174946,2025-04-03 12:18:12,A10-0048/2025,,Matjaž Nemec - Après le § 39 - Am 8,70,389,112
+174947,2025-04-03 12:19:51,A10-0048/2025,,Matjaž Nemec - Après le § 39 - Am 9,155,394,60
+174948,2025-04-03 12:20:02,A10-0048/2025,,Matjaž Nemec - § 40 - Am 2,429,168,16
+174949,2025-04-03 12:20:13,A10-0048/2025,,Matjaž Nemec - Après le § 42 - Am 4,283,298,12
+174950,2025-04-03 12:20:25,A10-0048/2025,,Matjaž Nemec - Après le § 42 - Am 26,193,402,3
+174951,2025-04-03 12:17:45,A10-0048/2025,,Matjaž Nemec - Après le § 39 - Am 1,236,205,147
+174971,2025-04-03 12:26:33,C10-0038/2025,,Proposition de la Commission,531,69,17
+174972,2025-04-03 12:21:19,RC-B10-0230/2025,,§ 6,418,108,59
+174973,2025-04-03 12:21:54,RC-B10-0220/2025,,Après le § 4 - Am 4,180,404,13
+174975,2025-04-03 12:22:09,RC-B10-0220/2025,,§ 8 - Am 2,378,182,26
+174976,2025-04-03 12:22:19,RC-B10-0220/2025,,Après le considérant B - Am 3,272,264,26
+174977,2025-04-03 12:22:31,RC-B10-0220/2025,,Après le considérant C - Am 1,424,54,120
+174978,2025-04-03 12:23:00,RC-B10-0219/2025,,Après le § 1 - Am 1,250,292,49
+174984,2025-04-03 12:23:33,RC-B10-0219/2025,,§ 7/2,477,113,15
+174988,2025-04-03 12:23:56,RC-B10-0219/2025,,Proposition de résolution (ensemble du texte),535,19,55
+174989,2025-04-03 12:24:31,C10-0038/2025,,Rejet - Am 1,68,537,9
+174990,2025-04-03 12:24:51,C10-0038/2025,,"Article 1, § 1, point 1 Directive 2022/2464 (UE) Article 5, point 2 - Am 16",174,407,4
+174991,2025-04-03 12:25:13,C10-0038/2025,,"Article 2 Directive 2024/1760 (UE) Article 37, point 1 - Am 17",176,412,5
+174992,2025-04-03 12:25:31,C10-0038/2025,,Considérant 2 - Am 12,178,411,11
+174993,2025-04-03 12:25:45,C10-0038/2025,,Après le considérant 2 - Am 13,179,405,8
+174994,2025-04-03 12:25:54,C10-0038/2025,,Après le considérant 2 - Am 14,180,403,10
+174995,2025-04-03 12:26:12,C10-0038/2025,,Après le considérant 4 - Am 15,176,411,9
+175000,2025-04-03 12:37:58,RC-B10-0211/2025,,Demande d'ajournement du groupe The Left,46,466,14
+175025,2025-05-06 12:14:30,A10-0064/2025,,Adam Jarubas - Procédure d'approbation,514,126,6
+175031,2025-05-06 12:15:54,A10-0080/2025,,Janusz Lewandowski - Proposition de résolution (ensemble du texte),598,48,5
+175044,2025-05-06 12:25:58,A10-0068/2025,,Ondřej Knotek - Proposition de résolution (ensemble du texte),340,162,150
+175067,2025-05-06 12:22:03,A10-0049/2025,,Gilles Boyer - Proposition de résolution (ensemble du texte),473,59,114
+175085,2025-05-07 12:52:58,A10-0069/2025,,Joachim Stanisław Brudziński - Proposition de résolution (ensemble du texte),475,136,53
+175093,2025-05-07 12:44:13,A10-0050/2025,,Cristian Terheş - Proposition de résolution (ensemble du texte),485,113,61
+175099,2025-05-07 12:49:04,A10-0055/2025,,Joachim Stanisław Brudziński - Proposition de résolution (ensemble du texte),611,8,46
+175107,2025-05-07 12:49:52,A10-0053/2025,,Joachim Stanisław Brudziński - Proposition de résolution (ensemble du texte),548,74,42
+175114,2025-05-07 12:48:21,A10-0046/2025,,Joachim Stanisław Brudziński - Proposition de résolution (ensemble du texte),548,110,9
+175116,2025-05-07 12:40:46,A10-0062/2025,,Monika Hohlmeier - Proposition de décision,513,119,20
+175123,2025-05-07 12:47:30,A10-0054/2025,,Joachim Stanisław Brudziński - Proposition de résolution (ensemble du texte),532,120,10
+175136,2025-05-07 12:56:28,A10-0051/2025,,Tomáš Zdechovský - Proposition de résolution (ensemble du texte),452,176,30
+175144,2025-05-07 12:46:19,A10-0047/2025,,Dick Erixon - Proposition de résolution (ensemble du texte),619,19,25
+175160,2025-05-07 12:42:50,A10-0052/2025,,Joachim Stanisław Brudziński - Proposition de résolution (ensemble du texte),526,119,20
+175162,2025-05-06 12:16:19,A10-0049/2025,,Gilles Boyer - Après le § 1 - Am 9,172,438,35
+175170,2025-05-06 12:19:16,A10-0049/2025,,Gilles Boyer - Après le § 36 - Am 14,203,436,9
+175171,2025-05-06 12:19:31,A10-0049/2025,,Gilles Boyer - Après le § 68 - Am 15,207,420,11
+175180,2025-05-06 12:21:24,A10-0049/2025,,Gilles Boyer - Après le considérant F - Am 7,206,431,13
+175181,2025-05-06 12:21:39,A10-0049/2025,,Gilles Boyer - Après le considérant L - Am 8,206,424,14
+175211,2025-05-07 13:12:22,A10-0056/2025,,Michal Wiezik - Proposition de résolution (ensemble du texte),513,101,39
+175231,2025-05-07 13:16:16,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Proposition de résolution (ensemble du texte)",317,206,123
+175252,2025-05-07 13:39:00,A10-0075/2025,,Riho Terras - Proposition de résolution (ensemble du texte),353,145,78
+175349,2025-05-07 12:40:27,A10-0074/2025,,Niclas Herbst - Proposition de résolution (ensemble du texte),443,202,21
+175396,2025-05-07 13:32:52,A10-0067/2025,,Nacho Sánchez Amor - Proposition de résolution (ensemble du texte),367,74,188
+175513,2025-05-07 13:08:51,A10-0065/2025,,Erik Marquardt - Proposition de résolution (ensemble du texte),503,121,26
+175535,2025-05-07 13:21:09,A10-0073/2025,,Thomas Bajada - Proposition de résolution (ensemble du texte),470,81,92
+175563,2025-05-07 13:36:39,A10-0072/2025,,Tonino Picula - Proposition de résolution (ensemble du texte),419,113,88
+175669,2025-05-05 17:37:32,Ordre du jour de mercredi,,Demande du groupe The Left-Freedom Flotilla,164,256,8
+175670,2025-05-05 17:40:13,Ordre du jour de mercredi,,Demande du groupe Verts/ALE-Gaza,184,241,18
+175671,2025-05-05 17:43:09,Ordre du jour de mercredi,,Demande du groupe Renew-TikTok,319,37,79
+175675,2025-05-07 12:43:09,A10-0050/2025,,Cristian Terheş - Proposition de décision,541,97,26
+175676,2025-05-07 12:43:21,A10-0050/2025,,Cristian Terheş - § 11 - Am 2,353,292,18
+175679,2025-05-07 12:43:35,A10-0050/2025,,Cristian Terheş - Après le § 11 - Am 3/1,423,81,147
+175680,2025-05-07 12:43:46,A10-0050/2025,,Cristian Terheş - Après le § 11 - Am 3/2,212,419,12
+175682,2025-05-07 12:44:01,A10-0050/2025,,Cristian Terheş - Après le § 44 - Am 1,187,450,21
+175683,2025-05-07 12:46:37,A10-0054/2025,,Joachim Stanisław Brudziński - Proposition de décision,538,96,27
+175684,2025-05-07 12:46:52,A10-0054/2025,,Joachim Stanisław Brudziński - Après le § 4 - Am 1,129,494,35
+175685,2025-05-07 12:47:07,A10-0054/2025,,Joachim Stanisław Brudziński - Après le § 4 - Am 2,193,444,5
+175686,2025-05-07 12:47:20,A10-0054/2025,,Joachim Stanisław Brudziński - Après le § 9 - Am 3,204,451,8
+175687,2025-05-07 12:50:11,A10-0069/2025,,Joachim Stanisław Brudziński - Proposition de décision,519,126,16
+175688,2025-05-07 12:50:27,A10-0069/2025,,Joachim Stanisław Brudziński - § 8 - Am 5,310,339,14
+175693,2025-05-07 12:51:00,A10-0069/2025,,Joachim Stanisław Brudziński - Après le § 9 - Am 3,143,455,64
+175694,2025-05-07 12:51:16,A10-0069/2025,,Joachim Stanisław Brudziński - § 10 - Am 1,231,384,40
+175695,2025-05-07 12:51:27,A10-0069/2025,,Joachim Stanisław Brudziński - § 10 - Am 6,271,290,90
+175699,2025-05-07 12:51:48,A10-0069/2025,,Joachim Stanisław Brudziński - § 31/2,412,152,84
+175701,2025-05-07 12:51:59,A10-0069/2025,,Joachim Stanisław Brudziński - § 33/1,457,88,98
+175705,2025-05-07 12:52:17,A10-0069/2025,,Joachim Stanisław Brudziński - § 40/2,415,133,96
+175706,2025-05-07 12:52:46,A10-0069/2025,,Joachim Stanisław Brudziński - Après le § 82 - Am 4,187,465,12
+175707,2025-05-07 12:48:37,A10-0055/2025,,Joachim Stanisław Brudziński - Proposition de décision,568,54,43
+175708,2025-05-07 12:48:51,A10-0055/2025,,Joachim Stanisław Brudziński - Après le § 47 - Am 1,246,267,139
+175709,2025-05-07 12:47:46,A10-0046/2025,,Joachim Stanisław Brudziński - Proposition de décision,549,97,18
+175710,2025-05-07 12:47:57,A10-0046/2025,,Joachim Stanisław Brudziński - Après le § 1 - Am 2,130,497,36
+175711,2025-05-07 12:48:07,A10-0046/2025,,Joachim Stanisław Brudziński - Après le § 1 - Am 3,200,449,13
+175712,2025-05-07 12:53:17,A10-0051/2025,,Tomáš Zdechovský - Proposition de décision,481,157,24
+175713,2025-05-07 12:53:29,A10-0051/2025,,Tomáš Zdechovský - Après le § 3 - Am 2,209,413,38
+175714,2025-05-07 12:53:41,A10-0051/2025,,Tomáš Zdechovský - Après le § 3 - Am 3,192,443,14
+175717,2025-05-07 12:53:56,A10-0051/2025,,Tomáš Zdechovský - § 8/2,456,185,18
+175720,2025-05-07 12:54:13,A10-0051/2025,,Tomáš Zdechovský - § 18/2,459,171,27
+175721,2025-05-07 12:54:24,A10-0051/2025,,Tomáš Zdechovský - § 18/3,458,154,24
+175724,2025-05-07 12:54:45,A10-0051/2025,,Tomáš Zdechovský - § 93/2,461,185,15
+175727,2025-05-07 12:55:00,A10-0051/2025,,Tomáš Zdechovský - § 95/2,441,199,18
+175729,2025-05-07 12:55:16,A10-0051/2025,,Tomáš Zdechovský - Après le § 96 - Am 5,191,453,14
+175730,2025-05-07 12:55:30,A10-0051/2025,,Tomáš Zdechovský - Après le § 96 - Am 1,244,237,169
+175731,2025-05-07 12:55:43,A10-0051/2025,,Tomáš Zdechovský - Après le § 96 - Am 6,168,450,40
+175733,2025-05-07 12:55:55,A10-0051/2025,,Tomáš Zdechovský - § 102 - Am 4/1,509,66,84
+175734,2025-05-07 12:56:05,A10-0051/2025,,Tomáš Zdechovský - § 102 - Am 4/2,484,20,143
+175735,2025-05-07 12:56:16,A10-0051/2025,,Tomáš Zdechovský - § 102 - Am 4/3,356,269,28
+175736,2025-05-07 12:49:21,A10-0053/2025,,Joachim Stanisław Brudziński - Proposition de décision,564,61,43
+175737,2025-05-07 12:49:31,A10-0053/2025,,Joachim Stanisław Brudziński - Après le § 5 - Am 3,118,507,33
+175738,2025-05-07 13:10:36,A10-0056/2025,,Michal Wiezik - Après le § 12 - Am 1,203,440,4
+175760,2025-05-06 12:15:27,A10-0080/2025,,Janusz Lewandowski - Considérant F,478,149,30
+175761,2025-05-07 12:24:03,A10-0074/2025,,Niclas Herbst - Proposition de décision,412,245,5
+175762,2025-05-07 12:24:24,A10-0074/2025,,Niclas Herbst - § 1 - Am 53,193,460,3
+175763,2025-05-07 12:24:34,A10-0074/2025,,Niclas Herbst - Après le § 1 - Am 54,195,444,4
+175764,2025-05-07 12:24:45,A10-0074/2025,,Niclas Herbst - Après le § 1 - Am 55,169,429,41
+175765,2025-05-07 12:24:54,A10-0074/2025,,Niclas Herbst - § 2 - Am 56,211,443,3
+175766,2025-05-07 12:25:04,A10-0074/2025,,Niclas Herbst - Après le § 3 - Am 38,171,436,36
+175767,2025-05-07 12:25:14,A10-0074/2025,,Niclas Herbst - Après le § 3 - Am 39,203,417,20
+175768,2025-05-07 12:25:23,A10-0074/2025,,Niclas Herbst - Après le § 3 - Am 57,192,456,11
+175769,2025-05-07 12:25:35,A10-0074/2025,,Niclas Herbst - Après le § 3 - Am 59,198,443,11
+175770,2025-05-07 12:25:45,A10-0074/2025,,Niclas Herbst - § 4 - Am 60,173,474,10
+175772,2025-05-07 12:26:04,A10-0074/2025,,Niclas Herbst - Après le § 10 - Am 4,188,423,49
+175773,2025-05-07 12:26:28,A10-0074/2025,,Niclas Herbst - § 13 - Am 15,198,450,14
+175774,2025-05-07 12:26:38,A10-0074/2025,,Niclas Herbst - Après le § 13 - Am 5,201,345,109
+175775,2025-05-07 12:26:51,A10-0074/2025,,Niclas Herbst - § 15 - Am 16,204,451,9
+175776,2025-05-07 12:27:05,A10-0074/2025,,Niclas Herbst - § 16 - Am 17,366,271,15
+175781,2025-05-07 12:27:21,A10-0074/2025,,Niclas Herbst - Après le § 16 - Am 66,203,429,15
+175782,2025-05-07 12:27:32,A10-0074/2025,,Niclas Herbst - Après le § 16 - Am 40,105,454,95
+175783,2025-05-07 12:27:45,A10-0074/2025,,Niclas Herbst - Après le § 17 - Am 1,322,218,114
+175784,2025-05-07 12:27:56,A10-0074/2025,,Niclas Herbst - Après le § 17 - Am 67,188,457,12
+175785,2025-05-07 12:28:06,A10-0074/2025,,Niclas Herbst - § 18 - Am 68,195,450,8
+175786,2025-05-07 12:28:30,A10-0074/2025,,Niclas Herbst - Après le § 18 - Am 41,198,452,8
+175787,2025-05-07 12:28:40,A10-0074/2025,,Niclas Herbst - Après le § 18 - Am 42,196,451,9
+175788,2025-05-07 12:28:49,A10-0074/2025,,Niclas Herbst - Après le § 18 - Am 43,196,448,4
+175789,2025-05-07 12:29:19,A10-0074/2025,,Niclas Herbst - Après le § 21 - Am 18,196,463,4
+175790,2025-05-07 12:29:29,A10-0074/2025,,Niclas Herbst - Après le § 21 - Am 69,200,439,13
+175791,2025-05-07 12:29:42,A10-0074/2025,,Niclas Herbst - Après le § 38 - Am 49,195,459,6
+175792,2025-05-07 12:29:52,A10-0074/2025,,Niclas Herbst - Après le § 38 - Am 50,217,434,9
+175793,2025-05-07 12:30:02,A10-0074/2025,,Niclas Herbst - Après le § 38 - Am 71,198,458,6
+175794,2025-05-07 12:30:13,A10-0074/2025,,Niclas Herbst - § 45 - Am 19,202,441,13
+175795,2025-05-07 12:30:23,A10-0074/2025,,Niclas Herbst - Après le § 46 - Am 6,133,468,50
+175796,2025-05-07 12:30:34,A10-0074/2025,,Niclas Herbst - Après le § 46 - Am 37,432,33,194
+175797,2025-05-07 12:30:53,A10-0074/2025,,"Niclas Herbst - § 49, après le point xii - Am 74",200,457,9
+175798,2025-05-07 12:31:06,A10-0074/2025,,Niclas Herbst - § 55 - Am 21,203,457,7
+175799,2025-05-07 12:31:17,A10-0074/2025,,Niclas Herbst - Après le § 55 - Am 75,205,437,11
+175800,2025-05-07 12:31:27,A10-0074/2025,,Niclas Herbst - Après le § 57 - Am 51,192,450,10
+175801,2025-05-07 12:31:39,A10-0074/2025,,Niclas Herbst - Après le § 70 - Am 44,222,420,16
+175802,2025-05-07 12:31:50,A10-0074/2025,,"Niclas Herbst - § 73, après le point iii - Am 76",190,449,9
+175803,2025-05-07 12:32:00,A10-0074/2025,,Niclas Herbst - § 74 - Am 7,334,279,48
+175811,2025-05-07 12:32:33,A10-0074/2025,,Niclas Herbst - § 98 - Am 22,198,453,13
+175812,2025-05-07 12:32:44,A10-0074/2025,,"Niclas Herbst - § 100, après le point viii - Am 77",196,445,7
+175814,2025-05-07 12:33:05,A10-0074/2025,,Niclas Herbst - § 108 - Am 23,219,437,2
+175815,2025-05-07 12:33:16,A10-0074/2025,,Niclas Herbst - Après le § 108 - Am 45,222,416,10
+175817,2025-05-07 12:33:49,A10-0074/2025,,Niclas Herbst - Après le § 124 - Am 52,206,432,16
+175822,2025-05-07 12:34:13,A10-0074/2025,,Niclas Herbst - § 131 - Am 24,283,365,14
+175829,2025-05-07 12:34:56,A10-0074/2025,,Niclas Herbst - Après le § 131 - Am 25,281,375,5
+175830,2025-05-07 12:35:07,A10-0074/2025,,Niclas Herbst - Après le § 131 - Am 46,238,407,9
+175831,2025-05-07 12:35:17,A10-0074/2025,,Niclas Herbst - Après le § 131 - Am 47,228,405,3
+175832,2025-05-07 12:35:28,A10-0074/2025,,Niclas Herbst - Après le § 131 - Am 79,202,431,13
+175834,2025-05-07 12:35:59,A10-0074/2025,,Niclas Herbst - Après le § 143 - Am 8,281,260,121
+175835,2025-05-07 12:36:12,A10-0074/2025,,Niclas Herbst - Après le § 143 - Am 27,292,257,103
+175836,2025-05-07 12:36:27,A10-0074/2025,,Niclas Herbst - Après le § 145 - Am 48,199,459,6
+175838,2025-05-07 12:36:46,A10-0074/2025,,Niclas Herbst - Après le § 152 - Am 30,219,407,36
+175839,2025-05-07 12:36:57,A10-0074/2025,,Niclas Herbst - Après le § 152 - Am 83,200,439,8
+175845,2025-05-07 12:37:44,A10-0074/2025,,"Niclas Herbst - § 171, après le point vi - Am 85",212,431,11
+175846,2025-05-07 12:37:55,A10-0074/2025,,"Niclas Herbst - § 171, après le point vi - Am 86",208,438,8
+175847,2025-05-07 12:38:08,A10-0074/2025,,Niclas Herbst - Après le § 179 - Am 88,207,443,13
+175848,2025-05-07 12:38:20,A10-0074/2025,,Niclas Herbst - Après le § 183 - Am 91,225,387,28
+175849,2025-05-07 12:38:36,A10-0074/2025,,Niclas Herbst - Après le § 185 - Am 32,287,239,135
+175850,2025-05-07 12:38:48,A10-0074/2025,,Niclas Herbst - Après le § 186 - Am 33,186,263,214
+175852,2025-05-07 12:39:20,A10-0074/2025,,Niclas Herbst - Après le § 224 - Am 34,248,352,54
+175853,2025-05-07 12:39:32,A10-0074/2025,,Niclas Herbst - Après le § 236 - Am 9,284,311,67
+175854,2025-05-07 12:39:43,A10-0074/2025,,Niclas Herbst - Après le § 250 - Am 35,132,477,44
+175855,2025-05-07 12:39:54,A10-0074/2025,,Niclas Herbst - Après le § 251 - Am 36,251,354,49
+175856,2025-05-07 12:40:04,A10-0074/2025,,"Niclas Herbst - § 252, après le point xiii - Am 89",213,443,4
+175857,2025-05-07 12:40:16,A10-0074/2025,,"Niclas Herbst - § 252, après le point xv - Am 90",191,447,18
+175858,2025-05-07 12:59:34,A10-0065/2025,,Erik Marquardt - Proposition de décision concernant la décharge (AUEA),520,126,6
+175859,2025-05-07 13:00:40,A10-0065/2025,,Erik Marquardt - Proposition de décision concernant la décharge (Frontex),473,120,64
+175861,2025-05-07 13:01:28,A10-0065/2025,,Erik Marquardt - Après le § 8 - Am 12,192,454,11
+175862,2025-05-07 13:01:43,A10-0065/2025,,Erik Marquardt - § 17 - Am 30,195,459,4
+175863,2025-05-07 13:01:54,A10-0065/2025,,Erik Marquardt - § 18 - Am 14,192,439,5
+175864,2025-05-07 13:02:06,A10-0065/2025,,Erik Marquardt - § 18 - Am 31,194,452,3
+175865,2025-05-07 13:02:16,A10-0065/2025,,Erik Marquardt - Après le § 18 - Am 15,213,421,7
+175866,2025-05-07 13:02:29,A10-0065/2025,,Erik Marquardt - Après le § 18 - Am 17,200,446,4
+175867,2025-05-07 13:02:44,A10-0065/2025,,Erik Marquardt - § 21 - Am 18,188,448,18
+175868,2025-05-07 13:03:52,A10-0065/2025,,Erik Marquardt - § 81 - Am 32,201,452,5
+175875,2025-05-07 13:04:28,A10-0065/2025,,Erik Marquardt - § 85 - Am 33,200,426,16
+175884,2025-05-07 13:05:07,A10-0065/2025,,Erik Marquardt - § 96 - Am 36,643,11,4
+175885,2025-05-07 13:05:38,A10-0065/2025,,Erik Marquardt - § 102 - Am 27,345,286,23
+175886,2025-05-07 13:05:58,A10-0065/2025,,Erik Marquardt - § 108 - Am 34,200,448,8
+175909,2025-05-07 13:07:48,A10-0065/2025,,Erik Marquardt - § 142 - Am 35,169,446,41
+175913,2025-05-07 12:44:31,A10-0047/2025,,Dick Erixon - Proposition de décision (ensemble du texte),630,16,16
+175916,2025-05-07 12:44:50,A10-0047/2025,,Dick Erixon - § 14/2,385,249,31
+175919,2025-05-07 12:45:04,A10-0047/2025,,Dick Erixon - § 22/2,481,115,66
+175922,2025-05-07 12:45:20,A10-0047/2025,,Dick Erixon - § 23/2,537,101,23
+175925,2025-05-07 12:45:33,A10-0047/2025,,Dick Erixon - § 31/2,488,109,68
+175928,2025-05-07 12:45:48,A10-0047/2025,,Dick Erixon - § 33/2,473,121,69
+175929,2025-05-07 12:45:58,A10-0047/2025,,Dick Erixon - § 45 - Am 1,258,323,80
+175930,2025-05-07 12:46:09,A10-0047/2025,,Dick Erixon - § 47 - Am 2,259,325,77
+175931,2025-05-07 12:41:05,A10-0052/2025,,Joachim Stanisław Brudziński - Proposition de décision,588,62,16
+175932,2025-05-07 12:41:24,A10-0052/2025,,Joachim Stanisław Brudziński - § 20 - Am 1,105,430,130
+175933,2025-05-07 12:41:35,A10-0052/2025,,Joachim Stanisław Brudziński - Après le § 20 - Am 2,283,358,20
+175934,2025-05-07 12:41:44,A10-0052/2025,,Joachim Stanisław Brudziński - Après le § 22 - Am 3,293,352,15
+175935,2025-05-07 12:41:54,A10-0052/2025,,Joachim Stanisław Brudziński - Après le § 22 - Am 5,246,383,20
+175936,2025-05-07 12:42:06,A10-0052/2025,,Joachim Stanisław Brudziński - Après le § 23 - Am 7,229,400,20
+175938,2025-05-07 12:42:27,A10-0052/2025,,Joachim Stanisław Brudziński - § 52 - Am 4,379,260,22
+175939,2025-05-07 12:42:37,A10-0052/2025,,Joachim Stanisław Brudziński - Après le § 57 - Am 8,316,327,17
+175940,2025-05-07 13:33:12,A10-0072/2025,,Tonino Picula - Avant le § 1 - Am 7,75,532,9
+175941,2025-05-07 13:35:06,A10-0072/2025,,Tonino Picula - Après le § 27 - Am 9,431,60,133
+175946,2025-05-07 13:35:33,A10-0072/2025,,Tonino Picula - Après le § 49 - Am 11,236,194,192
+175952,2025-05-07 13:12:52,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 11 - Am 8",210,425,8
+175953,2025-05-07 13:13:08,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 28 - Am 9",237,405,8
+175954,2025-05-07 13:14:20,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 37 - Am 7",277,319,51
+175955,2025-05-07 13:14:32,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 51 - Am 10",207,421,7
+175956,2025-05-07 13:14:41,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 54 - Am 11",185,423,16
+175957,2025-05-07 13:14:51,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 64 - Am 12",226,384,17
+175958,2025-05-07 13:15:01,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 70 - Am 13",206,431,2
+175959,2025-05-07 13:15:11,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 72 - Am 14",209,397,13
+175960,2025-05-07 13:15:21,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 72 - Am 15",210,424,5
+175961,2025-05-07 13:15:31,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 76 - Am 16",187,437,7
+175962,2025-05-07 13:15:43,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 76 - Am 17",179,439,17
+175966,2025-05-07 13:16:03,A10-0076/2025,,"Siegfried Mureşan, Carla Tavares - Après le § 125 - Am 18",206,437,6
+175968,2025-05-07 13:37:08,A10-0075/2025,,Riho Terras - Après le § 1 - Am 2,117,454,20
+175971,2025-05-07 13:37:53,A10-0075/2025,,Riho Terras - § 27 - Am 8,133,443,37
+175972,2025-05-07 13:38:04,A10-0075/2025,,Riho Terras - § 29 - Am 9,106,396,76
+175975,2025-05-07 13:21:31,A10-0067/2025,,Nacho Sánchez Amor - § 1 - Am 39,121,459,32
+175976,2025-05-07 13:21:42,A10-0067/2025,,Nacho Sánchez Amor - § 1 - Am 6,395,126,97
+175977,2025-05-07 13:21:52,A10-0067/2025,,Nacho Sánchez Amor - Après le § 1 - Am 20,138,474,16
+175979,2025-05-07 13:22:03,A10-0067/2025,,Nacho Sánchez Amor - Après le § 1 - Am 21/1,138,485,6
+175980,2025-05-07 13:22:13,A10-0067/2025,,Nacho Sánchez Amor - Après le § 1 - Am 21/2,135,468,16
+175981,2025-05-07 13:22:24,A10-0067/2025,,Nacho Sánchez Amor - Après le § 1 - Am 21/3,116,495,23
+175982,2025-05-07 13:22:35,A10-0067/2025,,Nacho Sánchez Amor - Après le § 1 - Am 22,118,446,65
+175983,2025-05-07 13:22:49,A10-0067/2025,,Nacho Sánchez Amor - Après le § 6 - Am 40,224,374,18
+175987,2025-05-07 13:23:06,A10-0067/2025,,Nacho Sánchez Amor - § 15 - Am 1,575,33,20
+175988,2025-05-07 13:23:15,A10-0067/2025,,Nacho Sánchez Amor - Après le § 15 - Am 2,569,4,41
+175989,2025-05-07 13:23:32,A10-0067/2025,,Nacho Sánchez Amor - Après le § 18 - Am 44,424,183,15
+175990,2025-05-07 13:23:45,A10-0067/2025,,Nacho Sánchez Amor - § 19 - Am 3,480,105,43
+175992,2025-05-07 13:23:57,A10-0067/2025,,Nacho Sánchez Amor - § 21 - Am 7/1,393,182,49
+175993,2025-05-07 13:24:08,A10-0067/2025,,Nacho Sánchez Amor - § 21 - Am 7/2,216,330,76
+175994,2025-05-07 13:24:40,A10-0067/2025,,Nacho Sánchez Amor - § 23 - Am 8,554,7,73
+176003,2025-05-07 13:25:23,A10-0067/2025,,Nacho Sánchez Amor - Après le § 23 - Am 25,153,394,77
+176004,2025-05-07 13:25:35,A10-0067/2025,,Nacho Sánchez Amor - Après le § 25 - Am 41,195,386,21
+176005,2025-05-07 13:25:55,A10-0067/2025,,Nacho Sánchez Amor - Après le § 28 - Am 4,105,467,63
+176025,2025-05-07 13:29:50,A10-0067/2025,,Nacho Sánchez Amor - § 43 - Am 27,146,443,38
+176026,2025-05-07 13:30:14,A10-0067/2025,,Nacho Sánchez Amor - § 49 - Am 10,461,55,112
+176031,2025-05-07 13:30:29,A10-0067/2025,,Nacho Sánchez Amor - § 50 - Am 11,348,204,69
+176033,2025-05-07 13:30:42,A10-0067/2025,,Nacho Sánchez Amor - § 51/1,476,88,50
+176034,2025-05-07 13:30:52,A10-0067/2025,,Nacho Sánchez Amor - § 51/2,426,192,4
+176036,2025-05-07 13:31:05,A10-0067/2025,,Nacho Sánchez Amor - § 52 - Am 12/1,409,157,62
+176037,2025-05-07 13:31:16,A10-0067/2025,,Nacho Sánchez Amor - § 52 - Am 12/2,557,15,51
+176042,2025-05-07 13:31:35,A10-0067/2025,,Nacho Sánchez Amor - § 54 - Am 13,493,84,49
+176043,2025-05-07 13:31:45,A10-0067/2025,,Nacho Sánchez Amor - § 57,441,131,43
+176044,2025-05-07 13:31:55,A10-0067/2025,,Nacho Sánchez Amor - Après le considérant K - Am 37,160,436,27
+176045,2025-05-07 13:32:06,A10-0067/2025,,Nacho Sánchez Amor - Après le considérant K - Am 38,170,410,33
+176047,2025-05-07 13:16:38,A10-0073/2025,,Thomas Bajada - § 9/1,533,70,34
+176048,2025-05-07 13:16:48,A10-0073/2025,,Thomas Bajada - § 9/2,447,171,17
+176049,2025-05-07 13:16:58,A10-0073/2025,,Thomas Bajada - Après le § 10 - Am 2,342,230,67
+176050,2025-05-07 13:17:18,A10-0073/2025,,Thomas Bajada - § 14 - Am 7,223,410,5
+176051,2025-05-07 13:17:33,A10-0073/2025,,Thomas Bajada - § 21 - Am 8,205,427,5
+176052,2025-05-07 13:18:04,A10-0073/2025,,Thomas Bajada - Après le § 25 - Am 9,225,393,14
+176053,2025-05-07 13:18:19,A10-0073/2025,,Thomas Bajada - Après le § 27 - Am 10,221,401,10
+176055,2025-05-07 13:18:37,A10-0073/2025,,Thomas Bajada - § 42 - Am 4/1,532,75,33
+176056,2025-05-07 13:18:47,A10-0073/2025,,Thomas Bajada - § 42 - Am 4/2,451,172,14
+176062,2025-05-07 13:19:26,A10-0073/2025,,Thomas Bajada - Après le § 55 - Am 11,211,410,19
+176063,2025-05-07 13:19:37,A10-0073/2025,,Thomas Bajada - Après le § 55 - Am 12,173,416,43
+176064,2025-05-07 13:19:48,A10-0073/2025,,Thomas Bajada - Après le § 62 - Am 13,222,405,12
+176065,2025-05-07 13:20:04,A10-0073/2025,,Thomas Bajada - § 88,460,165,18
+176067,2025-05-07 13:20:15,A10-0073/2025,,Thomas Bajada - Considérant O/1,589,39,9
+176068,2025-05-07 13:20:25,A10-0073/2025,,Thomas Bajada - Considérant O/2,433,190,16
+176069,2025-05-07 13:20:36,A10-0073/2025,,Thomas Bajada - Après le considérant R - Am 5,232,393,17
+176071,2025-05-07 13:20:57,A10-0073/2025,,Thomas Bajada - Après le considérant AL - Am 6,229,399,15
+176090,2025-05-07 12:23:04,C10-0063/2025,,Demande de décision d'urgence,316,291,27
+176091,2025-05-07 12:23:35,EP error,,Demande de décision d'urgence,370,268,16
