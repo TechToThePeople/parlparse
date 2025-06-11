@@ -1276,9 +1276,15 @@ identifier,date,report,desc,title,for,against,abstention
 175252,2025-05-07 13:39:00,A10-0075/2025,,Riho Terras - Proposition de résolution (ensemble du texte),353,145,78
 175349,2025-05-07 12:40:27,A10-0074/2025,,Niclas Herbst - Proposition de résolution (ensemble du texte),443,202,21
 175396,2025-05-07 13:32:52,A10-0067/2025,,Nacho Sánchez Amor - Proposition de résolution (ensemble du texte),367,74,188
+175398,2025-05-08 12:40:39,A10-0059/2025,,Karin Karlsbro - Proposition de la Commission,354,147,53
+175399,2025-05-08 12:10:09,A10-0066/2025,,Jacek Protas - Proposition de resolution,392,125,55
 175513,2025-05-07 13:08:51,A10-0065/2025,,Erik Marquardt - Proposition de résolution (ensemble du texte),503,121,26
 175535,2025-05-07 13:21:09,A10-0073/2025,,Thomas Bajada - Proposition de résolution (ensemble du texte),470,81,92
 175563,2025-05-07 13:36:39,A10-0072/2025,,Tonino Picula - Proposition de résolution (ensemble du texte),419,113,88
+175579,2025-05-08 12:51:23,A10-0044/2025,,Ralf Seekatz - Proposition de résolution (ensemble du texte),345,135,62
+175594,2025-05-08 12:47:18,A10-0071/2025,,Lara Wolters - Proposition de résolution (ensemble du texte),358,124,79
+175610,2025-05-08 12:21:03,A10-0079/2025,,Borys Budka - Proposition de la Commission,425,106,43
+175667,2025-05-08 12:32:06,A10-0061/2025,,Raphaël Glucksmann - Proposition de la Commission,378,173,24
 175669,2025-05-05 17:37:32,Ordre du jour de mercredi,,Demande du groupe The Left-Freedom Flotilla,164,256,8
 175670,2025-05-05 17:40:13,Ordre du jour de mercredi,,Demande du groupe Verts/ALE-Gaza,184,241,18
 175671,2025-05-05 17:43:09,Ordre du jour de mercredi,,Demande du groupe Renew-TikTok,319,37,79
@@ -1483,5 +1489,157 @@ identifier,date,report,desc,title,for,against,abstention
 176068,2025-05-07 13:20:25,A10-0073/2025,,Thomas Bajada - Considérant O/2,433,190,16
 176069,2025-05-07 13:20:36,A10-0073/2025,,Thomas Bajada - Après le considérant R - Am 5,232,393,17
 176071,2025-05-07 13:20:57,A10-0073/2025,,Thomas Bajada - Après le considérant AL - Am 6,229,399,15
+176089,2025-05-08 12:51:46,B10-0244/2025,,Proposition de résolution,373,150,10
 176090,2025-05-07 12:23:04,C10-0063/2025,,Demande de décision d'urgence,316,291,27
 176091,2025-05-07 12:23:35,EP error,,Demande de décision d'urgence,370,268,16
+176092,2025-05-08 12:47:39,A10-0044/2025,,Ralf Seekatz - § 1 - Am 1,180,346,28
+176097,2025-05-08 12:48:33,A10-0044/2025,,Ralf Seekatz - § 9,439,48,55
+176098,2025-05-08 12:48:44,A10-0044/2025,,Ralf Seekatz - Après le § 10 - Am 5,134,365,50
+176099,2025-05-08 12:48:56,A10-0044/2025,,Ralf Seekatz - § 16 - Am 6,121,372,56
+176100,2025-05-08 12:49:08,A10-0044/2025,,Ralf Seekatz - § 17,366,77,94
+176101,2025-05-08 12:49:20,A10-0044/2025,,Ralf Seekatz - Après le § 18 - Am 2,267,246,31
+176102,2025-05-08 12:49:44,A10-0044/2025,,Ralf Seekatz - § 25,355,117,69
+176103,2025-05-08 12:50:01,A10-0044/2025,,Ralf Seekatz - § 32 - Am 8,77,382,88
+176104,2025-05-08 12:50:13,A10-0044/2025,,Ralf Seekatz - § 35 - Am 9,89,375,83
+176107,2025-05-08 12:50:36,A10-0044/2025,,Ralf Seekatz - § 44/2,378,142,21
+176112,2025-05-08 12:16:06,A10-0079/2025,,"Borys Budka - Article 1, après l'alinéa 1 Règlement (UE) 2017/1938; Article 6 bis, § 1, alinéa 1 - Am 4",75,465,32
+176115,2025-05-08 12:16:28,A10-0079/2025,,"Borys Budka - Après l'article 1 Règlement (UE) 2017/1938; Article 6 bis, après le § 5 - Am 5/1",92,472,7
+176131,2025-05-08 12:18:19,A10-0079/2025,,Borys Budka - Après le considérant 1 - Am 7,366,140,67
+176136,2025-05-08 12:18:51,A10-0079/2025,,Borys Budka - Après le considérant 8 - Am 2/1,94,478,5
+176139,2025-05-08 12:19:50,A10-0079/2025,,Borys Budka - Après le considérant 9 - Am 3,102,427,45
+176144,2025-05-08 12:20:45,A10-0079/2025,,Borys Budka - Après le considérant 10 - Am 8,100,440,31
+176145,2025-05-08 12:41:09,A10-0071/2025,,Lara Wolters - Après le § 3 - Am 6,66,477,22
+176146,2025-05-08 12:41:22,A10-0071/2025,,Lara Wolters - Après le § 3 - Am 7,66,368,130
+176147,2025-05-08 12:41:34,A10-0071/2025,,Lara Wolters - Après le § 3 - Am 8,49,465,55
+176148,2025-05-08 12:41:46,A10-0071/2025,,Lara Wolters - Après le § 4 - Am 2,175,372,22
+176150,2025-05-08 12:45:25,A10-0071/2025,,Lara Wolters - Après le § 11 - Am 10,94,453,13
+176151,2025-05-08 12:45:38,A10-0071/2025,,Lara Wolters - § 14 - Am 11,88,335,128
+176152,2025-05-08 12:45:58,A10-0071/2025,,Lara Wolters - § 17,508,30,19
+176153,2025-05-08 12:46:11,A10-0071/2025,,Lara Wolters - Après le § 18 - Am 12,89,411,58
+176156,2025-05-08 12:46:29,A10-0071/2025,,Lara Wolters - § 22/2,507,44,7
+176157,2025-05-08 12:46:47,A10-0071/2025,,Lara Wolters - § 38 - Am 13,60,427,77
+176158,2025-05-08 12:46:58,A10-0071/2025,,Lara Wolters - Après le § 39 - Am 14,113,302,144
+176163,2025-05-08 12:22:27,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 100,370,196,9
+176164,2025-05-08 12:22:40,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 117,386,174,7
+176165,2025-05-08 12:22:53,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 118,371,194,6
+176166,2025-05-08 12:23:04,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 119,357,206,6
+176167,2025-05-08 12:23:17,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 120,361,209,6
+176168,2025-05-08 12:23:29,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 121,358,208,7
+176169,2025-05-08 12:23:45,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 122,378,191,2
+176170,2025-05-08 12:23:57,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 123,376,195,2
+176171,2025-05-08 12:24:08,A10-0061/2025,,Raphaël Glucksmann - Amendements de la commission compétente - votes séparés et votes par division - Am 151,391,180,0
+176174,2025-05-08 12:24:37,A10-0061/2025,,"Raphaël Glucksmann - Article 2, § 1, point 15 - Am 279",96,459,13
+176175,2025-05-08 12:24:50,A10-0061/2025,,"Raphaël Glucksmann - Article 4, § 2, après le sous-point i - Am 280",60,502,6
+176176,2025-05-08 12:26:24,A10-0061/2025,,"Raphaël Glucksmann - Article 7, § 9 - Am 270S",176,382,14
+176177,2025-05-08 12:26:40,A10-0061/2025,,"Raphaël Glucksmann - Article 7, § 9 - Am 116",369,199,8
+176178,2025-05-08 12:28:05,A10-0061/2025,,"Raphaël Glucksmann - Article 13, § 3, après le point b - Am 254",56,512,7
+176179,2025-05-08 12:28:20,A10-0061/2025,,"Raphaël Glucksmann - Article 13, § 3, après le point c - Am 292",53,461,42
+176180,2025-05-08 12:28:54,A10-0061/2025,,"Raphaël Glucksmann - Article 13, § 3, après le point c - Am 294",63,504,6
+176181,2025-05-08 12:29:31,A10-0061/2025,,Raphaël Glucksmann - Article 19 - Am 274S= 297S=,175,386,10
+176185,2025-05-08 12:30:05,A10-0061/2025,,Raphaël Glucksmann - Article 20 - Am 275S= 298S=,173,386,13
+176186,2025-05-08 12:30:45,A10-0061/2025,,Raphaël Glucksmann - Considérant 15 - Am 257,180,392,2
+176187,2025-05-08 12:31:05,A10-0061/2025,,Raphaël Glucksmann - Après le considérant 23 - Am 258,179,387,0
+176188,2025-05-08 12:31:18,A10-0061/2025,,Raphaël Glucksmann - Après le considérant 26 - Am 259,178,385,0
+176189,2025-05-08 12:31:35,A10-0061/2025,,Raphaël Glucksmann - Considérant 35 - Am 277,55,512,6
+176190,2025-05-08 12:31:53,A10-0061/2025,,Raphaël Glucksmann - Considérant 37 - Am 278,58,515,4
+176191,2025-05-08 12:32:46,A10-0061/2025,,"Raphaël Glucksmann - Demande de renvoi (article 60, paragraphe 4, du ; règlement)",427,122,10
+176241,2025-05-08 12:15:30,C10-0044/2025,,Proposition de la Commission,371,162,37
+176253,2025-05-08 12:52:13,B10-0246/2025,,Après le § 2 - Am 22/1,286,183,30
+176254,2025-05-08 12:52:23,B10-0246/2025,,Après le § 2 - Am 22/2,157,337,6
+176257,2025-05-08 12:52:45,B10-0246/2025,,§ 4/2,386,87,27
+176258,2025-05-08 12:52:56,B10-0246/2025,,§ 5 - Am 9,127,321,40
+176262,2025-05-08 12:53:49,B10-0246/2025,,Après le § 15 - Am 25,137,326,22
+176263,2025-05-08 12:54:00,B10-0246/2025,,§ 16 - Am 14,67,378,36
+176268,2025-05-08 12:54:23,B10-0246/2025,,Après le § 21 - Am 23/1,281,193,1
+176269,2025-05-08 12:54:35,B10-0246/2025,,Après le § 21 - Am 23/2,168,312,1
+176270,2025-05-08 12:54:48,B10-0246/2025,,§ 24 - Am 26,86,345,51
+176271,2025-05-08 12:55:03,B10-0246/2025,,§ 29 - Am 16,100,306,71
+176273,2025-05-08 12:55:24,B10-0246/2025,,§ 30/1,444,32,3
+176274,2025-05-08 12:55:36,B10-0246/2025,,§ 30/2,375,92,6
+176278,2025-05-08 12:56:07,B10-0246/2025,,§ 35 - Am 24,164,276,22
+176279,2025-05-08 12:56:49,B10-0246/2025,,Après le § 37 - Am 27,146,311,14
+176280,2025-05-08 12:57:21,B10-0246/2025,,Après le considérant E - Am 6,172,288,11
+176281,2025-05-08 12:57:35,B10-0246/2025,,Proposition de résolution (ensemble du texte),306,80,57
+176302,2025-05-08 12:14:45,C10-0062/2025,,Proposition de la Commission,458,101,14
+176305,2025-05-08 12:15:14,C10-0044/2025,,Rejet - Am 1= 2=,171,365,31
+176309,2025-05-08 12:08:20,RC-B10-0249/2025,,Proposition de résolution (ensemble du texte),516,3,34
+176310,2025-05-08 12:10:34,C10-0062/2025,,Titre - Am 4,210,355,8
+176311,2025-05-08 12:10:48,C10-0062/2025,,"Article 1, § 1, point 1 Règlement (UE) 2019/631 Article 1, § 5 bis - Am 3S= 19S=",200,351,16
+176312,2025-05-08 12:11:00,C10-0062/2025,,"Article 1, § 1, point 1 Règlement (UE) 2019/631 Article 4, § 1 bis - Am 9= 20=",210,345,16
+176313,2025-05-08 12:11:11,C10-0062/2025,,"Article 1, § 1, point 2 Règlement (UE) 2019/631 Article 6, § 2, alinéa 1 bis - Am 10",182,346,43
+176314,2025-05-08 12:11:23,C10-0062/2025,,"Article 1, § 1, point 3 Règlement (UE) 2019/631 Article 8 - Am 21S",139,389,41
+176315,2025-05-08 12:11:36,C10-0062/2025,,"Article 1, § 1, point 3 Règlement (UE) 2019/631 Article 8 - Am 22",178,351,37
+176316,2025-05-08 12:11:48,C10-0062/2025,,"Article 1, § 1, point 3 Règlement (UE) 2019/631 Article 8 - Am 11",207,348,16
+176317,2025-05-08 12:12:01,C10-0062/2025,,"Article 1, § 1, après le point 3 Règlement (UE) 2019/631 Article 15, § 1 - Am 23",159,347,55
+176318,2025-05-08 12:12:12,C10-0062/2025,,Après le considérant 1 - Am 12,199,354,9
+176319,2025-05-08 12:12:24,C10-0062/2025,,Après le considérant 1 - Am 13,205,350,12
+176320,2025-05-08 12:12:36,C10-0062/2025,,Après le considérant 1 - Am 14,182,353,32
+176321,2025-05-08 12:12:47,C10-0062/2025,,Considérant 2 - Am 15,179,349,37
+176322,2025-05-08 12:13:01,C10-0062/2025,,Considérant 2 - Am 5,202,350,18
+176323,2025-05-08 12:13:11,C10-0062/2025,,Considérant 3 - Am 16,180,348,36
+176324,2025-05-08 12:13:23,C10-0062/2025,,Considérant 3 - Am 17,180,353,36
+176325,2025-05-08 12:13:33,C10-0062/2025,,Considérant 3 - Am 6,206,349,16
+176326,2025-05-08 12:13:44,C10-0062/2025,,Considérant 4 - Am 7,178,350,42
+176327,2025-05-08 12:13:56,C10-0062/2025,,Considérant 5 - Am 18,180,350,37
+176328,2025-05-08 12:14:08,C10-0062/2025,,Considérant 5 - Am 8,207,349,16
+176329,2025-05-08 12:14:21,C10-0062/2025,,Après le considérant 5 - Am 1,146,372,48
+176330,2025-05-08 12:14:31,C10-0062/2025,,Après le considérant 5 - Am 2,209,339,14
+176341,2025-05-08 12:08:41,RC-B10-0248/2025,,§ 1 - Am 1,154,379,19
+176343,2025-05-08 12:09:49,RC-B10-0248/2025,,Proposition de résolution (ensemble du texte),478,30,41
+176344,2025-05-08 12:07:05,RC-B10-0260/2025,,Après le § 5 - Am 1,154,389,12
+176349,2025-05-08 12:45:06,A10-0071/2025,,Lara Wolters - Après le § 8 - Am 1,105,290,161
+176681,2025-05-22 11:22:44,A10-0083/2025,,Borys Budka - Proposition de la Commission au Conseil,489,55,38
+176688,2025-05-22 11:19:20,A10-0043/2025,,Veronika Vrecionová - Proposition de la Commission,374,176,36
+176731,2025-05-22 11:38:51,A10-0063/2025,,Gheorghe Falcă - Proposition de résolution (ensemble du texte),260,194,110
+176743,2025-05-22 11:22:16,C10-0059/2025,,Proposition de la Commission,436,149,11
+176844,2025-05-22 11:17:42,A10-0087/2025,,Inese Vaidere - Proposition de la Commission,411,100,78
+176873,2025-05-22 11:09:51,A10-0085/2025,,Antonio Decaro - Proposition de la Commission,564,20,12
+176875,2025-05-22 11:18:25,A10-0043/2025,,Veronika Vrecionová - Rejet - Am 3,180,367,43
+176876,2025-05-22 11:18:51,A10-0043/2025,,Veronika Vrecionová - Après le considérant 11 - Am 4,181,396,4
+176877,2025-05-22 11:19:04,A10-0043/2025,,Veronika Vrecionová - Après le considérant 11 - Am 5,177,400,7
+176879,2025-05-22 11:16:38,A10-0087/2025,,"Inese Vaidere - Article 2, après le § 2 - Am 6",172,376,41
+176880,2025-05-22 11:16:51,A10-0087/2025,,Inese Vaidere - Après le considérant 5 - Am 5,185,362,42
+176881,2025-05-22 11:17:03,A10-0087/2025,,Inese Vaidere - Après le considérant 10 - Am 2,176,380,34
+176882,2025-05-22 11:17:15,A10-0087/2025,,Inese Vaidere - Après le considérant 10 - Am 4,217,348,25
+176883,2025-05-22 11:17:26,A10-0087/2025,,Inese Vaidere - Après le considérant 11 - Am 3,164,358,61
+176884,2025-05-22 11:05:30,A10-0085/2025,,"Antonio Decaro - Article 1, alinéa 1, point 16, sous-point b Règlement (UE) 2023/956 Article 22, § 2, point b - Am 10",159,411,6
+176885,2025-05-22 11:05:48,A10-0085/2025,,"Antonio Decaro - Article 1, alinéa 1, point 21, sous-point a Règlement (UE) 2023/956 Article 26, après le § 1 - Am 7S= 11S=",105,462,14
+176886,2025-05-22 11:06:02,A10-0085/2025,,"Antonio Decaro - Article 1, § 1, après le point 23 Règlement (UE) 2023/956 Article 30, § 2 - Am 15",103,438,47
+176887,2025-05-22 11:06:15,A10-0085/2025,,"Antonio Decaro - Article 1, alinéa 1, après le point 24 Règlement (UE) 2023/956 après l'article 32 - Am 25",158,411,19
+176888,2025-05-22 11:06:28,A10-0085/2025,,"Antonio Decaro - Article 1, alinéa 1, point 25, sous-point a Règlement (UE) 2023/956 Article 36, § 2, point b - Am 26",151,421,22
+176889,2025-05-22 11:06:40,A10-0085/2025,,"Antonio Decaro - Article 1, alinéa 1, point 25, sous-point a Règlement (UE) 2023/956 Article 36, § 2, point b - Am 31",187,387,17
+176890,2025-05-22 11:07:03,A10-0085/2025,,"Antonio Decaro - Annexe I, alinéa 1, point 2, sous-point a Règlement (UE) 2023/956 Annexe IV, point 4.1, quatrième phrase - Am 12",163,418,7
+176891,2025-05-22 11:07:15,A10-0085/2025,,"Antonio Decaro - Annexe II, point 1 Règlement (UE) 2023/956 Annexe VII, point 1 - Am 27",176,411,3
+176892,2025-05-22 11:07:43,A10-0085/2025,,Antonio Decaro - Après le considérant 1 - Am 17,169,415,8
+176893,2025-05-22 11:07:55,A10-0085/2025,,Antonio Decaro - Après le considérant 1 - Am 18,171,407,5
+176894,2025-05-22 11:08:06,A10-0085/2025,,Antonio Decaro - Après le considérant 1 - Am 19,164,407,20
+176895,2025-05-22 11:08:17,A10-0085/2025,,Antonio Decaro - Après le considérant 1 - Am 29,189,388,17
+176896,2025-05-22 11:08:28,A10-0085/2025,,Antonio Decaro - Après le considérant 1 - Am 30,195,387,11
+176897,2025-05-22 11:08:55,A10-0085/2025,,Antonio Decaro - Après le considérant 27 - Am 13,114,424,51
+176898,2025-05-22 11:09:06,A10-0085/2025,,Antonio Decaro - Après le considérant 27 - Am 14,111,428,52
+176899,2025-05-22 11:09:23,A10-0085/2025,,Antonio Decaro - Après le considérant 27 - Am 23,172,405,6
+176900,2025-05-22 11:09:36,A10-0085/2025,,Antonio Decaro - Après le considérant 29 - Am 9,171,414,9
+176901,2025-05-22 11:19:56,C10-0059/2025,,Rejet-Am 1,115,442,41
+176902,2025-05-22 11:21:05,C10-0059/2025,,"Article 1, point 2 Règlement (UE) nº 575/2013 Article 510, §§ 7 et 8-Am 6",259,288,46
+176903,2025-05-22 11:23:56,A10-0063/2025,,Gheorghe Falcă - § 2,266,304,22
+176904,2025-05-22 11:24:11,A10-0063/2025,,Gheorghe Falcă - Après le § 2 - Am 16,192,374,20
+176905,2025-05-22 11:24:56,A10-0063/2025,,Gheorghe Falcă - Après le § 2 - Am 19,263,108,222
+176906,2025-05-22 11:25:10,A10-0063/2025,,Gheorghe Falcă - Après le § 2 - Am 20,264,252,76
+176907,2025-05-22 11:25:39,A10-0063/2025,,Gheorghe Falcă - Après le § 2 - Am 30,397,139,55
+176909,2025-05-22 11:27:24,A10-0063/2025,,Gheorghe Falcă - § 7 - Am 35,180,248,153
+176914,2025-05-22 11:28:03,A10-0063/2025,,Gheorghe Falcă - Après le § 8 - Am 36,319,255,15
+176915,2025-05-22 11:28:40,A10-0063/2025,,Gheorghe Falcă - § 10 - Am 23S,252,305,19
+176916,2025-05-22 11:29:03,A10-0063/2025,,Gheorghe Falcă - § 11 - Am 24S,378,183,24
+176917,2025-05-22 11:29:20,A10-0063/2025,,Gheorghe Falcă - § 12 - Am 25S,198,359,33
+176919,2025-05-22 11:29:46,A10-0063/2025,,Gheorghe Falcă - Après le § 19 - Am 28/1,190,379,12
+176920,2025-05-22 11:30:00,A10-0063/2025,,Gheorghe Falcă - Après le § 19 - Am 28/2,179,375,9
+176921,2025-05-22 11:30:13,A10-0063/2025,,Gheorghe Falcă - Après le § 19 - Am 28/3,192,374,11
+176922,2025-05-22 11:30:26,A10-0063/2025,,Gheorghe Falcă - Après le § 19 - Am 28/4,193,373,15
+176923,2025-05-22 11:31:30,A10-0063/2025,,Gheorghe Falcă - § 21 - Am 26S,255,314,15
+176924,2025-05-22 11:31:55,A10-0063/2025,,Gheorghe Falcă - § 21 - Am 38,298,273,15
+176929,2025-05-22 11:32:31,A10-0063/2025,,Gheorghe Falcă - Après le § 24 - Am 31,151,405,31
+176935,2025-05-22 11:33:42,A10-0063/2025,,Gheorghe Falcă - § 27 - Am 27,233,303,46
+176936,2025-05-22 11:35:06,A10-0063/2025,,Gheorghe Falcă - § 33 - Am 42,309,263,13
+176938,2025-05-22 11:38:10,A10-0063/2025,,Gheorghe Falcă - Après le considérant F - Am 29,294,261,28
+176944,2025-05-21 16:03:29,EP error,,Demande du groupe PfE,132,334,5
+176945,2025-05-21 16:03:49,EP error,,Demande du groupe The Left,102,378,7
