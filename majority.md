@@ -4,6 +4,55 @@ the aim is to identify for each vote what the eu groups wanted.
 
 this will be used after to show for each mep when they voted with their group of rebelled
 
+xavier@kundera:/var/www/mepwatch/parlparse$ /tmp/sqlite3 data/term10.db 
+/tmp/sqlite3: /lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.38' not found (required by /tmp/sqlite3)
+/tmp/sqlite3: /lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.29' not found (required by /tmp/sqlite3)
+/tmp/sqlite3: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by /tmp/sqlite3)
+/tmp/sqlite3: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /tmp/sqlite3)
+/tmp/sqlite3: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /tmp/sqlite3)
+
+INSERT INTO groupmajority (
+  eugroup, rollcall, majority, cohesion, total, `for`, against, abstention, created_at, updated_at
+)
+SELECT
+  agg.eugroup,
+  agg.rollcall,
+  CASE
+    WHEN agg.for_count >= agg.against_count AND agg.for_count >= agg.abstention_count THEN 'FOR'
+    WHEN agg.against_count >= agg.for_count AND agg.against_count >= agg.abstention_count THEN 'AGAINST'
+    ELSE 'ABSTENTION'
+  END                                                  AS majority,
+  CAST(ROUND(
+    100.0 * MAX(agg.for_count, agg.against_count, agg.abstention_count) / NULLIF(agg.total_count, 0)
+  ) AS INTEGER)                                        AS cohesion,
+  agg.total_count                                      AS total,
+  agg.for_count                                        AS `for`,
+  agg.against_count                                    AS against,
+  agg.abstention_count                                 AS abstention,
+  CURRENT_TIMESTAMP,
+  CURRENT_TIMESTAMP
+FROM (
+  SELECT
+    p.eugroup,
+    p.rollcall,
+    COUNT(*) FILTER (WHERE p.position = 'FOR')         AS for_count,
+    COUNT(*) FILTER (WHERE p.position = 'AGAINST')     AS against_count,
+    COUNT(*) FILTER (WHERE p.position = 'ABSTENTION')  AS abstention_count,
+    COUNT(*)                                           AS total_count
+  FROM positions p
+  WHERE p.eugroup IS NOT NULL
+    AND p.position IS NOT NULL
+  GROUP BY p.eugroup, p.rollcall
+) agg
+ON CONFLICT (eugroup, rollcall) DO UPDATE SET
+  majority   = excluded.majority,
+  cohesion   = excluded.cohesion,
+  total      = excluded.total,
+  `for`      = excluded.`for`,
+  against    = excluded.against,
+  abstention = excluded.abstention,
+  updated_at = CURRENT_TIMESTAMP;
+
 ## big script to update:
 
 ``` sql

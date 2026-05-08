@@ -1,7 +1,6 @@
 SELECT
-  ecr.rollcall,
-  r.date,
-  ecr.majority AS far_right_epp_position,
+  COUNT(*)     AS votes_together,
+  r.ref        AS reference,
   rep.title    AS report_title
 FROM groupmajority ecr
 JOIN groupmajority pfe  ON pfe.rollcall  = ecr.rollcall
@@ -22,6 +21,7 @@ WHERE ecr.eugroup = 'ECR'
   AND pfe.majority = ppe.majority
   AND (
     (sd.majority IS NOT NULL  AND sd.majority  != ppe.majority)
-    AND (ren.majority IS NOT NULL AND ren.majority != ppe.majority)
+    OR (ren.majority IS NOT NULL AND ren.majority != ppe.majority)
   )
-ORDER BY r.date DESC;
+GROUP BY rep.title, r.ref
+ORDER BY votes_together DESC;
