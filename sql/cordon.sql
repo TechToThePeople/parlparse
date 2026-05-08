@@ -1,13 +1,15 @@
 SELECT
   ecr.rollcall,
   r.date,
-  ecr.majority AS far_right_epp_position
+  ecr.majority AS far_right_epp_position,
+  rep.title    AS report_title
 FROM groupmajority ecr
 JOIN groupmajority pfe  ON pfe.rollcall  = ecr.rollcall
 JOIN groupmajority ppe  ON ppe.rollcall  = ecr.rollcall
 JOIN groupmajority sd   ON sd.rollcall   = ecr.rollcall
 JOIN groupmajority ren  ON ren.rollcall  = ecr.rollcall
 JOIN rollcalls r        ON r.id          = ecr.rollcall
+LEFT JOIN reports rep   ON rep.reference = r.ref
 WHERE ecr.eugroup = 'ECR'
   AND pfe.eugroup = 'PfE'
   AND ppe.eugroup = 'PPE'
@@ -20,6 +22,6 @@ WHERE ecr.eugroup = 'ECR'
   AND pfe.majority = ppe.majority
   AND (
     (sd.majority IS NOT NULL  AND sd.majority  != ppe.majority)
-    OR (ren.majority IS NOT NULL AND ren.majority != ppe.majority)
+    AND (ren.majority IS NOT NULL AND ren.majority != ppe.majority)
   )
 ORDER BY r.date DESC;
