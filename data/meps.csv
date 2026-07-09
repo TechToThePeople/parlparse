@@ -1,4 +1,5 @@
 epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid
+278815,Ufuk,KÂHYA,,2026-06-30,,1988-01-19,nl,,Greens/EFA,Progressief Nederland,,,10,278815
 278406,Norbert,HERHAMMER,,2026-06-11,,1975-04-08,de,,EPP,Christlich Demokratische Union Deutschlands,,,10,278406
 277777,Csaba,BOGDÁN,,2026-05-22,,,hu,,EPP,Tisztelet és Szabadság Párt,,,10,277777
 277178,Majbritt,BIRKHOLM,,2026-04-16,,1981-05-10,dk,,Patriots,Dansk Folkeparti,,,10,277178
@@ -671,7 +672,7 @@ epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,
 96761,Axel,VOSS,,2024-07-02,,1963-04-07,de,,EPP,Christlich Demokratische Union Deutschlands,,,10,
 96756,Sabine,VERHEYEN,,2024-07-02,,1964-10-24,de,,EPP,Christlich Demokratische Union Deutschlands,,,10,
 96752,Martin,HÄUSLING,,2024-07-02,,1961-03-26,de,,Greens/EFA,Bündnis 90/Die Grünen,,,10,
-96725,Bas,EICKHOUT,,2024-07-02,,1976-10-08,nl,,Greens/EFA,GroenLinks-PvdA,,,10,
+96725,Bas,EICKHOUT,,2024-07-02,2026-06-20,1976-10-08,nl,,Greens/EFA,GroenLinks-PvdA,,,10,
 96711,Pascal,CANFIN,,2024-07-02,,1974-08-22,fr,,Renew,Renaissance,,,10,
 96709,Morten,LØKKEGAARD,,2024-07-02,,1964-12-20,dk,,Renew,"Venstre, Danmarks Liberale Parti",,,10,
 96697,Waldemar,TOMASZEWSKI,,2024-07-02,,1965-03-03,lt,,ECR,Lietuvos lenkų rinkimų akcija – Krikščioniškų šeimų sąjunga,,,10,
