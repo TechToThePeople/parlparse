@@ -1,0 +1,679 @@
+{
+  "type": "vot",
+  "document_id": "PV-10-2024-10-09-VOT",
+  "date": "2024-10-09",
+  "item_count": 3,
+  "items": [
+    {
+      "dlvId": "961919",
+      "title": "Strengthening Moldova’s resilience against Russian interference ahead of the upcoming presidential elections and a constitutional referendum on EU integration",
+      "documents": [],
+      "voting_count": 22,
+      "votings": [
+        {
+          "votingId": "169731",
+          "type": "TITLE_BLOCK",
+          "result": "",
+          "title": "Joint motion for a resolution RC-B10-0072/2024\n(PPE, S&D, ECR, Renew, Verts/ALE, The Left)",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169760",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 5",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169761",
+          "type": "AMENDMENT",
+          "result": "REJECTED",
+          "title": "§ 7",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169762",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 8",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169733",
+          "type": "AMENDMENT",
+          "result": "REJECTED",
+          "title": "After § 8",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169763",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 9",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169764",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 9",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169765",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 9",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169734",
+          "type": "AMENDMENT",
+          "result": "REJECTED",
+          "title": "After § 9",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169766",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 11",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169767",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "§ 11",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169768",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 17",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169769",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Recital C",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169736",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Recital O",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169770",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Motion for a resolution (as a whole)",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169738",
+          "type": "TITLE_BLOCK",
+          "result": "",
+          "title": "Other motions for resolutions",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169739",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0072/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169740",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0073/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169741",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0080/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169742",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0081/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169743",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0082/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169744",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0085/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        }
+      ]
+    },
+    {
+      "dlvId": "961921",
+      "title": "The democratic backsliding and threats to political pluralism in Georgia",
+      "documents": [],
+      "voting_count": 50,
+      "votings": [
+        {
+          "votingId": "169745",
+          "type": "TITLE_BLOCK",
+          "result": "",
+          "title": "Joint motion for a resolution RC-B10-0070/2024\n(PPE, S&D, ECR, Renew, Verts/ALE, Members)",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169771",
+          "type": "AMENDMENT",
+          "result": "REJECTED",
+          "title": "§ 1",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169772",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 1",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169773",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 1",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169774",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 1",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169775",
+          "type": "AMENDMENT",
+          "result": "REJECTED",
+          "title": "After § 1",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169776",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 2",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169777",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 2",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169778",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 2",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169779",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 3",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169780",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 5",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169781",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 5",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169782",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 5",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169783",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 5",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169748",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 6",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169749",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 7",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169784",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 7",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169785",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "§ 7",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169786",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "§ 7",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169787",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 8",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169788",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 8",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169789",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 8",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169790",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 9",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169750",
+          "type": "AMENDMENT",
+          "result": "REJECTED",
+          "title": "After § 9",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169791",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 18",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169792",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 18",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169793",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 18",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169794",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 19",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169795",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 19",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169796",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 19",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169797",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 21",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169798",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 21",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169799",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 21",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169800",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "§ 22",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169801",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 22",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169802",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "§ 22",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169803",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Recital O",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169804",
+          "type": "AMENDMENT",
+          "result": "",
+          "title": "Recital P",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169805",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Recital P",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169806",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Recital P",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169807",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Recital P",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169808",
+          "type": "AMENDMENT",
+          "result": "ADOPTED",
+          "title": "Motion for a resolution (as a whole)",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169752",
+          "type": "TITLE_BLOCK",
+          "result": "",
+          "title": "Other motions for resolutions",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169753",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0070/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169754",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0071/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169755",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0074/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169756",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0079/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169757",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0083/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169758",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0084/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        },
+        {
+          "votingId": "169759",
+          "type": "AMENDMENT",
+          "result": "LAPSED",
+          "title": "B10-0086/2024",
+          "for": null,
+          "against": null,
+          "abstention": null
+        }
+      ]
+    },
+    {
+      "dlvId": "001691",
+      "title": "Additional information",
+      "documents": [],
+      "voting_count": 0,
+      "votings": []
+    }
+  ]
+}

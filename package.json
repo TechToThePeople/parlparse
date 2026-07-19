@@ -4,7 +4,10 @@
   "description": "Parse the european parliament public register of documents",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test openapi/test/*.test.js",
+    "test:unit": "node --test openapi/test/lib.test.js",
+    "test:integration": "node --test openapi/test/rcv.test.js openapi/test/vot.test.js openapi/test/att.test.js",
+    "test:update": "UPDATE_FIXTURES=1 node --test openapi/test/*.test.js"
   },
   "author": "xavier dutoit",
   "license": "aGPL3",
@@ -21,6 +24,7 @@
     "node-fetch": "^2.6.1",
     "osmosis": "^1.1.8",
     "pg": "^8.5.1",
+    "puppeteer-core": "^25.3.0",
     "signale": "^1.4.0",
     "sqlite3": "^5.1.7",
     "xlsx": "^0.16.9",

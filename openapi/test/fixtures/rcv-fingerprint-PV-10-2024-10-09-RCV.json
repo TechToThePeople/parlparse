@@ -1,0 +1,820 @@
+{
+  "type": "rcv",
+  "document_id": "PV-10-2024-10-09-RCV",
+  "date": "2024-10-09",
+  "sitting_id": "MTG-PL-2024-10-09",
+  "decision_count": 57,
+  "rollcall_count": 19,
+  "handvote_count": 38,
+  "decisions": [
+    {
+      "order": "10.0",
+      "title": "RC-B10-0072/2024 – § 11 – Am 2",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 467,
+      "against": 95,
+      "abstention": 90,
+      "attendees": 652,
+      "voter_count": 652,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0072-AM-2"
+      ],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "10.0",
+      "title": "§ 3",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "11.0",
+      "title": "§ 11",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "12.0",
+      "title": "RC-B10-0072/2024 – § 17",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 542,
+      "against": 70,
+      "abstention": 49,
+      "attendees": 661,
+      "voter_count": 661,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "12.0",
+      "title": "§ 5",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-2-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "13.0",
+      "title": "RC-B10-0072/2024 – Recital C",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 572,
+      "against": 46,
+      "abstention": 46,
+      "attendees": 664,
+      "voter_count": 664,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "13.0",
+      "title": "§ 5",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-2-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "14.0",
+      "title": "Recital O",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0072-AM-3"
+      ],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "14.0",
+      "title": "§ 5",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-2-3"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "15.0",
+      "title": "§ 6",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0070-AM-3"
+      ],
+      "responsible_group": "Renew"
+    },
+    {
+      "order": "15.0",
+      "title": "RC-B10-0072/2024 – Motion for a resolution (as a whole)",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 508,
+      "against": 53,
+      "abstention": 104,
+      "attendees": 665,
+      "voter_count": 665,
+      "decided_on": [],
+      "responsible_group": null
+    },
+    {
+      "order": "16.0",
+      "title": "§ 7",
+      "method": "VOTE_ELECTRONIC",
+      "outcome": "ADOPTED",
+      "for": 327,
+      "against": 280,
+      "abstention": 42,
+      "attendees": 649,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0070-AM-4"
+      ],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "17.0",
+      "title": "B10-0072/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "Renew"
+    },
+    {
+      "order": "18.0",
+      "title": "B10-0073/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "18.0",
+      "title": "§ 7",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-8-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "19.0",
+      "title": "B10-0080/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "PPE"
+    },
+    {
+      "order": "19.0",
+      "title": "§ 7",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-8-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "2.0",
+      "title": "RC-B10-0072/2024 – § 5",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 530,
+      "against": 49,
+      "abstention": 77,
+      "attendees": 656,
+      "voter_count": 656,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "2.0",
+      "title": "RC-B10-0070/2024 – § 1 – Am 2",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "REJECTED",
+      "for": 93,
+      "against": 526,
+      "abstention": 41,
+      "attendees": 660,
+      "voter_count": 660,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0070-AM-2"
+      ],
+      "responsible_group": "ESN"
+    },
+    {
+      "order": "20.0",
+      "title": "B10-0081/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "Verts/ALE"
+    },
+    {
+      "order": "21.0",
+      "title": "B10-0082/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "The Left"
+    },
+    {
+      "order": "21.0",
+      "title": "§ 8",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-9-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "22.0",
+      "title": "B10-0085/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "S&D"
+    },
+    {
+      "order": "22.0",
+      "title": "§ 8",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-9-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "23.0",
+      "title": "RC-B10-0070/2024 – § 9",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 490,
+      "against": 114,
+      "abstention": 61,
+      "attendees": 665,
+      "voter_count": 665,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "24.0",
+      "title": "After § 9",
+      "method": "VOTE_HAND",
+      "outcome": "REJECTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0070-AM-5"
+      ],
+      "responsible_group": "PfE"
+    },
+    {
+      "order": "26.0",
+      "title": "§ 18",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-4-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "27.0",
+      "title": "§ 18",
+      "method": "VOTE_ELECTRONIC",
+      "outcome": "ADOPTED",
+      "for": 340,
+      "against": 280,
+      "abstention": 26,
+      "attendees": 646,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-4-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "29.0",
+      "title": "§ 19",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-5-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "3.0",
+      "title": "RC-B10-0072/2024 – § 7 – Am 1",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "REJECTED",
+      "for": 156,
+      "against": 307,
+      "abstention": 180,
+      "attendees": 643,
+      "voter_count": 643,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0072-AM-1"
+      ],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "30.0",
+      "title": "§ 19",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-5-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "32.0",
+      "title": "§ 21",
+      "method": "VOTE_ELECTRONIC",
+      "outcome": "ADOPTED",
+      "for": 350,
+      "against": 259,
+      "abstention": 43,
+      "attendees": 652,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-6-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "33.0",
+      "title": "§ 21",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-6-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "35.0",
+      "title": "RC-B10-0070/2024 – § 22/1",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 501,
+      "against": 65,
+      "abstention": 95,
+      "attendees": 661,
+      "voter_count": 661,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-10-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "36.0",
+      "title": "RC-B10-0070/2024 – § 22/2",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 487,
+      "against": 113,
+      "abstention": 50,
+      "attendees": 650,
+      "voter_count": 650,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-10-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "37.0",
+      "title": "RC-B10-0070/2024 – Recital O",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 473,
+      "against": 114,
+      "abstention": 72,
+      "attendees": 659,
+      "voter_count": 659,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "39.0",
+      "title": "Recital P",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-3-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "4.0",
+      "title": "RC-B10-0072/2024 – § 8",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 527,
+      "against": 82,
+      "abstention": 49,
+      "attendees": 658,
+      "voter_count": 658,
+      "decided_on": [],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "4.0",
+      "title": "RC-B10-0070/2024 – § 1/1",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 504,
+      "against": 89,
+      "abstention": 69,
+      "attendees": 662,
+      "voter_count": 662,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-1-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "40.0",
+      "title": "Recital P",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-3-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "41.0",
+      "title": "Recital P",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-3-3"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "42.0",
+      "title": "RC-B10-0070/2024 – Motion for a resolution (as a whole)",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 495,
+      "against": 73,
+      "abstention": 86,
+      "attendees": 654,
+      "voter_count": 654,
+      "decided_on": [],
+      "responsible_group": null
+    },
+    {
+      "order": "44.0",
+      "title": "B10-0070/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "Renew"
+    },
+    {
+      "order": "45.0",
+      "title": "B10-0071/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "46.0",
+      "title": "B10-0074/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "ESN"
+    },
+    {
+      "order": "47.0",
+      "title": "B10-0079/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "PPE"
+    },
+    {
+      "order": "48.0",
+      "title": "B10-0083/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "Verts/ALE"
+    },
+    {
+      "order": "49.0",
+      "title": "B10-0084/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "S&D"
+    },
+    {
+      "order": "5.0",
+      "title": "After § 8",
+      "method": "VOTE_HAND",
+      "outcome": "REJECTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0072-AM-4"
+      ],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "5.0",
+      "title": "RC-B10-0070/2024 – § 1/2",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 456,
+      "against": 126,
+      "abstention": 64,
+      "attendees": 646,
+      "voter_count": 646,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-1-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "50.0",
+      "title": "B10-0086/2024",
+      "method": "VOTE_HAND",
+      "outcome": "LAPSED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [],
+      "responsible_group": "The Left"
+    },
+    {
+      "order": "6.0",
+      "title": "RC-B10-0070/2024 – After § 1 – Am 1",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "REJECTED",
+      "for": 212,
+      "against": 316,
+      "abstention": 134,
+      "attendees": 662,
+      "voter_count": 662,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0070-AM-1"
+      ],
+      "responsible_group": "The Left"
+    },
+    {
+      "order": "7.0",
+      "title": "§ 9",
+      "method": "VOTE_ELECTRONIC",
+      "outcome": "ADOPTED",
+      "for": 515,
+      "against": 85,
+      "abstention": 28,
+      "attendees": 628,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961919-SPLIT-1-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "8.0",
+      "title": "RC-B10-0072/2024 – § 9/2",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 500,
+      "against": 119,
+      "abstention": 41,
+      "attendees": 660,
+      "voter_count": 660,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961919-SPLIT-1-2"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "8.0",
+      "title": "§ 2",
+      "method": "VOTE_HAND",
+      "outcome": "ADOPTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-7-1"
+      ],
+      "responsible_group": "original text"
+    },
+    {
+      "order": "9.0",
+      "title": "After § 9",
+      "method": "VOTE_HAND",
+      "outcome": "REJECTED",
+      "for": null,
+      "against": null,
+      "abstention": null,
+      "attendees": null,
+      "voter_count": null,
+      "decided_on": [
+        "eli/dl/doc/RC-10-2024-0072-AM-5"
+      ],
+      "responsible_group": "ECR"
+    },
+    {
+      "order": "9.0",
+      "title": "RC-B10-0070/2024 – § 2/2",
+      "method": "VOTE_ELECTRONIC_ROLLCALL",
+      "outcome": "ADOPTED",
+      "for": 499,
+      "against": 98,
+      "abstention": 67,
+      "attendees": 664,
+      "voter_count": 664,
+      "decided_on": [
+        "eli/dl/doc/MTG-PL-2024-10-09-VOT-ITM-961921-SPLIT-7-2"
+      ],
+      "responsible_group": "original text"
+    }
+  ]
+}
