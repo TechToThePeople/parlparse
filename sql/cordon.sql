@@ -2,7 +2,13 @@ SELECT
   ecr.rollcall,
   r.date,
   ecr.majority AS far_right_epp_position,
-  rep.title    AS report_title
+  rep.title    AS report_title,
+  r.ref        AS reference,
+  r.name       AS name,
+  r."for"      AS for,
+  r.against    AS against,
+  r.abstention AS abstention,
+  ppe.cohesion AS epp_cohesion
 FROM groupmajority ecr
 JOIN groupmajority pfe  ON pfe.rollcall  = ecr.rollcall
 JOIN groupmajority ppe  ON ppe.rollcall  = ecr.rollcall
