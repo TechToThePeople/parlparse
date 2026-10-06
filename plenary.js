@@ -7,6 +7,7 @@ date,code,status,reference,name,baseurl,extensions
 //https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/yyyy/mm-dd/liste_presence/Pl_PV(yyyy)mm-dd(RCV)_XC.xml
 const term = 10;
 const https = require("https");
+const fs = require("fs");
 const downloadFile = require("./lib/download.js");
 const roll = require("./lib/rollcall.js");
 const { init } = require("./lib/mep.js");
@@ -139,8 +140,22 @@ async function run(date) {
       log.warn("no plenary with rollcalls published on " + date, url + ".xml");
       return;
     }
-    console.log(e);
-    return;
+    // WAF challenge (202): fall back to an archive already on disk, e.g. one
+    // pushed here by `openapi/plenary.js --download --push`. The plenaries
+    // insert below skips it when it has already been processed.
+    if (e.statusCode === 202) {
+      const dest = "./data/RCV/" + date + ".xml.zip";
+      if (fs.existsSync(dest)) {
+        log.warn("WAF challenge (202): processing already pushed " + dest);
+        plenary = { date, url: url + ".xml" };
+      } else {
+        log.warn("WAF challenge (202) and no local RCV file for " + date);
+        return;
+      }
+    } else {
+      console.log(e);
+      return;
+    }
   }
 
   await init();

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env node */
 /**
  * openapi/plenary.js — Import all decisions for a plenary sitting from the
  * EP Open Data API into the term10.db database.
@@ -22,16 +23,81 @@ const {
   fetchMeetingByDate,
   fetchDecisions,
   fetchDocumentList,
-  fetchDocumentById,
   extractDateFromId,
+  getWaf,
 } = require("./lib");
 
 const { spawnSync } = require("child_process");
 const path = require("path");
+const fs = require("fs");
+const zlib = require("zlib");
 
-const argv = minimist(process.argv.slice(2), {
-  alias: { h: "help", a: "all", d: "date", f: "fetch" },
-});
+const RCV_DIR = path.resolve(__dirname, "..", "data", "RCV");
+const PUSH_DEST = "kundera:/var/www/mepwatch/parlparse/data/RCV/";
+
+/** Raw RCV XML file behind a plenary date (same URL rcv.js downloads). */
+function rcvUrl(date) {
+  return `https://www.europarl.europa.eu/doceo/document/PV-10-${date}-RCV_EN.xml`;
+}
+
+/**
+ * Resolve the date argument: "YYYY-MM-DD", or a day offset from today
+ * (0 = today, -1 = yesterday, 1 = tomorrow).
+ */
+function normalizeDate(input) {
+  const s = String(input).trim();
+  if (/^-?\d+$/.test(s)) {
+    const d = new Date();
+    d.setDate(d.getDate() + Number(s));
+    const p = (n) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  }
+  return s;
+}
+
+/**
+ * Force-download the RCV XML via the WAF browser and gzip it to
+ * data/RCV/<date>.xml.zip. Best effort: returns the path, or null on failure.
+ */
+async function downloadRcv(date) {
+  const zipPath = path.join(RCV_DIR, `${date}.xml.zip`);
+  const url = rcvUrl(date);
+  console.log(`📥 downloading RCV: ${url}`);
+  try {
+    const result = await getWaf().downloadViaBrowser(url);
+    if (
+      result.status !== 200 ||
+      !result.body.includes("<PV.RollCallVoteResults")
+    ) {
+      console.warn(`   ⚠️  HTTP ${result.status} — not valid RCV XML, skipped`);
+      return null;
+    }
+    fs.mkdirSync(RCV_DIR, { recursive: true });
+    const compressed = zlib.gzipSync(result.body, { level: 9 });
+    fs.writeFileSync(zipPath, compressed);
+    console.log(
+      `   ✓ saved ${zipPath} (${result.body.length} → ${compressed.length} bytes)`
+    );
+    return zipPath;
+  } catch (e) {
+    console.warn(`   ⚠️  download failed: ${e.message}`);
+    return null;
+  }
+}
+
+/** Copy a saved RCV archive to kundera via scp. */
+function pushRcv(zipPath) {
+  console.log(`📤 pushing ${path.basename(zipPath)} → ${PUSH_DEST}`);
+  const r = spawnSync("scp", [zipPath, PUSH_DEST], { stdio: "inherit" });
+  if (r.status !== 0) console.warn(`   ⚠️  scp exited with code ${r.status}`);
+}
+
+// A bare day offset (e.g. "-1") looks like a flag to minimist; rewrite it as
+// --date=<n> so it survives parsing. Positive offsets parse as positionals.
+const argv = minimist(
+  process.argv.slice(2).map((a) => (/^-\d+$/.test(a) ? `--date=${a}` : a)),
+  { alias: { h: "help", a: "all", d: "date", f: "fetch" } }
+);
 
 if (argv.help) {
   console.log(`
@@ -39,12 +105,14 @@ Usage:
   node openapi/plenary.js [options] [<date>]
 
 Arguments:
-  <date>     A date in YYYY-MM-DD format (e.g. 2024-07-17)
+  <date>     YYYY-MM-DD, or a day offset: 0 = today, -1 = yesterday, 1 = tomorrow
 
 Options:
   --all, -a     Process all available plenary dates
-  --date, -d <date>   Alternative to positional arg
+  --date, -d <date>   Alternative to positional arg (same format)
   --fetch, -f   Also fetch raw JSON files (calls rcv.js, vot.js, att.js)
+  --download    Force-download the RCV XML (compressed) for the date(s)
+  --push        scp the RCV archive to kundera (with --download, after it)
   --force       Re-download even if already cached
   --help, -h    Show this help
 
@@ -54,6 +122,8 @@ Description:
   columns in the rollcalls table.
   With --fetch, also saves raw JSON for roll-call votes, vote results,
   and attendance lists to data/openapi/.
+  With --download, force-downloads the compressed RCV XML to data/RCV/;
+  combine with --push to copy it to kundera.
 `);
   process.exit(0);
 }
@@ -71,12 +141,12 @@ async function main() {
       .sort();
     console.log(`   → ${dates.length} plenary dates found`);
   } else {
-    const input = argv._[0] || argv.date;
-    if (!input) {
+    const input = argv._.length ? argv._[0] : argv.date;
+    if (input === undefined || input === null || input === "") {
       console.error("Error: provide a date or use --all");
       process.exit(1);
     }
-    dates = [input];
+    dates = [normalizeDate(input)];
   }
 
   let totalNew = 0;
@@ -85,6 +155,14 @@ async function main() {
 
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
+
+    // Optional: force-download the RCV XML, then push it to kundera
+    if (argv.download) await downloadRcv(date);
+    if (argv.push) {
+      const zipPath = path.join(RCV_DIR, `${date}.xml.zip`);
+      if (fs.existsSync(zipPath)) pushRcv(zipPath);
+      else console.warn(`   ⚠️  nothing to push for ${date}: ${zipPath}`);
+    }
 
     // Optional: fetch raw JSON files + English XML first
     if (argv.fetch) {
@@ -141,6 +219,18 @@ async function main() {
       `\n✅ Total: ${dates.length} dates, +${totalNew} new, ~${totalUpd} updated, -${totalSkip} skipped`
     );
   }
+
+  if (argv.download) {
+    // Release the WAF browser opened by downloadRcv (if any).
+    try {
+      await Promise.race([
+        getWaf().closeBrowser(),
+        new Promise((r) => setTimeout(r, 5000)),
+      ]);
+    } catch {
+      /* waf unavailable or browser already closed */
+    }
+  }
   process.exit(0);
 }
 
@@ -152,6 +242,7 @@ async function processDate(dateStr) {
   const meeting = await fetchMeetingByDate(dateStr);
   if (!meeting) {
     console.error(`⚠️  No plenary sitting found for ${dateStr}, skipping`);
+    console.log(`   📄 RCV file: ${rcvUrl(dateStr)}`);
     return {
       inserted: 0,
       updated: 0,
@@ -183,7 +274,9 @@ async function processDate(dateStr) {
   try {
     decisionsData = await fetchDecisions(sittingId);
   } catch (e) {
-    console.error(`   ❌ Failed to fetch decisions: ${e.message}`);
+    // ponytail: decisions 404 for the current day until published; keep going and point at the raw file
+    console.warn(`   ⚠️  Failed to fetch decisions: ${e.message}`);
+    console.log(`   📄 RCV file: ${rcvUrl(dateStr)}`);
     return {
       inserted: 0,
       updated: 0,
