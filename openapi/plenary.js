@@ -25,15 +25,14 @@ const {
   fetchDocumentList,
   extractDateFromId,
   getWaf,
+  RCV_DIR,
+  saveRcvXml,
+  pushRcv,
 } = require("./lib");
 
 const { spawnSync } = require("child_process");
 const path = require("path");
 const fs = require("fs");
-const zlib = require("zlib");
-
-const RCV_DIR = path.resolve(__dirname, "..", "data", "RCV");
-const PUSH_DEST = "kundera:/var/www/mepwatch/parlparse/data/RCV/";
 
 /** Raw RCV XML file behind a plenary date (same URL rcv.js downloads). */
 function rcvUrl(date) {
@@ -60,7 +59,6 @@ function normalizeDate(input) {
  * data/RCV/<date>.xml.zip. Best effort: returns the path, or null on failure.
  */
 async function downloadRcv(date) {
-  const zipPath = path.join(RCV_DIR, `${date}.xml.zip`);
   const url = rcvUrl(date);
   console.log(`📥 downloading RCV: ${url}`);
   try {
@@ -72,24 +70,11 @@ async function downloadRcv(date) {
       console.warn(`   ⚠️  HTTP ${result.status} — not valid RCV XML, skipped`);
       return null;
     }
-    fs.mkdirSync(RCV_DIR, { recursive: true });
-    const compressed = zlib.gzipSync(result.body, { level: 9 });
-    fs.writeFileSync(zipPath, compressed);
-    console.log(
-      `   ✓ saved ${zipPath} (${result.body.length} → ${compressed.length} bytes)`
-    );
-    return zipPath;
+    return saveRcvXml(date, result.body);
   } catch (e) {
     console.warn(`   ⚠️  download failed: ${e.message}`);
     return null;
   }
-}
-
-/** Copy a saved RCV archive to kundera via scp. */
-function pushRcv(zipPath) {
-  console.log(`📤 pushing ${path.basename(zipPath)} → ${PUSH_DEST}`);
-  const r = spawnSync("scp", [zipPath, PUSH_DEST], { stdio: "inherit" });
-  if (r.status !== 0) console.warn(`   ⚠️  scp exited with code ${r.status}`);
 }
 
 // A bare day offset (e.g. "-1") looks like a flag to minimist; rewrite it as

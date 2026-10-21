@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env node */
 /**
  * Shared utilities for the EP Open Data API v2 scripts.
  * Uses native fetch (Node 18+) — no node-fetch dependency.
@@ -6,6 +7,8 @@
 
 const fs = require("fs");
 const path = require("path");
+const zlib = require("zlib");
+const { spawnSync } = require("child_process");
 // waf is loaded lazily — see getWaf() below
 
 /** Lazy waf accessor — only loads puppeteer-core when first needed. */
@@ -16,8 +19,9 @@ function getWaf() {
 }
 
 const API_BASE = "https://data.europarl.europa.eu/api/v2";
-const API_BASE_URL = "https://data.europarl.europa.eu";
 const OUTPUT_BASE = path.resolve(__dirname, "..", "data", "openapi");
+const RCV_DIR = path.resolve(__dirname, "..", "data", "RCV");
+const PUSH_DEST = "kundera:/var/www/mepwatch/parlparse/data/RCV/";
 const TERM = 10;
 
 /**
@@ -219,6 +223,28 @@ function saveJson(subfolder, filename, data) {
 }
 
 /**
+ * Gzip raw RCV XML into data/RCV/<date>.xml.zip. Returns the zip path.
+ */
+function saveRcvXml(date, data) {
+  fs.mkdirSync(RCV_DIR, { recursive: true });
+  const zipPath = path.join(RCV_DIR, `${date}.xml.zip`);
+  const compressed = zlib.gzipSync(data, { level: 9 });
+  fs.writeFileSync(zipPath, compressed);
+  console.log(
+    `   ✓ saved ${zipPath} (${data.length} → ${compressed.length} bytes)`
+  );
+  return zipPath;
+}
+
+/** Copy a saved RCV archive to kundera via scp. */
+function pushRcv(zipPath) {
+  console.log(`📤 pushing ${path.basename(zipPath)} → ${PUSH_DEST}`);
+  const r = spawnSync("scp", [zipPath, PUSH_DEST], { stdio: "inherit" });
+  if (r.status !== 0) console.warn(`   ⚠️  scp exited with code ${r.status}`);
+  return r.status === 0;
+}
+
+/**
  * Common argument parser for all three scripts.
  * Returns { input, help }.
  */
@@ -276,6 +302,8 @@ Examples:
 module.exports = {
   API_BASE,
   OUTPUT_BASE,
+  RCV_DIR,
+  PUSH_DEST,
   TERM,
   fetchDocumentList,
   fetchDocumentById,
@@ -285,6 +313,8 @@ module.exports = {
   resolveId,
   extractDateFromId,
   saveJson,
+  saveRcvXml,
+  pushRcv,
   parseArgs,
   printUsage,
   getWaf,

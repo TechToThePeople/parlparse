@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env node */
 /**
  * openapi/rcv.js — Download English RCV XML and process into the database.
  *
@@ -14,13 +15,13 @@
 
 const fs = require("fs");
 const path = require("path");
-const zlib = require("zlib");
 const {
   fetchDocumentList,
   extractDateFromId,
   parseArgs,
   printUsage,
   getWaf,
+  saveRcvXml,
 } = require("./lib");
 
 const WORK_TYPE = "VOTE_ROLLCALL_PLENARY";
@@ -113,12 +114,7 @@ async function processDate(date, force) {
       result.status === 200 &&
       result.body.includes("<PV.RollCallVoteResults")
     ) {
-      fs.mkdirSync(rcvDir, { recursive: true });
-      const compressed = zlib.gzipSync(result.body, { level: 9 });
-      fs.writeFileSync(zipPath, compressed);
-      console.log(
-        `   ✓ saved ${zipPath} (${result.body.length} → ${compressed.length} bytes)`
-      );
+      saveRcvXml(date, result.body);
     } else if (result.status === 202) {
       console.error(
         `   ❌ WAF challenge failed after retry — cannot download ${identifier}`
