@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+/* eslint-env node */
 /**
  * Unit tests for lib.js utility functions and fingerprint helpers.
  * Pure logic — no network calls.
  */
 
-const { describe, it, mock } = require("node:test");
+const { describe, it } = require("node:test");
 const assert = require("node:assert");
 const path = require("path");
 const lib = require("../lib");
@@ -305,5 +306,25 @@ describe("fingerprintAtt", () => {
     assert.strictEqual(f.language_count, 3);
     assert.deepStrictEqual(f.languages, ["DEU", "ENG", "FRA"]);
     assert.strictEqual(f.file_count, 3);
+  });
+});
+
+// ─── saveRcvXml ──────────────────────────────────────────────────────
+
+describe("saveRcvXml", () => {
+  it("gzips the XML into data/RCV/<date>.xml.zip", () => {
+    const zlib = require("zlib");
+    const date = "1900-01-01";
+    const xml = "<PV.RollCallVoteResults></PV.RollCallVoteResults>";
+    const zipPath = lib.saveRcvXml(date, Buffer.from(xml));
+    try {
+      assert.strictEqual(zipPath, path.join(lib.RCV_DIR, `${date}.xml.zip`));
+      const roundTrip = zlib
+        .gunzipSync(require("fs").readFileSync(zipPath))
+        .toString();
+      assert.strictEqual(roundTrip, xml);
+    } finally {
+      require("fs").unlinkSync(zipPath);
+    }
   });
 });
