@@ -8,7 +8,11 @@
     "test:unit": "node --test openapi/test/lib.test.js",
     "test:integration": "node --test openapi/test/rcv.test.js openapi/test/vot.test.js openapi/test/att.test.js",
     "test:update": "UPDATE_FIXTURES=1 node --test openapi/test/*.test.js",
-    "majority:csv": "node sql/run.js"
+    "majority:csv": "node sql/run.js",
+    "db:migrate": "knex migrate:latest --knexfile knexfile.js",
+    "db:migrate:status": "knex migrate:list --knexfile knexfile.js",
+    "db:migrate:rollback": "knex migrate:rollback --knexfile knexfile.js",
+    "db:migrate:make": "knex migrate:make --knexfile knexfile.js"
   },
   "author": "xavier dutoit",
   "license": "aGPL3",
