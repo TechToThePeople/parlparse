@@ -1,7 +1,9 @@
-config = require("./config/database.js")();
+const config = require("./config/database.js")();
 
-//  settings: { client: 'sqlite3', connection: { filename: 'term10.db' } },
-config.connections.mepwatch.settings.connection.filename = "./data/term10.db";
-console.log(config.connections.mepwatch);
+// Which connection knex uses: DB=live for the postgres server, default is the
+// local sqlite file.
+const name = process.env.DB || "mepwatch";
+const settings = config.connections[name].settings;
+if (name === "mepwatch") settings.connection.filename = "./data/term10.db";
 
-module.exports = config.connections.mepwatch.settings;
+module.exports = settings;
