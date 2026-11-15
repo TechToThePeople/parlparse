@@ -98,6 +98,7 @@ Options:
   --fetch, -f   Also fetch raw JSON files (calls rcv.js, vot.js, att.js)
   --download    Force-download the RCV XML (compressed) for the date(s)
   --push        scp the RCV archive to kundera (with --download, after it)
+  --skip-rollcall Import only hand/electronic votes, leave roll-call rows as they are
   --force       Re-download even if already cached
   --help, -h    Show this help
 
@@ -156,12 +157,16 @@ async function main() {
       await new Promise((r) => setTimeout(r, 1000));
     }
 
-    // Skip DB import if already processed and --force not set
-    const existing = await db("rollcalls")
+    // Skip DB import if already processed and --force not set. With
+    // --skip-rollcall only non-roll-call decisions count as processed, so dates
+    // with RCV rows but no hand/electronic rows are still imported.
+    const processed = db("rollcalls")
       .join("plenaries", "rollcalls.plenary", "plenaries.id")
       .where("plenaries.date", date)
-      .whereNotNull("rollcalls.method")
-      .first();
+      .whereNotNull("rollcalls.method");
+    if (argv["skip-rollcall"])
+      processed.whereNot("rollcalls.method", "VOTE_ELECTRONIC_ROLLCALL");
+    const existing = await processed.first();
     if (!argv.force && existing) {
       console.log(
         `   ⏭️  ${date} already processed (use --force to re-import)`
@@ -271,7 +276,16 @@ async function processDate(dateStr) {
     };
   }
 
-  const decisions = decisionsData.data || [];
+  // --skip-rollcall leaves roll-call rows (and their per-MEP positions) alone and
+  // imports only the hand/electronic votes.
+  const all = decisionsData.data || [];
+  const decisions = argv["skip-rollcall"]
+    ? all.filter(
+        (d) =>
+          d.decision_method !==
+          "def/ep-decision-methods/VOTE_ELECTRONIC_ROLLCALL"
+      )
+    : all;
 
   if (decisions.length === 0) {
     console.log(`   ⚠️  No decisions returned for ${sittingId}`);
