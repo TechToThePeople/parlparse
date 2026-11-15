@@ -141,6 +141,34 @@ node openapi/plenary.js 2024-07-17       # single date
 node openapi/plenary.js --all            # dates from the VOT + RCV document lists
 ```
 
+### `node openapi/vot-xml.js [<date> | --all] [--dry] [--force-names]`
+
+Fills `rollcalls.ref`, `rollcalls.name` and `rollcalls.committee` from the
+"Results of votes" XML (`data.europarl.europa.eu/distribution/doc/PV-10-<date>-VOT_en.xml`,
+cached in `data/VOT/<date>.xml`, no WAF needed).
+
+The RCV XML only covers roll-calls, so hand/electronic votes arrive from the
+decisions API without a reference and with whatever label the API had. The VOT
+XML is per vote *item* and carries:
+
+| XML | used for |
+|---|---|
+| `<vote committee="Committee on Legal Affairs">` | `committee` — mapped to the acronym (`JURI`), joint committees become `ENVI, SANT` |
+| `<documents><document documentNumber="A10-0283/2026">` | `ref` when empty (for motions the `RC-…` reference in the label wins, since that is what was voted) |
+| `<voting><label status="rcv">A10-0280/2026 – … – Motion for a resolution (as a whole)</label>` | `name` |
+| `<voting><amendmentSubject>After § 2</amendmentSubject><amendmentNumber>1</amendmentNumber>` | `name` when there is no label |
+| `numberFavor` / `numberAgainst` / `numberAbstention` | **never written** — only compared with the RCV import, mismatches are reported |
+
+`name` is only replaced when the current one is empty or still a French RCV
+string (`Après le § 20 - Am 3`); `--force-names` replaces every name.
+
+```
+node openapi/vot-xml.js 2024-07-17
+node openapi/vot-xml.js --all            # sitting dates already in the database
+```
+
+Rapporteurs are in the XML (`author="ŽALIMAS"`) but are not imported yet.
+
 ### `node openapi/report-creator.js [--dry] [--limit N]`
 
 Fills `reports.creator` with the committee(s) or political group(s) behind each

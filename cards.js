@@ -6,7 +6,7 @@ const d3 = require("d3-dsv");
 const log = require("./lib/log.js");
 const term = 10;
 
-const groupAlias = {
+const _groupAlias = {
   //  PPE: "EPP",
   NI: "NA",
   //  "The Left": "GUE/NGL",
@@ -85,6 +85,7 @@ const writePositions = async (id, date) => {
 
 log.time("cards");
 let written = 0;
+let refreshed = 0;
 db.select(db.raw("rollcalls.*,title,url"))
   .from("rollcalls")
   .leftJoin("reports", "rollcalls.ref", "reports.reference")
@@ -96,24 +97,34 @@ db.select(db.raw("rollcalls.*,title,url"))
       const vdate = vote.date.substring(0, 10);
       console.log(vdate);
       try {
-        const exists = fs.existsSync(csv);
-        if (exists && !date && !argv.force) {
+        if (date && !argv.force && vdate !== date) continue;
+        // existing card: refresh the metadata json only, the csv is expensive
+        if (fs.existsSync(csv) && !argv.force) {
+          fs.writeFileSync(
+            "../" + term + "/cards/" + vote.id + ".json",
+            JSON.stringify(vote)
+          );
+          refreshed++;
           continue;
         }
-        if (date && !argv.force) {
-          if (vdate !== date) continue;
-        }
-      } catch (err) {
+      } catch {
         // nothing special to do, let's create the card that doesn't exist
       }
       written++;
       const dest = "../" + term + "/cards/" + vote.id + ".json";
       fs.writeFileSync(dest, JSON.stringify(vote));
+      // the per-MEP csv only changes when positions change; rewriting the json
+      // keeps name/ref/committee/outcome/requested_by fresh for existing cards
+      if (fs.existsSync(csv) && !argv.force) continue;
+      // only roll-call votes have individual positions; a hand/electronic/secret
+      // vote would just produce an empty csv, so don't write one at all
+      if (vote.method && vote.method !== "RCV") continue;
       await writePositions(vote.id, vdate);
       //      mepid,mep,result,group,identifier
     }
     log.success(votes.length, "votes processed");
-    if (votes.length !== written) log.info(written, "new votes");
+    if (refreshed) log.info(refreshed, "card metadata refreshed");
+    if (votes.length !== written + refreshed) log.info(written, "new votes");
     log.timeEnd("cards");
     process.exit(1);
   });
