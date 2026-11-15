@@ -299,12 +299,48 @@ Examples:
 `);
 }
 
+/**
+ * EP `decision_method` values (minus the def/ prefix) mapped to the short names
+ * this repo uses everywhere else (data/RCV, PV-…-RCV, rcv.js). Unknown methods
+ * pass through unchanged so a new EP method shows up instead of disappearing.
+ */
+const METHOD_NAMES = {
+  VOTE_ELECTRONIC_ROLLCALL: "RCV",
+  VOTE_HAND: "HAND",
+  VOTE_ELECTRONIC: "ELECTRONIC",
+  VOTE_ELECTRONIC_SECRET: "SECRET",
+};
+
+/** "def/ep-decision-methods/VOTE_HAND" -> "HAND"; "VOTE_HAND" -> "HAND". */
+function methodName(rawMethod) {
+  const api = String(rawMethod || "").replace("def/ep-decision-methods/", "");
+  return METHOD_NAMES[api] || api;
+}
+
+/**
+ * The API sends responsible_organization_label as one raw string, often
+ * "ECR\nPfE, ECR" or "S&D, Verts/ALE:". Split on commas/newlines, drop
+ * trailing colons and duplicates, join with ", ". Returns null when empty.
+ */
+function normalizeRequestedBy(raw) {
+  if (!raw) return null;
+  const seen = [];
+  for (const part of String(raw).split(/[,\n]/)) {
+    const group = part.trim().replace(/:+$/, "").trim();
+    if (group && !seen.includes(group)) seen.push(group);
+  }
+  return seen.length ? seen.join(", ").slice(0, 255) : null;
+}
+
 module.exports = {
   API_BASE,
   OUTPUT_BASE,
   RCV_DIR,
   PUSH_DEST,
   TERM,
+  METHOD_NAMES,
+  methodName,
+  normalizeRequestedBy,
   fetchDocumentList,
   fetchDocumentById,
   fetchDecisions,

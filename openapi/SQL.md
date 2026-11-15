@@ -72,9 +72,9 @@ Individual roll-call vote items within a plenary sitting.
 | `plenary` | integer | nullable | FK → `plenaries.id` |
 | `green_remark` | varchar(255) | nullable | Internal remark |
 | `term` | integer | nullable | Parliamentary term (10) |
-| `method` | varchar(50) | nullable | Vote method: `ROLL_CALL`, `HAND`, or `ELECTRONIC` (populated by `openapi/plenary.js`) |
+| `method` | varchar(50) | nullable | Vote method: `RCV`, `HAND`, or `ELECTRONIC` (populated by `openapi/plenary.js`; empty for rows imported from the RCV XML) |
 | `attendees` | integer | nullable | Total number of MEPs who voted (for electronic votes) |
-| `requested_by` | varchar(255) | nullable | Political group(s) that requested the vote (e.g. `"The Left"`, `"PPE, ECR, ESN"`, `"original text"`) |
+| `requested_by` | varchar(255) | nullable | Political group(s) that requested the vote (e.g. `"The Left"`, `"PPE, ECR, ESN"`, `"original text"`). Comma-separated, deduped; NULL for rows only ever seen by the RCV-XML importer |
 | `doc_ref` | varchar(255) | nullable | Specific amendment document reference (e.g. `B-10-2024-0007-AM-1`) |
 | `vote_type` | varchar(50) | nullable | Category: `amendment`, `split`, `original`, `main`, `procedural`, `other` |
 | `created_by` / `updated_by` | integer | nullable | Strapi admin |
@@ -238,7 +238,7 @@ Parliamentary reports referenced by roll-call votes.
 | `reference` | varchar(255) | NOT NULL | Document reference (e.g. `A10-0001/2024`) |
 | `title` | text | nullable | Report title |
 | `date` | date | nullable | Publication date |
-| `committee` | varchar(255) | nullable | Responsible committee |
+| `creator` | varchar(255) | nullable | Committee(s) responsible, or the political group(s) that tabled the report — comma-separated (`ECON, BUDG`, `ECR, Greens/EFA, Renew, S&D, EPP`); `0`/NULL when neither is known. Filled by `openapi/report-creator.js`; exported to `text_tabled.csv` as `committee` |
 | `url` | varchar(255) | nullable | Document URL |
 | `raw` | text | nullable | Raw metadata |
 | `topic` | varchar(255) | nullable | Topic tag |
@@ -375,7 +375,7 @@ SELECT r.id, r.name, r.method, r.requested_by, r.vote_type, r.doc_ref
 FROM rollcalls r
 JOIN plenaries p ON p.id = r.plenary
 WHERE p.date = '2024-10-09'
-  AND r.method != 'VOTE_ELECTRONIC_ROLLCALL'
+  AND r.method != 'RCV'
 ORDER BY r.id;
 ```
 

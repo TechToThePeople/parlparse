@@ -138,8 +138,32 @@ For each sitting date it:
 
 ```
 node openapi/plenary.js 2024-07-17       # single date
-node openapi/plenary.js --all            # all plenary dates
+node openapi/plenary.js --all            # dates from the VOT + RCV document lists
 ```
+
+### `node openapi/report-creator.js [--dry] [--limit N]`
+
+Fills `reports.creator` with the committee(s) or political group(s) behind each
+report, comma-separated (`ECON, BUDG`, `ECR, Greens/EFA, Renew, S&D, EPP`).
+
+Resolution order per report:
+
+1. `reports.raw` when it is an OpenAPI document — `creator` entries are
+   `org/<CODE>`, e.g. `org/ENVI` (committee) or `org/PPE` (political group).
+2. `GET /documents/<eli>` built from the reference (`A10-0098/2025` →
+   `A-10-2025-0098`, `A9-0162/2024` → `A-9-2024-0162`).
+3. The oeil procedure page in `reports.url` (parses the `Committee responsible`
+   table) for motions where the API lists only groups.
+
+Group codes are mapped to the names used in `meps.eugroup` (`PPE` → `EPP`,
+`S-D` → `S&D`, `VERTS-ALE` → `Greens/EFA`, `PFE` → `PfE`, `THE-LEFT` →
+`The Left`, `NI` → `NA`, …), so `../10` can colour them like MEP rows. Reports
+keep committee acronyms as the EP writes them (`ENVI`, `SANT`, `ECON, BUDG`).
+
+Only 16 of 655 rows resolve to nothing (the junk `--force` reference and a few
+`RC-B10-*` consolidated resolutions); they stay `0`/NULL. Re-run `node csv.js`
+afterwards to publish the values to `../10/data/text_tabled.csv`, where the
+column is still headed `committee` because that is what the site reads.
 
 ---
 
