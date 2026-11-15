@@ -1,5 +1,5 @@
 #!/bin/bash
-# Publish the generated CSVs to ../10/data.
+# Publish the generated CSVs (and explanation.json) to ../10/data.
 #
 # - `set -e`: a failed copy aborts instead of leaving a half-published set.
 # - `[ -s ]`: an empty/missing CSV stops the run instead of overwriting good data.
@@ -9,7 +9,7 @@ set -euo pipefail
 
 dest=../10/data
 
-for f in meps.csv text_tabled.csv item_rollcall.csv cordon.csv cordon-report.csv cordon-total.csv; do
+for f in meps.csv text_tabled.csv item_rollcall.csv cordon.csv cordon-report.csv cordon-total.csv explanation.json; do
   src="data/$f"
   if [ ! -s "$src" ]; then
     echo "aborting: $src is missing or empty" >&2

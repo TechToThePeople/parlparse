@@ -13,7 +13,7 @@ types.setTypeParser(1082, (val) => val);
 
 const rollcall = async () => {
   const file = "./data/item_rollcall.csv";
-  const head = "identifier,date,report,desc,title,for,against,abstention,no_show,excused".split(
+  const head = "identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method".split(
     ","
   );
 
@@ -62,7 +62,11 @@ const rollcall = async () => {
       "against",
       "abstention",
       "name as title",
-      "ref as report"
+      "ref as report",
+      "requested_by",
+      "outcome",
+      "committee",
+      "method"
     )
     .where("term", term)
     .from("rollcalls");

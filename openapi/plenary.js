@@ -362,12 +362,18 @@ async function processDate(dateStr) {
       detailedRef
     );
 
+    // decision_outcome is all the EP publishes for hand votes (no counts)
+    const outcome =
+      String(dec.decision_outcome || "").replace("def/ep-statuses/", "") ||
+      null;
+
     const row = {
       id,
       date: dateStr,
       name: title,
       ref: docRef,
       method,
+      outcome,
       requested_by: requestedBy,
       doc_ref: detailedRef,
       vote_type: voteType,
@@ -396,6 +402,7 @@ async function processDate(dateStr) {
           abstention: row.abstention ?? existing.abstention,
           name: existing.name || row.name,
           ref: existing.ref || row.ref,
+          outcome: row.outcome ?? existing.outcome,
         });
       updated++;
     } else {

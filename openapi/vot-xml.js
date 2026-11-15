@@ -35,7 +35,7 @@ const path = require("path");
 const minimist = require("minimist");
 const { parseStringPromise } = require("xml2js");
 const db = require("../lib/db");
-const { fetchDocumentList, extractDateFromId, TERM } = require("./lib");
+const { TERM } = require("./lib");
 
 const VOT_DIR = path.resolve(__dirname, "..", "data", "VOT");
 const BASE = "https://data.europarl.europa.eu/distribution/doc";
@@ -243,12 +243,11 @@ async function processDate(date, stats) {
 async function main() {
   let dates;
   if (argv.all) {
-    console.log("📋 Fetching vote-result document dates…");
-    const docs = await fetchDocumentList("VOTE_RESULTS_PLENARY");
-    dates = docs
-      .map((d) => extractDateFromId(d.identifier))
-      .filter(Boolean)
-      .sort();
+    // The sitting dates we have in the database — no API call, so no rate limit,
+    // and dates without roll-calls are irrelevant anyway.
+    const rows = await db("plenaries").distinct("date").orderBy("date");
+    dates = rows.map((r) => r.date).filter(Boolean);
+    console.log(`📋 ${dates.length} sitting dates from the database`);
   } else {
     const input = argv._.length ? argv._[0] : null;
     if (!input) {

@@ -77,6 +77,8 @@ Individual roll-call vote items within a plenary sitting.
 | `requested_by` | varchar(255) | nullable | Political group(s) that requested the vote (e.g. `"The Left"`, `"PPE, ECR, ESN"`, `"original text"`). Comma-separated, deduped; NULL for rows only ever seen by the RCV-XML importer |
 | `doc_ref` | varchar(255) | nullable | Specific amendment document reference (e.g. `B-10-2024-0007-AM-1`) |
 | `vote_type` | varchar(50) | nullable | Category: `amendment`, `split`, `original`, `main`, `procedural`, `other` |
+| `committee` | varchar(100) | nullable | Committee acronyms responsible for the voted item (`ENVI`, `ENVI, SANT`), from the VOT XML |
+| `outcome` | varchar(20) | nullable | `ADOPTED`, `REJECTED`, `LAPSED`, `WITHDRAWN` — from the API `decision_outcome`; the only result for hand votes, which have no counts |
 | `created_by` / `updated_by` | integer | nullable | Strapi admin |
 | `created_at` / `updated_at` | datetime | nullable, default NOW | Timestamps |
 

@@ -60,6 +60,7 @@ node openapi/report-creator.js             # committees/groups for all 655 repor
 | `openapi/rcv.js [<id> \| <date>]` | `data/openapi/rcv/*.json` |
 | `openapi/att.js [<id> \| <date>]` | `data/openapi/att/*.json` |
 | `openapi/report-creator.js [--dry]` | `reports.creator` |
+| `openapi/vot-xml.js [<date> \| --all]` | `rollcalls.ref`, `name`, `committee` from the VOT XML |
 
 See `openapi/README.md` for endpoints and `openapi/SQL.md` for the schema.
 
@@ -92,11 +93,13 @@ Vocabulary worth knowing:
 | file | written by | columns |
 |---|---|---|
 | `data/meps.csv` | `csv.js` | `epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid` |
-| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused` |
+| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method` |
 | `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc` |
 | `data/cordon.csv` | `sql/cordon.sql` | `rollcall,date,far_right_epp_position,report_title,reference,name,for,against,abstention,epp_cohesion` |
 | `data/cordon-report.csv` | `sql/cordon-report.sql` | `votes_together,reference,report_title` |
 | `data/cordon-total.csv` | `sql/cordon-total.sql` | `votes_in_common,total_votes,pct_of_total` (single row) |
+| `../10/data/explanation.json` | hand-written (`data/explanation.json`) | one text per vote type (`HAND`, `ELECTRONIC`, `SECRET`, `default`), shown by `vote.html` when a vote has no per-MEP record |
+| `../10/cards/<id>.json` + `.csv` | `cards.js` | metadata card per vote (`rollcalls.*` + `reports.title/url`, so it carries `method`, `outcome`, `committee`, `requested_by`) and its per-MEP positions. Every run refreshes the JSON of every card; the CSV is only written for `method='RCV'` rows and only rebuilt with `--force` (or when missing) |
 | `data/mep_rollcall.csv` | `rollcall.js` | `mepid,mep,result,group,identifier` (per-MEP votes; gzipped before pushing, not in `prod.sh`) |
 
 Formats the site relies on:
@@ -123,6 +126,19 @@ Formats the site relies on:
   (`&amp;` instead of `&`) — the site does not unescape it.
 - **`meps.country`** is lowercase ISO-3166 alpha-2 (`hu`, `fr`), `term` is `10`,
   `eugroup` is the group short name (`PPE`, `S&D`, `PfE`, …).
+- **`item_rollcall.method`** is `RCV`, `HAND`, `ELECTRONIC` or `SECRET`; the site
+  counts it for the "% transparent" tab. Empty for the 21 decisions the API
+  published without a method.
+- **`item_rollcall.committee`** is the EP acronym (`ENVI`, `ENVI, SANT` for
+  joint), never the full name. Empty when the vote item's VOT document is
+  missing for that date.
+- **`item_rollcall.outcome`** is `ADOPTED` / `REJECTED` / `LAPSED` / `WITHDRAWN`.
+  For hand votes it is the *only* result — the EP publishes no counts for them,
+  so `for`/`against`/`abstention` are empty and the site shows the outcome there.
+- **`item_rollcall.requested_by`** is the normalised `rollcalls.requested_by`
+  (the group(s) that requested the roll-call, e.g. `The Left`, `ECR, PfE`,
+  `original text`), empty for votes imported only from the RCV XML. The site
+  shows it under the vote date.
 - **`cordon.far_right_epp_position`** is one of `for` / `against` / `abstention`;
   `epp_cohesion` is 0–100.
 
