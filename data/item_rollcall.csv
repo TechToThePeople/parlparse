@@ -5634,3 +5634,575 @@ identifier,date,report,desc,title,for,against,abstention,no_show,excused
 197241,2026-09-17 12:13:25,RC-B10-0394/2026,,§ 8 - Am 5,145,417,24,0,0
 197242,2026-09-17 12:13:50,RC-B10-0394/2026,,Proposition de résolution (ensemble du texte),374,198,19,0,0
 197246,2026-09-17 12:51:34,B10-0406/2026,,Après le § 14 - Am 1/2,297,267,21,0,0
+197352,2026-10-06 12:39:46,A10-0097/2026,,"Markus Ferber, Carla Tavares - Accord provisoire - Am 2",458,138,61,0,0
+197356,2026-10-06 12:39:05,A10-0099/2026,,"Markus Ferber, Carla Tavares - Accord provisoire - Am 2",450,135,75,0,0
+197360,2026-10-06 12:33:12,A10-0188/2026,,"Tonino Picula, Ivars Ijabs - Accord provisoire - Am 2",536,101,16,0,0
+197457,2026-10-07 12:28:30,A10-0237/2026,,Hilde Vautmans - Proposition de résolution (ensemble du texte),454,86,110,0,0
+197460,2026-10-06 12:35:55,A10-0100/2026,,Liesbet Sommen - Accord provisoire - Am 46,499,49,104,0,0
+197464,2026-10-07 12:15:29,A10-0242/2026,,Sandra Gómez López - Proposition de résolution (ensemble du texte),608,55,7,0,0
+197467,2026-10-06 12:42:51,A10-0233/2026,,Emma Wiesner - Proposition de la Commission,515,108,35,0,0
+197470,2026-10-07 12:10:47,A10-0095/2026,,"Pierfrancesco Maran, Mélissa Camara - Accord provisoire - Am 6",658,2,4,0,0
+197472,2026-10-06 12:40:15,A10-0206/2026,,"Markus Ferber, Carla Tavares - Projet de règlement du Conseil",462,121,75,0,0
+197484,2026-10-06 12:50:09,A10-0225/2026,,Estelle Ceulemans - Proposition de résolution (ensemble du texte),413,210,29,0,0
+197486,2026-10-07 12:09:02,A10-0131/2026,,Matteo Ricci - Accord provisoire - Am 18,475,96,70,0,0
+197497,2026-10-07 12:16:37,A10-0241/2026,,Hélder Sousa Silva - Proposition de résolution (ensemble du texte),605,56,7,0,0
+197501,2026-10-07 12:16:04,A10-0243/2026,,Nicolae Ștefănuță - Proposition de résolution (ensemble du texte),601,57,9,0,0
+197509,2026-10-07 12:12:31,A10-0254/2026,,Lena Düpont - Proposition de la Commission,470,180,18,0,0
+197600,2026-10-06 12:52:57,A10-0238/2026,,Kinga Kollár - Proposition de résolution (ensemble du texte),364,69,162,0,0
+197601,2026-10-06 12:32:55,A10-0188/2026,,"Tonino Picula, Ivars Ijabs - Proposition de rejet - Am 3",83,540,24,0,0
+197617,2026-10-06 12:44:27,A10-0225/2026,,Estelle Ceulemans - § 12 - Am 4,210,427,20,0,0
+197618,2026-10-06 12:44:41,A10-0225/2026,,Estelle Ceulemans - § 13 - Am 5,189,453,12,0,0
+197619,2026-10-06 12:45:00,A10-0225/2026,,Estelle Ceulemans - § 17 - Am 6,192,458,7,0,0
+197623,2026-10-06 12:45:33,A10-0225/2026,,Estelle Ceulemans - § 18 - Am 7,181,467,3,0,0
+197629,2026-10-06 12:46:59,A10-0225/2026,,Estelle Ceulemans - Considérant AJ - Am 2,187,458,10,0,0
+197630,2026-10-06 12:47:16,A10-0225/2026,,Estelle Ceulemans - Annexe,434,137,84,0,0
+197632,2026-10-06 12:47:32,A10-0225/2026,,"Estelle Ceulemans - Annexe, partie introductive/1",453,123,76,0,0
+197633,2026-10-06 12:47:44,A10-0225/2026,,"Estelle Ceulemans - Annexe, partie introductive/2",251,375,11,0,0
+197635,2026-10-06 12:48:04,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 1/1",442,122,88,0,0
+197636,2026-10-06 12:48:19,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 1/2",254,378,10,0,0
+197637,2026-10-06 12:48:35,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 5, point 1 - Am 8",186,462,9,0,0
+197638,2026-10-06 12:48:52,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 11",340,223,93,0,0
+197639,2026-10-06 12:49:09,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 12, point 1 - Am 9",181,463,12,0,0
+197641,2026-10-06 12:49:26,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 16/1",279,326,51,0,0
+197642,2026-10-06 12:49:38,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 16/2",276,362,12,0,0
+197643,2026-10-06 12:49:52,A10-0225/2026,,"Estelle Ceulemans - Annexe, recommandation 16/3",298,226,130,0,0
+197644,2026-10-06 12:42:33,A10-0233/2026,,"Emma Wiesner - Article 1, § 1, après le point 6 - Am 24",284,350,24,0,0
+197674,2026-10-06 12:52:42,A10-0238/2026,,Kinga Kollár - Après le § 30 - Am 1,247,347,38,0,0
+197814,2026-10-07 12:11:29,A10-0254/2026,,Lena Düpont - Article 1 – alinéa 1 – point 1; Directive (UE) 2015/637 – Article 7 – après le paragraphe 1 - Am 42,289,370,5,0,0
+197815,2026-10-07 12:11:41,A10-0254/2026,,Lena Düpont - Article 1 – alinéa 1 – point 1; Directive (UE) 2015/637 – Article 7 – après le paragraphe 4  - Am 39,122,337,200,0,0
+197816,2026-10-07 12:11:56,A10-0254/2026,,Lena Düpont - Article 1 – alinéa 1 – point 10; Directive (UE) 2015/637 – Article 19 – après l'alinéa 3  - Am 38,457,193,17,0,0
+197817,2026-10-07 12:12:07,A10-0254/2026,,Lena Düpont - Article 1 – alinéa 1 – point -1; Directive (UE) 2015/637 – après le considérant 15 - Am 40,205,256,196,0,0
+197818,2026-10-07 12:12:19,A10-0254/2026,,Lena Düpont - Après le considérant 1 - Am 41,289,365,3,0,0
+197819,2026-10-07 12:17:00,A10-0237/2026,,"Hilde Vautmans - § 1, après le point a - Am 12",200,420,48,0,0
+197820,2026-10-07 12:17:11,A10-0237/2026,,"Hilde Vautmans - § 1, après le point a - Am 60",211,440,5,0,0
+197821,2026-10-07 12:17:25,A10-0237/2026,,"Hilde Vautmans - § 1, point c - Am 13",69,569,28,0,0
+197822,2026-10-07 12:17:43,A10-0237/2026,,"Hilde Vautmans - § 1, point e - Am 1",571,54,31,0,0
+197823,2026-10-07 12:17:54,A10-0237/2026,,"Hilde Vautmans - § 1, après le point h - Am 27",206,336,119,0,0
+197824,2026-10-07 12:18:08,A10-0237/2026,,"Hilde Vautmans - § 1, après le point i - Am 64",141,463,51,0,0
+197825,2026-10-07 12:18:29,A10-0237/2026,,"Hilde Vautmans - § 1, après le point j - Am 29",362,266,24,0,0
+197826,2026-10-07 12:18:40,A10-0237/2026,,"Hilde Vautmans - § 1, point k - Am 32",181,449,33,0,0
+197827,2026-10-07 12:18:49,A10-0237/2026,,"Hilde Vautmans - § 1, après le point k - Am 33",214,437,14,0,0
+197828,2026-10-07 12:18:59,A10-0237/2026,,"Hilde Vautmans - § 1, après le point k - Am 66",174,450,19,0,0
+197829,2026-10-07 12:19:09,A10-0237/2026,,"Hilde Vautmans - § 1, point l - Am 16",130,491,45,0,0
+197830,2026-10-07 12:19:19,A10-0237/2026,,"Hilde Vautmans - § 1, point n - Am 2",566,40,50,0,0
+197831,2026-10-07 12:19:29,A10-0237/2026,,"Hilde Vautmans - § 1, après le point o - Am 67",195,439,23,0,0
+197832,2026-10-07 12:19:47,A10-0237/2026,,"Hilde Vautmans - § 1, point v - Am 34",180,477,13,0,0
+197833,2026-10-07 12:20:21,A10-0237/2026,,"Hilde Vautmans - § 1, après le point y - Am 69",185,438,29,0,0
+197835,2026-10-07 12:22:04,A10-0237/2026,,"Hilde Vautmans - § 1, point ab - Am 20",91,541,13,0,0
+197836,2026-10-07 12:22:14,A10-0237/2026,,"Hilde Vautmans - § 1, après le point ab - Am 30",416,153,91,0,0
+197837,2026-10-07 12:22:25,A10-0237/2026,,"Hilde Vautmans - § 1, point ac - Am 21S",74,559,18,0,0
+197838,2026-10-07 12:22:35,A10-0237/2026,,"Hilde Vautmans - § 1, point ai - Am 35",187,473,9,0,0
+197839,2026-10-07 12:22:45,A10-0237/2026,,"Hilde Vautmans - § 1, point am - Am 3",546,25,66,0,0
+197840,2026-10-07 12:22:55,A10-0237/2026,,"Hilde Vautmans - § 1, après le point am - Am 24",500,43,122,0,0
+197841,2026-10-07 12:23:04,A10-0237/2026,,"Hilde Vautmans - § 1, point ao - Am 4",573,26,49,0,0
+197842,2026-10-07 12:23:14,A10-0237/2026,,"Hilde Vautmans - § 1, après le point ao - Am 42",536,40,78,0,0
+197843,2026-10-07 12:23:24,A10-0237/2026,,"Hilde Vautmans - § 1, après le point ao - Am 43",569,37,45,0,0
+197844,2026-10-07 12:23:38,A10-0237/2026,,"Hilde Vautmans - § 1, après le point aq - Am 31",382,173,95,0,0
+197847,2026-10-07 12:23:52,A10-0237/2026,,"Hilde Vautmans - § 1, point au/2",415,218,31,0,0
+197848,2026-10-07 12:24:03,A10-0237/2026,,"Hilde Vautmans - § 1, point au/3",379,266,19,0,0
+197849,2026-10-07 12:24:30,A10-0237/2026,,"Hilde Vautmans - § 1, après le point aw - Am 22",55,482,121,0,0
+197850,2026-10-07 12:24:45,A10-0237/2026,,Hilde Vautmans - Après le § 2 - Am 23,56,489,116,0,0
+197851,2026-10-07 12:24:56,A10-0237/2026,,Hilde Vautmans - § 5 - Am 36,195,457,10,0,0
+197852,2026-10-07 12:25:11,A10-0237/2026,,Hilde Vautmans - Après le considérant A - Am 48,159,499,8,0,0
+197855,2026-10-07 12:25:36,A10-0237/2026,,Hilde Vautmans - Considérant F/2,468,106,76,0,0
+197856,2026-10-07 12:25:46,A10-0237/2026,,Hilde Vautmans - Après le considérant F - Am 5,133,466,66,0,0
+197857,2026-10-07 12:26:12,A10-0237/2026,,Hilde Vautmans - Après le considérant G - Am 51,105,534,25,0,0
+197858,2026-10-07 12:26:26,A10-0237/2026,,Hilde Vautmans - Considérant H - Am 25,429,140,80,0,0
+197859,2026-10-07 12:26:40,A10-0237/2026,,Hilde Vautmans - Considérant I - Am 8,69,562,30,0,0
+197860,2026-10-07 12:26:50,A10-0237/2026,,Hilde Vautmans - Après le considérant L - Am 9,72,454,139,0,0
+197861,2026-10-07 12:27:01,A10-0237/2026,,Hilde Vautmans - Après le considérant L - Am 52,191,460,12,0,0
+197862,2026-10-07 12:27:22,A10-0237/2026,,Hilde Vautmans - Après le considérant N - Am 55,203,457,8,0,0
+197863,2026-10-07 12:27:33,A10-0237/2026,,Hilde Vautmans - Après le considérant N - Am 56,190,468,10,0,0
+197866,2026-10-07 12:28:17,A10-0237/2026,,Hilde Vautmans - Considérant AO - Am 40/2,357,270,36,0,0
+197871,2026-10-07 12:21:53,A10-0237/2026,,"Hilde Vautmans - § 1, point aa",498,76,86,0,0
+197875,2026-10-08 12:14:11,B10-0423/2026,,Après le § 6 - Am 2,199,382,8,0,0
+197876,2026-10-08 12:14:22,B10-0423/2026,,§ 7 - Am 9,83,427,71,0,0
+197877,2026-10-08 12:14:31,B10-0423/2026,,Après le § 7 - Am 10,163,239,185,0,0
+197878,2026-10-08 12:14:40,B10-0423/2026,,Après le § 7 - Am 11,171,278,138,0,0
+197882,2026-10-08 12:15:02,B10-0423/2026,,Après le § 10 - Am 3,185,399,2,0,0
+197887,2026-10-08 12:15:27,B10-0423/2026,,Après le § 19 - Am 4,198,378,12,0,0
+197891,2026-10-08 12:15:48,B10-0423/2026,,§ 22/3,462,115,11,0,0
+197893,2026-10-08 12:16:03,B10-0423/2026,,§ 24,407,146,36,0,0
+197894,2026-10-08 12:16:12,B10-0423/2026,,§ 27 - Am 12,61,424,95,0,0
+197895,2026-10-08 12:16:22,B10-0423/2026,,Après le § 27 - Am 13,57,311,216,0,0
+197899,2026-10-08 12:16:41,B10-0423/2026,,Après le § 34 - Am 14,121,261,205,0,0
+197901,2026-10-08 12:17:05,B10-0423/2026,,Considérant C - Am 5,218,298,67,0,0
+197902,2026-10-08 12:17:15,B10-0423/2026,,Après le considérant F - Am 1,195,389,4,0,0
+197906,2026-10-08 12:17:38,B10-0423/2026,,Après le considérant Q - Am 7,191,248,144,0,0
+197939,2026-10-08 12:18:21,B10-0424/2026,,§ 1 - Am 88,173,394,18,0,0
+197941,2026-10-08 12:18:35,B10-0424/2026,,§ 1 - Am 31/1,352,218,9,0,0
+197942,2026-10-08 12:18:47,B10-0424/2026,,§ 1 - Am 31/2,366,178,32,0,0
+197943,2026-10-08 12:18:56,B10-0424/2026,,§ 1 - Am 31/3,348,169,41,0,0
+197944,2026-10-08 12:19:08,B10-0424/2026,,Après le § 1 - Am 58,194,374,7,0,0
+197945,2026-10-08 12:19:19,B10-0424/2026,,Après le § 1 - Am 59,199,363,5,0,0
+197946,2026-10-08 12:19:29,B10-0424/2026,,Après le § 1 - Am 60,189,359,23,0,0
+197947,2026-10-08 12:19:40,B10-0424/2026,,Après le § 1 - Am 61,201,351,15,0,0
+197948,2026-10-08 12:19:51,B10-0424/2026,,Après le § 1 - Am 89,191,376,11,0,0
+197949,2026-10-08 12:20:06,B10-0424/2026,,§ 2 - Am 127,194,382,3,0,0
+197950,2026-10-08 12:20:16,B10-0424/2026,,Après le § 2 - Am 1,187,389,5,0,0
+197951,2026-10-08 12:20:26,B10-0424/2026,,§ 3 - Am 128,186,381,12,0,0
+197952,2026-10-08 12:20:36,B10-0424/2026,,§ 3 - Am 91,177,395,9,0,0
+197956,2026-10-08 12:21:06,B10-0424/2026,,Après le § 3 - Am 33,501,29,49,0,0
+197957,2026-10-08 12:22:40,B10-0424/2026,,Après le § 3 - Am 110,188,388,6,0,0
+197958,2026-10-08 12:23:43,B10-0424/2026,,Après le § 4 - Am 92,175,394,13,0,0
+197959,2026-10-08 12:23:53,B10-0424/2026,,Après le § 4 - Am 93,178,382,15,0,0
+197961,2026-10-08 12:26:07,B10-0424/2026,,§ 5 - Am 130,173,399,7,0,0
+197962,2026-10-08 12:26:18,B10-0424/2026,,§ 5 - Am 94,171,409,3,0,0
+197963,2026-10-08 12:26:49,B10-0424/2026,,§ 5,393,179,10,0,0
+197964,2026-10-08 12:26:59,B10-0424/2026,,§ 6 - Am 10,184,384,11,0,0
+197967,2026-10-08 12:27:22,B10-0424/2026,,§ 6/2,262,309,11,0,0
+197968,2026-10-08 12:27:34,B10-0424/2026,,Après le § 6 - Am 2,161,395,26,0,0
+197969,2026-10-08 12:27:45,B10-0424/2026,,Après le § 6 - Am 11,334,226,13,0,0
+197970,2026-10-08 12:27:56,B10-0424/2026,,Après le § 6 - Am 95,188,392,5,0,0
+197971,2026-10-08 12:28:14,B10-0424/2026,,§ 7 - Am 96,173,402,4,0,0
+197975,2026-10-08 12:28:50,B10-0424/2026,,Après le § 7 - Am 3,191,381,3,0,0
+197976,2026-10-08 12:29:03,B10-0424/2026,,Après le § 7 - Am 18,416,131,20,0,0
+197977,2026-10-08 12:29:14,B10-0424/2026,,§ 8 - Am 97,177,390,13,0,0
+197978,2026-10-08 12:29:25,B10-0424/2026,,§ 9 - Am 112,320,193,64,0,0
+197979,2026-10-08 12:29:36,B10-0424/2026,,Après le § 9 - Am 39,241,272,68,0,0
+197980,2026-10-08 12:29:48,B10-0424/2026,,Après le § 9 - Am 62,257,268,52,0,0
+197982,2026-10-08 12:30:00,B10-0424/2026,,Après le § 9 - Am 132/1,245,327,7,0,0
+197983,2026-10-08 12:30:10,B10-0424/2026,,Après le § 9 - Am 132/2,245,323,11,0,0
+197984,2026-10-08 12:30:20,B10-0424/2026,,Après le § 9 - Am 111,241,329,8,0,0
+197985,2026-10-08 12:30:36,B10-0424/2026,,Après le § 10 - Am 98,164,400,21,0,0
+197986,2026-10-08 12:30:46,B10-0424/2026,,Après le § 10 - Am 99,166,399,16,0,0
+197987,2026-10-08 12:30:56,B10-0424/2026,,Après le § 10 - Am 100,185,389,6,0,0
+197988,2026-10-08 12:31:10,B10-0424/2026,,§ 11 - Am 101,180,392,13,0,0
+197989,2026-10-08 12:31:31,B10-0424/2026,,Après le § 12 - Am 133,215,350,18,0,0
+197990,2026-10-08 12:31:41,B10-0424/2026,,§ 13 - Am 4,188,389,2,0,0
+197992,2026-10-08 12:32:01,B10-0424/2026,,Après le § 13 - Am 20,403,161,16,0,0
+197993,2026-10-08 12:32:10,B10-0424/2026,,Après le § 13 - Am 64,221,349,7,0,0
+197994,2026-10-08 12:32:21,B10-0424/2026,,Après le § 13 - Am 65,226,343,5,0,0
+197995,2026-10-08 12:32:30,B10-0424/2026,,§ 14 - Am 5,185,389,7,0,0
+197996,2026-10-08 12:32:40,B10-0424/2026,,Après le § 14 - Am 103,185,386,9,0,0
+197997,2026-10-08 12:32:55,B10-0424/2026,,§ 15 - Am 104,183,386,13,0,0
+197998,2026-10-08 12:33:10,B10-0424/2026,,Après le § 16 - Am 105,176,392,9,0,0
+197999,2026-10-08 12:33:19,B10-0424/2026,,Après le § 16 - Am 69,90,463,20,0,0
+198000,2026-10-08 12:33:39,B10-0424/2026,,§ 19 - Am 135,186,391,4,0,0
+198001,2026-10-08 12:33:49,B10-0424/2026,,Après le § 19 - Am 106,181,388,9,0,0
+198002,2026-10-08 12:33:59,B10-0424/2026,,Après le § 19 - Am 134,175,387,12,0,0
+198006,2026-10-08 12:34:21,B10-0424/2026,,Après le § 20 - Am 107,181,377,21,0,0
+198007,2026-10-08 12:34:38,B10-0424/2026,,§ 21 - Am 109,162,405,11,0,0
+198008,2026-10-08 12:34:49,B10-0424/2026,,Après le § 21 - Am 66,178,385,15,0,0
+198009,2026-10-08 12:35:00,B10-0424/2026,,Après le § 21 - Am 70,56,488,26,0,0
+198010,2026-10-08 12:35:10,B10-0424/2026,,Après le § 21 - Am 71,55,492,25,0,0
+198011,2026-10-08 12:35:19,B10-0424/2026,,Après le § 21 - Am 72,47,503,24,0,0
+198012,2026-10-08 12:35:30,B10-0424/2026,,Après le § 21 - Am 108,174,377,24,0,0
+198013,2026-10-08 12:35:45,B10-0424/2026,,§ 22 - Am 136,178,396,5,0,0
+198014,2026-10-08 12:35:56,B10-0424/2026,,Après le § 22 - Am 6,155,391,29,0,0
+198016,2026-10-08 12:36:56,B10-0424/2026,,Après le § 24 - Am 7,162,388,23,0,0
+198017,2026-10-08 12:37:08,B10-0424/2026,,Après le § 24 - Am 67,168,377,16,0,0
+198018,2026-10-08 12:37:25,B10-0424/2026,,Visa 3 - Am 113,394,157,25,0,0
+198019,2026-10-08 12:37:42,B10-0424/2026,,Après le visa 3 - Am 115,392,171,11,0,0
+198020,2026-10-08 12:37:54,B10-0424/2026,,Après le visa 3 - Am 114,238,322,12,0,0
+198021,2026-10-08 12:38:04,B10-0424/2026,,Après le visa 3 - Am 116,247,322,6,0,0
+198022,2026-10-08 12:38:36,B10-0424/2026,,Après le considérant A - Am 117,260,283,31,0,0
+198023,2026-10-08 12:38:47,B10-0424/2026,,Après le considérant A - Am 118,254,302,12,0,0
+198024,2026-10-08 12:39:03,B10-0424/2026,,Après le considérant B - Am 119,246,320,8,0,0
+198025,2026-10-08 12:39:13,B10-0424/2026,,Après le considérant B - Am 120,242,320,10,0,0
+198026,2026-10-08 12:39:30,B10-0424/2026,,Après le considérant B - Am 122,244,323,7,0,0
+198027,2026-10-08 12:39:40,B10-0424/2026,,Après le considérant B - Am 123,243,318,10,0,0
+198028,2026-10-08 12:39:51,B10-0424/2026,,Considérant C - Am 22,297,258,12,0,0
+198030,2026-10-08 12:41:02,B10-0424/2026,,Après le considérant D - Am 81,165,392,12,0,0
+198031,2026-10-08 12:41:12,B10-0424/2026,,Considérant E - Am 82,90,469,10,0,0
+198032,2026-10-08 12:41:23,B10-0424/2026,,Considérant E - Am 52,295,243,30,0,0
+198034,2026-10-08 12:41:44,B10-0424/2026,,Après le considérant E - Am 53,185,370,10,0,0
+198035,2026-10-08 12:41:56,B10-0424/2026,,Considérant F - Am 83,173,387,9,0,0
+198036,2026-10-08 12:42:06,B10-0424/2026,,Après le considérant G - Am 9,329,181,59,0,0
+198037,2026-10-08 12:42:25,B10-0424/2026,,Considérant H,385,169,11,0,0
+198038,2026-10-08 12:42:50,B10-0424/2026,,Considérant J - Am 85,172,398,5,0,0
+198039,2026-10-08 12:43:07,B10-0424/2026,,Après le considérant J - Am 54,184,373,11,0,0
+198040,2026-10-08 12:43:17,B10-0424/2026,,Considérant K - Am 86,178,388,3,0,0
+198041,2026-10-08 12:43:29,B10-0424/2026,,Considérant K - Am 124,180,379,11,0,0
+198042,2026-10-08 12:43:40,B10-0424/2026,,Considérant K,393,168,6,0,0
+198043,2026-10-08 12:43:51,B10-0424/2026,,Considérant L - Am 87,178,385,8,0,0
+198044,2026-10-08 12:44:06,B10-0424/2026,,Après le considérant L - Am 27,385,174,11,0,0
+198045,2026-10-08 12:44:17,B10-0424/2026,,Après le considérant M - Am 55,273,256,32,0,0
+198046,2026-10-08 12:44:28,B10-0424/2026,,Après le considérant M - Am 56,191,362,6,0,0
+198047,2026-10-08 12:44:39,B10-0424/2026,,Après le considérant M - Am 68,318,247,5,0,0
+198048,2026-10-08 12:44:49,B10-0424/2026,,Après le considérant N - Am 125,238,314,19,0,0
+198049,2026-10-08 12:45:00,B10-0424/2026,,Après le considérant N - Am 126,243,320,8,0,0
+198050,2026-10-08 12:45:11,B10-0424/2026,,Après le considérant S - Am 28,428,86,46,0,0
+198051,2026-10-08 12:45:36,B10-0424/2026,,Proposition de résolution (ensemble du texte),381,167,15,0,0
+198173,2026-10-08 12:20:48,B10-0424/2026,,§ 3 - Am 32/1,204,357,19,0,0
+198175,2026-10-08 12:04:28,B10-0465/2026,,Proposition de résolution,282,259,23,0,0
+198176,2026-10-08 12:05:03,B10-0466/2026,,Proposition de résolution,291,276,13,0,0
+198177,2026-10-08 12:11:26,B10-0435/2026,,Après le § 5 - Am 9,106,447,35,0,0
+198181,2026-10-08 12:11:52,B10-0435/2026,,Après le § 15 - Am 5,219,353,12,0,0
+198182,2026-10-08 12:12:03,B10-0435/2026,,Après le § 15 - Am 10,112,452,22,0,0
+198183,2026-10-08 12:12:14,B10-0435/2026,,Après le § 25 - Am 11,109,387,92,0,0
+198184,2026-10-08 12:12:25,B10-0435/2026,,Après le § 29 - Am 8,187,386,7,0,0
+198187,2026-10-08 12:12:45,B10-0435/2026,,§ 30/2,399,150,34,0,0
+198188,2026-10-08 12:13:00,B10-0435/2026,,Après le considérant D - Am 1,198,367,18,0,0
+198189,2026-10-08 12:13:10,B10-0435/2026,,Considérant G - Am 2,213,343,24,0,0
+198190,2026-10-08 12:13:21,B10-0435/2026,,Après le considérant G - Am 7,188,384,10,0,0
+198192,2026-10-08 12:13:35,B10-0435/2026,,Après le considérant P - Am 4,206,370,12,0,0
+198193,2026-10-08 12:03:40,B10-0431/2026,,Proposition de résolution,166,346,21,0,0
+198194,2026-10-08 12:04:03,B10-0432/2026,,Proposition de résolution,193,333,22,0,0
+198195,2026-10-08 12:07:59,B10-0436/2026,,§ 3 - Am 4,179,397,7,0,0
+198196,2026-10-08 12:08:10,B10-0436/2026,,Après le § 3 - Am 5,176,391,11,0,0
+198197,2026-10-08 12:08:19,B10-0436/2026,,§ 6 - Am 6,112,447,30,0,0
+198198,2026-10-08 12:08:29,B10-0436/2026,,Après le § 6 - Am 7,137,399,53,0,0
+198199,2026-10-08 12:08:39,B10-0436/2026,,Après le § 6 - Am 8,183,395,7,0,0
+198200,2026-10-08 12:08:48,B10-0436/2026,,§ 8 - Am 9,174,407,7,0,0
+198201,2026-10-08 12:08:59,B10-0436/2026,,Après le considérant B - Am 1,193,384,2,0,0
+198202,2026-10-08 12:09:09,B10-0436/2026,,Après le considérant I - Am 2,181,394,10,0,0
+198203,2026-10-08 12:09:21,B10-0436/2026,,Après le considérant I - Am 3,191,384,8,0,0
+198204,2026-10-08 12:09:34,B10-0436/2026,,Proposition de résolution (ensemble du texte),443,98,47,0,0
+198207,2026-10-08 12:10:04,RC-B10-0441/2026,,§ 5/2,527,37,11,0,0
+198209,2026-10-08 12:10:20,RC-B10-0441/2026,,§ 5/4,530,32,10,0,0
+198215,2026-10-08 12:10:48,RC-B10-0441/2026,,§ 19/2,427,83,65,0,0
+198216,2026-10-08 12:11:05,RC-B10-0441/2026,,Proposition de résolution (ensemble du texte),482,41,39,0,0
+198251,2026-10-08 12:07:06,RC-B10-0443/2026,,Proposition de résolution (ensemble du texte),445,37,97,0,0
+198252,2026-10-08 12:07:35,RC-B10-0438/2026,,Proposition de résolution,492,23,60,0,0
+198254,2026-10-08 12:05:35,RC-B10-0452/2026,,Après le § 6 - Am 2,100,423,50,0,0
+198255,2026-10-08 12:05:48,RC-B10-0452/2026,,Après le § 7 - Am 3,55,484,33,0,0
+198259,2026-10-08 12:06:11,RC-B10-0452/2026,,Après le § 10 - Am 4,65,480,29,0,0
+198260,2026-10-08 12:06:22,RC-B10-0452/2026,,Après le considérant C - Am 1,78,410,88,0,0
+198261,2026-10-08 12:06:35,RC-B10-0452/2026,,Proposition de résolution (ensemble du texte),541,11,25,0,0
+198290,2026-10-20 12:27:33,A10-0128/2025,,– Jana Toom – Provisional agreement – Am 140,531,93,41,0,0
+198291,2026-10-20 12:29:19,A10-0262/2026,,– Vicent Marzà Ibáñez – Motion for a resolution,558,23,73,0,0
+198292,2026-10-22 12:23:17,A10-0264/2026,,Jacek Protas - Proposition de résolution,414,79,90,0,0
+198299,2026-10-21 12:40:58,A10-0274/2026,,Lucia Yar - Proposition de résolution (ensemble du texte),651,17,3,0,0
+198302,2026-10-21 12:49:16,A10-0259/2026,,Brigitte van den Berg - Proposition de résolution (ensemble du texte),504,63,99,0,0
+198309,2026-10-20 12:28:55,A10-0213/2026,,– Ondřej Knotek – Motion for a resolution (as a whole),357,274,31,0,0
+198311,2026-10-20 12:23:18,A10-0162/2025,,"– Johan Danielsson, Andreas Schwab – Provisional agreement – Am 65",558,93,18,0,0
+198325,2026-10-21 12:42:37,A10-0256/2026,,Michael McNamara - Proposition de la Commission,629,7,31,0,0
+198335,2026-10-20 12:15:59,A10-0267/2026,,– Ingeborg Ter Laak – Commission proposal,612,8,39,0,0
+198338,2026-10-20 12:25:49,A10-0136/2025,,– Matteo Ricci – Provisional agreement – Am 172,652,2,8,0,0
+198350,2026-10-20 12:28:00,A10-0263/2026,,– Denis Nesci – Motion for a resolution,601,20,36,0,0
+198357,2026-10-21 12:39:55,A10-0258/2026,,Pasquale Tridico - Proposition de résolution (ensemble du texte),434,203,21,0,0
+198386,2026-10-21 12:47:21,A10-0260/2026,,Li Andersson - Proposition de la Commission au Conseil,434,212,23,0,0
+198405,2026-10-22 12:16:17,A10-0257/2026,,Bogdan Andrzej Zdrojewski - Proposition de la Commission,454,34,93,0,0
+198409,2026-10-21 12:41:32,A10-0273/2026,,Aura Salla - Proposition de résolution (ensemble du texte),609,51,14,0,0
+198423,2026-10-20 12:19:56,A10-0266/2026,,– Ingeborg Ter Laak – Commission proposal,616,9,39,0,0
+198425,2026-10-20 12:12:54,A10-0265/2026,,– Mohammed Chahim – Commission proposal and amendment,470,83,108,0,0
+198430,2026-10-22 12:17:46,A10-0104/2026,,"Dimitris Tsiodras, Piotr Müller - Accord provisoire - Am 118",477,59,41,0,0
+198774,2026-10-21 12:38:38,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Proposition de résolution (ensemble du texte)",400,189,84,0,0
+198777,2026-10-20 12:28:25,A10-0213/2026,,– Ondřej Knotek – § 22 – Am 2,193,454,11,0,0
+198780,2026-10-20 12:17:47,A10-0266/2026,,– Ingeborg Ter Laak – Article 1 – Am 15D= 17D=,237,416,12,0,0
+198782,2026-10-20 12:18:23,A10-0266/2026,,"– Ingeborg Ter Laak – Article 1, after § 2 – Am 21",119,519,27,0,0
+198783,2026-10-20 12:18:37,A10-0266/2026,,"– Ingeborg Ter Laak – Article 2, after § 1 – Am 22",119,512,29,0,0
+198784,2026-10-20 12:18:57,A10-0266/2026,,– Ingeborg Ter Laak – After Article 2 – Am 14,502,133,29,0,0
+198785,2026-10-20 12:19:09,A10-0266/2026,,– Ingeborg Ter Laak – After recital 1 – Am 20,191,467,8,0,0
+198786,2026-10-20 12:19:22,A10-0266/2026,,– Ingeborg Ter Laak – After recital 4 – Am 18,161,486,19,0,0
+198787,2026-10-20 12:14:18,A10-0267/2026,,"– Ingeborg Ter Laak – Amendments by the committee responsible – put to the vote collectively – Am 1-2, 4-12, 14-17",612,15,41,0,0
+198792,2026-10-20 12:15:24,A10-0267/2026,,– Ingeborg Ter Laak – After recital 1 – Am 25,193,463,6,0,0
+198793,2026-10-20 12:15:37,A10-0267/2026,,– Ingeborg Ter Laak – After recital 4 – Am 23,156,468,40,0,0
+198875,2026-10-20 12:14:47,A10-0267/2026,,– Ingeborg Ter Laak – After Article 1 – Am 18,395,249,17,0,0
+198876,2026-10-20 12:15:00,A10-0267/2026,,– Ingeborg Ter Laak – After Article 1 – Am 19,407,243,13,0,0
+198877,2026-10-20 12:15:13,A10-0267/2026,,– Ingeborg Ter Laak – After Article 1 – Am 20,507,127,28,0,0
+198878,2026-10-20 12:17:32,A10-0266/2026,,"– Ingeborg Ter Laak – Amendments by the committee responsible – put to the vote collectively – Am 1-2, 4-5, 7-9, 13",612,15,40,0,0
+198885,2026-10-20 12:30:04,B10-0471/2026,,– Motion for a resolution,199,407,45,0,0
+198922,2026-10-21 12:40:24,A10-0274/2026,,Lucia Yar - Après le § 2 - Am 1,158,476,38,0,0
+198923,2026-10-21 12:40:42,A10-0274/2026,,Lucia Yar - § 5 - Am 2,102,549,19,0,0
+198936,2026-10-21 12:42:05,A10-0256/2026,,Michael McNamara - Considérant 4 - Am 3/2,488,171,8,0,0
+198937,2026-10-21 12:42:14,A10-0256/2026,,Michael McNamara - Après le considérant 8 - Am 7,476,147,41,0,0
+198940,2026-10-21 12:42:27,A10-0256/2026,,Michael McNamara - Après le considérant 15 - Am 14/2,490,170,8,0,0
+198941,2026-10-21 12:48:30,A10-0259/2026,,Brigitte van den Berg - § 27 - Am 1,198,464,2,0,0
+198942,2026-10-21 12:48:41,A10-0259/2026,,Brigitte van den Berg - § 29 - Am 2,211,442,9,0,0
+198947,2026-10-21 12:50:02,B10-0469/2026,,Proposition de résolution (ensemble du texte),442,196,9,0,0
+198949,2026-10-21 12:43:45,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 5,504,71,92,0,0
+198950,2026-10-21 12:43:54,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 16,547,23,81,0,0
+198958,2026-10-21 12:44:59,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 29,505,89,71,0,0
+198959,2026-10-21 12:45:12,A10-0260/2026,,"Li Andersson - Annexe I, § 1 - Am 39",191,464,7,0,0
+198960,2026-10-21 12:45:23,A10-0260/2026,,"Li Andersson - Annexe I, § 1 - Am 12",455,94,114,0,0
+198961,2026-10-21 12:46:00,A10-0260/2026,,"Li Andersson - Annexe I, § 1 - Am 34",256,396,9,0,0
+198962,2026-10-21 12:46:15,A10-0260/2026,,"Li Andersson - Annexe I, § 3 - Am 14",429,219,16,0,0
+198964,2026-10-21 12:46:30,A10-0260/2026,,"Li Andersson - Annexe I, § 11 - Am 40",234,429,7,0,0
+198965,2026-10-21 12:46:42,A10-0260/2026,,"Li Andersson - Annexe I, § 11 - Am 22",456,203,8,0,0
+198966,2026-10-21 12:46:52,A10-0260/2026,,"Li Andersson - Annexe I, § 11 - Am 36",237,394,27,0,0
+198968,2026-10-21 12:47:10,A10-0260/2026,,"Li Andersson - Annexe I, après le § 23 - Am 41",227,433,11,0,0
+198969,2026-10-21 12:18:49,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Avant le § 1 - Am 2",67,563,41,0,0
+198970,2026-10-21 12:19:00,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Avant le § 1 - Am 3",74,553,27,0,0
+198971,2026-10-21 12:19:10,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Avant le § 1 - Am 4",133,460,70,0,0
+198972,2026-10-21 12:19:20,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Avant le § 1 - Am 5",76,542,54,0,0
+198973,2026-10-21 12:19:30,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Avant le § 1 - Am 22",122,416,118,0,0
+198974,2026-10-21 12:19:43,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 1 - Am 24",124,450,83,0,0
+198975,2026-10-21 12:19:53,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 1 - Am 25",195,397,67,0,0
+198976,2026-10-21 12:20:03,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 1 - Am 68",186,463,13,0,0
+198977,2026-10-21 12:20:25,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 3 - Am 70",177,455,41,0,0
+198978,2026-10-21 12:20:35,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 4 - Am 113",136,508,19,0,0
+198979,2026-10-21 12:20:45,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 4 - Am 71",150,453,62,0,0
+198980,2026-10-21 12:20:54,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 4 - Am 72",150,450,69,0,0
+198981,2026-10-21 12:21:06,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 6 - Am 114",132,515,20,0,0
+198982,2026-10-21 12:21:15,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 6 - Am 74",184,472,12,0,0
+198983,2026-10-21 12:21:24,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 8 - Am 115",120,527,11,0,0
+198984,2026-10-21 12:21:33,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 8 - Am 75",203,449,8,0,0
+198985,2026-10-21 12:21:44,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 9 - Am 27",136,508,24,0,0
+198986,2026-10-21 12:22:01,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 10 - Am 77",133,476,54,0,0
+198987,2026-10-21 12:22:11,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 11 - Am 29",113,520,38,0,0
+198988,2026-10-21 12:22:23,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 12 - Am 30",65,548,58,0,0
+198989,2026-10-21 12:22:40,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 13, point a, après le point i  - Am 8",65,530,76,0,0
+198990,2026-10-21 12:22:50,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 13, après le point a - Am 9",72,506,83,0,0
+198991,2026-10-21 12:22:59,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 13, après le point a - Am 10",76,489,83,0,0
+198992,2026-10-21 12:23:09,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 13, après le point a - Am 11",83,522,55,0,0
+198993,2026-10-21 12:23:18,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 12",104,537,25,0,0
+198994,2026-10-21 12:23:28,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 13",79,480,107,0,0
+198995,2026-10-21 12:23:37,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 14",97,485,82,0,0
+198996,2026-10-21 12:23:46,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 15",119,475,72,0,0
+198997,2026-10-21 12:23:55,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 31",82,480,102,0,0
+198998,2026-10-21 12:24:04,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 32",95,528,48,0,0
+198999,2026-10-21 12:24:13,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 33",151,444,72,0,0
+199000,2026-10-21 12:24:23,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 13 - Am 34",142,446,77,0,0
+199001,2026-10-21 12:24:36,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 14 - Am 35",80,478,107,0,0
+199002,2026-10-21 12:24:46,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 14 - Am 79",111,476,69,0,0
+199003,2026-10-21 12:24:56,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, partie introductive - Am 116",123,520,26,0,0
+199004,2026-10-21 12:25:06,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, après le point b - Am 36",179,413,68,0,0
+199005,2026-10-21 12:25:15,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, après le point b - Am 80",209,446,7,0,0
+199006,2026-10-21 12:25:24,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, après le point c - Am 37",153,458,57,0,0
+199007,2026-10-21 12:25:37,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, point f",438,166,69,0,0
+199008,2026-10-21 12:25:48,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, point g",453,138,76,0,0
+199009,2026-10-21 12:25:57,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, après le point g - Am 81",206,455,5,0,0
+199010,2026-10-21 12:26:07,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 15, après le point g - Am 82",222,430,11,0,0
+199011,2026-10-21 12:26:16,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 15 - Am 83",198,457,14,0,0
+199012,2026-10-21 12:26:30,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 21, partie introductive - Am 117",167,459,44,0,0
+199013,2026-10-21 12:26:43,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 21, point a",598,57,14,0,0
+199014,2026-10-21 12:26:55,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 21, après le point a - Am 84",197,418,36,0,0
+199015,2026-10-21 12:27:04,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 21, après le point a - Am 85",211,408,21,0,0
+199016,2026-10-21 12:27:18,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 21, après le point a - Am 87",195,441,18,0,0
+199017,2026-10-21 12:27:28,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 21, après le point b - Am 88",210,456,4,0,0
+199018,2026-10-21 12:27:41,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 21 - Am 89",195,450,20,0,0
+199019,2026-10-21 12:27:50,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 21 - Am 90",191,450,20,0,0
+199020,2026-10-21 12:28:01,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 22, point a",458,131,74,0,0
+199021,2026-10-21 12:28:15,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 22, point b, point i - Am 16S",38,613,15,0,0
+199022,2026-10-21 12:28:25,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 22 - Am 110",240,396,24,0,0
+199023,2026-10-21 12:28:34,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 24 - Am 39",62,588,18,0,0
+199024,2026-10-21 12:28:44,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 24 - Am 40",60,583,21,0,0
+199025,2026-10-21 12:28:53,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 24 - Am 41",108,520,36,0,0
+199026,2026-10-21 12:29:03,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 24 - Am 42",67,491,99,0,0
+199027,2026-10-21 12:29:28,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 25 - Am 21",90,547,37,0,0
+199028,2026-10-21 12:29:38,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 25 - Am 44",67,512,83,0,0
+199029,2026-10-21 12:29:47,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 25 - Am 45",69,558,36,0,0
+199030,2026-10-21 12:29:57,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 25 - Am 46",75,533,42,0,0
+199031,2026-10-21 12:30:05,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 27, partie introductive - Am 118",117,533,19,0,0
+199032,2026-10-21 12:30:16,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 27, point a",448,185,37,0,0
+199033,2026-10-21 12:30:25,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 27, après le point b - Am 92",239,397,21,0,0
+199034,2026-10-21 12:30:36,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 27 - Am 93",169,459,36,0,0
+199035,2026-10-21 12:30:45,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 27 - Am 94",221,431,8,0,0
+199037,2026-10-21 12:32:21,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 32 - Am 47",134,480,48,0,0
+199038,2026-10-21 12:32:31,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 32 - Am 48",129,480,49,0,0
+199039,2026-10-21 12:32:40,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 32 - Am 49",98,528,36,0,0
+199040,2026-10-21 12:32:50,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 32 - Am 50",141,434,88,0,0
+199041,2026-10-21 12:33:01,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 32 - Am 95",191,425,5,0,0
+199042,2026-10-21 12:33:11,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 34 - Am 119",204,455,6,0,0
+199043,2026-10-21 12:33:19,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 36 - Am 96",206,454,4,0,0
+199044,2026-10-21 12:33:28,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 36 - Am 120",132,463,70,0,0
+199045,2026-10-21 12:33:37,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 37 - Am 51",109,530,21,0,0
+199046,2026-10-21 12:33:46,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 37 - Am 52",104,551,7,0,0
+199047,2026-10-21 12:33:56,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 37 - Am 53",64,543,42,0,0
+199048,2026-10-21 12:34:05,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 37 - Am 54",79,574,14,0,0
+199049,2026-10-21 12:34:15,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 37 - Am 55",86,569,8,0,0
+199050,2026-10-21 12:34:33,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 37 - Am 111",216,443,9,0,0
+199051,2026-10-21 12:34:42,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 38 - Am 121",176,452,36,0,0
+199052,2026-10-21 12:34:51,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 38 - Am 97",206,447,11,0,0
+199053,2026-10-21 12:35:00,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 38 - Am 59",83,533,41,0,0
+199054,2026-10-21 12:35:10,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 38 - Am 60",152,470,33,0,0
+199055,2026-10-21 12:35:19,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 38 - Am 98",199,451,18,0,0
+199056,2026-10-21 12:35:29,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 39 - Am 99",137,465,62,0,0
+199057,2026-10-21 12:35:38,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 40 - Am 61",64,535,29,0,0
+199058,2026-10-21 12:35:48,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 40 - Am 62",71,537,46,0,0
+199059,2026-10-21 12:35:58,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 40 - Am 63",69,525,39,0,0
+199060,2026-10-21 12:36:08,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 43 - Am 64",88,491,87,0,0
+199061,2026-10-21 12:36:27,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 44 - Am 100",206,447,13,0,0
+199062,2026-10-21 12:36:37,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 44 - Am 101",199,464,4,0,0
+199063,2026-10-21 12:36:46,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 44 - Am 102",146,451,62,0,0
+199064,2026-10-21 12:37:00,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 46 - Am 122",119,473,79,0,0
+199065,2026-10-21 12:37:08,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 46 - Am 104",186,464,18,0,0
+199066,2026-10-21 12:37:18,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 48 - Am 105",204,461,4,0,0
+199067,2026-10-21 12:37:28,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 49, partie introductive - Am 106",209,453,4,0,0
+199068,2026-10-21 12:37:42,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - § 49, point c",438,143,89,0,0
+199069,2026-10-21 12:37:52,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le § 50 - Am 107",205,444,7,0,0
+199070,2026-10-21 12:38:03,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Visa 3",427,192,52,0,0
+199071,2026-10-21 12:38:14,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Visa 10",426,182,60,0,0
+199072,2026-10-21 12:38:25,A10-0272/2026,,"Nils Ušakovs, Michalis Hadjipantela - Après le visa 12 - Am 124",238,404,21,0,0
+199073,2026-10-21 12:39:12,A10-0258/2026,,Pasquale Tridico - § 17 - Am 2,186,466,10,0,0
+199074,2026-10-21 12:39:25,A10-0258/2026,,Pasquale Tridico - § 21 - Am 3,194,456,7,0,0
+199075,2026-10-21 12:39:35,A10-0258/2026,,Pasquale Tridico - § 21 - Am 1,213,426,10,0,0
+199076,2026-10-21 12:39:45,A10-0258/2026,,Pasquale Tridico - § 21,346,292,26,0,0
+199095,2026-10-21 12:04:08,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-05 03 03-Am 313,86,449,74,0,0
+199099,2026-10-21 12:04:33,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-07 02 05-Am 317,117,393,111,0,0
+199101,2026-10-21 12:04:48,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-07-Am 320,84,463,87,0,0
+199151,2026-10-21 12:07:25,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-08 04 01-Am 324,121,499,33,0,0
+199167,2026-10-21 12:08:21,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-11 02-Am 330,91,549,21,0,0
+199175,2026-10-21 12:08:54,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-13-Am 333,55,568,36,0,0
+199176,2026-10-21 12:09:05,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-13-Am 353,76,577,6,0,0
+199187,2026-10-21 12:09:53,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-13 02-Am 343,68,559,35,0,0
+199190,2026-10-21 12:10:07,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-13 03-Am 345,53,560,48,0,0
+199195,2026-10-21 12:10:28,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-13 08-Am 349,90,526,45,0,0
+199199,2026-10-21 12:10:47,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-13 09 01-Am 352,65,568,30,0,0
+199212,2026-10-21 12:11:39,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-14 20 03 06-Am 360,113,432,120,0,0
+199244,2026-10-21 12:14:02,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-1 0 0 6-Am 296,112,465,87,0,0
+199247,2026-10-21 12:14:18,Projet de budget général de l'Union européenne pour l'exercice 2027,,toutes sections-1 6 5 4-Am 299,73,560,26,0,0
+199334,2026-10-21 12:44:39,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 18/1,470,63,132,0,0
+199335,2026-10-21 12:44:49,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 18/2,337,169,133,0,0
+199337,2026-10-21 12:44:05,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 17/1,587,23,50,0,0
+199338,2026-10-21 12:44:15,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 17/2,314,317,20,0,0
+199339,2026-10-21 12:44:26,A10-0260/2026,,Li Andersson - Amendements de la commission compétente - votes séparés - Am 17/3,298,307,51,0,0
+199346,2026-10-22 12:33:09,B10-0468/2026,,Après le § 1 - Am 11,249,302,20,0,0
+199350,2026-10-22 12:33:37,B10-0468/2026,,Après le § 14 - Am 33,301,199,60,0,0
+199351,2026-10-22 12:33:56,B10-0468/2026,,Après le § 43 - Am 5,448,56,51,0,0
+199352,2026-10-22 12:34:18,B10-0468/2026,,§ 48 - Am 17,181,366,17,0,0
+199353,2026-10-22 12:34:35,B10-0468/2026,,§ 54 - Am 19,217,338,10,0,0
+199354,2026-10-22 12:35:09,B10-0468/2026,,§ 101 - Am 1,277,278,13,0,0
+199355,2026-10-22 12:35:47,B10-0468/2026,,Après le § 126 - Am 32,307,224,35,0,0
+199356,2026-10-22 12:37:03,B10-0468/2026,,Considérant G - Am 15,128,362,56,0,0
+199360,2026-10-22 12:12:22,A10-0257/2026,,Bogdan Andrzej Zdrojewski - Amendements de la commission compétente - vote séparé - Am 4/2,423,125,32,0,0
+199365,2026-10-22 12:12:50,A10-0257/2026,,Bogdan Andrzej Zdrojewski - Amendements de la commission compétente - vote séparé - Am 145/2,401,176,1,0,0
+199372,2026-10-22 12:13:28,A10-0257/2026,,"Bogdan Andrzej Zdrojewski - Article 3, paragraphe 1, alinéa 1 - Am 174",179,399,4,0,0
+199373,2026-10-22 12:14:17,A10-0257/2026,,"Bogdan Andrzej Zdrojewski - Article 8, paragraphe 1 - Am 175",173,403,6,0,0
+199374,2026-10-22 12:14:34,A10-0257/2026,,Bogdan Andrzej Zdrojewski - Après l'article 8 - Am 176,157,382,37,0,0
+199375,2026-10-22 12:14:52,A10-0257/2026,,"Bogdan Andrzej Zdrojewski - Article 13, paragraphe 2, alinéa 1, point e - Am 177",196,383,2,0,0
+199376,2026-10-22 12:15:03,A10-0257/2026,,"Bogdan Andrzej Zdrojewski - Article 14, paragraphe 1 - Am 178",192,377,9,0,0
+199379,2026-10-22 12:15:58,A10-0257/2026,,Bogdan Andrzej Zdrojewski - Considérant 27 - Am 173,180,393,4,0,0
+199380,2026-10-22 12:17:32,A10-0104/2026,,"Dimitris Tsiodras, Piotr Müller - Proposition de rejet - Am 119",93,480,2,0,0
+199470,2026-10-22 12:20:22,A10-0276/2026,,Adam Jarubas - Proposition de la Commission,474,82,28,0,0
+199475,2026-10-22 12:30:47,RC-B10-0482/2026,,§ 1 - Am 1,287,253,22,0,0
+199477,2026-10-22 12:31:02,RC-B10-0482/2026,,Après le § 1 - Am 4/1,55,492,25,0,0
+199478,2026-10-22 12:31:12,RC-B10-0482/2026,,Après le § 1 - Am 4/2,106,400,56,0,0
+199479,2026-10-22 12:31:28,RC-B10-0482/2026,,Après le § 9 - Am 6,57,459,58,0,0
+199480,2026-10-22 12:31:42,RC-B10-0482/2026,,Après le § 9 - Am 7,178,313,81,0,0
+199482,2026-10-22 12:31:54,RC-B10-0482/2026,,Après le § 25 - Am 2/1,291,271,8,0,0
+199483,2026-10-22 12:32:05,RC-B10-0482/2026,,Après le § 25 - Am 2/2,175,390,9,0,0
+199485,2026-10-22 12:32:16,RC-B10-0482/2026,,Après le considérant D - Am 3/1,50,490,30,0,0
+199486,2026-10-22 12:32:26,RC-B10-0482/2026,,Après le considérant D - Am 3/2,116,390,57,0,0
+199489,2026-10-22 12:23:45,RC-B10-0476/2026,,§ 1/1,559,3,19,0,0
+199490,2026-10-22 12:23:55,RC-B10-0476/2026,,§ 1/2,216,325,34,0,0
+199491,2026-10-22 12:24:10,RC-B10-0476/2026,,Après le § 4 - Am 3,128,425,27,0,0
+199492,2026-10-22 12:24:22,RC-B10-0476/2026,,Après le § 4 - Am 1,116,441,16,0,0
+199493,2026-10-22 12:24:33,RC-B10-0476/2026,,Après le § 4 - Am 4,104,430,40,0,0
+199495,2026-10-22 12:24:47,RC-B10-0476/2026,,§ 5/1,516,21,41,0,0
+199497,2026-10-22 12:25:03,RC-B10-0476/2026,,Après le § 5 - Am 5,131,433,15,0,0
+199502,2026-10-22 12:25:35,RC-B10-0476/2026,,§ 7/1,384,138,48,0,0
+199503,2026-10-22 12:25:45,RC-B10-0476/2026,,§ 7/2,432,103,41,0,0
+199504,2026-10-22 12:25:55,RC-B10-0476/2026,,§ 7/3,73,445,56,0,0
+199507,2026-10-22 12:26:23,RC-B10-0476/2026,,§ 11/2,424,122,32,0,0
+199509,2026-10-22 12:26:40,RC-B10-0476/2026,,Après le § 18 - Am 9,100,462,23,0,0
+199512,2026-10-22 12:29:37,RC-B10-0476/2026,,§ 21/1,556,0,10,0,0
+199515,2026-10-22 12:29:57,RC-B10-0476/2026,,Après le § 22 - Am 10,78,360,120,0,0
+199516,2026-10-22 12:30:08,RC-B10-0476/2026,,Après le considérant N - Am 2,136,419,18,0,0
+199517,2026-10-22 12:30:22,RC-B10-0476/2026,,Proposition de résolution (ensemble du texte),432,52,88,0,0
+199560,2026-10-22 12:18:16,A10-0276/2026,,Adam Jarubas - Proposition de rejet - Am 6= 7=,94,482,1,0,0
+199561,2026-10-22 12:18:38,A10-0276/2026,,Adam Jarubas - Article 1 – alinéa 1 – point –1; Directive 2003/87/CE – Article 10 bis – paragraphe 1 – alinéa 6 - Am 13,131,417,33,0,0
+199562,2026-10-22 12:19:22,A10-0276/2026,,Adam Jarubas - Article 1 – alinéa 1 – point 1; Directive 2003/87/CE – Article 10 bis – après le paragraphe 2 bis - Am 18,120,401,60,0,0
+199563,2026-10-22 12:19:38,A10-0276/2026,,Adam Jarubas - Article 1 – alinéa 1 – point 1; Directive 2003/87/CE – Article 10 bis – après le paragraphe 2 ter - Am 14,167,397,9,0,0
+199564,2026-10-22 12:19:48,A10-0276/2026,,Adam Jarubas - Article 1 – alinéa 1 – point 1; Directive 2003/87/CE – Article 10 bis – après le paragraphe 2 ter - Am 15,171,404,4,0,0
+199565,2026-10-22 12:19:59,A10-0276/2026,,Adam Jarubas - Article 1 – alinéa 1 – point 1; Directive 2003/87/CE – Article 10 bis – après le paragraphe 2 ter - Am 16,229,317,33,0,0
+199566,2026-10-22 12:20:11,A10-0276/2026,,Adam Jarubas - Après le considérant 2 - Am 17,172,396,9,0,0
+199567,2026-10-22 12:05:37,C10-0258/2026,,Proposition de rejet - Am 1= 2=,123,374,41,0,0
+199568,2026-10-22 12:06:13,C10-0258/2026,,Avant l'article 1 - Am 26,156,395,14,0,0
+199569,2026-10-22 12:06:25,C10-0258/2026,,"Article 1, alinéa 1, avant le point 1 - Am 5",287,268,16,0,0
+199571,2026-10-22 12:06:42,C10-0258/2026,,"Article 1, alinéa 1, avant le point 1 - Am 6",177,381,16,0,0
+199572,2026-10-22 12:06:53,C10-0258/2026,,"Article 1, alinéa 1, avant le point 1 - Am 31",163,404,10,0,0
+199573,2026-10-22 12:07:05,C10-0258/2026,,"Article 1, alinéa 1, point 1, point a - Am 7",326,244,8,0,0
+199576,2026-10-22 12:07:20,C10-0258/2026,,"Article 1, alinéa 1, point 1, point a - Am 19",121,359,97,0,0
+199577,2026-10-22 12:07:31,C10-0258/2026,,"Article 1, alinéa 1, point 1, point b - Am 13",169,404,1,0,0
+199578,2026-10-22 12:07:43,C10-0258/2026,,"Article 1, alinéa 1, point 1, point b - Am 8= 28=",337,231,8,0,0
+199579,2026-10-22 12:07:54,C10-0258/2026,,"Article 1, alinéa 1, point 1, après le point b - Am 20",213,323,36,0,0
+199580,2026-10-22 12:08:04,C10-0258/2026,,"Article 1, alinéa 1, point 1, après le point b - Am 21",196,373,5,0,0
+199581,2026-10-22 12:08:16,C10-0258/2026,,"Article 1, alinéa 1, point 2, point a - Am 14",171,405,2,0,0
+199582,2026-10-22 12:08:26,C10-0258/2026,,"Article 1, alinéa 1, point 2, point a - Am 29",170,407,1,0,0
+199583,2026-10-22 12:08:38,C10-0258/2026,,"Article 1, alinéa 1, point 2, point a - Am 9",339,232,8,0,0
+199584,2026-10-22 12:08:49,C10-0258/2026,,"Article 1, alinéa 1, point 2, point a - Am 22",124,386,68,0,0
+199585,2026-10-22 12:09:00,C10-0258/2026,,"Article 1, alinéa 1, point 2, point b - Am 23S",125,383,68,0,0
+199586,2026-10-22 12:09:10,C10-0258/2026,,"Article 1, alinéa 1, point 2, point b - Am 15",180,390,4,0,0
+199587,2026-10-22 12:09:20,C10-0258/2026,,"Article 1, alinéa 1, point 2, après le point b - Am 16",174,393,2,0,0
+199588,2026-10-22 12:09:39,C10-0258/2026,,"Article 1, alinéa 1, après le point 2 - Am 4",395,174,6,0,0
+199589,2026-10-22 12:10:23,C10-0258/2026,,Après le considérant 1 - Am 32,173,402,4,0,0
+199590,2026-10-22 12:10:33,C10-0258/2026,,Considérant 7 - Am 25,176,400,2,0,0
+199591,2026-10-22 12:10:44,C10-0258/2026,,Après le considérant 7 - Am 3,396,162,18,0,0
+199592,2026-10-22 12:11:03,C10-0258/2026,,Proposition de la Commission,341,225,6,0,0
+199977,2026-11-12 11:36:01,A10-0275/2026,,Barry Andrews - Proposition de la Commission au Conseil,460,76,81,0,0
+199979,2026-11-12 11:18:46,A10-0270/2026,,Lara Wolters - Proposition de résolution (ensemble du texte),578,25,4,0,0
+199981,2026-11-12 11:31:42,A10-0211/2026,,Dainius Žalimas - Accord provisoire - Am 36,613,3,0,0,0
+199983,2026-11-12 11:54:57,A10-0280/2026,,Emmanouil Kefalogiannis - Proposition de résolution (ensemble du texte),405,133,60,0,0
+199985,2026-11-12 11:28:45,A9-0162/2024,,Stéphanie Yon-Courtin-Accord provisoire-Am 2,286,300,23,0,0
+199987,2026-11-12 11:28:09,A9-0160/2024,,Stéphanie Yon-Courtin-Accord provisoire-Am 2,311,261,38,0,0
+199991,2026-11-12 11:29:21,A10-0093/2026,,Christophe Clergeau - Accord provisoire - Am 117,561,13,39,0,0
+200011,2026-11-12 11:51:25,A10-0269/2026,,Salvatore De Meo - Proposition de résolution (ensemble du texte),476,83,42,0,0
+200032,2026-11-12 11:46:42,A10-0261/2026,,Vlad Vasile-Voiculescu - Proposition de résolution (ensemble du texte),447,66,91,0,0
+200049,2026-11-12 11:55:19,A10-0268/2026,,Mārtiņš Staķis - Proposition de résolution,411,133,41,0,0
+200101,2026-11-12 11:27:08,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Proposition de la Commission",424,105,83,0,0
+200331,2026-11-12 11:35:00,A10-0275/2026,,Barry Andrews - Amendements de la commission compétente - vote séparé - Am 83,276,332,4,0,0
+200346,2026-11-12 11:19:24,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Proposition de rejet - Am 339",111,486,10,0,0
+200350,2026-11-12 11:19:51,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Amendements de la commission compétente - vote séparé - Am 9/2",464,116,28,0,0
+200351,2026-11-12 11:20:02,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Amendements de la commission compétente - vote séparé - Am 12",469,117,22,0,0
+200354,2026-11-12 11:20:19,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Amendements de la commission compétente - vote séparé - Am 38/1",546,51,12,0,0
+200355,2026-11-12 11:20:29,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Amendements de la commission compétente - vote séparé - Am 38/2",426,175,8,0,0
+200356,2026-11-12 11:20:40,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Amendements de la commission compétente - vote séparé - Am 53",449,109,54,0,0
+200357,2026-11-12 11:20:51,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Amendements de la commission compétente - vote séparé - Am 138",476,121,13,0,0
+200358,2026-11-12 11:21:04,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 2, après le § 8 - Am 340",169,434,11,0,0
+200359,2026-11-12 11:22:12,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 5 - Am 337S",154,441,10,0,0
+200360,2026-11-12 11:22:24,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 5, alinéa 1, partie introductive - Am 344",157,437,13,0,0
+200361,2026-11-12 11:22:40,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 5, alinéa 1, point a - Am 345",151,451,6,0,0
+200362,2026-11-12 11:23:11,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 5, alinéa 1, point b - Am 346",156,443,7,0,0
+200363,2026-11-12 11:23:32,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 5, après le § 1 - Am 333",193,399,14,0,0
+200364,2026-11-12 11:24:59,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 26 - Am 338S= 352S=",163,442,5,0,0
+200367,2026-11-12 11:26:16,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Article 31, après le § 1 - Am 334",204,389,17,0,0
+200368,2026-11-12 11:26:33,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Après le considérant 1 - Am 335",152,429,19,0,0
+200369,2026-11-12 11:26:50,A10-0271/2026,,"Leire Pajín, Aurelijus Veryga - Après le considérant 23 - Am 336",169,439,1,0,0
+200370,2026-11-12 11:48:31,A10-0269/2026,,Salvatore De Meo - Après le § 1 - Am 13,90,474,40,0,0
+200371,2026-11-12 11:48:47,A10-0269/2026,,Salvatore De Meo - § 6 - Am 9,239,330,30,0,0
+200374,2026-11-12 11:49:19,A10-0269/2026,,Salvatore De Meo - § 13/2,415,152,30,0,0
+200375,2026-11-12 11:49:32,A10-0269/2026,,Salvatore De Meo - § 13/3,429,143,23,0,0
+200376,2026-11-12 11:49:42,A10-0269/2026,,Salvatore De Meo - § 13/4,448,126,19,0,0
+200377,2026-11-12 11:49:55,A10-0269/2026,,Salvatore De Meo - § 13/5,467,114,7,0,0
+200379,2026-11-12 11:50:23,A10-0269/2026,,Salvatore De Meo - Après le § 14 - Am 7,105,479,12,0,0
+200382,2026-11-12 11:50:58,A10-0269/2026,,Salvatore De Meo - Considérant G/2,468,115,14,0,0
+200383,2026-11-12 11:51:11,A10-0269/2026,,Salvatore De Meo - Considérant N - Am 12,183,379,22,0,0
+200401,2026-11-12 11:36:33,A10-0261/2026,,Vlad Vasile-Voiculescu - § 17/2,468,117,15,0,0
+200402,2026-11-12 11:36:46,A10-0261/2026,,Vlad Vasile-Voiculescu - § 17/3,479,77,47,0,0
+200403,2026-11-12 11:36:57,A10-0261/2026,,Vlad Vasile-Voiculescu - § 19 - Am 2,185,396,27,0,0
+200404,2026-11-12 11:37:09,A10-0261/2026,,Vlad Vasile-Voiculescu - § 20 - Am 14,178,426,6,0,0
+200405,2026-11-12 11:37:21,A10-0261/2026,,Vlad Vasile-Voiculescu - § 20 - Am 12,179,368,54,0,0
+200407,2026-11-12 11:37:35,A10-0261/2026,,Vlad Vasile-Voiculescu - § 20/1,439,116,53,0,0
+200408,2026-11-12 11:37:46,A10-0261/2026,,Vlad Vasile-Voiculescu - § 20/2,540,35,29,0,0
+200411,2026-11-12 11:38:02,A10-0261/2026,,Vlad Vasile-Voiculescu - § 22/2,445,80,79,0,0
+200412,2026-11-12 11:38:13,A10-0261/2026,,Vlad Vasile-Voiculescu - § 23 - Am 3,160,427,20,0,0
+200415,2026-11-12 11:38:30,A10-0261/2026,,Vlad Vasile-Voiculescu - § 23/2,446,140,20,0,0
+200421,2026-11-12 11:38:42,A10-0261/2026,,Vlad Vasile-Voiculescu - § 24 - Am 4,127,432,55,0,0
+200424,2026-11-12 11:38:58,A10-0261/2026,,Vlad Vasile-Voiculescu - § 24/2,448,133,24,0,0
+200425,2026-11-12 11:39:08,A10-0261/2026,,Vlad Vasile-Voiculescu - § 24/3,482,84,48,0,0
+200430,2026-11-12 11:39:19,A10-0261/2026,,Vlad Vasile-Voiculescu - § 25 - Am 15,172,420,9,0,0
+200432,2026-11-12 11:39:32,A10-0261/2026,,Vlad Vasile-Voiculescu - § 25/1,410,150,43,0,0
+200433,2026-11-12 11:39:43,A10-0261/2026,,Vlad Vasile-Voiculescu - § 25/2,449,89,73,0,0
+200434,2026-11-12 11:39:55,A10-0261/2026,,Vlad Vasile-Voiculescu - § 26 - Am 16,160,429,16,0,0
+200435,2026-11-12 11:40:06,A10-0261/2026,,Vlad Vasile-Voiculescu - § 27 - Am 5,144,420,45,0,0
+200437,2026-11-12 11:40:18,A10-0261/2026,,Vlad Vasile-Voiculescu - § 27/1,448,80,79,0,0
+200438,2026-11-12 11:40:28,A10-0261/2026,,Vlad Vasile-Voiculescu - § 27/2,559,30,9,0,0
+200439,2026-11-12 11:40:38,A10-0261/2026,,Vlad Vasile-Voiculescu - § 28 - Am 17,184,410,10,0,0
+200441,2026-11-12 11:40:51,A10-0261/2026,,Vlad Vasile-Voiculescu - § 28/1,446,127,32,0,0
+200442,2026-11-12 11:41:01,A10-0261/2026,,Vlad Vasile-Voiculescu - § 28/2,509,63,26,0,0
+200443,2026-11-12 11:41:11,A10-0261/2026,,Vlad Vasile-Voiculescu - § 28/3,422,156,26,0,0
+200444,2026-11-12 11:41:21,A10-0261/2026,,Vlad Vasile-Voiculescu - § 29 - Am 18,189,403,15,0,0
+200445,2026-11-12 11:41:32,A10-0261/2026,,Vlad Vasile-Voiculescu - § 29 - Am 6,210,390,11,0,0
+200448,2026-11-12 11:41:56,A10-0261/2026,,Vlad Vasile-Voiculescu - § 29/2,420,128,57,0,0
+200449,2026-11-12 11:42:08,A10-0261/2026,,Vlad Vasile-Voiculescu - § 29/3,414,137,52,0,0
+200450,2026-11-12 11:42:19,A10-0261/2026,,Vlad Vasile-Voiculescu - § 29/4,412,176,13,0,0
+200451,2026-11-12 11:42:30,A10-0261/2026,,Vlad Vasile-Voiculescu - § 30 - Am 7,186,397,18,0,0
+200454,2026-11-12 11:42:47,A10-0261/2026,,Vlad Vasile-Voiculescu - § 30/2,442,100,58,0,0
+200456,2026-11-12 11:43:01,A10-0261/2026,,Vlad Vasile-Voiculescu - § 31/1,459,73,77,0,0
+200457,2026-11-12 11:43:12,A10-0261/2026,,Vlad Vasile-Voiculescu - § 31/2,452,82,69,0,0
+200459,2026-11-12 11:43:26,A10-0261/2026,,Vlad Vasile-Voiculescu - § 32/1,559,28,21,0,0
+200460,2026-11-12 11:43:38,A10-0261/2026,,Vlad Vasile-Voiculescu - § 32/2,478,104,20,0,0
+200461,2026-11-12 11:43:49,A10-0261/2026,,Vlad Vasile-Voiculescu - § 34 - Am 19,200,398,6,0,0
+200462,2026-11-12 11:44:01,A10-0261/2026,,Vlad Vasile-Voiculescu - § 35 - Am 8S,211,380,12,0,0
+200463,2026-11-12 11:44:11,A10-0261/2026,,Vlad Vasile-Voiculescu - § 35 - Am 20,195,403,6,0,0
+200466,2026-11-12 11:44:29,A10-0261/2026,,Vlad Vasile-Voiculescu - § 35/2,424,163,14,0,0
+200467,2026-11-12 11:44:39,A10-0261/2026,,Vlad Vasile-Voiculescu - § 35/3,399,191,10,0,0
+200469,2026-11-12 11:44:53,A10-0261/2026,,Vlad Vasile-Voiculescu - § 36/1,526,5,68,0,0
+200470,2026-11-12 11:45:07,A10-0261/2026,,Vlad Vasile-Voiculescu - § 36/2,495,88,20,0,0
+200471,2026-11-12 11:45:17,A10-0261/2026,,Vlad Vasile-Voiculescu - § 36/3,595,3,9,0,0
+200473,2026-11-12 11:45:39,A10-0261/2026,,Vlad Vasile-Voiculescu - § 107/1,501,26,77,0,0
+200474,2026-11-12 11:45:49,A10-0261/2026,,Vlad Vasile-Voiculescu - § 107/2,414,164,16,0,0
+200475,2026-11-12 11:46:01,A10-0261/2026,,Vlad Vasile-Voiculescu - § 113,432,150,19,0,0
+200477,2026-11-12 11:46:24,A10-0261/2026,,Vlad Vasile-Voiculescu - Considérant Z - Am 1S,188,392,24,0,0
+200490,2026-11-12 11:55:43,RC-B10-0497/2026,,§ 1,569,2,16,0,0
+200491,2026-11-12 11:55:54,RC-B10-0497/2026,,§ 2,551,4,32,0,0
+200492,2026-11-12 11:56:04,RC-B10-0497/2026,,Après le § 2 - Am 1,140,385,62,0,0
+200496,2026-11-12 11:56:28,RC-B10-0497/2026,,§ 4,559,0,24,0,0
+200497,2026-11-12 11:56:42,RC-B10-0497/2026,,§ 5,557,5,20,0,0
+200498,2026-11-12 11:56:53,RC-B10-0497/2026,,§ 19 - Am 2,142,436,5,0,0
+200501,2026-11-12 11:57:10,RC-B10-0497/2026,,§ 19/2,411,111,62,0,0
+200502,2026-11-12 11:57:22,RC-B10-0497/2026,,Après le § 20 - Am 3,103,398,86,0,0
+200503,2026-11-12 11:57:33,RC-B10-0497/2026,,Proposition de résolution (ensemble du texte),536,8,37,0,0
