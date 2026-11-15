@@ -143,6 +143,76 @@ describe("parseArgs", () => {
   );
 });
 
+// ─── methodName ──────────────────────────────────────────────────────
+
+describe("methodName", () => {
+  it("maps the EP decision methods to the repo vocabulary", () => {
+    assert.strictEqual(
+      lib.methodName("def/ep-decision-methods/VOTE_ELECTRONIC_ROLLCALL"),
+      "RCV"
+    );
+    assert.strictEqual(lib.methodName("VOTE_HAND"), "HAND");
+    assert.strictEqual(lib.methodName("VOTE_ELECTRONIC"), "ELECTRONIC");
+    assert.strictEqual(
+      lib.methodName("def/ep-decision-methods/VOTE_ELECTRONIC_SECRET"),
+      "SECRET"
+    );
+  });
+
+  it("passes unknown methods and empty input through", () => {
+    assert.strictEqual(
+      lib.methodName("def/ep-decision-methods/VOTE_UNKNOWN"),
+      "VOTE_UNKNOWN"
+    );
+    assert.strictEqual(lib.methodName(""), "");
+    assert.strictEqual(lib.methodName(undefined), "");
+    assert.strictEqual(lib.methodName(null), "");
+  });
+});
+
+// ─── normalizeRequestedBy ────────────────────────────────────────────
+
+describe("normalizeRequestedBy", () => {
+  it("keeps a single group as-is", () => {
+    assert.strictEqual(lib.normalizeRequestedBy("The Left"), "The Left");
+    assert.strictEqual(lib.normalizeRequestedBy("PfE"), "PfE");
+  });
+
+  it("splits newlines and commas, dropping duplicates", () => {
+    assert.strictEqual(
+      lib.normalizeRequestedBy("ECR\nPfE, ECR"),
+      "ECR, PfE",
+      "the API repeats ECR as a header and in the list"
+    );
+    assert.strictEqual(lib.normalizeRequestedBy("ECR\nPPE"), "ECR, PPE");
+    assert.strictEqual(
+      lib.normalizeRequestedBy("S&D\nThe Left"),
+      "S&D, The Left"
+    );
+    assert.strictEqual(lib.normalizeRequestedBy("S&D, Renew"), "S&D, Renew");
+  });
+
+  it("strips trailing colons and surrounding whitespace", () => {
+    assert.strictEqual(
+      lib.normalizeRequestedBy("S&D, Verts/ALE:"),
+      "S&D, Verts/ALE"
+    );
+    assert.strictEqual(lib.normalizeRequestedBy("  PPE ,  ECR  "), "PPE, ECR");
+  });
+
+  it("returns null when there is nothing to keep", () => {
+    assert.strictEqual(lib.normalizeRequestedBy(null), null);
+    assert.strictEqual(lib.normalizeRequestedBy(undefined), null);
+    assert.strictEqual(lib.normalizeRequestedBy(""), null);
+    assert.strictEqual(lib.normalizeRequestedBy(" , : ,\n"), null);
+  });
+
+  it("truncates to the varchar(255) column width", () => {
+    const long = Array.from({ length: 60 }, (_, i) => `Group${i}`).join(", ");
+    assert.strictEqual(lib.normalizeRequestedBy(long).length, 255);
+  });
+});
+
 // ─── fingerprintRcv ──────────────────────────────────────────────────
 
 describe("fingerprintRcv", () => {

@@ -13,7 +13,9 @@ const log = require("./lib/log.js");
 
 log.time("report");
 let ref = "";
-if (process.argv[2]) {
+// A flag (e.g. --force) used to be taken as a report reference and inserted as
+// a junk row; only accept something that looks like A10-0001/2024.
+if (process.argv[2] && !process.argv[2].startsWith("-")) {
   ref = process.argv[2];
 } else {
   log.info("processing all reports");

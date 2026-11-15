@@ -9,6 +9,7 @@
     "test:integration": "node --test openapi/test/rcv.test.js openapi/test/vot.test.js openapi/test/att.test.js",
     "test:update": "UPDATE_FIXTURES=1 node --test openapi/test/*.test.js",
     "majority:csv": "node sql/run.js",
+    "update": "sh update.sh",
     "db:migrate": "knex migrate:latest --knexfile knexfile.js",
     "db:migrate:status": "knex migrate:list --knexfile knexfile.js",
     "db:migrate:rollback": "knex migrate:rollback --knexfile knexfile.js",

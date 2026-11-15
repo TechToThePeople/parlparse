@@ -1,60 +1,185 @@
-# how does it fit together?
+# parlparse
 
-This scrapes the rollcalls of votes in the European Parliament as used in [mepwatch](https://mepwatch.eu). It is using a database to store the data in their intermediary form, but the end result as used by the data visualisation is all based on static files.
+Parses the European Parliament's plenary votes into the static files that
+[mepwatch](https://mepwatch.eu) (`../10`) serves. The database
+(`data/term10.db`) is only an intermediate store — everything the site shows is
+generated from CSVs.
 
-## MEPs
+Two sources feed the database:
 
-The rollcalls do not contain much information about each MEP we use for some analysis (eg no information about their country or their national party).
+| source | work types | gives | scripts |
+|---|---|---|---|
+| EP Open Data API `https://data.europarl.europa.eu/api/v2` | `VOTE_ROLLCALL_PLENARY` (RCV), `VOTE_RESULTS_PLENARY` (VOT), `MINUTES_PLENARY` (MIN), plus `/meetings/MTG-PL-<date>/decisions` | **every** vote of a sitting (roll-call, hand, electronic) with counts, method, requesting group, outcome; per-MEP arrays only for roll-calls | `openapi/*.js` |
+| EP RCV XML (`PV-10-<date>-RCV_EN.xml`) | — | per-MEP positions (`positions`), roll-call subset only | `plenary.js`, `lib/rollcall.js` |
 
-Before each plenary week, we should update the list of MEPs so the votes are all matching complete informations of the MEPs. We use the data from tttp.eu (itself an aggreate between the data on parltrack, wikimedia and a bunch of external sources).
+The minutes documents (`MIN`) contain no vote data — they only say "see also
+'Results of votes'". Use VOT/decisions for numbers.
 
-_note: sometimes, MEPs vote before their profile is published on the EP website, we are trying to handle it by creating "placeholder" MEPs that are updated later_
+## Quick start
 
-## parsing the plenary rollcalls
+```bash
+npm install
+npm run db:migrate      # schema + data migrations (sqlite: data/term10.db)
+npm run update          # full update for yesterday + today, then publish
+```
 
-Each rollcall is not published separately, but there is one file per day containing all the votes of the day (up to 600). The parliament doesn't notify nor publish on a timely fashion when there is a new plenary vote, but fortunately, each vote has a unique url that is easy to guess.
+`npm run db:migrate:status` shows applied/pending migrations; knexfiles target
+`./data/term10.db` (put `DB=live` in front to use the postgres connection from
+`config/database.js`).
 
-So the parser is checking regularly for each day if there is a file published (usually early in the PM on plenary days). If there is more than one voting session per day, the EP does update the file, so we check both for today (to get the votes as soon as possible) and yesterday (to catch potential updates of a second voting session).
+## What `npm run update` does
 
-    $node plenary.js --help
+`update.sh`, in this order (order matters — `csv.js` reads what the earlier
+steps write):
 
-    $node plenary.js -d -u
-    $node plenary.js -d-1 -u
+1. `npm run db:migrate` — schema first: `openapi/plenary.js` writes
+   `method`/`vote_type`/`requested_by`, `csv.js` reads `reports.creator`.
+2. `node openapi/plenary.js -d-1` / `-d0` — all decisions of yesterday and today
+   from the API, upserted into `rollcalls` by EP voting id.
+3. `node plenary.js -d -u` / `-d-1 -u` — per-MEP `positions` from the RCV XML.
+4. `node report.js` then `node openapi/report-creator.js` — report rows, then the
+   committee(s) or political group(s) behind each one.
+5. `node csv.js`, `node cards.js`, `npm run majority:csv` — the static files.
+6. `sh prod.sh` — publish to `../10/data` (fails loudly on an empty CSV, and
+   swaps each file atomically).
 
-plenary.js is containing the logic of finding the xml files, the parsing and processing of the xml is in lib/rollcall.js
+One-off backfills, not part of the daily run:
 
-tables and structures:
-- plenaries: one record per day in the plenary that has votes (with rollcalls). In general, monday (very few votes) to thu in the plenary weeks, but with a lot of exceptions
-- rollcalls: each "thing" being voted. it can be a report (law), a specific amendment, a bunch of amendments...
-- positions: each individual MEP vote -for, against, abstain- (key:  MEP+rollcall)
+```bash
+node openapi/plenary.js --all              # all vote-result dates (116), ~4 min
+node openapi/plenary.js --all --no-rollcall # hand/electronic only, leaves RCV rows alone
+node openapi/report-creator.js             # committees/groups for all 655 reports
+```
 
-_notes: 
-- I never found a list of the text of each of these votes (beside the reports), eg finding what is the amendment text. Please let me know if you find it 
-- the EP use different IDs for MEPs in their voting system than everywhere else. It's getting better, but you might still have a bit of logic/magic to connect the two IDs
-- there are a lot of exceptions, for instance rollcalls that aren't publishing individual votes
-- votes are related to a report (specific legislation), but some aren't (eg. budget or agenda)
-- we parse the french version, that used to be more complete or faster updated. pretty much irrelevant because...
-- the name of each rollcall is a mess, for instance the reports contain the full name of the report in 3 languages, and the name of the rapporteur, in a format that isn't parsable (one single string)_
+## openapi/ scripts
 
-## reports
+| script | writes |
+|---|---|
+| `openapi/plenary.js <date> \| --all` | `rollcalls` (all vote methods, counts, `vote_type`, `requested_by`) |
+| `openapi/vot.js [<date> \| --all]` | `votes` + `votings` (from the VOT documents) |
+| `openapi/rcv.js [<id> \| <date>]` | `data/openapi/rcv/*.json` |
+| `openapi/att.js [<id> \| <date>]` | `data/openapi/att/*.json` |
+| `openapi/report-creator.js [--dry]` | `reports.creator` |
 
-Most of the votes are related to a report, A9-xx or B9-xx.
-Some of the analysis are depending on the committee that was the source of that report, and in general extra information about it.
+See `openapi/README.md` for endpoints and `openapi/SQL.md` for the schema.
 
-The key is their ref A9-xxx or B9-xxx
- 
-node report.js
+## Database
 
-## generate the static files and publish them
-node csv.js
-node cards.js
-sh prod.sh
+SQLite at `data/term10.db`, managed with knex (`migrations/`, `knexfile.js`).
+`plenaries`, `rollcalls`, `meps` and `positions` predate the migrations (they
+came from the Strapi CMS), so migrations only add columns and derived tables —
+they cannot build a fresh database from scratch.
 
+Vocabulary worth knowing:
 
+- `rollcalls.method` — `RCV` (roll-call), `HAND`, `ELECTRONIC`, `SECRET`. NULL
+  used to mean "unknown"; the `backfill_rollcall_method` migration set those to
+  `RCV`. `''` means the API reported a decision without a method.
+- `rollcalls.requested_by` is also the marker for "this date has been imported
+  by `openapi/plenary.js`" — `method` cannot be used for that any more, since the
+  backfill labelled every legacy row.
+- `rollcalls.requested_by` and `reports.creator` — comma-separated, deduplicated
+  (`The Left`, `ECR, PfE`, `original text`; `ENVI`, `ECON, BUDG`). Group codes
+  from the API are mapped to the names `meps.eugroup` uses (`PPE` → `EPP`,
+  `S-D` → `S&D`, `VERTS-ALE` → `Greens/EFA`, `PFE` → `PfE`, …).
+- `groupmajority` is derived from `positions` by `sql/updatemajority.sql`
+  (upsert on `(eugroup, rollcall)`; it never deletes rows).
 
+## the files ../10 reads (format contract)
 
-# notes
+`prod.sh` copies six of these into `../10/data/`.
 
+| file | written by | columns |
+|---|---|---|
+| `data/meps.csv` | `csv.js` | `epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid` |
+| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused` |
+| `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc` |
+| `data/cordon.csv` | `sql/cordon.sql` | `rollcall,date,far_right_epp_position,report_title,reference,name,for,against,abstention,epp_cohesion` |
+| `data/cordon-report.csv` | `sql/cordon-report.sql` | `votes_together,reference,report_title` |
+| `data/cordon-total.csv` | `sql/cordon-total.sql` | `votes_in_common,total_votes,pct_of_total` (single row) |
+| `data/mep_rollcall.csv` | `rollcall.js` | `mepid,mep,result,group,identifier` (per-MEP votes; gzipped before pushing, not in `prod.sh`) |
+
+Formats the site relies on:
+
+- **Missing values are empty strings**, never `NULL`/`null` — `../10` does
+  `+d.for || ""` and treats the empty string as "no data".
+- **`identifier` / `rollcall` are `rollcalls.id`**, the EP voting id (also
+  `positions.mep_vote` side is `meps.vote_id`). Not a sequence number.
+- **Dates**: `item_rollcall.date` and `cordon.date` are `YYYY-MM-DD HH:MM:SS`
+  (the site slices the first 10 chars); `meps.start` / `meps.end` are plain
+  dates and often empty.
+- **Counts** (`for`, `against`, `abstention`, `no_show`, `excused`,
+  `epp_cohesion`, `votes_together`) are integers with no thousands separator;
+  `cordon-total.pct_of_total` is a percentage with one decimal.
+- **`item_rollcall.report` joins `text_tabled.reference`** (e.g. `B10-0007/2024`,
+  `A10-0264/2026`). Vote titles keep the EP typography: `–` dashes, `§`
+  paragraphs, `Am N` amendment numbers.
+- **`text_tabled.committee`** holds either the committee acronyms (`ENVI`,
+  `ECON, BUDG`) or, for motions tabled by groups, the groups in the same names
+  `meps.eugroup` uses (`ECR, Renew, S&D, EPP`). The header stays `committee`
+  because `../10` reads `docs[...].committee`; in the database the column is
+  `reports.creator` (filled by `openapi/report-creator.js`).
+- **`text_tabled.oeil`** is an HTML-escaped URL as copied from the source
+  (`&amp;` instead of `&`) — the site does not unescape it.
+- **`meps.country`** is lowercase ISO-3166 alpha-2 (`hu`, `fr`), `term` is `10`,
+  `eugroup` is the group short name (`PPE`, `S&D`, `PfE`, …).
+- **`cordon.far_right_epp_position`** is one of `for` / `against` / `abstention`;
+  `epp_cohesion` is 0–100.
+
+## Gotchas
+
+- **MEP ids**: the EP's voting system uses its own ids, unrelated to the ids used
+  everywhere else. `meps.vote_id` bridges them; `sh qa.sh` (run twice) does the
+  name matching, and `data/mepidmatch.csv` holds the manual fixes.
+- **Placeholder MEPs**: someone can vote before their profile is published; a
+  placeholder row is created and updated later.
+- **Name strings are messy**: a rollcall name can contain the report title in
+  three languages plus rapporteurs, in one unparsable string.
+- **Not every vote has individual records** — hand votes have counts only, and
+  some roll-calls are published without per-MEP data.
+- RCV XML is parsed in French: it used to be more complete and updated sooner.
+
+## Legacy pipeline (term 8/9, RCV XML only)
+
+Before the OpenAPI importer existed, everything came from scraped XML files and
+the steps below. They are still the way `positions` are filled, and `qa.sh`
+still depends on them.
+
+```
+0) prepare the list of meps
+cd /var/www/ep/ && gulp && node script/aliases.js
+
+1) parse the pages to get the list of documents
+node index.js     # attendance lists, votes, rollcall documents
+node report.js    # reports and motions tabled (A8-xx, B8-xxx)
+
+2) download the xml files (gzipped to save space)
+node download.js
+
+3) parse each xml
+node attendance.js
+node rollcall.js  # generates data/item_rollcall.csv and data/mep_rollcall.csv
+```
+
+Watch the mismatch warnings, e.g.
+`2018-07-04 12:56:20 for 92449 error processed 286/256` means more registered
+votes than the total mentioned in the file.
+
+```
+4) match the two MEP id spaces via the attendance lists
+sh qa.sh
+sh qa.sh   (yes, twice)
+# manual fixes end up in data/mepidmatch.csv, e.g.
+# 6782,Packet,ECR,530
+5) gzip data/mep_rollcall.csv before pushing
+```
+
+The queries in `qa.sh` use [q](https://github.com/harelba/q) (>1.4, older
+versions escape `"` wrongly).
+
+Schema snippets from that era (the current schema is in `openapi/SQL.md`):
+
+```sql
 CREATE TABLE `positions` (
   `id` integer not null primary key autoincrement,
   `rollcall` integer not null,
@@ -63,64 +188,11 @@ CREATE TABLE `positions` (
   UNIQUE(mep_vote,rollcall)
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS position_mep ON positions(mep_vote, rollcall
-
-//`id` integer not null primary key autoincrement, 
 CREATE TABLE `attendances` (
-
-`status` varchar(30) null, `mep_id` integer not null, `date` date not null, UNIQUE(mep_id,date));
-
-CREATE UNIQUE INDEX IF NOT EXISTS position_group ON groupmajority ( eugroup, rollcall);
-
-
-insert into groupmajority( majority,cohesion,rollcall,eugroup,total,"for",against, abstention) (select case when ("for" >= against and "for" >= abstention) then 'for' when (against >= "for" and against >= abstention) then 'against' when (abstention >= against and abstention >= "for") then 'abstention' end as majority, round(100.0* GREATEST("for",against,abstention)/total) cohesion, rollcall,eugroups.id eugroup,total,"for",against, abstention from ( select rollcall, eugroup, count(*) as total, sum (case when position = 'for' then 1 else 0 end) as for,sum (case when position = 'against' then 1 else 0 end) as against,sum (case when position = 'abstention' then 1 else 0 end) as abstention from positions join meps on mep_vote=meps.vote_id group by rollcall, eugroup) q left join eugroups on eugroups.name=eugroup) on conflict do nothing;
-
-
-you need the latest version of q (>1.4 to work -bug on escaping ")
-The data published by the EP needs some massaging to be extracted in a useful format.
-
-These are the steps:
-
-0) prepare the list of meps
-cd /var/www/ep/
-gulp
-node script/aliases.js
-
-1) parse the pages to get the list of the documents
-
-- node index.js : parse and fetch all the attendance lists, votes and rollcall documents
-- node report.js : the reports and motions tabled (A8-xx B8-xxx)
-
-2) once that's done, you need to download the xml files
-
-- node download.js (to save space, it gzips them)
-
-3) once that's done, parse each xml to extract the data within them
-
-- node attendance.js
-- node rollcall.js to generate data/item_rollcall.csv and data/mep_rollcall.csv
-
-pay attention to the mistakes, eg:
-2018-07-04 12:56:20 for 92449 error processed 286/256 at http://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/2018/07-04/liste_presence/P8_PV(2018)07-04(RCV)_XC.xml
-
-It means you have more registered votes than the total mentionned in the file.
-
-4) once that's done, use the attendance lists (that contains the "normal" meps id) to match them with the mep id used in the rollcalls (nope, they aren't the same)
-
-sh qa.sh
-sh qa.sh
-(yes, twice)
-
-DUPLICATE,Khan,S&D,1
-6782,Packet,ECR,530
-6371,Rodrigues Maria João,S&D,7036
-
-see, that wasn't that difficult, wasn't it? (</irony>)
-
-5) before git pushing, 
-
-gzip data/mep_rollcall.csv 
-
-6) 
-cd /var/www/mepwatch
-sh update.sh
+  `id` integer not null primary key autoincrement,
+  `status` varchar(30) null,
+  `mep_id` integer not null,
+  `date` date not null,
+  UNIQUE(mep_id,date)
+);
+```

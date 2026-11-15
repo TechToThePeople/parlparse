@@ -1,5 +1,9 @@
-DELETE FROM groupmajority;
-
+-- Upsert instead of DELETE + INSERT: no window where groupmajority is empty,
+-- and a partial run is recoverable. The (eugroup, rollcall) unique index already
+-- exists. Rows whose positions disappeared are NOT pruned (the old DELETE did) —
+-- run the delete by hand if that ever matters.
+-- `WHERE true` is required so SQLite parses ON CONFLICT as an upsert clause and
+-- not as a join constraint of the SELECT.
 INSERT INTO groupmajority (
   eugroup, rollcall, majority, cohesion, total, `for`, against, abstention, created_at, updated_at
 )
@@ -35,4 +39,13 @@ FROM (
   WHERE p.eugroup IS NOT NULL
     AND p.position IS NOT NULL
   GROUP BY p.eugroup, p.rollcall
-) agg;
+) agg
+WHERE true
+ON CONFLICT(eugroup, rollcall) DO UPDATE SET
+  majority    = excluded.majority,
+  cohesion    = excluded.cohesion,
+  total       = excluded.total,
+  `for`       = excluded.`for`,
+  against     = excluded.against,
+  abstention  = excluded.abstention,
+  updated_at  = excluded.updated_at;

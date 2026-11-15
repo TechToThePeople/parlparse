@@ -28,6 +28,8 @@ const {
   RCV_DIR,
   saveRcvXml,
   pushRcv,
+  methodName,
+  normalizeRequestedBy,
 } = require("./lib");
 
 const { spawnSync } = require("child_process");
@@ -81,7 +83,11 @@ async function downloadRcv(date) {
 // --date=<n> so it survives parsing. Positive offsets parse as positionals.
 const argv = minimist(
   process.argv.slice(2).map((a) => (/^-\d+$/.test(a) ? `--date=${a}` : a)),
-  { alias: { h: "help", a: "all", d: "date", f: "fetch" } }
+  {
+    alias: { h: "help", a: "all", d: "date", f: "fetch" },
+    boolean: ["rollcall"],
+    default: { rollcall: true },
+  }
 );
 
 if (argv.help) {
@@ -98,7 +104,7 @@ Options:
   --fetch, -f   Also fetch raw JSON files (calls rcv.js, vot.js, att.js)
   --download    Force-download the RCV XML (compressed) for the date(s)
   --push        scp the RCV archive to kundera (with --download, after it)
-  --skip-rollcall Import only hand/electronic votes, leave roll-call rows as they are
+  --rollcall    Import roll-call votes too (default: true, disable with --no-rollcall)
   --force       Re-download even if already cached
   --help, -h    Show this help
 
@@ -118,13 +124,18 @@ async function main() {
   let dates;
 
   if (argv.all) {
-    // Discover all dates that have RCV documents
-    console.log("📋 Fetching all roll-call document dates…");
-    const docs = await fetchDocumentList("VOTE_ROLLCALL_PLENARY");
-    dates = docs
-      .map((d) => extractDateFromId(d.identifier))
-      .filter(Boolean)
-      .sort();
+    // Discover dates from the vote-results documents (every vote of a sitting,
+    // not just roll-calls), unioned with the roll-call documents in case one
+    // exists without the other.
+    console.log("📋 Fetching all vote-result document dates…");
+    const sets = [];
+    for (const workType of ["VOTE_RESULTS_PLENARY", "VOTE_ROLLCALL_PLENARY"]) {
+      const docs = await fetchDocumentList(workType);
+      sets.push(
+        docs.map((d) => extractDateFromId(d.identifier)).filter(Boolean)
+      );
+    }
+    dates = [...new Set(sets.flat())].sort();
     console.log(`   → ${dates.length} plenary dates found`);
   } else {
     const input = argv._.length ? argv._[0] : argv.date;
@@ -158,14 +169,17 @@ async function main() {
     }
 
     // Skip DB import if already processed and --force not set. With
-    // --skip-rollcall only non-roll-call decisions count as processed, so dates
+    // --no-rollcall only non-roll-call decisions count as processed, so dates
     // with RCV rows but no hand/electronic rows are still imported.
+    //
+    // `requested_by` marks a date as imported, not `method`: the
+    // backfill_rollcall_method migration set every legacy RCV-XML row to 'RCV',
+    // so any date with votes would look processed already.
     const processed = db("rollcalls")
       .join("plenaries", "rollcalls.plenary", "plenaries.id")
       .where("plenaries.date", date)
-      .whereNotNull("rollcalls.method");
-    if (argv["skip-rollcall"])
-      processed.whereNot("rollcalls.method", "VOTE_ELECTRONIC_ROLLCALL");
+      .whereNotNull("rollcalls.requested_by");
+    if (!argv.rollcall) processed.whereNot("rollcalls.method", "RCV");
     const existing = await processed.first();
     if (!argv.force && existing) {
       console.log(
@@ -276,16 +290,16 @@ async function processDate(dateStr) {
     };
   }
 
-  // --skip-rollcall leaves roll-call rows (and their per-MEP positions) alone and
+  // --no-rollcall leaves roll-call rows (and their per-MEP positions) alone and
   // imports only the hand/electronic votes.
   const all = decisionsData.data || [];
-  const decisions = argv["skip-rollcall"]
-    ? all.filter(
+  const decisions = argv.rollcall
+    ? all
+    : all.filter(
         (d) =>
           d.decision_method !==
           "def/ep-decision-methods/VOTE_ELECTRONIC_ROLLCALL"
-      )
-    : all;
+      );
 
   if (decisions.length === 0) {
     console.log(`   ⚠️  No decisions returned for ${sittingId}`);
@@ -315,9 +329,8 @@ async function processDate(dateStr) {
     }
     const id = parseInt(idMatch[1], 10);
 
-    // Extract method
-    const rawMethod = dec.decision_method || "";
-    const method = rawMethod.replace("def/ep-decision-methods/", "");
+    // Extract method — normalised to the repo's short vocabulary
+    const method = methodName(dec.decision_method);
 
     // Extract title
     const title =
@@ -327,7 +340,9 @@ async function processDate(dateStr) {
       "";
 
     // Extract requested by (political group)
-    const requestedBy = dec.responsible_organization_label?.en || null;
+    const requestedBy = normalizeRequestedBy(
+      dec.responsible_organization_label?.en
+    );
 
     // Extract document reference from decided_on_a_realization_of
     const decidedOn = dec.decided_on_a_realization_of || [];
