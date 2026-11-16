@@ -36,7 +36,9 @@ steps write):
    `method`/`vote_type`/`requested_by`, `csv.js` reads `reports.creator`.
 2. `node openapi/decisions.js -d-1` / `-d0` — all decisions of yesterday and today
    from the API, upserted into `rollcalls` by EP voting id.
-3. `node positions.js -d -u` / `-d-1 -u` — per-MEP `positions` from the RCV XML.
+3. `node positions.js -d -u` / `-d-1 -u` — per-MEP `positions` from the RCV XML
+   (`doceo` is behind the EP's WAF, so the download falls back to the same XML on
+   `data.europarl.europa.eu/distribution/doc/PV-10-<date>-RCV_en.xml`).
 4. `node report.js` then `node openapi/report-creator.js` — report rows, then the
    committee(s) or political group(s) behind each one.
 5. `node csv.js`, `node cards.js`, `npm run majority:csv` — the static files.

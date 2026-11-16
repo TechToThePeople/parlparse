@@ -101,20 +101,38 @@ async function run(date) {
     year + "/" + month + "-" + day + "/liste_presence/" +
     "P" + term + "_PV(" + year + ")" + month + "-" + day + "(RCV)_XC";
 */
-  const url =
+  // doceo is behind the EP's WAF (403/202 for anything that is not a browser),
+  // the Open Data distribution serves the same XML openly. Try both.
+  const candidates = [
     "https://www.europarl.europa.eu/doceo/document/PV-" +
-    term +
-    "-" +
-    date +
-    "-RCV_EN";
-  //    "-RCV_FR";
+      term +
+      "-" +
+      date +
+      "-RCV_EN",
+    "https://data.europarl.europa.eu/distribution/doc/PV-" +
+      term +
+      "-" +
+      date +
+      "-RCV_en",
+  ];
+  let url = candidates[0];
 
   try {
     if (argv.update) log.await("downloading", url + ".xml");
-    plenary = await downloadFile("RCV", url, {
-      file: date,
-      force: argv.update,
-    });
+    for (const candidate of candidates) {
+      try {
+        plenary = await downloadFile("RCV", candidate, {
+          file: date,
+          force: argv.update,
+        });
+        url = candidate;
+        break;
+      } catch (e) {
+        if (!plenary && candidate !== candidates[candidates.length - 1])
+          log.warn(candidate.split("/")[2], "->", e.statusCode || e.message);
+        if (candidate === candidates[candidates.length - 1]) throw e;
+      }
+    }
     if (!plenary.fresh) {
       log.info("./data/RCV/" + date + ".xml.zip already processed");
       if (!argv.force && !argv["correction-only"]) return;
