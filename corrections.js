@@ -1,4 +1,4 @@
-// find data/RCV -exec zgrep -l 'Intentions' {} \; | sed -En "s/data\/RCV\/(.*).xml.zip/\1/p" | xargs -I{} node plenary.js -d {} --correction-only
+// find data/RCV -exec zgrep -l 'Intentions' {} \; | sed -En "s/data\/RCV\/(.*).xml.zip/\1/p" | xargs -I{} node positions.js -d {} --correction-only
 
 "use strict";
 const db = require("./lib/db.js");
@@ -16,7 +16,7 @@ const help = (error = false) => {
   console.log(
     "--force -f : retry download even if already downloaded and parse it anyway (by default, skip)"
   );
-  process.exit(error);
+  process.exit(error ? 1 : 0);
 };
 
 if (argv.help) {
@@ -53,7 +53,7 @@ db.select("rollcall as id")
         if (exists && !argv.force) {
           continue;
         }
-      } catch (err) {
+      } catch {
         // nothing special to do, let's create the card that doesn't exist
       }
       written++;

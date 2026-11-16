@@ -454,6 +454,16 @@ async function ensureProposalReport(reference, title, url) {
 }
 
 async function processDate(date, stats) {
+  // nothing to do for a day without votes (update.sh calls this every day)
+  const dayVotes = await db("rollcalls")
+    .where("date", "like", `${date}%`)
+    .count("* as n")
+    .first();
+  if (!dayVotes || !dayVotes.n) {
+    stats.skipped++;
+    return;
+  }
+
   let xml;
   try {
     xml = await fetchXml(date);

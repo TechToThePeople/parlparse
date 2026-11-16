@@ -124,7 +124,7 @@ node openapi/att.js 2024-07-16
 node openapi/att.js PV-10-2024-07-16-ATT
 ```
 
-### `node openapi/plenary.js [<date> | --all]`
+### `node openapi/decisions.js [<date> | --all]`
 
 Imports decisions from the OpenAPI into the `term10.db` database.
 Fills the `method`, `requested_by`, `doc_ref`, `vote_type`, and `attendees`
@@ -137,8 +137,8 @@ For each sitting date it:
 4. Reports new rows, updated rows, and counts by method
 
 ```
-node openapi/plenary.js 2024-07-17       # single date
-node openapi/plenary.js --all            # dates from the VOT + RCV document lists
+node openapi/decisions.js 2024-07-17       # single date
+node openapi/decisions.js --all            # dates from the VOT + RCV document lists
 ```
 
 ### `node openapi/vot-xml.js [<date> | --all] [--dry] [--force-names]`

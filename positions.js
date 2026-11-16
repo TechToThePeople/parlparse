@@ -6,17 +6,12 @@ date,code,status,reference,name,baseurl,extensions
 
 //https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/yyyy/mm-dd/liste_presence/Pl_PV(yyyy)mm-dd(RCV)_XC.xml
 const term = 10;
-const https = require("https");
 const fs = require("fs");
 const downloadFile = require("./lib/download.js");
 const roll = require("./lib/rollcall.js");
 const { init } = require("./lib/mep.js");
 const db = require("./lib/db.js");
 const log = require("./lib/log.js");
-const { format } = require("@fast-csv/format");
-
-const head = "date,code,status,reference,name,baseurl,extensions".split(",");
-const csvStream = format({ headers: head });
 
 let date = null;
 let initialised = false;
@@ -33,7 +28,7 @@ let argv = require("minimist")(process.argv.slice(2), {
 });
 const main = (argv) => {
   const help = (error = false) => {
-    error && log.fatal("parameter missing");
+    if (error) log.fatal("parameter missing");
     log.info(
       "\n--all -a : process all days or:",
       "\n--date=2020-04-09 -d=2020-04-09 : process a single day (today by default if no date)",
@@ -43,7 +38,7 @@ const main = (argv) => {
       "\n--force-position -p : parse again even the positions (by default, skip)",
       "\n--correction-only -c : check if correction only"
     );
-    process.exit(error);
+    process.exit(error ? 1 : 0);
   };
 
   if (argv.help) {
@@ -64,7 +59,7 @@ const main = (argv) => {
       process.exit(1);
     });
   } else {
-    !argv.date && help(true);
+    if (!argv.date) help(true);
     argv.date === true
       ? (date = new Date().toISOString().substring(0, 10)) // today
       : (date = argv.date);
@@ -72,13 +67,11 @@ const main = (argv) => {
       const t = new Date(new Date().valueOf() + 1000 * 3600 * 24 * argv.date);
       date = t.toISOString().substring(0, 10);
     }
-    const d = date.split("-");
-    if (d.length !== 3) {
+    const parts = date.split("-");
+    if (parts.length !== 3) {
       log.error("can't parse the date", date);
       process.exit(1);
     }
-    const start = new Date();
-
     run(date).then(() => {
       log.timeEnd("plenary");
       process.exit(1);
@@ -100,20 +93,13 @@ async function run(date) {
   if (!initialised) {
     initialised = await init();
   }
-  const d = date.split("-");
   let plenary = null;
 
-  const name =
-    "P" + term + "_PV(" + d[0] + ")" + d[1] + "-" + d[2] + "(RCV)_XC";
-  /*  const oldurl =
+  /*  const [year, month, day] = date.split("-");
+  const oldurl =
     "https://www.europarl.europa.eu/RegData/seance_pleniere/proces_verbal/" +
-    d[0] +
-    "/" +
-    d[1] +
-    "-" +
-    d[2] +
-    "/liste_presence/" +
-    name;
+    year + "/" + month + "-" + day + "/liste_presence/" +
+    "P" + term + "_PV(" + year + ")" + month + "-" + day + "(RCV)_XC";
 */
   const url =
     "https://www.europarl.europa.eu/doceo/document/PV-" +
@@ -141,7 +127,7 @@ async function run(date) {
       return;
     }
     // WAF challenge (202): fall back to an archive already on disk, e.g. one
-    // pushed here by `openapi/plenary.js --download --push`. The plenaries
+    // pushed here by `openapi/decisions.js --download --push`. The plenaries
     // insert below skips it when it has already been processed.
     if (e.statusCode === 202) {
       const dest = "./data/RCV/" + date + ".xml.zip";

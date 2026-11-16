@@ -72,7 +72,7 @@ Individual roll-call vote items within a plenary sitting.
 | `plenary` | integer | nullable | FK → `plenaries.id` |
 | `green_remark` | varchar(255) | nullable | Internal remark |
 | `term` | integer | nullable | Parliamentary term (10) |
-| `method` | varchar(50) | nullable | Vote method: `RCV`, `HAND`, or `ELECTRONIC` (populated by `openapi/plenary.js`; empty for rows imported from the RCV XML) |
+| `method` | varchar(50) | nullable | Vote method: `RCV`, `HAND`, or `ELECTRONIC` (populated by `openapi/decisions.js`; empty for rows imported from the RCV XML) |
 | `attendees` | integer | nullable | Total number of MEPs who voted (for electronic votes) |
 | `requested_by` | varchar(255) | nullable | Group(s) that requested the vote (`"The Left"`, `"PfE, ECR"`). Filled from the VOT XML remarks by `openapi/vot-xml.js`; rows the remarks don't cover keep the decisions API's `responsible_organization_label` (`"original text"`, a group, …). NULL for rows only ever seen by the RCV-XML importer |
 | `doc_ref` | varchar(255) | nullable | Specific amendment document reference (e.g. `B-10-2024-0007-AM-1`) |
