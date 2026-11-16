@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-env node */
 /**
- * openapi/plenary.js — Import all decisions for a plenary sitting from the
+ * openapi/decisions.js — Import all decisions for a plenary sitting from the
  * EP Open Data API into the term10.db database.
  *
  * For each sitting date:
@@ -12,9 +12,9 @@
  *   4. Reports: new rows inserted, existing rows updated, totals by method
  *
  * Usage:
- *   node openapi/plenary.js 2024-07-17
- *   node openapi/plenary.js --all
- *   node openapi/plenary.js --help
+ *   node openapi/decisions.js 2024-07-17
+ *   node openapi/decisions.js --all
+ *   node openapi/decisions.js --help
  */
 
 const minimist = require("minimist");
@@ -93,7 +93,7 @@ const argv = minimist(
 if (argv.help) {
   console.log(`
 Usage:
-  node openapi/plenary.js [options] [<date>]
+  node openapi/decisions.js [options] [<date>]
 
 Arguments:
   <date>     YYYY-MM-DD, or a day offset: 0 = today, -1 = yesterday, 1 = tomorrow

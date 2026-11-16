@@ -25,9 +25,9 @@ node -e 'const db=require("./lib/db");db("rollcalls").select("method").count("* 
 node -e 'const db=require("./lib/db");db.raw("select count(distinct plenary) days, count(*) rollcalls from rollcalls").then(r=>console.log(r))'
 ```
 
-OpenAPI imports (`openapi/plenary.js`) do not need this matching for counts, but
+OpenAPI imports (`openapi/decisions.js`) do not need this matching for counts, but
 per-MEP `positions` still come exclusively from the RCV XML and therefore still
-depend on it. `openapi/plenary.js` can also fill `requested_by` for a roll-call
+depend on it. `openapi/decisions.js` can also fill `requested_by` for a roll-call
 even when no individual votes were published.
 
 # I'm not a number

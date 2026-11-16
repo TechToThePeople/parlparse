@@ -10,7 +10,7 @@ Two sources feed the database:
 | source | work types | gives | scripts |
 |---|---|---|---|
 | EP Open Data API `https://data.europarl.europa.eu/api/v2` | `VOTE_ROLLCALL_PLENARY` (RCV), `VOTE_RESULTS_PLENARY` (VOT), `MINUTES_PLENARY` (MIN), plus `/meetings/MTG-PL-<date>/decisions` | **every** vote of a sitting (roll-call, hand, electronic) with counts, method, requesting group, outcome; per-MEP arrays only for roll-calls | `openapi/*.js` |
-| EP RCV XML (`PV-10-<date>-RCV_EN.xml`) | — | per-MEP positions (`positions`), roll-call subset only | `plenary.js`, `lib/rollcall.js` |
+| EP RCV XML (`PV-10-<date>-RCV_EN.xml`) | — | per-MEP positions (`positions`), roll-call subset only | `positions.js`, `lib/rollcall.js` |
 
 The minutes documents (`MIN`) contain no vote data — they only say "see also
 'Results of votes'". Use VOT/decisions for numbers.
@@ -32,11 +32,11 @@ npm run update          # full update for yesterday + today, then publish
 `update.sh`, in this order (order matters — `csv.js` reads what the earlier
 steps write):
 
-1. `npm run db:migrate` — schema first: `openapi/plenary.js` writes
+1. `npm run db:migrate` — schema first: `openapi/decisions.js` writes
    `method`/`vote_type`/`requested_by`, `csv.js` reads `reports.creator`.
-2. `node openapi/plenary.js -d-1` / `-d0` — all decisions of yesterday and today
+2. `node openapi/decisions.js -d-1` / `-d0` — all decisions of yesterday and today
    from the API, upserted into `rollcalls` by EP voting id.
-3. `node plenary.js -d -u` / `-d-1 -u` — per-MEP `positions` from the RCV XML.
+3. `node positions.js -d -u` / `-d-1 -u` — per-MEP `positions` from the RCV XML.
 4. `node report.js` then `node openapi/report-creator.js` — report rows, then the
    committee(s) or political group(s) behind each one.
 5. `node csv.js`, `node cards.js`, `npm run majority:csv` — the static files.
@@ -46,8 +46,8 @@ steps write):
 One-off backfills, not part of the daily run:
 
 ```bash
-node openapi/plenary.js --all              # all vote-result dates (116), ~4 min
-node openapi/plenary.js --all --no-rollcall # hand/electronic only, leaves RCV rows alone
+node openapi/decisions.js --all              # all vote-result dates (116), ~4 min
+node openapi/decisions.js --all --no-rollcall # hand/electronic only, leaves RCV rows alone
 node openapi/report-creator.js             # committees/groups for all 655 reports
 ```
 
@@ -55,7 +55,7 @@ node openapi/report-creator.js             # committees/groups for all 655 repor
 
 | script | writes |
 |---|---|
-| `openapi/plenary.js <date> \| --all` | `rollcalls` (all vote methods, counts, `vote_type`, `requested_by`) |
+| `openapi/decisions.js <date> \| --all` | `rollcalls` (all vote methods, counts, `vote_type`, `requested_by`) |
 | `openapi/vot.js [<date> \| --all]` | `votes` + `votings` (from the VOT documents) |
 | `openapi/rcv.js [<id> \| <date>]` | `data/openapi/rcv/*.json` |
 | `openapi/att.js [<id> \| <date>]` | `data/openapi/att/*.json` |
@@ -78,7 +78,7 @@ Vocabulary worth knowing:
   used to mean "unknown"; the `backfill_rollcall_method` migration set those to
   `RCV`. `''` means the API reported a decision without a method.
 - `rollcalls.requested_by` is also the marker for "this date has been imported
-  by `openapi/plenary.js`" — `method` cannot be used for that any more, since the
+  by `openapi/decisions.js`" — `method` cannot be used for that any more, since the
   backfill labelled every legacy row.
 - `rollcalls.ref` — the document voted on. Some votes have none in the source,
   so `openapi/vot-xml.js` gives them a virtual reference and creates the
