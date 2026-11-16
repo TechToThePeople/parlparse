@@ -213,6 +213,127 @@ describe("normalizeRequestedBy", () => {
   });
 });
 
+// ─── remarks (roll-call / separate / split requests) ─────────────────
+
+const remarks = require("../remarks");
+
+describe("remarks.parseMentions", () => {
+  it("parses a comma-separated amendment list", () => {
+    assert.deepStrictEqual(
+      remarks.parseMentions("Amendments 6, 7, 9, 10").map((m) => m.number),
+      ["6", "7", "9", "10"]
+    );
+  });
+
+  it("parses sections, recitals and articles", () => {
+    const m = remarks.parseMentions("Recital E; § 4; final vote");
+    assert.deepStrictEqual(
+      m.map((x) => x.type),
+      ["recital", "section", "final"]
+    );
+    assert.strictEqual(remarks.parseMentions("Article 29")[0].number, "29");
+  });
+
+  it("keeps the part qualifiers, in words and ordinals", () => {
+    const [seven, eight] = remarks.parseMentions("§§ 7, 8 (2nd part)");
+    assert.strictEqual(seven.number, "7");
+    assert.deepStrictEqual(eight.parts, [2]);
+    const [first] = remarks.parseMentions("§ 5 (first part)");
+    assert.deepStrictEqual(first.parts, [1]);
+    const [multi] = remarks.parseMentions(
+      "§ 29 (second, third and fourth parts)"
+    );
+    assert.deepStrictEqual(multi.parts, [2, 3, 4]);
+  });
+
+  it("returns nothing for free text it does not understand", () => {
+    assert.deepStrictEqual(remarks.parseMentions("the whole text"), []);
+  });
+});
+
+describe("remarks.votingKeys", () => {
+  it("keys a section vote, and an amendment to a section, to both", () => {
+    const keys = remarks.votingKeys({
+      subject: "§ 6",
+      number: "§",
+      request: "RCV",
+      name: "RC-B10-0028/2024 – § 6 – Am 6",
+    });
+    assert.deepStrictEqual(
+      keys.map((k) => `${k.type}:${k.number}`),
+      ["section:6", "amendment:6"]
+    );
+  });
+
+  it("takes the part from the rcv marker", () => {
+    const keys = remarks.votingKeys({
+      subject: "§ 17",
+      request: "2/RCV",
+      name: "A10-0261/2026 – § 17/2",
+    });
+    assert.deepStrictEqual(keys[0].parts, [2]);
+  });
+
+  it("recognises the final vote of a report or a motion", () => {
+    assert.deepStrictEqual(
+      remarks.votingKeys({
+        subject: "",
+        request: "RCV",
+        name: "B10-0020/2024 – Motion for a resolution",
+      }),
+      [{ type: "final" }]
+    );
+  });
+});
+
+describe("remarks.mentionMatches", () => {
+  const keys = remarks.votingKeys({
+    subject: "§ 17",
+    request: "2/RCV",
+    name: "A10-0261/2026 – § 17/2",
+  });
+
+  it("matches a section listed without parts", () => {
+    assert.strictEqual(
+      remarks.mentionMatches(
+        { type: "section", number: "17", parts: null },
+        keys
+      ),
+      true
+    );
+  });
+
+  it("matches when the requested parts include ours", () => {
+    assert.strictEqual(
+      remarks.mentionMatches(
+        { type: "section", number: "17", parts: [2, 3] },
+        keys
+      ),
+      true
+    );
+  });
+
+  it("does not match another part of the same section", () => {
+    assert.strictEqual(
+      remarks.mentionMatches(
+        { type: "section", number: "17", parts: [3] },
+        keys
+      ),
+      false
+    );
+  });
+
+  it("does not match a different item", () => {
+    assert.strictEqual(
+      remarks.mentionMatches(
+        { type: "section", number: "18", parts: null },
+        keys
+      ),
+      false
+    );
+  });
+});
+
 // ─── fingerprintRcv ──────────────────────────────────────────────────
 
 describe("fingerprintRcv", () => {
