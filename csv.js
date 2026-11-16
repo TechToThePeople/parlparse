@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 //identifier,date,report,desc,title,for,against,abstention
 
-const roll = require("./lib/rollcall.js");
-const { init } = require("./lib/mep.js");
 const db = require("./lib/db.js");
 const fs = require("fs");
 const { format } = require("@fast-csv/format");
@@ -13,7 +11,7 @@ types.setTypeParser(1082, (val) => val);
 
 const rollcall = async () => {
   const file = "./data/item_rollcall.csv";
-  const head = "identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method".split(
+  const head = "identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source".split(
     ","
   );
 
@@ -66,7 +64,11 @@ const rollcall = async () => {
       "requested_by",
       "outcome",
       "committee",
-      "method"
+      "method",
+      "doc_ref",
+      "vote_request",
+      "split_requested_by",
+      "requested_source"
     )
     .where("term", term)
     .from("rollcalls");

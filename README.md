@@ -60,7 +60,8 @@ node openapi/report-creator.js             # committees/groups for all 655 repor
 | `openapi/rcv.js [<id> \| <date>]` | `data/openapi/rcv/*.json` |
 | `openapi/att.js [<id> \| <date>]` | `data/openapi/att/*.json` |
 | `openapi/report-creator.js [--dry]` | `reports.creator` |
-| `openapi/vot-xml.js [<date> \| --all]` | `rollcalls.ref`, `name`, `committee` from the VOT XML |
+| `openapi/vot-xml.js [<date> \| --all]` | `rollcalls.ref`, `name`, `committee` (and `doc_ref` for the individual motions of a resolution) from the VOT XML |
+| `openapi/reports-backfill.js [--dry]` | creates the missing `reports` rows for the references `rollcalls.ref` points at |
 
 See `openapi/README.md` for endpoints and `openapi/SQL.md` for the schema.
 
@@ -79,10 +80,22 @@ Vocabulary worth knowing:
 - `rollcalls.requested_by` is also the marker for "this date has been imported
   by `openapi/plenary.js`" — `method` cannot be used for that any more, since the
   backfill labelled every legacy row.
-- `rollcalls.requested_by` and `reports.creator` — comma-separated, deduplicated
-  (`The Left`, `ECR, PfE`, `original text`; `ENVI`, `ECON, BUDG`). Group codes
-  from the API are mapped to the names `meps.eugroup` uses (`PPE` → `EPP`,
-  `S-D` → `S&D`, `VERTS-ALE` → `Greens/EFA`, `PFE` → `PfE`, …).
+- `rollcalls.ref` — the document voted on. Some votes have none in the source,
+  so `openapi/vot-xml.js` gives them a virtual reference and creates the
+  matching `reports` row: the annual budget amendments become `budget-<year>`
+  (title: the budget's own block title), and procedural votes about the sitting
+  itself (agenda requests, urgent decisions, adjournments, approvals without
+  vote) become `agenda-<YYYY-MM-DD>` (title: "Agenda of the sitting of …").
+  Per **day**, not per month: a month can hold several part-sessions.
+- `rollcalls.requested_by` — who asked for the vote, comma-separated
+  (`The Left`, `PfE, ECR`). `openapi/vot-xml.js` fills it from the "Requests for
+  roll-call / separate / split votes" remarks of the VOT XML; rows the remarks
+  don't cover keep whatever the decisions API reported
+  (`responsible_organization_label`, which for amendments is really the author).
+- `reports.creator` — comma-separated, deduplicated (`ENVI`, `ECON, BUDG`, or the
+  tabling groups). Group codes from the API are mapped to the names
+  `meps.eugroup` uses (`PPE` → `EPP`, `S-D` → `S&D`, `VERTS-ALE` → `Greens/EFA`,
+  `PFE` → `PfE`, …).
 - `groupmajority` is derived from `positions` by `sql/updatemajority.sql`
   (upsert on `(eugroup, rollcall)`; it never deletes rows).
 
@@ -93,7 +106,7 @@ Vocabulary worth knowing:
 | file | written by | columns |
 |---|---|---|
 | `data/meps.csv` | `csv.js` | `epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid` |
-| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method` |
+| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source` |
 | `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc` |
 | `data/cordon.csv` | `sql/cordon.sql` | `rollcall,date,far_right_epp_position,report_title,reference,name,for,against,abstention,epp_cohesion` |
 | `data/cordon-report.csv` | `sql/cordon-report.sql` | `votes_together,reference,report_title` |
@@ -126,6 +139,25 @@ Formats the site relies on:
   (`&amp;` instead of `&`) — the site does not unescape it.
 - **`meps.country`** is lowercase ISO-3166 alpha-2 (`hu`, `fr`), `term` is `10`,
   `eugroup` is the group short name (`PPE`, `S&D`, `PfE`, …).
+- **`item_rollcall.vote_request`** is the EP's own marker for how the vote was
+  requested: `RCV`, `EV` (electronic), `sep` (separate vote), `split`, or
+  `<n>/RCV` / `<n>/EV` for the n-th part of a split vote.
+- **`item_rollcall.split_requested_by`** names the group(s) that asked for the
+  split (`ECR`, `PPE, PfE`), from the XML's "Requests for split votes" remark.
+  Not displayed: on all 2,326 rows it is a subset of `requested_by`, which is
+  shown as "asked by …" under the date.
+- **`item_rollcall.requested_source`** says where `requested_by` came from:
+  `remarks` (a group really asked for this vote — the site shows "asked by X")
+  or `api` (the decisions API's `responsible_organization_label`, i.e. who
+  tabled the amendment, `original text` for the committee's own wording — the
+  site shows "tabled by X"). `vote_request` alone cannot be used for that: 995
+  rows carry a roll-call marker *and* the API's author value, because no remark
+  covers that item.
+- **`item_rollcall.doc_ref`** is the specific document a vote is about when it
+  is not the report itself: for the individual motions of a joint resolution
+  (`B10-0496/2026`) the row's `report` points at the joint motion
+  (`RC-B10-0497/2026`) and `doc_ref` at the tabled one. Shown under the
+  reference on the site.
 - **`item_rollcall.method`** is `RCV`, `HAND`, `ELECTRONIC` or `SECRET`; the site
   counts it for the "% transparent" tab. Empty for the 21 decisions the API
   published without a method.

@@ -78,10 +78,15 @@ function creatorsFromApi(creator) {
   return out;
 }
 
-/** Committee badges in the "Committee responsible" table of an oeil page. */
+/**
+ * Committee badges in the responsible-committee table of an oeil page. The
+ * header reads "Committee responsible", but joint procedures say "Joint
+ * committee responsible", so match both.
+ */
 function committeesFromOeil(html) {
-  const start = html.indexOf("Committee responsible");
-  if (start < 0) return [];
+  const header = html.match(/(?:joint\s+)?committees?\s+responsible/i);
+  if (!header) return [];
+  const start = header.index;
   const end = html.indexOf("</table>", start);
   const table = html.slice(start, end < 0 ? undefined : end);
   const out = [];

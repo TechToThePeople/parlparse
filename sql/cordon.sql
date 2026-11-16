@@ -8,7 +8,10 @@ SELECT
   r."for"      AS for,
   r.against    AS against,
   r.abstention AS abstention,
-  ppe.cohesion AS epp_cohesion
+  ppe.cohesion AS epp_cohesion,
+  r.requested_by,
+  r.requested_source,
+  r.vote_request
 FROM groupmajority ecr
 JOIN groupmajority pfe  ON pfe.rollcall  = ecr.rollcall
 JOIN groupmajority ppe  ON ppe.rollcall  = ecr.rollcall

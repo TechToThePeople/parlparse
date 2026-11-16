@@ -144,8 +144,17 @@ node openapi/plenary.js --all            # dates from the VOT + RCV document lis
 ### `node openapi/vot-xml.js [<date> | --all] [--dry] [--force-names]`
 
 Fills `rollcalls.ref`, `rollcalls.name` and `rollcalls.committee` from the
-"Results of votes" XML (`data.europarl.europa.eu/distribution/doc/PV-10-<date>-VOT_en.xml`,
-cached in `data/VOT/<date>.xml`, no WAF needed).
+"Results of votes" XML, cached in `data/VOT/<date>.xml` (no WAF needed).
+
+The English XML sits in two places depending on the document's age: recent ones
+under `distribution/doc/PV-10-<date>-VOT_en.xml`, older ones under
+`distribution/reds_iPlPv_Vot/PV-10-<date>-VOT/…_en.xml` (redirecting to
+`redmapl3.europarl.europa.eu`). The shortcut is tried first and the document
+metadata (`/documents/PV-10-<date>-VOT`) provides the real path as a fallback.
+That request needs a browser-ish `accept` header — the EP server answers 500 to
+`accept: */*` on those paths.
+
+One date (2025-05-21) has no English XML at all, only 20 other languages.
 
 The RCV XML only covers roll-calls, so hand/electronic votes arrive from the
 decisions API without a reference and with whatever label the API had. The VOT
@@ -158,6 +167,7 @@ XML is per vote *item* and carries:
 | `<voting><label status="rcv">A10-0280/2026 – … – Motion for a resolution (as a whole)</label>` | `name` |
 | `<voting><amendmentSubject>After § 2</amendmentSubject><amendmentNumber>1</amendmentNumber>` | `name` when there is no label |
 | `numberFavor` / `numberAgainst` / `numberAbstention` | **never written** — only compared with the RCV import, mismatches are reported |
+| `<remarks>` "Requests for roll-call / separate / split votes" | `requested_by` (the group(s) that asked), `vote_request` (`RCV`, `EV`, `sep`, `split`, `<n>/RCV`) and `split_requested_by` |
 
 `name` is only replaced when the current one is empty or still a French RCV
 string (`Après le § 20 - Am 3`); `--force-names` replaces every name.
@@ -166,6 +176,55 @@ string (`Après le § 20 - Am 3`); `--force-names` replaces every name.
 node openapi/vot-xml.js 2024-07-17
 node openapi/vot-xml.js --all            # sitting dates already in the database
 ```
+
+**References that don't exist as documents.** Two block types carry no
+reference at all, so the script invents one and creates the `reports` row for it:
+
+| block | reference | title |
+|---|---|---|
+| `<vote type="BUDGET">` (draft amendments to the annual budget, named `Block 1` / `01 02 02 51`) | `budget-<year>` from the block title | the block title ("Draft general budget … all sections") |
+| `<vote type="EUGI">` (dvId `000001`: agenda requests, urgent decisions, adjournments) | `agenda-<YYYY-MM-DD>` | "Agenda of the sitting of …" |
+
+`agenda-` is per sitting day: the 84 such votes span 37 days in 22 months, and a
+month can hold two part-sessions (2025-03-10/12/13 vs 2025-03-31).
+
+**`C10-xxxx/yyyy` (Commission proposals).** The OpenAPI publishes no document for
+these (404), so the block is used instead: `reports.title` comes from the block
+`<title>`, and the procedure reference in the block label
+(`Proposal for a regulation (COM(2026)0569 – C10-0258/2026 – 2026/0325(COD))`)
+gives the oeil URL
+(`…/ficheprocedure.do?reference=2026/0325(COD)`), which `report-creator.js` then
+scrapes for the committee — including "Joint committee responsible" tables.
+
+Rapporteurs are in the XML (`author="ŽALIMAS"`) but are not imported yet.
+
+**Individual motions of a joint resolution.** A `<vote type="RESOLUTION">` block
+contains the joint motion (`documentType="RC"`, listed without its `RC-` prefix)
+plus the motions each group tabled on the same subject (`documentType="PR"`).
+Those votings have no label of their own: their `amendmentSubject` *is* the
+motion's reference and `amendmentAuthor` the tabling group, and they are usually
+`LAPSED`. For them the script writes:
+
+| column | value |
+|---|---|
+| `ref` | the joint motion, e.g. `RC-B10-0497/2026` — so selecting that report in Texts Tabled still lists the motion |
+| `doc_ref` | the individual motion, e.g. `B10-0496/2026` |
+| `name` | `<motion> (<tabling group>) – <subject>`, e.g. `B10-0496/2026 (The Left) – Ukrainian children …` |
+
+### `node openapi/reports-backfill.js [--dry] [--limit N]`
+
+Creates the `reports` rows that `rollcalls.ref` points at but that `report.js`
+never scraped: 944 references were missing, including all the joint motions.
+Only `(RC-)?[AB]\d+-\d+/YYYY` references are attempted (via
+`/documents/<eli>`, e.g. `A-10-2024-0008`); `C10-…` Commission proposals are not
+published by the API (404). A `…/REV1` suffix is stripped for the lookup and the
+row is stored under the revised reference, so `B10-0245/2026/REV1` resolves to
+the `B-10-2026-0245` document.
+
+Each row gets `title` (from `title_dcterms.en`), `url` (the predictable
+`doceo/document/<ELI>_EN.html`) and `raw` (the document JSON), so running
+`node openapi/report-creator.js` afterwards fills `creator` without extra
+requests.
 
 Rapporteurs are in the XML (`author="ŽALIMAS"`) but are not imported yet.
 

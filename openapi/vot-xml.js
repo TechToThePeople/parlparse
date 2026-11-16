@@ -35,7 +35,8 @@ const path = require("path");
 const minimist = require("minimist");
 const { parseStringPromise } = require("xml2js");
 const db = require("../lib/db");
-const { TERM } = require("./lib");
+const { TERM, fetchDocumentById } = require("./lib");
+const { parseMentions, votingKeys, mentionMatches } = require("./remarks");
 
 const VOT_DIR = path.resolve(__dirname, "..", "data", "VOT");
 const BASE = "https://data.europarl.europa.eu/distribution/doc";
@@ -121,11 +122,19 @@ function committeeAcronyms(attr) {
  * motion that was actually put to the vote (RC-B10-0497/2026) while
  * <documents> lists every tabled one, so the label wins there.
  */
-function voteReference(vote) {
-  const label = txt(vote.label);
-  const rcFromLabel = label.match(/(RC-[AB]\d+-\d{4}\/\d{4})/);
-  if (rcFromLabel) return rcFromLabel[1];
+function voteReference(vote, voting) {
+  const REF = /((?:RC-)?[ABC]\d+-\d{4}\/\d{4})/;
+  const CONSOLIDATED = /(RC-[ABC]\d+-\d{4}\/\d{4})/;
 
+  // 1. the voting's own label: "C10-0258/2026 – Article 1, § 1 …",
+  //    "RC-B10-0497/2026 – After § 20 – Am 3", "A10-0280/2026 – … – Am 339"
+  const votingLabel = txt(voting && voting.label);
+  const rcVoting = votingLabel.match(CONSOLIDATED);
+  if (rcVoting) return rcVoting[1];
+  const anyVoting = votingLabel.match(REF);
+  if (anyVoting) return anyVoting[1];
+
+  // 2. the block's own documents (report / motion / joint motion)
   const docs =
     (vote.documents && vote.documents[0] && vote.documents[0].document) || [];
   const numbers = docs.map((d) => d.$ && d.$.documentNumber).filter(Boolean);
@@ -133,8 +142,195 @@ function voteReference(vote) {
   if (consolidated) return consolidated;
   if (numbers.length) return numbers[0];
 
-  const any = label.match(/([AB]\d+-\d{4}\/\d{4})/);
-  return any ? any[1] : null;
+  // 3. the block label: "Report: X (A10-0275/2026)", "Proposal for a regulation
+  //    (COM(2026)0569 – C10-0258/2026 – 2026/0325(COD))"
+  const blockLabel = txt(vote.label);
+  const rcBlock = blockLabel.match(CONSOLIDATED);
+  if (rcBlock) return rcBlock[1];
+  const anyBlock = blockLabel.match(REF);
+  return anyBlock ? anyBlock[1] : null;
+}
+
+const REFERENCE = /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}$/;
+
+/**
+ * The annual budget is voted as `<vote type="BUDGET">` draft amendments named
+ * by block ("Block 1") or budget line ("01 02 02 51"), with no `<documents>` at
+ * all. There is no reference to extract, so the block title gives a virtual one:
+ * "Draft general budget … for the financial year 2027 – all sections" →
+ * "budget-2027".
+ */
+/**
+ * Procedural blocks (`<vote type="EUGI">`, dvId "000001") carry no document:
+ * they are the requests about the sitting's agenda, urgent decisions,
+ * adjournments. Their "document" is that day's agenda, so the reference is
+ * `agenda-<date>` — per day, since one month can hold several part-sessions.
+ */
+function agendaReference(vote, date) {
+  if (!vote.$ || vote.$.type !== "EUGI") return null;
+  return `agenda-${date}`;
+}
+
+function budgetReference(vote) {
+  if (!vote.$ || vote.$.type !== "BUDGET") return null;
+  const title = txt(vote.title);
+  const year = title.match(/(\d{4})/);
+  return year ? `budget-${year[1]}` : null;
+}
+
+/**
+ * A "motion" voting: one of the individually tabled texts inside a RESOLUTION
+ * block (B10-0496/2026 …). It has no label of its own — the reference sits in
+ * amendmentSubject and the tabling group in amendmentAuthor.
+ */
+function isMotionVoting(voting) {
+  return (
+    !txt(voting.label) &&
+    REFERENCE.test(txt(voting.amendmentSubject)) &&
+    REFERENCE.test(txt(voting.amendmentSubject))
+  );
+}
+
+/**
+ * The joint motion of a RESOLUTION block, if there is one. The XML lists it as
+ * documentType="RC" with the plain number (B10-0497/2026), so the RC- prefix has
+ * to be added back to get the reference used everywhere else.
+ */
+function jointReference(vote) {
+  const docs =
+    (vote.documents && vote.documents[0] && vote.documents[0].document) || [];
+  const numbers = docs.map((d) => d.$ && d.$.documentNumber).filter(Boolean);
+  const joint = docs.find((d) => d.$ && d.$.documentType === "RC");
+  if (joint && joint.$.documentNumber)
+    return "RC-" + joint.$.documentNumber.replace(/^RC-/, "");
+  const rc = numbers.find((n) => n.startsWith("RC-"));
+  return rc || null;
+}
+
+/** Items are spelled inconsistently ("recital S" vs "Recital S"). */
+function normaliseSubject(subject) {
+  return String(subject || "")
+    .trim()
+    .toLowerCase();
+}
+
+/**
+ * Who asked, from one request node. The XML uses three shapes:
+ *   <politicalGroups><label>The Left:</label><groups code="The Left"/>
+ *   <splitTitle>Members:</splitTitle>          (split requests, individuals)
+ *   <title>ECR, PfE:</title>                   (some roll-call requests)
+ */
+function groupOf(node) {
+  const org = (node.politicalGroups && node.politicalGroups[0]) || {};
+  const fromGroups =
+    txt(org.label).replace(/:$/, "") ||
+    ((org.groups && org.groups[0] && org.groups[0].$) || {}).code ||
+    "";
+  if (fromGroups) return fromGroups;
+  return (txt(node.splitTitle) || txt(node.title)).replace(/:$/, "").trim();
+}
+
+/** Is this voting one part of a split vote? ("1", "2", "2/RCV", "split") */
+function isSplitPart(request) {
+  return /^\d+(\/|$)/.test(request) || request === "split";
+}
+
+/**
+ * The "Requests for …" remarks of a vote item, which say who asked for the
+ * roll-call, the separate votes and the split votes:
+ *
+ *   requests: [{ group: "The Left", mentions: [...], kind: "rollcall"|"separate" }]
+ *   splits:   Map("§ 17" -> Set("ECR"))                  (split votes)
+ */
+function readRemarks(vote) {
+  const remarks =
+    vote.remarks && vote.remarks[0] && vote.remarks[0].remark
+      ? vote.remarks[0].remark[0]
+      : {};
+  const requests = [];
+  for (const tag of ["remarkRollCalls", "remarkSeparateds"]) {
+    const notes =
+      (remarks[tag] &&
+        remarks[tag][0] &&
+        remarks[tag][0].RemarkRollCallSeparated) ||
+      [];
+    for (const note of notes) {
+      const group = groupOf(note);
+      const text = txt(note.translation);
+      if (group && text)
+        requests.push({
+          group,
+          mentions: parseMentions(text),
+          kind: tag === "remarkSeparateds" ? "separate" : "rollcall",
+        });
+    }
+  }
+
+  const splits = new Map();
+  const splitNotes =
+    (remarks.remarkSplitVotes &&
+      remarks.remarkSplitVotes[0] &&
+      remarks.remarkSplitVotes[0].remarkSplitVote) ||
+    [];
+  for (const note of splitNotes) {
+    const group = groupOf(note);
+    const items = (note.items && note.items[0] && note.items[0].item) || [];
+    for (const item of items) {
+      const subject = normaliseSubject(txt(item.title));
+      if (!subject || !group) continue;
+      if (!splits.has(subject)) splits.set(subject, new Set());
+      splits.get(subject).add(group);
+    }
+  }
+  return { requests, splits };
+}
+
+/** Groups that asked for this vote, from the block's remarks. */
+function requesters(voting, remarks) {
+  const request = voteRequest(voting);
+  const part = isSplitPart(request);
+  const asked = /RCV|sep|split|\//.test(request);
+  // no marker and no split: still possibly a requested separate vote, the loop
+  // below decides (roll-call entries are skipped in that case)
+  if (!part && !asked && !remarks.requests.length)
+    return { groups: [], separate: false };
+  const keys = votingKeys({
+    subject: txt(voting.amendmentSubject),
+    number: txt(voting.amendmentNumber),
+    request,
+    name: txt(voting.label) || txt(voting.title),
+  });
+  const groups = [];
+  // a header can name several groups at once ("ECR, PfE:"), and the same group
+  // can appear in both the roll-call and the separate-vote lists
+  const add = (label) => {
+    for (const name of String(label || "").split(","))
+      if (name.trim() && !groups.includes(name.trim()))
+        groups.push(name.trim());
+  };
+  let separate = false;
+  for (const entry of remarks.requests) {
+    // a roll-call request only applies to votes that carry an rcv marker, but a
+    // separate vote can be taken by show of hands (no marker at all)
+    if (entry.kind === "rollcall" && !asked) continue;
+    if (entry.mentions.some((m) => mentionMatches(m, keys))) {
+      add(entry.group);
+      if (entry.kind === "separate") separate = true;
+    }
+  }
+  if (part) {
+    for (const group of remarks.splits.get(
+      normaliseSubject(txt(voting.amendmentSubject))
+    ) || [])
+      add(group);
+  }
+  return { groups, separate };
+}
+
+/** The `rcv/value` marker:/** The `rcv/value` marker: "RCV", "EV", "sep", "split", "2/RCV", … */
+function voteRequest(voting) {
+  const rcv = voting.rcv && voting.rcv[0];
+  return rcv ? txt(rcv.value) : "";
 }
 
 /** Readable name for one voting, in English. */
@@ -154,21 +350,107 @@ function votingName(voting) {
 /** Names coming from the French RCV XML, e.g. "Après le § 20 - Am 3". */
 function looksLikeRcvName(name) {
   if (!name) return true;
-  return /^(Apr[èe]s|Avant|Consid[ée]rant|Paragraphe|Alin[ée]a|Amendement|Article|Annexe|§)/i.test(
+  return /^(Apr[èe]s|Avant|Consid[ée]rant|Paragraphe|Alin[ée]a|Amendement|Article|Annexe|Proposition|§)/i.test(
     name
   );
+}
+
+/**
+ * The English XML lives at two different places depending on the age of the
+ * document:
+ *   recent  distribution/doc/PV-10-<date>-VOT_en.xml            (the shortcut)
+ *   older   distribution/reds_iPlPv_Vot/PV-10-<date>-VOT/…_en.xml
+ * The second is only discoverable from the document metadata, so the shortcut is
+ * tried first and the metadata is used as a fallback.
+ */
+async function xmlUrls(date) {
+  const urls = [`${BASE}/PV-${TERM}-${date}-VOT_en.xml`];
+  try {
+    const json = await fetchDocumentById(`PV-${TERM}-${date}-VOT`);
+    const doc = (json.data || [json])[0] || {};
+    for (const expression of doc.is_realized_by || []) {
+      if (!String(expression.language || "").endsWith("ENG")) continue;
+      for (const m of expression.is_embodied_by || []) {
+        if (String(m.format || "").includes("XML") && m.is_exemplified_by)
+          urls.push(
+            `https://data.europarl.europa.eu/${m.is_exemplified_by.replace(
+              /^\//,
+              ""
+            )}`
+          );
+      }
+    }
+  } catch {
+    // no metadata: the shortcut was the only hope
+  }
+  return urls;
 }
 
 async function fetchXml(date) {
   fs.mkdirSync(VOT_DIR, { recursive: true });
   const file = path.join(VOT_DIR, `${date}.xml`);
   if (fs.existsSync(file)) return fs.readFileSync(file, "utf8");
-  const url = `${BASE}/PV-${TERM}-${date}-VOT_en.xml`;
-  const res = await fetch(url, { headers: { "user-agent": "Mozilla/5.0" } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  const xml = await res.text();
-  fs.writeFileSync(file, xml);
-  return xml;
+
+  let lastError = null;
+  for (const url of await xmlUrls(date)) {
+    // The EP server 500s on `accept: */*` for the redmapl3-hosted XML but
+    // redirects fine with a browser-ish accept header, hence the odd value.
+    const res = await fetch(url, {
+      headers: {
+        "user-agent":
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-language": "en-US,en;q=0.9",
+      },
+      redirect: "follow",
+    });
+    if (!res.ok) {
+      lastError = `HTTP ${res.status} for ${url}`;
+      continue;
+    }
+    const xml = await res.text();
+    fs.writeFileSync(file, xml);
+    return xml;
+  }
+  throw new Error(lastError || `no XML for ${date}`);
+}
+
+/** A virtual reference (budget-<year>, agenda-<day>) needs a reports row. */
+async function ensureBudgetReport(reference, title) {
+  const existing = await db("reports").where("reference", reference).first();
+  if (existing) return existing;
+  await db("reports").insert({
+    reference,
+    title,
+    term: TERM,
+  });
+  return null;
+}
+
+/**
+ * A C10-xxxx/yyyy reference is a Commission proposal: the OpenAPI publishes no
+ * document for it (404), but the block knows enough to describe it — the title,
+ * and the procedure reference ("2026/0325(COD)") that the oeil page answers to,
+ * which is also where `report-creator.js` picks up the committee.
+ */
+function oeilUrlFor(label) {
+  const m = String(label).match(/(\d{4}\/\d{4}\([A-Z]+\))/);
+  if (!m) return null;
+  const reference = m[1].replace(/[()]/g, (c) => (c === "(" ? "%28" : "%29"));
+  return `https://oeil.secure.europarl.europa.eu/oeil/popups/ficheprocedure.do?reference=${reference}&l=en`;
+}
+
+async function ensureProposalReport(reference, title, url) {
+  const existing = await db("reports").where("reference", reference).first();
+  if (existing) return existing;
+  await db("reports").insert({
+    reference,
+    title,
+    url,
+    term: TERM,
+  });
+  return null;
 }
 
 async function processDate(date, stats) {
@@ -187,8 +469,16 @@ async function processDate(date, stats) {
     : null) || [doc.file.sitting[0].votes[0].vote];
 
   for (const vote of votes) {
-    const ref = voteReference(vote);
+    const joint = jointReference(vote);
+    const blockTitle = txt(vote.title);
     const committee = committeeAcronyms(vote.$ && vote.$.committee);
+    const remarks = readRemarks(vote);
+    const budgetRef = budgetReference(vote);
+    if (budgetRef && !argv.dry)
+      await ensureBudgetReport(budgetRef, txt(vote.title));
+    const agendaRef = agendaReference(vote, date);
+    if (agendaRef && !argv.dry)
+      await ensureBudgetReport(agendaRef, `Agenda of the sitting of ${date}`);
     const votings =
       (vote.votings && vote.votings[0] && vote.votings[0].voting) || [];
 
@@ -203,12 +493,71 @@ async function processDate(date, stats) {
 
       const name = votingName(voting);
       const update = {};
-      if (ref && !row.ref) update.ref = ref;
-      if (committee && !row.committee) update.committee = committee;
-      if (name && name !== row.name) {
-        if (argv["force-names"] || looksLikeRcvName(row.name))
-          update.name = name;
+
+      const request = voteRequest(voting);
+      if (request && row.vote_request !== request)
+        update.vote_request = request;
+      // "2/RCV", "3/EV", ... = the n-th part of a split vote
+      if (isSplitPart(request)) {
+        const by = [
+          ...new Set(
+            [
+              ...(remarks.splits.get(
+                normaliseSubject(txt(voting.amendmentSubject))
+              ) || []),
+            ].flatMap((label) =>
+              String(label)
+                .split(",")
+                .map((n) => n.trim())
+            )
+          ),
+        ]
+          .filter(Boolean)
+          .join(", ");
+        if (by && row.split_requested_by !== by) update.split_requested_by = by;
       }
+      // requested_by comes from the remarks, not from the API's
+      // responsible_organization_label (which is the amendment's author)
+      const { groups: asked, separate } = requesters(voting, remarks);
+      // a separate vote taken by show of hands has no rcv marker of its own
+      if (!request && separate) update.vote_request = "sep";
+      if (asked.length) {
+        const by = asked.join(", ").slice(0, 255);
+        if (row.requested_by !== by) update.requested_by = by;
+        if (row.requested_source !== "remarks")
+          update.requested_source = "remarks";
+      }
+
+      // the voting's own label often names the document it amends; the annual
+      // budget has none, its block title gives "budget-<year>"
+      const ref = voteReference(vote, voting) || budgetRef || agendaRef;
+      if (/^C\d+-/.test(ref || "") && !argv.dry)
+        await ensureProposalReport(
+          ref,
+          txt(vote.title) || null,
+          oeilUrlFor(txt(vote.label))
+        );
+      if (isMotionVoting(voting)) {
+        // An individual motion: the vote belongs to the joint resolution (so a
+        // report filter still lists it), the motion itself goes to doc_ref, and
+        // the name says whose motion lapsed — "B10-0496/2026 (The Left) – subject"
+        const motion = txt(voting.amendmentSubject);
+        const group = txt(voting.amendmentAuthor);
+        if (joint && row.ref !== joint) update.ref = joint;
+        if (motion && row.doc_ref !== motion) update.doc_ref = motion;
+        const label =
+          motion && group
+            ? `${motion} (${group})` + (blockTitle ? ` – ${blockTitle}` : "")
+            : blockTitle;
+        if (label && row.name !== label) update.name = label.slice(0, 255);
+      } else {
+        if (ref && !row.ref) update.ref = ref;
+        if (name && name !== row.name) {
+          if (argv["force-names"] || looksLikeRcvName(row.name))
+            update.name = name;
+        }
+      }
+      if (committee && !row.committee) update.committee = committee;
 
       // never write counts, only compare them with what the RCV import stored
       const favor = Number(voting.$.numberFavor);
