@@ -333,6 +333,20 @@ function voteRequest(voting) {
   return rcv ? txt(rcv.value) : "";
 }
 
+/**
+ * A split vote is one item voted in parts, each a separate voting with the same
+ * subject: "§ 3" part 1 and part 2. The part is in the rcv marker ("1", "2",
+ * "2/RCV"), so put it in the name, the way the EP's own labels do ("§ 17/2").
+ */
+function withPart(name, request) {
+  if (!name) return name;
+  const m = String(request || "").match(/^(\d+)(?:\/|$)/);
+  if (!m) return name;
+  const part = m[1];
+  if (new RegExp(`/${part}\\b`).test(name)) return name;
+  return `${name}/${part}`;
+}
+
 /** Readable name for one voting, in English. */
 function votingName(voting) {
   const label = txt(voting.label);
@@ -562,9 +576,10 @@ async function processDate(date, stats) {
         if (label && row.name !== label) update.name = label.slice(0, 255);
       } else {
         if (ref && !row.ref) update.ref = ref;
-        if (name && name !== row.name) {
+        const named = withPart(name, request);
+        if (named && named !== row.name) {
           if (argv["force-names"] || looksLikeRcvName(row.name))
-            update.name = name;
+            update.name = named;
         }
       }
       if (committee && !row.committee) update.committee = committee;
