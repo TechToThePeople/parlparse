@@ -14,7 +14,7 @@ const db = require("../lib/db.js");
 // Each step: the .sql file to run relative to this script, and (optionally) the
 // CSV file to write its result set into relative to the repo root.
 const steps = [
-  { sql: "updatemajority.sql" }, // write (DELETE + INSERT), no CSV
+  { sql: "updatemajority.sql" }, // recompute groupmajority (upsert), no CSV
   { sql: "cohesion.sql", csv: "data/cohesion.csv" },
   { sql: "cordon.sql", csv: "data/cordon.csv" },
   { sql: "cordon-report.sql", csv: "data/cordon-report.csv" },
