@@ -56,7 +56,7 @@ node openapi/report-creator.js             # committees/groups for all 655 repor
 ## openapi/ scripts
 
 | script | writes |
-|---|---|
+| --- | --- |
 | `openapi/decisions.js <date> \| --all` | `rollcalls` (all vote methods, counts, `vote_type`, `requested_by`) |
 | `openapi/vot.js [<date> \| --all]` | `votes` + `votings` (from the VOT documents) |
 | `openapi/rcv.js [<id> \| <date>]` | `data/openapi/rcv/*.json` |
@@ -106,7 +106,7 @@ Vocabulary worth knowing:
 `prod.sh` copies six of these into `../10/data/`.
 
 | file | written by | columns |
-|---|---|---|
+| --- | --- | --- |
 | `data/meps.csv` | `csv.js` | `epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid` |
 | `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source` |
 | `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc` |
@@ -215,7 +215,7 @@ Before the OpenAPI importer existed, everything came from scraped XML files and
 the steps below. They are still the way `positions` are filled, and `qa.sh`
 still depends on them.
 
-```
+```text
 0) prepare the list of meps
 cd /var/www/ep/ && gulp && node script/aliases.js
 
@@ -235,7 +235,7 @@ Watch the mismatch warnings, e.g.
 `2018-07-04 12:56:20 for 92449 error processed 286/256` means more registered
 votes than the total mentioned in the file.
 
-```
+```text
 4) match the two MEP id spaces via the attendance lists
 sh qa.sh
 sh qa.sh   (yes, twice)
