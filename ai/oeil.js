@@ -12,7 +12,7 @@
  *
  * Outputs:
  *   data/content/oeil/<reference>.md      the document as markdown (markitdown)
- *   data/content/summary/<reference>.md   the summary (front-matter + prose)
+ *   data/content/summary/<reference>.md   the summary (prose only)
  *
  * Usage:
  *   node ai/oeil.js A10-0275/2026      # one report
@@ -203,14 +203,7 @@ function toMarkdown(file) {
   throw new Error("no converter worked for " + path.basename(file));
 }
 
-function frontMatter(fields) {
-  const lines = Object.entries(fields)
-    .filter(([, v]) => v !== null && v !== undefined && v !== "")
-    .map(([k, v]) => `${k}: ${String(v).replace(/\n/g, " ")}`);
-  return `---\n${lines.join("\n")}\n---\n\n`;
-}
-
-/** Front-matter + markdown, the document saved once and reused afterwards. */
+/** The document as markdown, saved once and reused afterwards. */
 async function documentMarkdown(reference) {
   const dest = path.join(OEIL_DIR, fileName(reference));
   fs.mkdirSync(OEIL_DIR, { recursive: true });
@@ -222,25 +215,24 @@ async function documentMarkdown(reference) {
   const found = await fetchDocument(reference);
   if (!found) return null;
   const body = toMarkdown(found.file);
-  const header = frontMatter({
-    reference,
-    title: found.doc.title_dcterms && found.doc.title_dcterms.en,
-    distribution: found.format,
-    source: found.url,
-    fetched_at: new Date().toISOString().slice(0, 10),
-    chars: body.length,
-  });
-  fs.writeFileSync(dest, header + body);
+  fs.writeFileSync(dest, body);
   stats.documents++;
   console.log(
-    `   📄 ${reference} ${found.format} → ${path.relative(ROOT, dest)} (${
-      body.length
-    } chars)`
+    `   📄 ${reference} ${found.format} ${body.length} chars → ${path.relative(
+      ROOT,
+      dest
+    )}` +
+      `\n      title: ${
+        (found.doc.title_dcterms && found.doc.title_dcterms.en) || "?"
+      }` +
+      `\n      source: ${found.url}`
   );
-  return header + body;
+  return body;
 }
 
-const SYSTEM = `You explain decisions of the European Parliament to citizens who have no legal or EU background. Write plain English, short sentences, no jargon, no acronyms without expanding them, no preamble, no "this report" framing.`;
+const SYSTEM = `You explain decisions of the European Parliament to citizens who have no legal or EU background. Write plain English, short sentences, no jargon, no acronyms without expanding them, no preamble, no "this report" framing.
+
+Ignore the procedural parts: the committee's own votes (the results of the vote in committee, the roll-call or show-of-hands results there), the list of members who voted, the composition of the committee, and the administrative references. They say how the text was adopted, not what it changes.`;
 
 function summaryPrompt(text) {
   return `Here is a report of the European Parliament.
@@ -347,8 +339,7 @@ async function summarise(reference, markdown, model) {
     return;
   }
 
-  // the front-matter is ours, the model should not summarise it
-  const body = markdown.replace(/^---\n[\s\S]*?\n---\n/, "").trim();
+  const body = markdown.trim();
   const parts = chunks(body, CHUNK);
   const tokens = { in: stats.tokensIn, out: stats.tokensOut };
 
@@ -369,17 +360,15 @@ async function summarise(reference, markdown, model) {
     answer = await complete(mergePrompt(partial), { model });
   }
 
-  const header = frontMatter({
-    reference,
-    model,
-    chars: body.length,
-    tokens_in: stats.tokensIn - tokens.in,
-    tokens_out: stats.tokensOut - tokens.out,
-    generated_at: new Date().toISOString().slice(0, 10),
-  });
-  fs.writeFileSync(dest, header + answer.trim() + "\n");
+  fs.writeFileSync(dest, answer.trim() + "\n");
   stats.summaries++;
-  console.log(`   ✍️  ${reference} → ${path.relative(ROOT, dest)}`);
+  console.log(
+    `   ✍️  ${reference} → ${path.relative(ROOT, dest)} (${model}, ${
+      body.length
+    } chars in, ${stats.tokensIn - tokens.in} tokens in / ${
+      stats.tokensOut - tokens.out
+    } out)`
+  );
 }
 
 async function main() {

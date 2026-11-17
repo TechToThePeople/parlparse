@@ -194,6 +194,11 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
   context, thinking mode switched off since its reasoning is billed as output),
   one paragraph of 60–90 words + 3 bullets, or a chunk/map-reduce pass for a
   report over ~600k characters → `data/content/summary/<ref>.md`
+- no front-matter in either file: reference, title, distribution, source and
+  token counts are printed to the console instead, so the markdown stays plain;
+- the prompt tells the model to ignore the committee's own votes, the list of
+  members who voted and the procedural references — how the text was adopted,
+  not what it changes;
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
