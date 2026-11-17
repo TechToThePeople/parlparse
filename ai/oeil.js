@@ -56,7 +56,7 @@ const PRICE_OUT = 0.6;
 const CHUNK = 600000;
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["all", "force", "dry", "help"],
+  boolean: ["all", "force", "dry", "attach", "help"],
   string: ["model"],
   alias: { h: "help", a: "all", n: "limit" },
 });
@@ -70,6 +70,7 @@ Usage: node ai/oeil.js [<reference> | --all] [options]
   --limit, -n  stop after N documents
   --force      redo documents and summaries that already exist
   --dry        fetch and convert only, no DeepSeek call
+  --attach     re-attach the summaries already on disk to their votes
   --help, -h   this text
 
 Needs DEEPSEEK_API_KEY, read from the environment or from .env in the repo root.
@@ -117,6 +118,7 @@ const stats = {
   failed: 0,
   tokensIn: 0,
   tokensOut: 0,
+  attached: 0,
 };
 
 /** Documents to process: one reference, or every A/B/RC report. */
@@ -384,15 +386,15 @@ async function summarise(reference, markdown, model) {
  * resolution (as a whole)`, `Proposition de la Commission`) is about the report
  * itself, so its text in rollcall_texts is the summary.
  */
+const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposition de r[ée]solution|proposals? for (?:a )?decisions?|proposition de la commission|commission proposal|projet de d[ée]cision|draft council decision|projet du conseil|draft legislative act|approval without vote/i;
+
 async function storeWholeTextVotes(reference, summary) {
-  const rows = await db("rollcalls")
+  const all = await db("rollcalls")
     .where("ref", reference)
-    .where(function () {
-      this.where("vote_type", "main")
-        .orWhere("name", "like", "%as a whole%")
-        .orWhere("name", "like", "%ensemble du texte%");
-    })
-    .select("id");
+    .select("id", "name", "vote_type");
+  const rows = all.filter(
+    (v) => v.vote_type === "main" || WHOLE_TEXT.test(v.name || "")
+  );
   for (const row of rows) {
     await db("rollcall_texts")
       .insert({
@@ -408,13 +410,38 @@ async function storeWholeTextVotes(reference, summary) {
       .onConflict("rollcall")
       .merge();
   }
-  if (rows.length)
+  stats.attached += rows.length;
+  if (rows.length && !argv.attach)
     console.log(
       `   🗳  ${reference}: summary attached to ${rows.length} whole-text vote(s)`
     );
 }
 
+/** Attach every summary already on disk to its whole-text votes. */
+async function attachExisting() {
+  if (!fs.existsSync(SUMMARY_DIR)) {
+    console.error("no summaries in " + path.relative(ROOT, SUMMARY_DIR));
+    return;
+  }
+  const files = fs.readdirSync(SUMMARY_DIR).filter((f) => f.endsWith(".md"));
+  console.log(`🔗 ${files.length} summaries to attach`);
+  for (const file of files) {
+    const reference = file.replace(/\.md$/, "").replace(/_(\d{4})$/, "/$1");
+    const summary = fs
+      .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
+      .trim();
+    if (summary) await storeWholeTextVotes(reference, summary);
+  }
+  console.log(
+    `${stats.attached} vote(s) attached across ${files.length} summaries`
+  );
+}
+
 async function main() {
+  if (argv.attach) {
+    await attachExisting();
+    return;
+  }
   if (!argv.dry && !process.env.DEEPSEEK_API_KEY) {
     console.error(
       "DEEPSEEK_API_KEY is not set. Add it to .env in the repo root (DEEPSEEK_API_KEY=sk-…) or export it."
