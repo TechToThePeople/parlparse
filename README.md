@@ -190,9 +190,10 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
 
 - document: the DOCX from the Open Data distribution (PDF as fallback, `doceo`
   is WAF-blocked), converted with `markitdown` → `data/content/oeil/<ref>.md`
-- summary: `deepseek-chat` (its cheapest model — "flash" is a Gemini name),
-  one paragraph of 60–90 words + 3 bullets, or a chunk/map-reduce pass when the
-  document is over ~100k characters → `data/content/summary/<ref>.md`
+- summary: `deepseek-flash` (DeepSeek-V4.1-Flash, their cheapest — 1M token
+  context, thinking mode switched off since its reasoning is billed as output),
+  one paragraph of 60–90 words + 3 bullets, or a chunk/map-reduce pass for a
+  report over ~600k characters → `data/content/summary/<ref>.md`
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
