@@ -138,6 +138,7 @@ For each sitting date it:
 
 ```
 node openapi/decisions.js 2024-07-17       # single date
+node openapi/decisions.js --all --fix-refs  # repair rollcalls.ref from the headings
 node openapi/decisions.js --all            # dates from the VOT + RCV document lists
 ```
 

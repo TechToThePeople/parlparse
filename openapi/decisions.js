@@ -85,7 +85,7 @@ const argv = minimist(
   process.argv.slice(2).map((a) => (/^-\d+$/.test(a) ? `--date=${a}` : a)),
   {
     alias: { h: "help", a: "all", d: "date", f: "fetch" },
-    boolean: ["rollcall"],
+    boolean: ["rollcall", "fix-refs"],
     default: { rollcall: true },
   }
 );
@@ -105,6 +105,7 @@ Options:
   --download    Force-download the RCV XML (compressed) for the date(s)
   --push        scp the RCV archive to kundera (with --download, after it)
   --rollcall    Import roll-call votes too (default: true, disable with --no-rollcall)
+  --fix-refs    Only repair rollcalls.ref from the decisions' headings
   --force       Re-download even if already cached
   --help, -h    Show this help
 
@@ -118,6 +119,51 @@ Description:
   combine with --push to copy it to kundera.
 `);
   process.exit(0);
+}
+
+/**
+ * Correct `rollcalls.ref` from the decisions' heading/reference text, without
+ * re-importing anything else (a --force run would overwrite the requested_by
+ * values that come from the VOT XML remarks).
+ */
+async function fixRefs(dates) {
+  let fixed = 0;
+  let checked = 0;
+  for (const date of dates) {
+    let decisions;
+    try {
+      const meeting = await fetchMeetingByDate(date);
+      if (!meeting) continue;
+      const data = await fetchDecisions(meeting.activity_id);
+      decisions = data.data || [];
+    } catch {
+      continue;
+    }
+    for (const dec of decisions) {
+      const m = String(dec.activity_id || dec.id).match(/DEC-(\d+)$/);
+      if (!m) continue;
+      const id = parseInt(m[1], 10);
+      const headingRef = extractDocRef(
+        dec.decided_on_a_realization_of || [],
+        null,
+        dec.headingLabel && dec.headingLabel.en,
+        dec.referenceText && dec.referenceText.en
+      );
+      if (!headingRef) continue;
+      const row = await db("rollcalls").where("id", id).first("ref");
+      if (!row) continue;
+      checked++;
+      if (row.ref === headingRef) continue;
+      await db("rollcalls").where("id", id).update({ ref: headingRef });
+      fixed++;
+      if (fixed <= 20)
+        console.log(`   ${id}: ${row.ref || "(none)"} → ${headingRef}`);
+    }
+    await new Promise((r) => setTimeout(r, 300));
+  }
+  console.log(
+    `\n${fixed} ref(s) corrected out of ${checked} decisions with a named document (${dates.length} dates)`
+  );
 }
 
 async function main() {
@@ -144,6 +190,11 @@ async function main() {
       process.exit(1);
     }
     dates = [normalizeDate(input)];
+  }
+
+  if (argv["fix-refs"]) {
+    await fixRefs(dates);
+    return;
   }
 
   let totalNew = 0;
@@ -346,7 +397,12 @@ async function processDate(dateStr) {
 
     // Extract document reference from decided_on_a_realization_of
     const decidedOn = dec.decided_on_a_realization_of || [];
-    const docRef = extractDocRef(decidedOn, title);
+    const docRef = extractDocRef(
+      decidedOn,
+      title,
+      dec.headingLabel && dec.headingLabel.en,
+      dec.referenceText && dec.referenceText.en
+    );
     const detailedRef = extractDocRefForDb(decidedOn);
 
     // Extract comment
@@ -435,7 +491,16 @@ async function processDate(dateStr) {
  * Extract a short document reference from the decided_on array.
  * e.g. "eli/dl/doc/B-10-2024-0007-AM-1" → "B10-0007/2024"
  */
-function extractDocRef(decidedOn, title) {
+const REF = /((?:RC-)?[AB]\d+-\d{4}\/\d{4})/;
+
+/**
+ * The document a decision is about. `decided_on_a_realization_of` is the
+ * authority when present; otherwise `headingLabel` / `referenceText` name it
+ * ("Motion for a resolution B10-0558/2025", "Report: X (A10-0275/2026)") and the
+ * title only as a last resort — the title fallback used to pick the wrong motion
+ * of the same subject (28 of 134 refs wrong on one sitting).
+ */
+function extractDocRef(decidedOn, title, heading, reference) {
   // First try from the decided_on references
   for (const ref of decidedOn) {
     // e.g. B-10-2024-0007-AM-1
@@ -445,16 +510,15 @@ function extractDocRef(decidedOn, title) {
     }
   }
 
+  // then whatever the EP writes in the heading / reference text
+  for (const text of [heading, reference]) {
+    const m = String(text || "").match(REF);
+    if (m) return m[1];
+  }
+
   // Fallback: try to extract from title like "B10-0007/2024 – ..."
-  const t = title || "";
-  const m2 = t.match(/([A-Z]\d{2}-\d{4}\/\d{4})/);
-  if (m2) return m2[1];
-
-  // Try "RC-B10-0022/2024"
-  const m3 = t.match(/(RC-B10-\d{4}\/\d{4})/);
-  if (m3) return m3[1];
-
-  return null;
+  const m2 = String(title || "").match(REF);
+  return m2 ? m2[1] : null;
 }
 
 /**
@@ -550,7 +614,9 @@ async function fetchForDate(date) {
   }
 }
 
-main().catch((err) => {
-  console.error("❌", err.message);
-  process.exit(1);
-});
+main()
+  .then(() => process.exit(0))
+  .catch((err) => {
+    console.error("❌", err.message);
+    process.exit(1);
+  });
