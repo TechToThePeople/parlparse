@@ -231,6 +231,20 @@ function groupOf(node) {
 }
 
 /** Is this voting one part of a split vote? ("1", "2", "2/RCV", "split") */
+/**
+ * What kind of thing the split's partValue is: the wording itself (quoted), a
+ * description of a split "text as a whole without/with the words: …", or
+ * something else ("those words").
+ */
+function partKind(value) {
+  const v = String(value || "").trim();
+  if (!v) return null;
+  if (/^["'\u2018\u201c]/.test(v)) return "quoted";
+  if (/^text as a whole without the words/i.test(v)) return "without-words";
+  if (/^text as a whole with the words/i.test(v)) return "with-words";
+  return "other";
+}
+
 function isSplitPart(request) {
   return /^\d+(\/|$)/.test(request) || request === "split";
 }
@@ -267,6 +281,7 @@ function readRemarks(vote) {
   }
 
   const splits = new Map();
+  const parts = new Map(); // subject -> Map(part number -> text)
   const splitNotes =
     (remarks.remarkSplitVotes &&
       remarks.remarkSplitVotes[0] &&
@@ -277,12 +292,19 @@ function readRemarks(vote) {
     const items = (note.items && note.items[0] && note.items[0].item) || [];
     for (const item of items) {
       const subject = normaliseSubject(txt(item.title));
+      const itemParts =
+        (item.parts && item.parts[0] && item.parts[0].part) || [];
+      if (subject && itemParts.length && !parts.has(subject))
+        parts.set(
+          subject,
+          new Map(itemParts.map((p, i) => [i + 1, txt(p.partValue).trim()]))
+        );
       if (!subject || !group) continue;
       if (!splits.has(subject)) splits.set(subject, new Set());
       splits.get(subject).add(group);
     }
   }
-  return { requests, splits };
+  return { requests, splits, parts };
 }
 
 /** Groups that asked for this vote, from the block's remarks. */
@@ -521,8 +543,31 @@ async function processDate(date, stats) {
       const request = voteRequest(voting);
       if (request && row.vote_request !== request)
         update.vote_request = request;
-      // "2/RCV", "3/EV", ... = the n-th part of a split vote
+      // "2/RCV", "3/EV", ... = the n-th part of a split vote: keep the text that
+      // was voted, it exists nowhere else in machine-readable form
       if (isSplitPart(request)) {
+        const subject = normaliseSubject(txt(voting.amendmentSubject));
+        const num = Number(String(request).match(/^(\d+)/)[1]);
+        const text = (remarks.parts.get(subject) || new Map()).get(num);
+        if (text) {
+          stats.texts++;
+          if (!argv.dry)
+            await db("rollcall_texts")
+              .insert({
+                rollcall: id,
+                section: txt(voting.amendmentSubject),
+                part: num,
+                text,
+                kind: partKind(text),
+                source: "vot-xml",
+                chars: text.length,
+                updated_at: new Date().toISOString(),
+              })
+              .onConflict("rollcall")
+              .merge();
+        } else {
+          stats.noText++;
+        }
         const by = [
           ...new Set(
             [
@@ -638,6 +683,8 @@ async function main() {
     unmatched: 0,
     mismatch: 0,
     skipped: 0,
+    texts: 0,
+    noText: 0,
   };
   for (let i = 0; i < dates.length; i++) {
     if (dates.length > 1)
@@ -652,6 +699,9 @@ async function main() {
     }, not in db ${stats.unmatched}, count mismatches ${
       stats.mismatch
     }, skipped ${stats.skipped} (${dates.length} dates)`
+  );
+  console.log(
+    `split parts: ${stats.texts} texts saved, ${stats.noText} without a text in the XML`
   );
 }
 

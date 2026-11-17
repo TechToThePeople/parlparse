@@ -47,11 +47,17 @@ Options:
   process.exit(0);
 }
 
-/** "A10-0098/2025" -> "A-10-2025-0098"; /REV1 suffixes are ignored. */
+/**
+ * "A10-0098/2025" -> "A-10-2025-0098"; /REV1 suffixes are ignored.
+ * A joint motion keeps its RC- and loses the B: "RC-B10-0191/2024" is published
+ * as "RC-10-2024-0191", and the B- form is a different (single-group) document.
+ */
 function eliId(reference) {
   const base = String(reference).replace(/\/REV\d+$/, "");
-  const m = base.match(/^(?:RC-)?([AB])(\d+)-(\d+)\/(\d{4})$/);
-  return m ? `${m[1]}-${m[2]}-${m[4]}-${m[3]}` : null;
+  const m = base.match(/^(RC-)?([AB])(\d+)-(\d+)\/(\d{4})$/);
+  if (!m) return null;
+  if (m[1]) return `RC-${m[3]}-${m[5]}-${m[4]}`;
+  return `${m[2]}-${m[3]}-${m[5]}-${m[4]}`;
 }
 
 /** Published-document URL on the EP site, predictable from the ELI id. */

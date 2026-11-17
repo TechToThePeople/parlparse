@@ -233,6 +233,25 @@ Political group definitions (multilingual).
 
 ---
 
+### `rollcall_texts`
+
+The text a vote was about, when it was on part of a text rather than on a whole
+report. One row per rollcall (`rollcall` is the primary key, = `rollcalls.id`).
+
+| Column | Type | Constraints | Description |
+|---|---|---|---|
+| `rollcall` | integer | PK | FK → `rollcalls.id` |
+| `section` | varchar(100) | nullable | `§ 19`, `Recital U`; NULL for the whole text |
+| `part` | integer | nullable | 1, 2, 3 … for a split vote |
+| `text` | text | nullable | the wording, or the summary for a whole-text vote |
+| `kind` | varchar(20) | nullable | `quoted`, `without-words`, `with-words`, `other`, `summary` |
+| `source` | varchar(20) | nullable | `vot-xml` (the split remark), `summary`, `ai` |
+| `chars` | integer | nullable | length of `text` |
+
+`kind = quoted` is the wording itself; `without-words` / `with-words` describe a
+split ("Text as a whole without the words: …"), so the literal text has to be
+reconstructed from the document.
+
 ### `reports`
 
 Parliamentary reports referenced by roll-call votes.
