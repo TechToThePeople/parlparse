@@ -42,14 +42,18 @@ const SUMMARY_DIR = path.join(ROOT, "data", "content", "summary");
 const TMP_DIR = path.join(ROOT, "data", "tmp");
 
 const API = "https://api.deepseek.com/chat/completions";
-const MODEL = "deepseek-chat";
-// USD per million tokens, deepseek-chat list prices. They change: this is a
-// running estimate for the log, not an invoice.
-const PRICE_IN = 0.28;
-const PRICE_OUT = 0.42;
+// deepseek-flash (DeepSeek-V4.1-Flash), the cheap one. The legacy names
+// deepseek-v4-flash and deepseek-chat are no longer advertised.
+const MODEL = "deepseek-flash";
+// USD per 1M tokens, deepseek-flash, off-peak, cache miss. Off-peak is half the
+// peak rate (peak: 01:00-04:00 and 06:00-10:00 UTC, Mon-Fri) and a cache hit is
+// ~50x cheaper, so this is an upper bound for the log, not an invoice.
+const PRICE_IN = 0.15;
+const PRICE_OUT = 0.6;
 
-// ~100k characters is well inside the 64k-token window once split in chunks
-const CHUNK = 100000;
+// the model takes 1M tokens (~2.5M characters), so only very long reports are
+// chunked at all
+const CHUNK = 600000;
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ["all", "force", "dry", "help"],
@@ -289,6 +293,9 @@ async function complete(prompt, { model, maxTokens = 900 } = {}) {
         ],
         temperature: 0.3,
         max_tokens: maxTokens,
+        // thinking mode is the default and its reasoning is billed as output;
+        // summarising does not need it
+        thinking: { type: "disabled" },
       }),
     });
 
@@ -412,7 +419,7 @@ async function main() {
     `\n${stats.documents} fetched, ${stats.summaries} summarised, ${stats.skipped} already there, ${stats.failed} failed` +
       `\n${stats.tokensIn} tokens in, ${
         stats.tokensOut
-      } out — ≈ $${cost.toFixed(2)}`
+      } out — at most $${cost.toFixed(2)} (off-peak, cache miss)`
   );
 }
 
