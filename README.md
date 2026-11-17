@@ -196,6 +196,10 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
   report over ~600k characters → `data/content/summary/<ref>.md`
 - no front-matter in either file: reference, title, distribution, source and
   token counts are printed to the console instead, so the markdown stays plain;
+- `ai/split.js` fills the votes on a paragraph (`§ 19`), a recital (`Recital U`)
+  or a citation (`Citation 9`) from that markdown, deterministically: the
+  numbered items after the resolution heading, the `X. whereas` run, and the
+  N-th "having regard to" bullet;
 - the prompt tells the model to ignore the committee's own votes, the list of
   members who voted and the procedural references — how the text was adopted,
   not what it changes;

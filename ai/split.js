@@ -11,7 +11,9 @@
  * Everything else is counted and, for the interesting failures, printed:
  *   Article N   the article text lives in the Commission proposal, not in the
  *               report (0 of the sampled reports have "Article N" headings)
- *   Citation N  the "having regard to" bullets, numbered by position: fragile
+ *   Citation N  the N-th "having regard to" bullet (1-based, as the EP numbers
+ *               them); skipped when the index is past the end of the list, which
+ *               is how a wrong `ref` used to show up
  *
  * Usage:
  *   node ai/split.js --dry --limit 5      # see what it would write
@@ -29,6 +31,7 @@ const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
 
 const PARAGRAPH = /^§\s*(\d{1,3})$/;
 const RECITAL = /^Recital\s+([A-Z]|\d{1,3})$/i;
+const CITATION = /^Citation\s+(\d{1,3})$/i;
 const ITEM = /^([A-Z]|\d{1,3})[.)]\s+(.*)$/;
 // the resolution's operative part starts under one of these headings
 const BODY = /^(MOTION FOR A RESOLUTION|MOTION FOR RESOLUTIONS|PROPOSITION DE R[ÉE]SOLUTION|DRAFT (EUROPEAN PARLIAMENT )?(LEGISLATIVE )?RESOLUTION|PROJET DE (R[ÉE]SOLUTION|D[ÉE]CISION))/i;
@@ -85,6 +88,7 @@ function segments(markdown) {
 
   const recitals = new Map();
   const paragraphs = new Map();
+  const citations = [];
 
   for (const item of items) {
     if (/^whereas\b/i.test(item.text)) {
@@ -92,6 +96,12 @@ function segments(markdown) {
       if (!recitals.has(key)) recitals.set(key, []);
       recitals.get(key).push(item.text);
     }
+  }
+
+  // the "having regard to" list, in the order the EP numbers it
+  for (const line of lines) {
+    const m = line.trim().match(/^[–—−-]\s*(having regard to.*)$/i);
+    if (m) citations.push(m[1].trim());
   }
 
   const bodyIndex = lines.reduce(
@@ -111,13 +121,14 @@ function segments(markdown) {
       expected++;
     }
   }
-  return { recitals, paragraphs };
+  return { recitals, paragraphs, citations };
 }
 
 const stats = {
   reports: 0,
   paragraph: 0,
   recital: 0,
+  citation: 0,
   ambiguous: 0,
   notFound: 0,
   unsupported: 0,
@@ -133,7 +144,9 @@ async function processReport(reference, votes) {
     );
     return;
   }
-  const { recitals, paragraphs } = segments(fs.readFileSync(file, "utf8"));
+  const { recitals, paragraphs, citations } = segments(
+    fs.readFileSync(file, "utf8")
+  );
   stats.reports++;
 
   for (const vote of votes) {
@@ -144,12 +157,18 @@ async function processReport(reference, votes) {
 
     const p = name.match(PARAGRAPH);
     const r = name.match(RECITAL);
+    const c = name.match(CITATION);
     if (p) {
       bucket = paragraphs.get(Number(p[1]));
       kind = "paragraph";
     } else if (r) {
       bucket = recitals.get(r[1].toUpperCase());
       kind = "recital";
+    } else if (c) {
+      // 1-based index into the "having regard to" list
+      const n = Number(c[1]);
+      bucket = n >= 1 && n <= citations.length ? [citations[n - 1]] : null;
+      kind = "citation";
     } else {
       stats.unsupported++;
       continue;
@@ -223,7 +242,7 @@ async function main() {
     await processReport(reference, byRef.get(reference));
 
   console.log(
-    `\n${stats.paragraph} paragraphs, ${stats.recital} recitals written` +
+    `\n${stats.paragraph} paragraphs, ${stats.recital} recitals, ${stats.citation} citations written` +
       `\n${stats.notFound} not found, ${stats.ambiguous} ambiguous, ` +
       `${stats.unsupported} not extractable (Article/Citation), ` +
       `${stats.noMarkdown} votes in reports without markdown`
