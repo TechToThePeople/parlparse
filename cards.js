@@ -86,13 +86,29 @@ const writePositions = async (id, date) => {
 log.time("cards");
 let written = 0;
 let refreshed = 0;
-db.select(db.raw("rollcalls.*,title,url"))
-  .from("rollcalls")
-  .leftJoin("reports", "rollcalls.ref", "reports.reference")
-  .orderBy("rollcalls.id", "desc")
-  .where("rollcalls.term", term)
-  .then(async (votes) => {
+// the text the vote was about (a split part, or the report summary for a vote on
+// the whole text): one query, then attached by rollcall id
+db("rollcall_texts")
+  .then((rows) => new Map(rows.map((r) => [r.rollcall, r])))
+  .then((texts) =>
+    db
+      .select(db.raw("rollcalls.*,title,url"))
+      .from("rollcalls")
+      .leftJoin("reports", "rollcalls.ref", "reports.reference")
+      .orderBy("rollcalls.id", "desc")
+      .where("rollcalls.term", term)
+      .then((votes) => ({ votes, texts }))
+  )
+  .then(async ({ votes, texts }) => {
     for (const vote of votes) {
+      const voted = texts.get(vote.id);
+      if (voted) {
+        vote.section = voted.section;
+        vote.part = voted.part;
+        vote.part_text = voted.text;
+        vote.part_kind = voted.kind;
+        vote.part_source = voted.source;
+      }
       const csv = "../" + term + "/cards/" + vote.id + ".csv";
       const vdate = vote.date.substring(0, 10);
       console.log(vdate);
