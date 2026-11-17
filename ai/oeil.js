@@ -56,7 +56,7 @@ const PRICE_OUT = 0.6;
 const CHUNK = 600000;
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["all", "force", "dry", "attach", "help"],
+  boolean: ["all", "force", "dry", "attach", "report", "motions", "help"],
   string: ["model"],
   alias: { h: "help", a: "all", n: "limit" },
 });
@@ -70,6 +70,8 @@ Usage: node ai/oeil.js [<reference> | --all] [options]
   --limit, -n  stop after N documents
   --force      redo documents and summaries that already exist
   --dry        fetch and convert only, no DeepSeek call
+  --report     only the A/B/RC reports (the default with --motions)
+  --motions    only the individual motions (B10-… tabled by a group)
   --attach     re-attach the summaries already on disk to their votes
   --help, -h   this text
 
@@ -340,11 +342,19 @@ function chunks(text, size) {
   return out;
 }
 
-async function summarise(reference, markdown, model) {
+async function summarise(
+  reference,
+  markdown,
+  model,
+  attach = storeWholeTextVotes
+) {
   const dest = path.join(SUMMARY_DIR, fileName(reference));
   fs.mkdirSync(SUMMARY_DIR, { recursive: true });
   if (fs.existsSync(dest) && !argv.force) {
     stats.skipped++;
+    // a summary written before this pass existed still has to reach its votes
+    const existing = fs.readFileSync(dest, "utf8").trim();
+    if (existing) await attach(reference, existing);
     return;
   }
 
@@ -371,7 +381,7 @@ async function summarise(reference, markdown, model) {
 
   fs.writeFileSync(dest, answer.trim() + "\n");
   stats.summaries++;
-  await storeWholeTextVotes(reference, answer.trim());
+  await attach(reference, answer.trim());
   console.log(
     `   ✍️  ${reference} → ${path.relative(ROOT, dest)} (${model}, ${
       body.length
@@ -430,11 +440,72 @@ async function attachExisting() {
     const summary = fs
       .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
       .trim();
-    if (summary) await storeWholeTextVotes(reference, summary);
+    if (!summary) continue;
+    // the same text can be a report reference and a motion's doc_ref
+    await storeWholeTextVotes(reference, summary);
+    await storeMotionVotes(reference, summary);
   }
   console.log(
     `${stats.attached} vote(s) attached across ${files.length} summaries`
   );
+}
+
+/**
+ * A motion is its own document (`doc_ref` = B10-0028/2024), so its votes are
+ * found by that column, not by `ref` (which is the joint motion or the report).
+ */
+async function storeMotionVotes(reference, summary) {
+  const rows = await db("rollcalls").where("doc_ref", reference).pluck("id");
+  for (const id of rows) {
+    await db("rollcall_texts")
+      .insert({
+        rollcall: id,
+        section: null,
+        part: null,
+        text: summary,
+        kind: "summary",
+        source: "summary",
+        chars: summary.length,
+        updated_at: new Date().toISOString(),
+      })
+      .onConflict("rollcall")
+      .merge();
+  }
+  stats.attached += rows.length;
+  if (rows.length && !argv.attach)
+    console.log(
+      `   🗳  ${reference}: summary attached to ${rows.length} motion vote(s)`
+    );
+}
+
+/** The motions that still have no text: one document each. */
+async function motionReferences() {
+  const rows = await db.raw(`SELECT DISTINCT r.doc_ref AS ref
+       FROM rollcalls r
+      WHERE r.doc_ref GLOB '*10-[0-9][0-9][0-9][0-9]/*'
+        AND NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = r.id)
+      ORDER BY r.doc_ref`);
+  return rows.map((r) => r.ref);
+}
+
+async function runList(list, model, attach) {
+  for (const reference of list) {
+    try {
+      const markdown = await documentMarkdown(reference);
+      if (!markdown) {
+        stats.failed++;
+        console.warn(`   ⚠️  ${reference}: no document published by the API`);
+        continue;
+      }
+      if (argv.dry) continue;
+      await summarise(reference, markdown, model, attach);
+    } catch (e) {
+      stats.failed++;
+      console.warn(`   ⚠️  ${reference}: ${e.message}`);
+      // a bad key or an empty balance fails every document: stop at once
+      if (/^DeepSeek (401|402)/.test(e.message)) process.exit(1);
+    }
+  }
 }
 
 async function main() {
@@ -449,28 +520,25 @@ async function main() {
     process.exit(1);
   }
   const model = argv.model || MODEL;
-  let list = await references();
-  if (argv.limit) list = list.slice(0, Number(argv.limit));
-  console.log(
-    `📚 ${list.length} report(s), model ${argv.dry ? "(none, --dry)" : model}`
-  );
+  // --report / --motions restrict; both by default (and with --all)
+  const reports = argv.report || !argv.motions;
+  const motions = argv.motions || !argv.report;
 
-  for (const reference of list) {
-    try {
-      const markdown = await documentMarkdown(reference);
-      if (!markdown) {
-        stats.failed++;
-        console.warn(`   ⚠️  ${reference}: no document published by the API`);
-        continue;
-      }
-      if (argv.dry) continue;
-      await summarise(reference, markdown, model);
-    } catch (e) {
-      stats.failed++;
-      console.warn(`   ⚠️  ${reference}: ${e.message}`);
-      // a bad key or an empty balance fails every document: stop at once
-      if (/^DeepSeek (401|402)/.test(e.message)) process.exit(1);
-    }
+  if (reports) {
+    let list = await references();
+    if (argv.limit) list = list.slice(0, Number(argv.limit));
+    console.log(
+      `📚 ${list.length} report(s), model ${argv.dry ? "(none, --dry)" : model}`
+    );
+    await runList(list, model, storeWholeTextVotes);
+  }
+  if (motions) {
+    let list = await motionReferences();
+    if (argv.limit) list = list.slice(0, Number(argv.limit));
+    console.log(
+      `🗳  ${list.length} motion(s), model ${argv.dry ? "(none, --dry)" : model}`
+    );
+    await runList(list, model, storeMotionVotes);
   }
 
   const cost = (stats.tokensIn * PRICE_IN + stats.tokensOut * PRICE_OUT) / 1e6;

@@ -1,0 +1,238 @@
+#!/usr/bin/env node
+/* eslint-env node */
+/**
+ * ai/split.js — fill `rollcall_texts` for votes on a section or a recital by
+ * extracting the passage from the markdown already saved by ai/oeil.js
+ * (data/content/oeil/<reference>.md). No PDF, no conversion, no model call.
+ *
+ * Only what can be found unambiguously is written:
+ *   § 19        the "19." item of the resolution's numbered paragraphs
+ *   Recital U   the "U. whereas …" item (letters or numbers)
+ * Everything else is counted and, for the interesting failures, printed:
+ *   Article N   the article text lives in the Commission proposal, not in the
+ *               report (0 of the sampled reports have "Article N" headings)
+ *   Citation N  the "having regard to" bullets, numbered by position: fragile
+ *
+ * Usage:
+ *   node ai/split.js --dry --limit 5      # see what it would write
+ *   node ai/split.js                      # write for every report with markdown
+ *   node ai/split.js --ref A10-0275/2026  # one report
+ */
+
+const fs = require("fs");
+const path = require("path");
+const minimist = require("minimist");
+const db = require("../lib/db");
+
+const ROOT = path.resolve(__dirname, "..");
+const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
+
+const PARAGRAPH = /^§\s*(\d{1,3})$/;
+const RECITAL = /^Recital\s+([A-Z]|\d{1,3})$/i;
+const ITEM = /^([A-Z]|\d{1,3})[.)]\s+(.*)$/;
+// the resolution's operative part starts under one of these headings
+const BODY = /^(MOTION FOR A RESOLUTION|MOTION FOR RESOLUTIONS|PROPOSITION DE R[ÉE]SOLUTION|DRAFT (EUROPEAN PARLIAMENT )?(LEGISLATIVE )?RESOLUTION|PROJET DE (R[ÉE]SOLUTION|D[ÉE]CISION))/i;
+
+const argv = minimist(process.argv.slice(2), {
+  boolean: ["dry", "help"],
+  string: ["ref"],
+  alias: { h: "help", n: "limit" },
+});
+
+if (argv.help) {
+  console.log(`
+Usage: node ai/split.js [options]
+
+Extracts the text of the votes on a paragraph (§ 19) or a recital (Recital U)
+from data/content/oeil/<reference>.md and writes it to rollcall_texts.
+
+  --dry        print the matches instead of writing
+  --limit, -n  stop after N reports
+  --ref <ref>  only that report
+  --help, -h
+`);
+  process.exit(0);
+}
+
+/** reference A10-0275/2026 -> A10-0275_2026.md */
+const fileName = (reference) => String(reference).replace(/\//g, "_") + ".md";
+
+/**
+ * Split a document into its recitals and its numbered paragraphs.
+ *
+ * Recitals are the items whose text starts with "whereas" ("A. whereas …" in
+ * most reports, "1. whereas …" in a few). Paragraphs are the numbered items
+ * after the last "MOTION FOR A RESOLUTION" heading, and only when they number
+ * 1..N consecutively, otherwise the list is the citations or an annex.
+ */
+function segments(markdown) {
+  const lines = markdown.split("\n");
+  const items = [];
+  let current = null;
+
+  for (const line of lines) {
+    const m = line.match(ITEM);
+    if (m) {
+      current = { key: m[1], text: m[2].trim() };
+      items.push(current);
+      continue;
+    }
+    // a continuation line belongs to the item above it
+    if (current && line.trim() && !/^[#|<\s]/.test(line.slice(0, 1))) {
+      current.text += " " + line.trim();
+    }
+  }
+
+  const recitals = new Map();
+  const paragraphs = new Map();
+
+  for (const item of items) {
+    if (/^whereas\b/i.test(item.text)) {
+      const key = item.key.toUpperCase();
+      if (!recitals.has(key)) recitals.set(key, []);
+      recitals.get(key).push(item.text);
+    }
+  }
+
+  const bodyIndex = lines.reduce(
+    (last, line, i) => (BODY.test(line.trim()) ? i : last),
+    -1
+  );
+  if (bodyIndex >= 0) {
+    let expected = 1;
+    for (let i = bodyIndex + 1; i < lines.length; i++) {
+      const m = lines[i].match(ITEM);
+      if (!m || /^whereas\b/i.test(m[2].trim())) continue;
+      const n = Number(m[1]);
+      if (!Number.isInteger(n)) continue;
+      if (n !== expected) break; // citations, annexes, amendments: not the body
+      if (!paragraphs.has(n)) paragraphs.set(n, []);
+      paragraphs.get(n).push(m[2].trim());
+      expected++;
+    }
+  }
+  return { recitals, paragraphs };
+}
+
+const stats = {
+  reports: 0,
+  paragraph: 0,
+  recital: 0,
+  ambiguous: 0,
+  notFound: 0,
+  unsupported: 0,
+  noMarkdown: 0,
+};
+
+async function processReport(reference, votes) {
+  const file = path.join(OEIL_DIR, fileName(reference));
+  if (!fs.existsSync(file)) {
+    stats.noMarkdown += votes.length;
+    console.log(
+      `   ⚠️  ${reference}: no markdown (run ai/oeil.js --dry for it)`
+    );
+    return;
+  }
+  const { recitals, paragraphs } = segments(fs.readFileSync(file, "utf8"));
+  stats.reports++;
+
+  for (const vote of votes) {
+    const name = vote.name || "";
+    let found = null;
+    let kind = null;
+    let bucket = null;
+
+    const p = name.match(PARAGRAPH);
+    const r = name.match(RECITAL);
+    if (p) {
+      bucket = paragraphs.get(Number(p[1]));
+      kind = "paragraph";
+    } else if (r) {
+      bucket = recitals.get(r[1].toUpperCase());
+      kind = "recital";
+    } else {
+      stats.unsupported++;
+      continue;
+    }
+
+    if (!bucket || !bucket.length) {
+      stats.notFound++;
+      continue;
+    }
+    if (bucket.length > 1) {
+      stats.ambiguous++;
+      console.log(
+        `   ⚠️  ${vote.id} ${name}: ${bucket.length} matching blocks`
+      );
+      for (const block of bucket)
+        console.log(`        "${block.slice(0, 90)}…"`);
+      continue;
+    }
+    found = bucket[0];
+    if (found.length < 40 || found.length > 4000) {
+      stats.notFound++;
+      continue;
+    }
+
+    if (argv.dry) {
+      console.log(`   ${vote.id} ${kind} ${name} → "${found.slice(0, 70)}…"`);
+    } else {
+      await db("rollcall_texts")
+        .insert({
+          rollcall: vote.id,
+          section: name,
+          part: null,
+          text: found,
+          kind,
+          source: "markdown",
+          chars: found.length,
+          updated_at: new Date().toISOString(),
+        })
+        .onConflict("rollcall")
+        .merge();
+    }
+    stats[kind]++;
+  }
+}
+
+async function main() {
+  const rows = await db.raw(
+    `SELECT r.id, r.ref, r.name
+       FROM rollcalls r
+      WHERE NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = r.id)
+        AND (r.name GLOB '§ [0-9]*' OR r.name GLOB 'Recital *'
+             OR r.name GLOB 'Article [0-9]*' OR r.name GLOB 'Citation *')
+      ${argv.ref ? "AND r.ref = ?" : ""}
+      ORDER BY r.ref, r.id`,
+    argv.ref ? [argv.ref] : []
+  );
+
+  const byRef = new Map();
+  for (const row of rows) {
+    if (!byRef.has(row.ref)) byRef.set(row.ref, []);
+    byRef.get(row.ref).push(row);
+  }
+
+  const refs = [...byRef.keys()].slice(
+    0,
+    argv.limit ? Number(argv.limit) : undefined
+  );
+  console.log(`📑 ${refs.length} reports, ${rows.length} votes without text`);
+
+  for (const reference of refs)
+    await processReport(reference, byRef.get(reference));
+
+  console.log(
+    `\n${stats.paragraph} paragraphs, ${stats.recital} recitals written` +
+      `\n${stats.notFound} not found, ${stats.ambiguous} ambiguous, ` +
+      `${stats.unsupported} not extractable (Article/Citation), ` +
+      `${stats.noMarkdown} votes in reports without markdown`
+  );
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
