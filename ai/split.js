@@ -73,18 +73,18 @@ function segments(markdown) {
   const items = [];
   let current = null;
 
-  for (const line of lines) {
+  lines.forEach((line, index) => {
     const m = line.match(ITEM);
     if (m) {
-      current = { key: m[1], text: m[2].trim() };
+      current = { key: m[1], text: m[2].trim(), line: index + 1 };
       items.push(current);
-      continue;
+      return;
     }
     // a continuation line belongs to the item above it
     if (current && line.trim() && !/^[#|<\s]/.test(line.slice(0, 1))) {
       current.text += " " + line.trim();
     }
-  }
+  });
 
   const recitals = new Map();
   const paragraphs = new Map();
@@ -94,7 +94,7 @@ function segments(markdown) {
     if (/^whereas\b/i.test(item.text)) {
       const key = item.key.toUpperCase();
       if (!recitals.has(key)) recitals.set(key, []);
-      recitals.get(key).push(item.text);
+      recitals.get(key).push({ line: item.line, text: item.text });
     }
   }
 
@@ -117,7 +117,7 @@ function segments(markdown) {
       if (!Number.isInteger(n)) continue;
       if (n !== expected) break; // citations, annexes, amendments: not the body
       if (!paragraphs.has(n)) paragraphs.set(n, []);
-      paragraphs.get(n).push(m[2].trim());
+      paragraphs.get(n).push({ line: i + 1, text: m[2].trim() });
       expected++;
     }
   }
@@ -167,7 +167,8 @@ async function processReport(reference, votes) {
     } else if (c) {
       // 1-based index into the "having regard to" list
       const n = Number(c[1]);
-      bucket = n >= 1 && n <= citations.length ? [citations[n - 1]] : null;
+      bucket =
+        n >= 1 && n <= citations.length ? [{ text: citations[n - 1] }] : null;
       kind = "citation";
     } else {
       stats.unsupported++;
@@ -181,13 +182,15 @@ async function processReport(reference, votes) {
     if (bucket.length > 1) {
       stats.ambiguous++;
       console.log(
-        `   ⚠️  ${vote.id} ${name}: ${bucket.length} matching blocks`
+        `   ⚠️  ${vote.id} ${name} (${reference}): ${bucket.length} matching blocks`
       );
       for (const block of bucket)
-        console.log(`        "${block.slice(0, 90)}…"`);
+        console.log(
+          `        line ${block.line || "?"}: "${block.text.slice(0, 90)}…"`
+        );
       continue;
     }
-    found = bucket[0];
+    found = bucket[0].text;
     if (found.length < 40 || found.length > 4000) {
       stats.notFound++;
       continue;
