@@ -3,5 +3,7 @@ data/mep_rollcall.csv
 data/RCV
 data/LP
 data/VOT
+data/content
+data/tmp
 node_modules/*
 tmp

@@ -13,7 +13,8 @@
     "db:migrate": "knex migrate:latest --knexfile knexfile.js",
     "db:migrate:status": "knex migrate:list --knexfile knexfile.js",
     "db:migrate:rollback": "knex migrate:rollback --knexfile knexfile.js",
-    "db:migrate:make": "knex migrate:make --knexfile knexfile.js"
+    "db:migrate:make": "knex migrate:make --knexfile knexfile.js",
+    "ai": "node ai/oeil.js"
   },
   "author": "xavier dutoit",
   "license": "aGPL3",
