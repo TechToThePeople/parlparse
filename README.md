@@ -202,6 +202,19 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
+## The text of each vote (`rollcall_texts`)
+
+`openapi/vot-xml.js` also stores what was voted, in `rollcall_texts` (one row per
+vote): for a split vote (`§ 19/2`, `Recital U/1`) the wording from the XML's
+"Requests for split votes" remark, with `kind` telling whether it is the literal
+text (`quoted`) or a description of the split (`without-words`, `with-words`).
+`ai/oeil.js` adds a `summary` row for the votes on the whole text of a report
+("Motion for a resolution (as a whole)", "Proposal for a decision").
+
+```sh
+node -e 'const db=require("./lib/db");db("rollcall_texts").where("rollcall",200501).then(console.log)'
+```
+
 ## Gotchas
 
 - **MEP ids**: the EP's voting system uses its own ids, unrelated to the ids used

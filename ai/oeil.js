@@ -90,12 +90,19 @@ function loadEnv() {
 }
 loadEnv();
 
-/** A10-0275/2026 → A-10-2026-0275; RC-B10-0191/2024 → B-10-2024-0191. */
+/**
+ * A10-0275/2026 → A-10-2026-0275.
+ * RC-B10-0191/2024 → RC-10-2024-0191: a joint motion is its own document, and
+ * dropping the RC- prefix would fetch the single motion of one group instead.
+ */
 function eliId(reference) {
   const m = String(reference)
     .replace(/\/REV\d+$/, "")
-    .match(/^(?:RC-)?([AB])(\d+)-(\d+)\/(\d{4})$/);
-  return m ? `${m[1]}-${m[2]}-${m[4]}-${m[3]}` : null;
+    .match(/^(RC-)?([AB])(\d+)-(\d+)\/(\d{4})$/);
+  if (!m) return null;
+  // RC-B10-… is published as RC-10-…: no B, the term takes its place
+  if (m[1]) return `RC-${m[3]}-${m[5]}-${m[4]}`;
+  return `${m[2]}-${m[3]}-${m[5]}-${m[4]}`;
 }
 
 /** A10-0275/2026 → A10-0275_2026.md (the reference is the key everywhere). */
@@ -362,6 +369,7 @@ async function summarise(reference, markdown, model) {
 
   fs.writeFileSync(dest, answer.trim() + "\n");
   stats.summaries++;
+  await storeWholeTextVotes(reference, answer.trim());
   console.log(
     `   ✍️  ${reference} → ${path.relative(ROOT, dest)} (${model}, ${
       body.length
@@ -369,6 +377,41 @@ async function summarise(reference, markdown, model) {
       stats.tokensOut - tokens.out
     } out)`
   );
+}
+
+/**
+ * A vote "on the whole text" (`Proposal for a decision`, `Motion for a
+ * resolution (as a whole)`, `Proposition de la Commission`) is about the report
+ * itself, so its text in rollcall_texts is the summary.
+ */
+async function storeWholeTextVotes(reference, summary) {
+  const rows = await db("rollcalls")
+    .where("ref", reference)
+    .where(function () {
+      this.where("vote_type", "main")
+        .orWhere("name", "like", "%as a whole%")
+        .orWhere("name", "like", "%ensemble du texte%");
+    })
+    .select("id");
+  for (const row of rows) {
+    await db("rollcall_texts")
+      .insert({
+        rollcall: row.id,
+        section: null,
+        part: null,
+        text: summary,
+        kind: "summary",
+        source: "summary",
+        chars: summary.length,
+        updated_at: new Date().toISOString(),
+      })
+      .onConflict("rollcall")
+      .merge();
+  }
+  if (rows.length)
+    console.log(
+      `   🗳  ${reference}: summary attached to ${rows.length} whole-text vote(s)`
+    );
 }
 
 async function main() {
