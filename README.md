@@ -176,6 +176,26 @@ Formats the site relies on:
 - **`cordon.far_right_epp_position`** is one of `for` / `against` / `abstention`;
   `epp_cohesion` is 0–100.
 
+## AI summaries (`ai/oeil.js`)
+
+Fetches a report, converts it to markdown and asks DeepSeek for a citizen-facing
+summary. Key from `DEEPSEEK_API_KEY` (environment or `.env` in the repo root).
+
+```bash
+node ai/oeil.js A10-0275/2026        # one report
+node ai/oeil.js --all                # every A / B / RC report
+node ai/oeil.js --all --limit 5      # trial run
+node ai/oeil.js --all --dry          # fetch + convert only, no API call
+```
+
+- document: the DOCX from the Open Data distribution (PDF as fallback, `doceo`
+  is WAF-blocked), converted with `markitdown` → `data/content/oeil/<ref>.md`
+- summary: `deepseek-chat` (its cheapest model — "flash" is a Gemini name),
+  one paragraph of 60–90 words + 3 bullets, or a chunk/map-reduce pass when the
+  document is over ~100k characters → `data/content/summary/<ref>.md`
+- the run prints tokens used and an estimated cost; `401`/`402` abort, other
+  errors skip the document. Existing files are kept unless `--force`.
+
 ## Gotchas
 
 - **MEP ids**: the EP's voting system uses its own ids, unrelated to the ids used
