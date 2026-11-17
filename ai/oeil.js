@@ -153,19 +153,24 @@ async function fetchDocument(reference) {
   }
   if (!doc) return null;
 
+  // English first; a few reports are published only in another language, and
+  // the model reads those (it is told to answer in English either way)
   const candidates = [];
   for (const expression of doc.is_realized_by || []) {
-    if (!String(expression.language || "").endsWith("ENG")) continue;
+    const language = String(expression.language || "")
+      .split("/")
+      .pop();
     for (const m of expression.is_embodied_by || []) {
       const format = String(m.format || "")
         .split("/")
         .pop();
       if (["DOCX", "PDF"].includes(format) && m.is_exemplified_by)
-        candidates.push({ format, url: m.is_exemplified_by });
+        candidates.push({ format, language, url: m.is_exemplified_by });
     }
   }
-  // DOCX first: smaller and markitdown keeps the structure
+  // DOCX first: smaller, best structure; then the English version
   candidates.sort((a) => (a.format === "DOCX" ? -1 : 1));
+  candidates.sort((a) => (a.language === "ENG" ? -1 : 1));
   if (!candidates.length) return null;
 
   const pick = candidates[0];
@@ -191,6 +196,10 @@ async function fetchDocument(reference) {
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${pick.url}`);
     fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
   }
+  if (pick.language !== "ENG")
+    console.log(
+      `   🌐 ${reference}: no English version, using ${pick.language}`
+    );
   return { file: dest, url: pick.url, format: pick.format, doc };
 }
 
@@ -242,6 +251,8 @@ async function documentMarkdown(reference) {
 }
 
 const SYSTEM = `You explain decisions of the European Parliament to citizens who have no legal or EU background. Write plain English, short sentences, no jargon, no acronyms without expanding them, no preamble, no "this report" framing.
+
+The text may be in a language other than English; answer in English regardless.
 
 Ignore the procedural parts: the committee's own votes (the results of the vote in committee, the roll-call or show-of-hands results there), the list of members who voted, the composition of the committee, and the administrative references. They say how the text was adopted, not what it changes.`;
 
@@ -520,6 +531,20 @@ async function main() {
     process.exit(1);
   }
   const model = argv.model || MODEL;
+  const single = argv._[0];
+
+  // one reference: attach the summary both as a report (by ref) and as a motion
+  // (by doc_ref), which is what a single reference can be
+  if (single && !argv.motions) {
+    console.log(`📚 ${single}, model ${argv.dry ? "(none, --dry)" : model}`);
+    await runList([single], model, async (reference, summary) => {
+      await storeWholeTextVotes(reference, summary);
+      await storeMotionVotes(reference, summary);
+    });
+    reportCost();
+    return;
+  }
+
   // --report / --motions restrict; both by default (and with --all)
   const reports = argv.report || !argv.motions;
   const motions = argv.motions || !argv.report;
@@ -541,6 +566,10 @@ async function main() {
     await runList(list, model, storeMotionVotes);
   }
 
+  reportCost();
+}
+
+function reportCost() {
   const cost = (stats.tokensIn * PRICE_IN + stats.tokensOut * PRICE_OUT) / 1e6;
   console.log(
     `\n${stats.documents} fetched, ${stats.summaries} summarised, ${stats.skipped} already there, ${stats.failed} failed` +
