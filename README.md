@@ -257,6 +257,31 @@ attached by two rules:
 - motion: the votes whose `doc_ref` is that motion's reference (a motion is its
   own document, so the name test does not apply).
 
+**Amendments (`ai/amendments.js`).** Two sources, indexed per report as
+`number → {article, text}`:
+
+1. the report's own markdown (`data/content/oeil/<ref>.md`) — the committee
+   amendments sit in it, e.g. 366 for `A10-0271/2026`;
+2. the amendment **range documents** listed on the report's doceo page
+   (`A-10-YYYY-NNNN-AM-340-346_EN.docx`, fetched through the WAF browser and
+   converted with markitdown) — the amendments tabled in plenary.
+
+A table row's amendment is the **last** column: the first is empty for new text,
+so dropping empty cells shifts every amendment into it. The number comes from
+`rollcalls.amendment_number` — the VOT XML's own list (`4= 7=` identical
+amendments voted together, `274D` a variant, `9-14` a range), which is more
+reliable than the name: 139 votes spell the variant `S` where the XML says `D`,
+and a name holds at most two of them. The name is the fallback.
+
+doceo throttles a burst with a 200 that carries no content; a page under 20 KB
+is retried three times with a fresh WAF token, and the run leaves a second
+between reports. To resume where a throttled run stopped, run it in batches —
+votes that already have text are skipped:
+
+```sh
+for i in $(seq 1 10); do node ai/amendments.js --limit 60; sleep 600; done
+```
+
 **Paragraphs (`ai/split.js`).** The resolution's paragraphs are the `1, 2, 3 …`
 run **after the first body heading**, where the body heading is
 
@@ -290,11 +315,11 @@ and unambiguous; every skip is counted (`not found`, `ambiguous`,
 
 ### What is not extracted (yet)
 
-8,958 of the 14,117 votes still have no text. By category, largest first:
+5,400 of the 14,117 votes still have no text. By category, largest first:
 
 | category | votes | why not | what it would take |
 |---|---|---|---|
-| amendments (`… Am 26`, `§ 6 – 12`, `After § 3`, `Before § 1`) | ~4,900 + 1,253 insertions | the VOT XML gives the number and author of an amendment, never its wording; the `A-10-YYYY-NNNN-AM-N` documents are not in the OpenAPI (404) and `doceo` is behind the WAF | fetch each amendment document through the WAF browser, or parse the amendment tables out of the report DOCX |
+| amendments (`… Am 26`, `§ 6 – 12`, `After § 3`, `Before § 1`) | ~4,950 | the wording lives in the amendment range documents on doceo, which is behind a WAF that throttles a burst | `ai/amendments.js` fetches them in batches (see above); each run picks up where the last stopped |
 | `Article N` and `Article 2, § 2 – 20` | 703 | the article text lives in the **Commission proposal** (`C10-…`), a different document, which the API does not publish either | scrape the procedure page, or accept the proposal document as a second input |
 | split parts with no wording in the XML | 481 | the block's "Requests for split votes" remark does not list that part | nothing reliable: the text was never published |
 | procedural / appointments (`Request by…`, `Appointment of…`) | 358 | there is no text — the vote is about the agenda or a person | nothing |
