@@ -108,7 +108,7 @@ Vocabulary worth knowing:
 | file | written by | columns |
 | --- | --- | --- |
 | `data/meps.csv` | `csv.js` | `epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid` |
-| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source` |
+| `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source,text` |
 | `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc` |
 | `data/cordon.csv` | `sql/cordon.sql` | `rollcall,date,far_right_epp_position,report_title,reference,name,for,against,abstention,epp_cohesion` |
 | `data/cordon-report.csv` | `sql/cordon-report.sql` | `votes_together,reference,report_title` |
@@ -144,6 +144,9 @@ Formats the site relies on:
 - **`item_rollcall.vote_request`** is the EP's own marker for how the vote was
   requested: `RCV`, `EV` (electronic), `sep` (separate vote), `split`, or
   `<n>/RCV` / `<n>/EV` for the n-th part of a split vote.
+- **`item_rollcall.text`** is the `rollcall_texts.kind` of the vote's text
+  (`amendment`, `summary`, `quoted`, …), empty when the detail page has none —
+  `votes.html` marks those rows with a `¶`.
 - **`item_rollcall.split_requested_by`** names the group(s) that asked for the
   split (`ECR`, `PPE, PfE`), from the XML's "Requests for split votes" remark.
   Not displayed: on all 2,326 rows it is a subset of `requested_by`, which is
