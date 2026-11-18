@@ -266,8 +266,9 @@ attached by two rules:
 1. the report's own markdown (`data/content/oeil/<ref>.md`) — the committee
    amendments sit in it, e.g. 366 for `A10-0271/2026`;
 2. the amendment **range documents** listed on the report's doceo page
-   (`A-10-YYYY-NNNN-AM-340-346_EN.docx`, fetched through the WAF browser and
-   converted with markitdown) — the amendments tabled in plenary.
+   (`A-10-YYYY-NNNN-AM-340-346_EN.docx`, fetched through the WAF browser, converted
+   with markitdown and kept in `data/content/amendments/`) — the amendments tabled
+   in plenary.
 
 A table row's amendment is the **last** column: the first is empty for new text,
 so dropping empty cells shifts every amendment into it. The number comes from
@@ -300,12 +301,10 @@ votes that already have text are skipped:
 for i in $(seq 1 10); do node ai/amendments.js --limit 60; sleep 600; done
 ```
 
-`--cached` re-parses what is already in `data/content/amendments/` and touches the
-network not at all — the way to redo the texts after a parser fix:
-
-```sh
-node ai/amendments.js --cached
-```
+The markdown of every range document is kept in `data/content/amendments/`, and a
+run uses it: only a report with **nothing** saved is fetched (its page lists the
+documents), so re-running after a parser fix touches the network not at all.
+`--force` ignores the saved markdown and downloads again.
 
 **Paragraphs (`ai/split.js`).** The resolution's paragraphs are the `1, 2, 3 …`
 run **after the first body heading**, where the body heading is
