@@ -181,11 +181,15 @@ async function amendmentDocuments(eli) {
 /** The amendment column of a two-column table ("Text proposed… | Amendment"). */
 function amendmentText(block) {
   const lines = block.split("\n");
+  // start after the header row's "| --- | --- |" separator: without it the
+  // column label ("Amendment") is glued to the first amendment's text
+  const separator = lines.findIndex((l) => /^\|?[\s|:-]*-{3,}/.test(l));
   const header = lines.findIndex(
     (l) => /Text proposed by the Commission/i.test(l) && l.includes("|")
   );
+  const start = separator >= 0 ? separator + 1 : header + 1;
   const cells = [];
-  for (const line of header >= 0 ? lines.slice(header + 1) : lines) {
+  for (const line of lines.slice(start)) {
     if (line.includes("</Amend>")) break;
     if (!line.trim().startsWith("|")) continue;
     // the amendment is the last column; the first is empty for new text, so
@@ -196,6 +200,16 @@ function amendmentText(block) {
       .map((c) => c.trim())
       .filter((c) => c && !/^-+$/.test(c));
     if (!parts.length) continue;
+    // a column-label row ("Joint motion for a resolution | Amendment") is not
+    // text: the layout table repeats one just before the real one
+    if (
+      parts.every((c) =>
+        /^(amendment|text proposed by the (commission|council)|(joint )?motion for a resolution|proposal for (a )?(regulation|directive|decision)|council position)$/i.test(
+          c.replace(/\*+/g, "").trim()
+        )
+      )
+    )
+      continue;
     const text = parts
       .at(-1)
       .replace(/\*{2,}/g, "")
