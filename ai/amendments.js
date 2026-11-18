@@ -374,7 +374,9 @@ async function main() {
              OR r.name GLOB '* [–-] [0-9]*' OR r.name GLOB '§ * – *'
              OR r.doc_ref LIKE '%-AM-%')
       ${argv.ref ? "AND r.ref = ?" : ""}
-      ORDER BY r.ref, r.id`,
+      -- newest vote first: the refs are taken in the order they appear, so the
+      -- most recent report is fetched first
+      ORDER BY r.date DESC, r.id DESC`,
     argv.ref ? [argv.ref] : []
   );
 
