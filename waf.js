@@ -18,7 +18,6 @@ const path = require("path");
 const os = require("os");
 const tls = require("tls");
 const https = require("https");
-const { URL } = require("url");
 
 // ── Configuration ─────────────────────────────────────────────────────
 
@@ -244,6 +243,39 @@ async function downloadViaBrowser(url, opts = {}) {
   return { status: result.status, body: result.body, url };
 }
 
+/**
+ * Download a binary file (PDF, DOCX) through the browser. `downloadViaBrowser`
+ * uses `resp.text()`, which corrupts anything that is not text, so this one
+ * reads an ArrayBuffer and returns it as a Buffer.
+ */
+async function downloadBuffer(url, opts = {}) {
+  const { page } = await getBrowser();
+  const result = await page.evaluate(
+    async (targetUrl, fetchTimeout) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), fetchTimeout);
+      try {
+        const resp = await fetch(targetUrl, { signal: controller.signal });
+        if (resp.status !== 200) return { status: resp.status, base64: null };
+        const bytes = new Uint8Array(await resp.arrayBuffer());
+        let binary = "";
+        for (let i = 0; i < bytes.length; i++)
+          binary += String.fromCharCode(bytes[i]);
+        return { status: resp.status, base64: btoa(binary) };
+      } finally {
+        clearTimeout(timer);
+      }
+    },
+    url,
+    opts.timeout || 30000
+  );
+  return {
+    status: result.status,
+    buffer: result.base64 ? Buffer.from(result.base64, "base64") : null,
+    url,
+  };
+}
+
 /** Close the shared browser instance (e.g. after a batch completes). */
 async function closeBrowser() {
   if (_browser) {
@@ -282,6 +314,7 @@ module.exports = {
   clearWafToken,
   solveWafChallenge,
   downloadViaBrowser,
+  downloadBuffer,
   closeBrowser,
   FIREFOX_HEADERS,
   CHROMIUM_PATH,
