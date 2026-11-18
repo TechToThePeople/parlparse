@@ -11,7 +11,7 @@ types.setTypeParser(1082, (val) => val);
 
 const rollcall = async () => {
   const file = "./data/item_rollcall.csv";
-  const head = "identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source".split(
+  const head = "identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source,text".split(
     ","
   );
 
@@ -73,8 +73,14 @@ const rollcall = async () => {
     .where("term", term)
     .from("rollcalls");
 
+  // Which votes have a text on the detail page, and of what kind
+  const texts = await db("rollcall_texts").select("rollcall", "kind");
+  const textMap = {};
+  for (const t of texts) textMap[t.rollcall] = t.kind;
+
   // Map attendance stats onto each row (date keys may include time)
   for (const r of rcv) {
+    r.text = textMap[r.identifier] || "";
     const dateKey = (r.date || "").substring(0, 10);
     const attended = attendedMap[dateKey] || 0;
     const voted = votersMap[r.identifier] || 0;
