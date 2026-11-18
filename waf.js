@@ -341,6 +341,7 @@ module.exports = {
   getWafToken,
   clearWafToken,
   solveWafChallenge,
+  refreshToken,
   downloadViaBrowser,
   downloadBuffer,
   closeBrowser,

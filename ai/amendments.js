@@ -129,17 +129,27 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 /** The AM-<from>-<to> documents linked from a report's doceo page. */
 async function amendmentDocuments(eli) {
   const waf = getWaf();
-  const page = await waf.downloadViaBrowser(`${DOCEO}/${eli}_EN.html`);
-  if (page.status !== 200) return [];
-  const links = [
-    ...new Set(
-      [
-        ...String(page.body).matchAll(
-          /href="([^"]*\/doceo\/document\/[^"]*AM-[^"]*)"/g
-        ),
-      ].map((m) => m[1].replace(/^\//, ""))
-    ),
-  ];
+  const url = `${DOCEO}/${eli}_EN.html`;
+  let links = [];
+  // a page that comes back too short is the WAF asking again, not a report
+  // without amendments: real ones are 40 KB and up
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const page = await waf.downloadViaBrowser(url);
+    const body = String(page.body || "");
+    links = [
+      ...new Set(
+        [
+          ...body.matchAll(/href="([^"]*\/doceo\/document\/[^"]*AM-[^"]*)"/g),
+        ].map((m) => m[1].replace(/^\//, ""))
+      ),
+    ];
+    if (links.length || (page.status === 200 && body.length > 20000)) break;
+    console.warn(
+      `   ⏳ ${eli}: WAF again, refreshing the token (${attempt}/3)`
+    );
+    await waf.refreshToken();
+    await sleep(2000 * attempt);
+  }
   const base = "https://www.europarl.europa.eu/";
   const docs = new Map();
   for (const link of links.filter(
@@ -384,6 +394,8 @@ async function main() {
   for (const reference of refs) {
     try {
       await processReport(reference, byRef.get(reference));
+      // doceo throttles a burst: a report every second keeps the token alive
+      await sleep(1000);
     } catch (e) {
       stats.failed++;
       console.warn(`   ⚠️  ${reference}: ${e.message}`);
