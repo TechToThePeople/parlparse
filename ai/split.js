@@ -164,7 +164,8 @@ async function processReport(reference, votes) {
   stats.reports++;
 
   for (const vote of votes) {
-    const name = vote.name || "";
+    // the API sometimes prefixes the name with a dash: "– § 6", "– Recital E"
+    const name = String(vote.name || "").replace(/^[–—−-]\s*/, "");
     let found = null;
     let kind = null;
     let bucket = null;
@@ -244,7 +245,9 @@ async function main() {
     `SELECT r.id, r.ref, r.name
        FROM rollcalls r
       WHERE NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = r.id)
-        AND (r.name GLOB '§ [0-9]*' OR r.name GLOB 'Recital *'
+        AND (r.name GLOB '[–—-] § [0-9]*' OR r.name GLOB '[–—-] Recital *'
+             OR r.name GLOB '[–—-] Article [0-9]*' OR r.name GLOB '[–—-] Citation *'
+             OR r.name GLOB '§ [0-9]*' OR r.name GLOB 'Recital *'
              OR r.name GLOB 'Article [0-9]*' OR r.name GLOB 'Citation *')
       ${argv.ref ? "AND r.ref = ?" : ""}
       ORDER BY r.ref, r.id`,

@@ -209,7 +209,7 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
 ## Where the text of a vote comes from (`rollcall_texts`)
 
 One row per vote (`rollcall` = `rollcalls.id`), with `kind` saying what the text
-is and `source` saying where it was found. 5,119 of the 14,117 votes have one:
+is and `source` saying where it was found. 5,159 of the 14,117 votes have one:
 
 | kind | source | votes | rule |
 |---|---|---|---|
@@ -217,13 +217,14 @@ is and `source` saying where it was found. 5,119 of the 14,117 votes have one:
 | `without-words` | `vot-xml` | 652 | split described as `Text as a whole without the words: …` — a description, not the wording |
 | `other` | `vot-xml` | 590 | other split wording, e.g. `those words` (the complement half) |
 | `summary` | `summary` | 1,710 | the vote is on a whole text, so the AI summary of that document is the text |
-| `paragraph` | `markdown` | 290 | vote named `§ 19` → paragraph 19 of the resolution |
-| `recital` | `markdown` | 227 | vote named `Recital U` → the `U. whereas …` item |
+| `paragraph` | `markdown` | 317 | vote named `§ 19` → paragraph 19 of the resolution |
+| `recital` | `markdown` | 240 | vote named `Recital U` → the `U. whereas …` item |
 | `citation` | `markdown` | 49 | vote named `Citation 9` → the 9th `– having regard to …` item |
 
 ### The rules, exactly
 
-**Which votes are candidates.** `openapi/vot-xml.js` takes the split parts; the
+**Which votes are candidates.** Names are first stripped of a leading dash
+(`– § 6` → `§ 6`). `openapi/vot-xml.js` takes the split parts; the
 AI summary attaches to two different things; `ai/split.js` only looks at votes
 whose name matches one of:
 
@@ -269,7 +270,7 @@ matching `ELI:`, `[↑]`, `OJ C,` or starting with `OJ ` are footnotes — both
 skipped. The run stops at the first gap, because budget and discharge reports
 append committee opinions that restart their own numbering. If the run finds
 nothing, a number that occurs **exactly once in the whole document** is used
-instead (132 of the 290 paragraphs come from that fallback).
+instead (28 of the 317 paragraphs come from that fallback).
 
 **Recitals (`ai/split.js`).** Items of the form `<A-Z or number>. whereas …`;
 the vote name gives the key. Only written when the key appears **once** in the
@@ -286,6 +287,28 @@ attached to a document with 7 citations).
 and unambiguous; every skip is counted (`not found`, `ambiguous`,
 `not extractable`) at the end of the run. Nothing is overwritten unless
 `--force`.
+
+### What is not extracted (yet)
+
+8,958 of the 14,117 votes still have no text. By category, largest first:
+
+| category | votes | why not | what it would take |
+|---|---|---|---|
+| amendments (`… Am 26`, `§ 6 – 12`, `After § 3`, `Before § 1`) | ~4,900 + 1,253 insertions | the VOT XML gives the number and author of an amendment, never its wording; the `A-10-YYYY-NNNN-AM-N` documents are not in the OpenAPI (404) and `doceo` is behind the WAF | fetch each amendment document through the WAF browser, or parse the amendment tables out of the report DOCX |
+| `Article N` and `Article 2, § 2 – 20` | 703 | the article text lives in the **Commission proposal** (`C10-…`), a different document, which the API does not publish either | scrape the procedure page, or accept the proposal document as a second input |
+| split parts with no wording in the XML | 481 | the block's "Requests for split votes" remark does not list that part | nothing reliable: the text was never published |
+| procedural / appointments (`Request by…`, `Appointment of…`) | 358 | there is no text — the vote is about the agenda or a person | nothing |
+| budget lines (`Block 1`, `01 02 02 51`) | 353 | the draft-amendment texts are in the budget document, which we never fetch | fetch the budget document, then a per-country/line parser |
+| recitals not found or ambiguous | 264 | 18 are documents with two lettered lists (line numbers printed by the run); the rest have no `X. whereas` in the report | review the 18 by hand; the others are missing in the source |
+| sub-paragraphs (`§ 100, point ix`, `§ 88, indent 7`) | 20 | the vote is on one indent inside a paragraph, and markdown loses that structure | needs the DOCX's list levels, not the flat markdown |
+| individual motions with no document | 40 | the API lists the motion but publishes no English file, and no other language either | nothing |
+| whole-text votes without a summary | 37 | the report has no summary yet (94 of the 1,683 reports have no document at all) | `node ai/oeil.js <ref>` |
+| paragraphs / citations not found | 19 | the number has no match in the markdown | check case by case |
+
+Also unprocessed at the document level: **94 reports have no summary/markdown**
+(1,683 reports, 1,589 files), because the API publishes no file for them (the
+`C10-…` proposals and a few `REV1` variants) or only in a language we did not
+fetch.
 
 ### Inspecting it
 
