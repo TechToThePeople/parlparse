@@ -217,8 +217,9 @@ is and `source` saying where it was found. 5,159 of the 14,117 votes have one:
 | kind | source | votes | rule |
 |---|---|---|---|
 | `quoted` | `vot-xml` | 1,601 | split vote, the part's wording as the EP gives it: `<partValue>` starts with a quote |
-| `without-words` | `vot-xml` | 652 | split described as `Text as a whole without the words: …` — a description, not the wording |
-| `other` | `vot-xml` | 590 | other split wording, e.g. `those words` (the complement half) |
+| `without-words` | `vot-xml` | 678 | split described as `Text as a whole without the words: …` — a description, not the wording |
+| `words` | `vot-xml` | 541 | the part is **those words**: `those words` / `that word` refers back to the quoted words of the sibling part (`Text as a whole without the words: ‘within DG FINS’`), and the words are stored, not the reference |
+| `other` | `vot-xml` | 23 | other split wording that refers to nothing |
 | `summary` | `summary` | 1,710 | the vote is on a whole text, so the AI summary of that document is the text |
 | `paragraph` | `markdown` | 317 | vote named `§ 19` → paragraph 19 of the resolution |
 | `recital` | `markdown` | 240 | vote named `Recital U` → the `U. whereas …` item |
@@ -245,7 +246,10 @@ marker (`1`, `2`, `2/RCV`, `3/EV`). The wording comes from the same vote item's
 `<remarkSplitVote>`: items are matched to the vote by `amendmentSubject`
 (case-insensitive), the part by its position. `kind` is decided by the value
 itself: starts with a quote → `quoted`; `Text as a whole without/with the words`
-→ `without-words`/`with-words`; anything else → `other`.
+→ `without-words`/`with-words`; `those words` / `that word` → `words`, with the
+wording taken from the sibling part that names it (`… without the words: ‘within
+DG FINS’`, also written `…’ without the words: …` and `…’ excluding the words …`) —
+without that, `§ 140/2` would only say "those words"; anything else → `other`.
 
 **Summaries (`ai/oeil.js`).** Written after the model summarises a document, and
 attached by two rules:

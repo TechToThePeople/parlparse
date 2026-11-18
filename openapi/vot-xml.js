@@ -239,10 +239,36 @@ function groupOf(node) {
 function partKind(value) {
   const v = String(value || "").trim();
   if (!v) return null;
+  if (REFERRED_WORDS.test(v)) return "words";
   if (/^["'\u2018\u201c]/.test(v)) return "quoted";
-  if (/^text as a whole without the words/i.test(v)) return "without-words";
-  if (/^text as a whole with the words/i.test(v)) return "with-words";
+  if (/^text as a whole without the words?/i.test(v)) return "without-words";
+  if (/^text as a whole with the words?/i.test(v)) return "with-words";
   return "other";
+}
+
+// "those words", "that word": the part is one word or phrase of the paragraph,
+// and the remark names it in a sibling part ("Text as a whole without the
+// words: ‘within DG FINS’") instead of repeating it
+const REFERRED_WORDS = /^(those|these|that|the) words?$|^(ce|ces) mots?$/i;
+
+/** The words a "without the words: …" sibling part is about. */
+function referredWords(values) {
+  for (const v of values) {
+    // "Text as a whole without the words: …", but also "…’ without the words:
+    // ‘…’" and "…’ excluding the words ‘…’"
+    const m = String(v).match(
+      /(?:\bwithout|\bexcluding) the words?:?\s*(.+)$/i
+    );
+    if (!m) continue;
+    const quoted = m[1].match(/[\u2018'"]([^\u2018\u2019'"]+)[\u2019'"]/);
+    const words = (quoted ? quoted[1] : m[1]).trim();
+    // "second ‘R’ in ‘SRHR’": the word is the quoted one before "in"
+    const inner = words.match(
+      /^[^\u2018'"]*[\u2018'"]([^\u2019'"]+)[\u2019'"]\s+in\s/i
+    );
+    return inner ? inner[1] : words;
+  }
+  return null;
 }
 
 function isSplitPart(request) {
@@ -294,11 +320,25 @@ function readRemarks(vote) {
       const subject = normaliseSubject(txt(item.title));
       const itemParts =
         (item.parts && item.parts[0] && item.parts[0].part) || [];
-      if (subject && itemParts.length && !parts.has(subject))
+      if (subject && itemParts.length && !parts.has(subject)) {
+        const values = itemParts.map((p) => txt(p.partValue).trim());
+        const words = referredWords(values);
         parts.set(
           subject,
-          new Map(itemParts.map((p, i) => [i + 1, txt(p.partValue).trim()]))
+          new Map(
+            values.map((v, i) => {
+              const referred = REFERRED_WORDS.test(v) && words;
+              return [
+                i + 1,
+                {
+                  text: referred ? words : v,
+                  kind: referred ? "words" : partKind(v),
+                },
+              ];
+            })
+          )
         );
+      }
       if (!subject || !group) continue;
       if (!splits.has(subject)) splits.set(subject, new Set());
       splits.get(subject).add(group);
@@ -554,8 +594,8 @@ async function processDate(date, stats) {
       if (isSplitPart(request)) {
         const subject = normaliseSubject(txt(voting.amendmentSubject));
         const num = Number(String(request).match(/^(\d+)/)[1]);
-        const text = (remarks.parts.get(subject) || new Map()).get(num);
-        if (text) {
+        const part = (remarks.parts.get(subject) || new Map()).get(num);
+        if (part) {
           stats.texts++;
           if (!argv.dry)
             await db("rollcall_texts")
@@ -563,10 +603,10 @@ async function processDate(date, stats) {
                 rollcall: id,
                 section: txt(voting.amendmentSubject),
                 part: num,
-                text,
-                kind: partKind(text),
+                text: part.text,
+                kind: part.kind,
                 source: "vot-xml",
-                chars: text.length,
+                chars: part.text.length,
                 updated_at: new Date().toISOString(),
               })
               .onConflict("rollcall")

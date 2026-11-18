@@ -244,13 +244,14 @@ report. One row per rollcall (`rollcall` is the primary key, = `rollcalls.id`).
 | `section` | varchar(100) | nullable | `§ 19`, `Recital U`; NULL for the whole text |
 | `part` | integer | nullable | 1, 2, 3 … for a split vote |
 | `text` | text | nullable | the wording, or the summary for a whole-text vote |
-| `kind` | varchar(20) | nullable | `quoted`, `without-words`, `with-words`, `other` (split wording, from the VOT XML); `summary` (the AI summary of a whole-text vote); `paragraph`, `recital`, `citation` (extracted from the report markdown) |
+| `kind` | varchar(20) | nullable | `quoted`, `without-words`, `with-words`, `words`, `other` (split wording, from the VOT XML); `summary` (the AI summary of a whole-text vote); `paragraph`, `recital`, `citation` (extracted from the report markdown); `amendment` (ai/amendments.js) |
 | `source` | varchar(20) | nullable | `vot-xml` (the split remark), `summary` (ai/oeil.js), `markdown` (ai/split.js) |
 | `chars` | integer | nullable | length of `text` |
 
 `kind = quoted` is the wording itself; `without-words` / `with-words` describe a
 split ("Text as a whole without the words: …"), so the literal text has to be
-reconstructed from the document.
+reconstructed from the document; `words` is the other half of that split — the
+words themselves, copied from the sibling part that names them.
 
 ### `reports`
 
