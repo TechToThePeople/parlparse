@@ -141,15 +141,19 @@ async function amendmentDocuments(eli) {
     ),
   ];
   const base = "https://www.europarl.europa.eu/";
-  return links
-    .filter((l) => l.endsWith(".docx") || l.endsWith(".pdf"))
-    .map((l) => ({
-      url: base + l,
-      // docx first: markitdown keeps the table cells intact in both
-      docx: l.endsWith(".docx"),
-      name: path.basename(l).replace(/_EN\.(docx|pdf)$/, ""),
-    }))
-    .sort((a, b) => (a.docx === b.docx ? 0 : a.docx ? -1 : 1));
+  const docs = new Map();
+  for (const link of links.filter(
+    (l) => l.endsWith(".docx") || l.endsWith(".pdf")
+  )) {
+    // one document per range: the docx, whose table cells markitdown keeps
+    const name = path.basename(link).replace(/_EN\.(docx|pdf)$/, "");
+    if (!docs.has(name) || link.endsWith(".docx"))
+      docs.set(name, {
+        url: base + link,
+        name: path.basename(link),
+      });
+  }
+  return [...docs.values()];
 }
 
 /** The amendment column of a two-column table ("Text proposed… | Amendment"). */
@@ -162,14 +166,16 @@ function amendmentText(block) {
   for (const line of header >= 0 ? lines.slice(header + 1) : lines) {
     if (line.includes("</Amend>")) break;
     if (!line.trim().startsWith("|")) continue;
+    // the amendment is the last column; the first is empty for new text, so
+    // dropping empty cells would shift every amendment into it
     const parts = line
       .split("|")
+      .slice(1, -1)
       .map((c) => c.trim())
       .filter((c) => c && !/^-+$/.test(c));
     if (!parts.length) continue;
     const text = parts
-      .slice(1)
-      .join(" ")
+      .at(-1)
       .replace(/\*{2,}/g, "")
       .replace(/<[^>]+>/g, "")
       .trim();
@@ -230,6 +236,8 @@ function parseAmendmentDocument(markdown) {
 async function rangeMarkdown(doc) {
   fs.mkdirSync(AMEND_DIR, { recursive: true });
   fs.mkdirSync(TMP_DIR, { recursive: true });
+  // the name keeps the extension: a pdf and a docx of one range used to share
+  // a cache file, so a stale pdf parse hid the docx
   const cache = path.join(AMEND_DIR, `${doc.name}.md`);
   if (fs.existsSync(cache) && !argv.force)
     return fs.readFileSync(cache, "utf8");
