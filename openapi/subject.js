@@ -195,9 +195,7 @@ async function main() {
       WHERE 1 = 1
         ${argv.procedure ? "AND p.code = ?" : ""}
         ${
-          !argv.force && !argv.procedure
-            ? "AND NOT EXISTS (SELECT 1 FROM procedure_subjects s WHERE s.procedure = p.code)"
-            : ""
+          !argv.force && !argv.procedure ? "AND p.subjects_checked IS NULL" : ""
         }
       ORDER BY p.code`,
     argv.procedure ? [argv.procedure] : []
@@ -214,7 +212,8 @@ async function main() {
       `${OEIL}?reference=${encodeURIComponent(code)}`,
       "text/html"
     );
-    if (oeil.status === 200) {
+    const oeilOk = oeil.status === 200;
+    if (oeilOk) {
       for (const s of oeilSubjects(oeil.body))
         found.push({ scheme: "oeil", code: s.code, label: s.label });
     }
@@ -227,6 +226,7 @@ async function main() {
     } catch {
       docs = [];
     }
+    let apiOk = docs.length === 0;
     for (const doc of docs) {
       const { status, body } = await getWithBackoff(
         `${API}/documents/${doc}?format=application/ld%2Bjson`,
@@ -234,6 +234,7 @@ async function main() {
       );
       await sleep(pause);
       if (status !== 200) continue;
+      apiOk = true;
       let record;
       try {
         record = JSON.parse(body).data[0];
@@ -247,9 +248,22 @@ async function main() {
       }
     }
 
+    if (!oeilOk || !apiOk) {
+      // no answer is not an answer: leave it unchecked so the next run retries it
+      stats.failed++;
+      console.log(
+        `   ⚠️  ${code}: could not read the sources ` +
+          `(OEIL ${oeil.status}, ${apiOk ? "API ok" : "API silent"})`
+      );
+      continue;
+    }
     if (!found.length) {
       stats.noSubject++;
       console.log(`   · ${code}: no subject published`);
+      if (!argv.dry)
+        await db("procedures")
+          .where("code", code)
+          .update({ subjects_checked: new Date().toISOString() });
       continue;
     }
 
@@ -269,13 +283,17 @@ async function main() {
         .ignore();
       stats.links++;
     }
+    await db("procedures")
+      .where("code", code)
+      .update({ subjects_checked: new Date().toISOString() });
     stats.skipped++;
   }
 
   console.log(
     `\n${stats.links} subject link(s) over ${stats.subjects} subject(s), ` +
       `${stats.labels} label(s) fetched, ${stats.noSubject} procedure(s) ` +
-      `without a published subject, ${stats.failed} failure(s)`
+      `without a published subject, ${stats.failed} could not be read ` +
+      `(left for the next run)`
   );
   await db.destroy();
 }
