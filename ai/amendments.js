@@ -75,6 +75,26 @@ function eliId(reference) {
  * key is "355D", with the plain number as a fallback.
  */
 function amendmentKeys(vote) {
+  // the VOT XML gives the authoritative list ("4= 7=", "274D", "9-14", "1/REV")
+  const column = String(vote.amendment_number || "");
+  if (column) {
+    const keys = [];
+    for (const token of column.split(/[\s,]+/).filter(Boolean)) {
+      const range = token.match(/^(\d{1,3})-(\d{1,3})$/);
+      if (range) {
+        const [from, to] = [Number(range[1]), Number(range[2])];
+        // a short range is readable as its members, a long one is left out
+        if (to >= from && to - from <= 10)
+          for (let n = from; n <= to; n++) keys.push(String(n));
+        continue;
+      }
+      const number = token.match(/^(\d{1,3})([A-Z]*)/);
+      if (number) keys.push(number[1] + number[2]);
+    }
+    if (keys.length) return keys;
+  }
+
+  // otherwise the name, whose suffix is unreliable (S where the XML says D)
   const name = String(vote.name || "");
   // everything after the last separator is the amendment reference
   // "Am 20/1" is amendment 20, second part: the part is not an amendment number
@@ -82,8 +102,10 @@ function amendmentKeys(vote) {
     /\/\d+\s*$/,
     ""
   );
-  const keys = [...tail.matchAll(/(\d{1,3})([A-Z]*)/g)].map((m) => m[1] + m[2]);
-  if (keys.length) return keys;
+  const named = [...tail.matchAll(/(\d{1,3})([A-Z]*)/g)].map(
+    (m) => m[1] + m[2]
+  );
+  if (named.length) return named;
   const fromDocRef = String(vote.doc_ref || "").match(/-AM-(\d+)/);
   return fromDocRef ? [fromDocRef[1]] : [];
 }
@@ -308,11 +330,12 @@ async function processReport(reference, votes) {
 
 async function main() {
   const rows = await db.raw(
-    `SELECT r.id, r.ref, r.name, r.doc_ref
+    `SELECT r.id, r.ref, r.name, r.doc_ref, r.amendment_number
        FROM rollcalls r
       WHERE NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = r.id)
-        AND (r.name LIKE '%Am %' OR r.name GLOB '* [–-] [0-9]*'
-             OR r.name GLOB '§ * – *' OR r.doc_ref LIKE '%-AM-%')
+        AND (r.amendment_number IS NOT NULL OR r.name LIKE '%Am %'
+             OR r.name GLOB '* [–-] [0-9]*' OR r.name GLOB '§ * – *'
+             OR r.doc_ref LIKE '%-AM-%')
       ${argv.ref ? "AND r.ref = ?" : ""}
       ORDER BY r.ref, r.id`,
     argv.ref ? [argv.ref] : []
