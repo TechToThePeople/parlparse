@@ -240,6 +240,38 @@ node openapi/procedure.js            # extract + fetch what is missing
 node openapi/procedure.js --dry      # only print the codes found
 ```
 
+## What a procedure is about (`subjects`, `procedure_subjects`)
+
+Two sources, four vocabularies, one table keyed by `(scheme, code)` — because the
+same idea is numbered differently in each:
+
+| scheme | where it comes from | example |
+|---|---|---|
+| `oeil` | the "Subject" block of the OEIL procedure page (scraped; this numbering exists nowhere else) | `8.70` Budget of the Union |
+| `dir-eu-legal-act` | `isAboutDirectoryCode` on the procedure's documents | `016020` Budget |
+| `subject-matter` | `isAboutSubjectMatter` on the documents | `BUDG` Budget |
+| `eurovoc` | `is_about` on the documents | `5158` general budget (EU) |
+
+Labels are the English `skos:prefLabel` of the concept, fetched once per code from
+the Publications Office / EuroVoc and cached in `subjects`.
+
+```sh
+node openapi/subject.js                          # every procedure without subjects
+node openapi/subject.js --procedure 2025/0227(COD) --dry
+```
+
+```sql
+select p.code, s.scheme, s.code, s.label
+  from procedures p
+  join procedure_subjects ps on ps.procedure = p.code
+  join subjects s on s.id = ps.subject
+ where p.code = '2024/0212(BUD)';
+```
+
+OEIL shows several subjects per procedure (that is why the junction table), and a
+procedure whose documents carry no classification keeps none — the API publishes
+it for about half of them.
+
 ## Where the text of a vote comes from (`rollcall_texts`)
 
 One row per vote (`rollcall` = `rollcalls.id`), with `kind` saying what the text
