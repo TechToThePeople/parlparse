@@ -251,6 +251,20 @@ wording taken from the sibling part that names it (`… without the words: ‘wi
 DG FINS’`, also written `…’ without the words: …` and `…’ excluding the words …`) —
 without that, `§ 140/2` would only say "those words"; anything else → `other`.
 
+**The paragraph behind a split part (`ai/split.js`).** A part vote names the
+paragraph (`§ 140/2`) and its own words; `rollcall_texts.context` also holds
+paragraph 140 itself, with those words wrapped in `<b>` when the part is (or
+keeps) them and `<del>` when it removes them:
+
+```
+§ 140/2  "within DG FINS"
+         … calls for adequate oversight mechanisms <b>within DG FINS</b> by
+         making more resources available; …
+```
+
+934 of the 1,219 words/without-words/with-words parts got it; the rest name a
+paragraph the report markdown does not carry (or a report with no markdown).
+
 **Summaries (`ai/oeil.js`).** Written after the model summarises a document, and
 attached by two rules:
 

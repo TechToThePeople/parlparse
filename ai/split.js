@@ -240,6 +240,83 @@ async function processReport(reference, votes) {
   }
 }
 
+/**
+ * The paragraph behind a split part ("§ 140/2 – those words"): the reader gets
+ * the sentence in place, with the words marked. <del> when the part removes
+ * them, <b> when the part is those words (or keeps them).
+ */
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function wordsOf(row) {
+  if (row.kind === "words" || row.kind === "quoted")
+    return String(row.text || "")
+      .replace(/^[\u2018'"]|[\u2019'"]$/g, "")
+      .trim();
+  const m = String(row.text || "").match(
+    /(?:\bwithout|\bwith) the words?:?\s*(.+)$/i
+  );
+  if (!m) return null;
+  const quoted = m[1].match(/[\u2018'"]([^\u2018\u2019'"]+)[\u2019'"]/);
+  return (quoted ? quoted[1] : m[1]).trim();
+}
+
+function markWords(paragraph, words, tag) {
+  const plain = escapeHtml(paragraph.replace(/\*{2,}/g, "").trim());
+  if (!words) return plain;
+  const escaped = escapeHtml(words);
+  const at = plain.toLowerCase().indexOf(escaped.toLowerCase());
+  if (at < 0) return plain;
+  return (
+    plain.slice(0, at) +
+    `<${tag}>` +
+    plain.slice(at, at + escaped.length) +
+    `</${tag}>` +
+    plain.slice(at + escaped.length)
+  );
+}
+
+async function contextPass(rows) {
+  const byRef = new Map();
+  for (const row of rows) {
+    if (!byRef.has(row.ref)) byRef.set(row.ref, []);
+    byRef.get(row.ref).push(row);
+  }
+  let written = 0;
+  let noParagraph = 0;
+  for (const [reference, list] of byRef) {
+    const file = path.join(OEIL_DIR, fileName(reference));
+    if (!fs.existsSync(file)) continue;
+    const { paragraphs, everywhere } = segments(fs.readFileSync(file, "utf8"));
+    for (const row of list) {
+      const m = String(row.section || "").match(/§\s*(\d+)/);
+      if (!m) continue;
+      const n = Number(m[1]);
+      const bucket = paragraphs.get(n) || everywhere.get(n) || [];
+      if (bucket.length !== 1) {
+        noParagraph++;
+        continue;
+      }
+      const tag = row.kind === "without-words" ? "del" : "b";
+      const context = markWords(bucket[0].text, wordsOf(row), tag);
+      if (argv.dry) {
+        console.log(`   ${row.rollcall} § ${n} → "${context.slice(0, 90)}…"`);
+        written++;
+        continue;
+      }
+      await db("rollcall_texts")
+        .where("rollcall", row.rollcall)
+        .update({ context });
+      written++;
+    }
+  }
+  return { written, noParagraph };
+}
+
 async function main() {
   const rows = await db.raw(
     `SELECT r.id, r.ref, r.name
@@ -269,6 +346,22 @@ async function main() {
   for (const reference of refs)
     await processReport(reference, byRef.get(reference));
 
+  // the split parts already written by vot-xml: give them their paragraph
+  const splitRows = await db.raw(
+    `SELECT t.rollcall, t.section, t.kind, t.text, r.ref
+       FROM rollcall_texts t JOIN rollcalls r ON r.id = t.rollcall
+      WHERE t.source = 'vot-xml'
+        AND t.section LIKE '§ %'
+        AND t.kind IN ('words', 'without-words', 'with-words')
+      ${argv.ref ? "AND r.ref = ?" : ""}
+      ORDER BY r.ref, t.rollcall`,
+    argv.ref ? [argv.ref] : []
+  );
+  const context = await contextPass(splitRows);
+  console.log(
+    `\n${context.written} split part(s) given their paragraph ` +
+      `(${context.noParagraph} paragraph(s) not found)`
+  );
   console.log(
     `\n${stats.paragraph} paragraphs (${stats.fromWholeDocument} found anywhere in the document), ${stats.recital} recitals, ${stats.citation} citations written` +
       `\n${stats.notFound} not found, ${stats.ambiguous} ambiguous, ` +

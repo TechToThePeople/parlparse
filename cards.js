@@ -108,6 +108,7 @@ db("rollcall_texts")
         vote.part_text = voted.text;
         vote.part_kind = voted.kind;
         vote.part_source = voted.source;
+        vote.part_context = voted.context;
       }
       const csv = "../" + term + "/cards/" + vote.id + ".csv";
       const vdate = vote.date.substring(0, 10);
