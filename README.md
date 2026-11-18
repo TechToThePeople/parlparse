@@ -206,17 +206,95 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
-## The text of each vote (`rollcall_texts`)
+## Where the text of a vote comes from (`rollcall_texts`)
 
-`openapi/vot-xml.js` also stores what was voted, in `rollcall_texts` (one row per
-vote): for a split vote (`§ 19/2`, `Recital U/1`) the wording from the XML's
-"Requests for split votes" remark, with `kind` telling whether it is the literal
-text (`quoted`) or a description of the split (`without-words`, `with-words`).
-`ai/oeil.js` adds a `summary` row for the votes on the whole text of a report
-("Motion for a resolution (as a whole)", "Proposal for a decision").
+One row per vote (`rollcall` = `rollcalls.id`), with `kind` saying what the text
+is and `source` saying where it was found. 5,119 of the 14,117 votes have one:
 
-```sh
-node -e 'const db=require("./lib/db");db("rollcall_texts").where("rollcall",200501).then(console.log)'
+| kind | source | votes | rule |
+|---|---|---|---|
+| `quoted` | `vot-xml` | 1,601 | split vote, the part's wording as the EP gives it: `<partValue>` starts with a quote |
+| `without-words` | `vot-xml` | 652 | split described as `Text as a whole without the words: …` — a description, not the wording |
+| `other` | `vot-xml` | 590 | other split wording, e.g. `those words` (the complement half) |
+| `summary` | `summary` | 1,710 | the vote is on a whole text, so the AI summary of that document is the text |
+| `paragraph` | `markdown` | 290 | vote named `§ 19` → paragraph 19 of the resolution |
+| `recital` | `markdown` | 227 | vote named `Recital U` → the `U. whereas …` item |
+| `citation` | `markdown` | 49 | vote named `Citation 9` → the 9th `– having regard to …` item |
+
+### The rules, exactly
+
+**Which votes are candidates.** `openapi/vot-xml.js` takes the split parts; the
+AI summary attaches to two different things; `ai/split.js` only looks at votes
+whose name matches one of:
+
+```
+§ N              /^§\s*(\d{1,3})$/            → paragraph N
+Recital X        /^Recital\s+([A-Z]|\d{1,3})$/i → the X. whereas item
+Citation N       /^Citation\s+(\d{1,3})$/i     → the N-th having-regard-to item
+```
+
+Anything else is left alone — `Article N`, `§ 19/2` (already a split part),
+`§ 100, point ix`, `Am 26` — and counted in the run summary.
+
+**Split parts (`vot-xml`).** The part number is the leading digits of the `rcv`
+marker (`1`, `2`, `2/RCV`, `3/EV`). The wording comes from the same vote item's
+`<remarkSplitVote>`: items are matched to the vote by `amendmentSubject`
+(case-insensitive), the part by its position. `kind` is decided by the value
+itself: starts with a quote → `quoted`; `Text as a whole without/with the words`
+→ `without-words`/`with-words`; anything else → `other`.
+
+**Summaries (`ai/oeil.js`).** Written after the model summarises a document, and
+attached by two rules:
+
+- report: the votes whose `ref` is that report **and** either `vote_type = main`
+  or a name matching
+  `ensemble du texte | as a whole | motion for a resolution | proposition de
+  résolution | proposals? for (a )?decisions? | proposition de la commission |
+  commission proposal | projet de décision | draft council decision | projet du
+  conseil | draft legislative act | approval without vote` (the EP names the whole
+  text in a dozen ways, and `vote_type` is `procedural` for many of them);
+- motion: the votes whose `doc_ref` is that motion's reference (a motion is its
+  own document, so the name test does not apply).
+
+**Paragraphs (`ai/split.js`).** The resolution's paragraphs are the `1, 2, 3 …`
+run **after the first body heading**, where the body heading is
+
+```
+MOTION FOR (A )?(EUROPEAN PARLIAMENT )?RESOLUTION | PROPOSITION DE RÉSOLUTION |
+DRAFT (EUROPEAN PARLIAMENT )?(LEGISLATIVE )?RESOLUTION | PROJET DE (RÉSOLUTION|DÉCISION)
+```
+
+Items whose text starts with `whereas` are recitals, not paragraphs, and lines
+matching `ELI:`, `[↑]`, `OJ C,` or starting with `OJ ` are footnotes — both
+skipped. The run stops at the first gap, because budget and discharge reports
+append committee opinions that restart their own numbering. If the run finds
+nothing, a number that occurs **exactly once in the whole document** is used
+instead (132 of the 290 paragraphs come from that fallback).
+
+**Recitals (`ai/split.js`).** Items of the form `<A-Z or number>. whereas …`;
+the vote name gives the key. Only written when the key appears **once** in the
+document: a document can hold two lettered lists (the report's, and the amended
+ones further down), and the run prints both candidates with their line numbers
+instead of guessing.
+
+**Citations (`ai/split.js`).** The `– having regard to …` items, in document
+order, 1-based — the EP numbers them the same way. Written only when the index
+is within the list, which is how a wrong `ref` shows up (a vote "Citation 11"
+attached to a document with 7 citations).
+
+**Guards.** Markdown-derived text is only written when it is 40–4,000 characters
+and unambiguous; every skip is counted (`not found`, `ambiguous`,
+`not extractable`) at the end of the run. Nothing is overwritten unless
+`--force`.
+
+### Inspecting it
+
+```bash
+sqlite3 -column -header data/term10.db \
+  "select rollcall, kind, chars from rollcall_texts where rollcall = 200501;"
+node ai/split.js --dry --ref A10-0075/2025   # what would be written for one report
+node ai/split.js                             # write it
+node ai/oeil.js --motions                    # fetch + summarise the missing motions
 ```
 
 ## Gotchas
