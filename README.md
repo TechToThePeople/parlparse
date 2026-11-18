@@ -286,7 +286,11 @@ UPDATE rollcalls SET amendment_status = 'manual' WHERE id = 199981;
 
 doceo throttles a burst with a 200 that carries no content; a page under 20 KB
 is retried three times with a fresh WAF token, and the run leaves a second
-between reports. To resume where a throttled run stopped, run it in batches —
+between reports. A page that stays empty is a *blocked* report, not a report
+without amendments — it is counted as such and its votes are left untouched. When
+three reports in a row come back empty the run clears the token, prints
+`⛔ doceo is blocking us (WAF): pausing 15 minutes` and sleeps before continuing,
+because retrying inside a block only deepens it. To resume where a throttled run stopped, run it in batches —
 votes that already have text are skipped:
 
 ```sh

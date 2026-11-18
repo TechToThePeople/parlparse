@@ -122,6 +122,7 @@ const stats = {
   written: 0,
   missing: 0,
   parked: 0,
+  blocked: 0,
   failed: 0,
 };
 
@@ -131,13 +132,16 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const MAX_ATTEMPTS = 3;
 
 /** The AM-<from>-<to> documents linked from a report's doceo page. */
+/** null when the WAF kept answering, an empty list when nothing is published. */
 async function amendmentDocuments(eli) {
   const waf = getWaf();
   const url = `${DOCEO}/${eli}_EN.html`;
   let links = [];
+  let blocked = false;
   // a page that comes back too short is the WAF asking again, not a report
   // without amendments: real ones are 40 KB and up
   for (let attempt = 1; attempt <= 3; attempt++) {
+    blocked = true;
     const page = await waf.downloadViaBrowser(url);
     const body = String(page.body || "");
     links = [
@@ -147,13 +151,17 @@ async function amendmentDocuments(eli) {
         ].map((m) => m[1].replace(/^\//, ""))
       ),
     ];
-    if (links.length || (page.status === 200 && body.length > 20000)) break;
+    if (links.length || (page.status === 200 && body.length > 20000)) {
+      blocked = false;
+      break;
+    }
     console.warn(
       `   ⏳ ${eli}: WAF again, refreshing the token (${attempt}/3)`
     );
     await waf.refreshToken();
     await sleep(2000 * attempt);
   }
+  if (blocked) return null;
   const base = "https://www.europarl.europa.eu/";
   const docs = new Map();
   for (const link of links.filter(
@@ -297,6 +305,14 @@ async function processReport(reference, votes) {
 
   // 2. the amendments tabled in plenary are published as range documents
   const docs = await amendmentDocuments(eli);
+  if (docs === null) {
+    // no page, no verdict: leave the votes alone so the next run retries them
+    console.warn(
+      `   ⛔ ${reference}: the WAF kept answering with an empty page`
+    );
+    stats.blocked++;
+    return "blocked";
+  }
   if (!docs.length) {
     if (!index.size) {
       // the page exists and lists nothing: there is no document to fetch, so
@@ -412,9 +428,23 @@ async function main() {
     `📑 ${refs.length} report(s), ${rows.length} amendment vote(s) without text`
   );
 
+  let blockedInARow = 0;
   for (const reference of refs) {
     try {
-      await processReport(reference, byRef.get(reference));
+      const outcome = await processReport(reference, byRef.get(reference));
+      blockedInARow = outcome === "blocked" ? blockedInARow + 1 : 0;
+      if (blockedInARow >= 3) {
+        // three empty pages in a row is not bad luck, it is the WAF refusing us
+        const minutes = 15;
+        console.log(
+          `\n⛔ doceo is blocking us (WAF): pausing ${minutes} minutes, ` +
+            `then resuming with ${refs.length - refs.indexOf(reference) - 1} ` +
+            `report(s) left`
+        );
+        getWaf().clearWafToken();
+        await sleep(minutes * 60 * 1000);
+        blockedInARow = 0;
+      }
       // doceo throttles a burst: a report every second keeps the token alive
       await sleep(1000);
     } catch (e) {
@@ -431,6 +461,7 @@ async function main() {
       `${stats.amendments} amendments in ${stats.ranges} document(s), ` +
       `${stats.reports} report(s)\n${stats.missing} vote(s) whose amendment ` +
       `is not in those documents, ${stats.failed} failure(s), ` +
+      `${stats.blocked} blocked by the WAF, ` +
       `${stats.parked} parked as unpublished`
   );
   const [left] = await db.raw(
