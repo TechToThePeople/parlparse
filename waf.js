@@ -128,6 +128,30 @@ async function solveWafChallenge() {
   }
 }
 
+/**
+ * Solve the challenge in a fresh page and wait for the token cookie. The shared
+ * page's `goto` returns before the challenge JS has set `aws-waf-token`, which
+ * is why re-solving on it used to end in another 202.
+ */
+async function refreshToken() {
+  const page = await _browser.newPage();
+  try {
+    await page.goto(CHALLENGE_URL, {
+      waitUntil: "domcontentloaded",
+      timeout: 20000,
+    });
+    for (let i = 0; i < 20; i++) {
+      const cookies = await page.cookies();
+      const token = cookies.find((c) => c.name === "aws-waf-token");
+      if (token && token.value) return token.value;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+    throw new Error("no aws-waf-token after the challenge");
+  } finally {
+    await page.close();
+  }
+}
+
 /** Clear the cached WAF token. */
 function clearWafToken() {
   if (fs.existsSync(TOKEN_FILE)) fs.unlinkSync(TOKEN_FILE);
@@ -137,7 +161,6 @@ function clearWafToken() {
 
 let _browser = null;
 let _browserPage = null;
-let _browserRefCount = 0;
 
 /**
  * Get or create a shared headless Chromium instance.
@@ -219,10 +242,7 @@ async function downloadViaBrowser(url, opts = {}) {
   // If the WAF token expired (HTTP 202), re-solve the challenge and retry once
   if (result.status === 202) {
     console.warn("   ⏳ WAF token expired, re-solving challenge…");
-    await page.goto(CHALLENGE_URL, {
-      waitUntil: "networkidle0",
-      timeout: 20000,
-    });
+    await refreshToken();
     result = await page.evaluate(
       async (targetUrl, fetchTimeout) => {
         const controller = new AbortController();
@@ -250,25 +270,33 @@ async function downloadViaBrowser(url, opts = {}) {
  */
 async function downloadBuffer(url, opts = {}) {
   const { page } = await getBrowser();
-  const result = await page.evaluate(
-    async (targetUrl, fetchTimeout) => {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), fetchTimeout);
-      try {
-        const resp = await fetch(targetUrl, { signal: controller.signal });
-        if (resp.status !== 200) return { status: resp.status, base64: null };
-        const bytes = new Uint8Array(await resp.arrayBuffer());
-        let binary = "";
-        for (let i = 0; i < bytes.length; i++)
-          binary += String.fromCharCode(bytes[i]);
-        return { status: resp.status, base64: btoa(binary) };
-      } finally {
-        clearTimeout(timer);
-      }
-    },
-    url,
-    opts.timeout || 30000
-  );
+  const grab = () =>
+    page.evaluate(
+      async (targetUrl, fetchTimeout) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), fetchTimeout);
+        try {
+          const resp = await fetch(targetUrl, { signal: controller.signal });
+          if (resp.status !== 200) return { status: resp.status, base64: null };
+          const bytes = new Uint8Array(await resp.arrayBuffer());
+          let binary = "";
+          for (let i = 0; i < bytes.length; i++)
+            binary += String.fromCharCode(bytes[i]);
+          return { status: resp.status, base64: btoa(binary) };
+        } finally {
+          clearTimeout(timer);
+        }
+      },
+      url,
+      opts.timeout || 30000
+    );
+
+  let result = await grab();
+  if (result.status === 202) {
+    console.warn("   ⏳ WAF token expired, re-solving challenge…");
+    await refreshToken();
+    result = await grab();
+  }
   return {
     status: result.status,
     buffer: result.base64 ? Buffer.from(result.base64, "base64") : null,
