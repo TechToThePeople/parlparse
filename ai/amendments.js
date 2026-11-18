@@ -82,9 +82,9 @@ function amendmentKeys(vote) {
     for (const token of column.split(/[\s,]+/).filter(Boolean)) {
       const range = token.match(/^(\d{1,3})-(\d{1,3})$/);
       if (range) {
+        // "1-18" is amendments 1 to 18, all of them voted in one go
         const [from, to] = [Number(range[1]), Number(range[2])];
-        // a short range is readable as its members, a long one is left out
-        if (to >= from && to - from <= 10)
+        if (to >= from && to - from < 60)
           for (let n = from; n <= to; n++) keys.push(String(n));
         continue;
       }
@@ -224,6 +224,30 @@ function amendmentTarget(block) {
 }
 
 /**
+ * A provisional-agreement amendment is the whole amended text, not a table:
+ * "AMENDMENTS BY THE EUROPEAN PARLIAMENT … to the Commission proposal" followed
+ * by the consolidated regulation. Keep the opening of it rather than nothing.
+ */
+function wholeTextAmendment(block) {
+  const start = block.search(/AMENDMENTS BY THE EUROPEAN PARLIAMENT/i);
+  if (start < 0) return "";
+  const text = block
+    .slice(start)
+    .split("\n")
+    .filter(
+      (l) => l.trim() && !/^\s*<[^>]+>\s*$/.test(l) && !/^-{5,}\s*$/.test(l)
+    )
+    .join(" ")
+    .replace(/\[\[?\d+\]\]?\(#[^)]*\)/g, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\*{2,}/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  // a whole regulation is long: the opening is what a reader can use
+  return text.length > 200 ? text.slice(0, 2500) : "";
+}
+
+/**
  * One range document → Map(number -> {article, text}). Two layouts exist:
  * the per-amendment documents wrap each block in <Amend>…<NumAm>N</NumAm>, the
  * big "AMENDMENTS 001-332" ones just head each block with "Amendment 1".
@@ -234,7 +258,7 @@ function parseAmendmentDocument(markdown) {
   for (const block of markdown.split(/<Amend>/).slice(1)) {
     const num = block.match(/<NumAm>(\d+)<\/NumAm>/);
     if (!num) continue;
-    const text = amendmentText(block);
+    const text = amendmentText(block) || wholeTextAmendment(block);
     if (!text) continue;
     amendments.set(Number(num[1]), {
       article: amendmentTarget(block),
@@ -247,7 +271,7 @@ function parseAmendmentDocument(markdown) {
     const n = Number(parts[i]);
     if (amendments.has(n)) continue;
     const block = parts[i + 1] || "";
-    const text = amendmentText(block);
+    const text = amendmentText(block) || wholeTextAmendment(block);
     if (!text) continue;
     amendments.set(n, { article: amendmentTarget(block), text });
   }
@@ -365,7 +389,11 @@ async function processReport(reference, votes) {
         );
       continue;
     }
-    const text = found.map((f) => f.text).join(" / ");
+    // a block vote can carry dozens of amendments: keep the page readable, the
+    // text stays verbatim up to the cut
+    let text = found.map((f) => f.text).join(" / ");
+    if (text.length > 4000)
+      text = text.slice(0, text.lastIndexOf(" ", 4000)) + " …";
     const section =
       found
         .map((f) => f.article)
