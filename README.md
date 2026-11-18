@@ -273,6 +273,17 @@ amendments voted together, `274D` a variant, `9-14` a range), which is more
 reliable than the name: 139 votes spell the variant `S` where the XML says `D`,
 and a name holds at most two of them. The name is the fallback.
 
+A vote that stays without text is not retried for ever: `rollcalls.amendment_attempts` counts the
+runs it survived (three, then it drops out of the queue), a report whose page lists no amendment
+document at all is parked at once as `amendment_status = 'unavailable'`, and a vote that needs a
+human is parked by hand — the end of the run prints the query for both:
+
+```sql
+SELECT id, ref, name, amendment_number FROM rollcalls
+ WHERE amendment_status IS NULL AND amendment_attempts >= 3;
+UPDATE rollcalls SET amendment_status = 'manual' WHERE id = 199981;
+```
+
 doceo throttles a burst with a 200 that carries no content; a page under 20 KB
 is retried three times with a fresh WAF token, and the run leaves a second
 between reports. To resume where a throttled run stopped, run it in batches —
