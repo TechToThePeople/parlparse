@@ -110,6 +110,11 @@ function amendmentKeys(vote) {
   return fromDocRef ? [fromDocRef[1]] : [];
 }
 
+/** data/content/oeil/<ref>.md — the report as markitdown saved it */
+const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
+const reportMarkdown = (reference) =>
+  path.join(OEIL_DIR, String(reference).replace(/\//g, "_") + ".md");
+
 const stats = {
   reports: 0,
   ranges: 0,
@@ -255,17 +260,31 @@ async function rangeMarkdown(doc) {
 async function processReport(reference, votes) {
   const eli = eliId(reference);
   if (!eli) return;
+  const index = new Map();
+
+  // 1. the report's own document already holds the committee amendments
+  const local = reportMarkdown(reference);
+  if (fs.existsSync(local)) {
+    const fromReport = parseAmendmentDocument(fs.readFileSync(local, "utf8"));
+    for (const [n, a] of fromReport) index.set(n, a);
+    if (fromReport.size)
+      console.log(
+        `   📄 ${reference}: ${fromReport.size} amendment(s) in the report itself`
+      );
+  }
+
+  // 2. the amendments tabled in plenary are published as range documents
   const docs = await amendmentDocuments(eli);
   if (!docs.length) {
-    console.log(`   ⚠️  ${reference}: no amendment document listed on doceo`);
-    stats.failed++;
-    return;
+    if (!index.size) {
+      console.log(`   ⚠️  ${reference}: no amendment document listed on doceo`);
+      stats.failed++;
+      return;
+    }
+  } else {
+    console.log(`   📑 ${reference}: ${docs.length} amendment document(s)`);
   }
   stats.reports++;
-  console.log(`   📑 ${reference}: ${docs.length} amendment document(s)`);
-
-  // one index for the whole report: number -> amendment
-  const index = new Map();
   for (const doc of docs) {
     try {
       const amendments = parseAmendmentDocument(await rangeMarkdown(doc));
