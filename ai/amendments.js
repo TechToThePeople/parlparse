@@ -121,10 +121,14 @@ const stats = {
   amendments: 0,
   written: 0,
   missing: 0,
+  parked: 0,
   failed: 0,
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// a vote is retried this many times, then parked for a human
+const MAX_ATTEMPTS = 3;
 
 /** The AM-<from>-<to> documents linked from a report's doceo page. */
 async function amendmentDocuments(eli) {
@@ -295,8 +299,17 @@ async function processReport(reference, votes) {
   const docs = await amendmentDocuments(eli);
   if (!docs.length) {
     if (!index.size) {
+      // the page exists and lists nothing: there is no document to fetch, so
+      // retrying this report on the next run only costs a request
       console.log(`   ⚠️  ${reference}: no amendment document listed on doceo`);
-      stats.failed++;
+      if (!argv.dry)
+        await db("rollcalls")
+          .whereIn(
+            "id",
+            votes.map((v) => v.id)
+          )
+          .update({ amendment_status: "unavailable" });
+      stats.parked += votes.length;
       return;
     }
   } else {
@@ -324,6 +337,10 @@ async function processReport(reference, votes) {
     );
     if (!keys.length || found.some((f) => !f || !f.text)) {
       stats.missing++;
+      if (!argv.dry)
+        await db("rollcalls")
+          .where("id", vote.id)
+          .increment("amendment_attempts", 1);
       if (stats.missing <= 10)
         console.log(
           `   · ${vote.id} "${(vote.name || "").slice(0, 60)}" keys ${
@@ -370,6 +387,8 @@ async function main() {
     `SELECT r.id, r.ref, r.name, r.doc_ref, r.amendment_number
        FROM rollcalls r
       WHERE NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = r.id)
+        AND r.amendment_status IS NULL
+        AND r.amendment_attempts < ${MAX_ATTEMPTS}
         AND (r.amendment_number IS NOT NULL OR r.name LIKE '%Am %'
              OR r.name GLOB '* [–-] [0-9]*' OR r.name GLOB '§ * – *'
              OR r.doc_ref LIKE '%-AM-%')
@@ -411,8 +430,21 @@ async function main() {
     `\n${stats.written} text(s) ${argv.dry ? "would be " : ""}written from ` +
       `${stats.amendments} amendments in ${stats.ranges} document(s), ` +
       `${stats.reports} report(s)\n${stats.missing} vote(s) whose amendment ` +
-      `is not in those documents, ${stats.failed} failure(s)`
+      `is not in those documents, ${stats.failed} failure(s), ` +
+      `${stats.parked} parked as unpublished`
   );
+  const [left] = await db.raw(
+    `SELECT count(*) AS n FROM rollcalls
+      WHERE amendment_status IS NULL AND amendment_attempts >= ${MAX_ATTEMPTS}
+        AND NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = rollcalls.id)`
+  );
+  if (left.n)
+    console.log(
+      `${left.n} vote(s) gave up after ${MAX_ATTEMPTS} attempts — to park them ` +
+        `by hand:\n  SELECT id, ref, name, amendment_number FROM rollcalls\n` +
+        `   WHERE amendment_status IS NULL AND amendment_attempts >= ${MAX_ATTEMPTS};\n` +
+        `  UPDATE rollcalls SET amendment_status = 'manual' WHERE id = <id>;`
+    );
 }
 
 main()
