@@ -149,14 +149,21 @@ const mep = async () => {
 
 const textTabled = async () => {
   const file = "./data/text_tabled.csv";
-  const head = "date,reference,type,title,rapporteur,committee,intra,oeil,doc".split(
+  const head = "date,reference,type,title,rapporteur,committee,intra,oeil,doc,procedure".split(
     ","
   );
 
   // reports.creator holds committees (A10-*) or political groups (B10-*);
   // ../10 reads it as docs[...].committee, so keep that header.
   const rcv = await db
-    .select("date", "title", "reference", "creator as committee", "url as oeil")
+    .select(
+      "date",
+      "title",
+      "reference",
+      "creator as committee",
+      "url as oeil",
+      "procedure"
+    )
     .from("reports");
 
   return new Promise((resolve) => {
