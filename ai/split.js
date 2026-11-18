@@ -34,7 +34,9 @@ const RECITAL = /^Recital\s+([A-Z]|\d{1,3})$/i;
 const CITATION = /^Citation\s+(\d{1,3})$/i;
 const ITEM = /^([A-Z]|\d{1,3})[.)]\s+(.*)$/;
 // the resolution's operative part starts under one of these headings
-const BODY = /^(MOTION FOR A RESOLUTION|MOTION FOR RESOLUTIONS|PROPOSITION DE R[ÉE]SOLUTION|DRAFT (EUROPEAN PARLIAMENT )?(LEGISLATIVE )?RESOLUTION|PROJET DE (R[ÉE]SOLUTION|D[ÉE]CISION))/i;
+const BODY = /^(MOTION FOR (A )?(EUROPEAN PARLIAMENT )?RESOLUTION|PROPOSITION DE R[ÉE]SOLUTION|DRAFT (EUROPEAN PARLIAMENT )?(LEGISLATIVE )?RESOLUTION|PROJET DE (R[ÉE]SOLUTION|D[ÉE]CISION))/i;
+// numbered lines in the footnotes look exactly like paragraphs
+const FOOTNOTE = /ELI:|\[↑\]|OJ C,|^OJ /i;
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ["dry", "help"],
@@ -104,24 +106,35 @@ function segments(markdown) {
     if (m) citations.push(m[1].trim());
   }
 
-  const bodyIndex = lines.reduce(
-    (last, line, i) => (BODY.test(line.trim()) ? i : last),
-    -1
-  );
+  // The resolution's own paragraphs: the 1, 2, 3… run after its heading. A
+  // budget or discharge report also carries committee opinions with their own
+  // numbering, so that run — not the whole document — is the authority.
+  const bodyIndex = lines.findIndex((line) => BODY.test(line.trim()));
   if (bodyIndex >= 0) {
     let expected = 1;
     for (let i = bodyIndex + 1; i < lines.length; i++) {
-      const m = lines[i].match(ITEM);
-      if (!m || /^whereas\b/i.test(m[2].trim())) continue;
+      const m = lines[i].trim().match(ITEM);
+      if (!m || /^whereas\b/i.test(m[2]) || FOOTNOTE.test(m[2])) continue;
       const n = Number(m[1]);
-      if (!Number.isInteger(n)) continue;
-      if (n !== expected) break; // citations, annexes, amendments: not the body
+      if (n !== expected) break;
       if (!paragraphs.has(n)) paragraphs.set(n, []);
       paragraphs.get(n).push({ line: i + 1, text: m[2].trim() });
       expected++;
     }
   }
-  return { recitals, paragraphs, citations };
+
+  // A number that appears exactly once in the whole document is still usable
+  // when the run above found nothing (body heading missing or worded oddly).
+  const everywhere = new Map();
+  lines.forEach((line, i) => {
+    const m = line.trim().match(ITEM);
+    if (!m || /^whereas\b/i.test(m[2]) || FOOTNOTE.test(m[2])) return;
+    const n = Number(m[1]);
+    if (!everywhere.has(n)) everywhere.set(n, []);
+    everywhere.get(n).push({ line: i + 1, text: m[2].trim() });
+  });
+
+  return { recitals, paragraphs, citations, everywhere };
 }
 
 const stats = {
@@ -129,6 +142,7 @@ const stats = {
   paragraph: 0,
   recital: 0,
   citation: 0,
+  fromWholeDocument: 0,
   ambiguous: 0,
   notFound: 0,
   unsupported: 0,
@@ -144,7 +158,7 @@ async function processReport(reference, votes) {
     );
     return;
   }
-  const { recitals, paragraphs, citations } = segments(
+  const { recitals, paragraphs, citations, everywhere } = segments(
     fs.readFileSync(file, "utf8")
   );
   stats.reports++;
@@ -159,7 +173,15 @@ async function processReport(reference, votes) {
     const r = name.match(RECITAL);
     const c = name.match(CITATION);
     if (p) {
-      bucket = paragraphs.get(Number(p[1]));
+      const n = Number(p[1]);
+      bucket = paragraphs.get(n);
+      if (!bucket || !bucket.length) {
+        const anywhere = everywhere.get(n) || [];
+        if (anywhere.length === 1) {
+          bucket = anywhere;
+          stats.fromWholeDocument++;
+        }
+      }
       kind = "paragraph";
     } else if (r) {
       bucket = recitals.get(r[1].toUpperCase());
@@ -245,7 +267,7 @@ async function main() {
     await processReport(reference, byRef.get(reference));
 
   console.log(
-    `\n${stats.paragraph} paragraphs, ${stats.recital} recitals, ${stats.citation} citations written` +
+    `\n${stats.paragraph} paragraphs (${stats.fromWholeDocument} found anywhere in the document), ${stats.recital} recitals, ${stats.citation} citations written` +
       `\n${stats.notFound} not found, ${stats.ambiguous} ambiguous, ` +
       `${stats.unsupported} not extractable (Article/Citation), ` +
       `${stats.noMarkdown} votes in reports without markdown`
