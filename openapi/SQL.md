@@ -254,6 +254,33 @@ split ("Text as a whole without the words: …"), so the literal text has to be
 reconstructed from the document; `words` is the other half of that split — the
 words themselves, copied from the sibling part that names them.
 
+### `subjects` / `procedure_subjects`
+
+| column | type | | |
+|---|---|---|---|
+| `id` | integer | PK | autoincrement |
+| `scheme` | varchar(20) | not null | `oeil`, `dir-eu-legal-act`, `subject-matter`, `eurovoc` |
+| `code` | varchar(40) | not null | `8.70`, `016020`, `BUDG`, `5158` — unique with `scheme` |
+| `label` | varchar(255) | nullable | English `skos:prefLabel` |
+
+`procedure_subjects` joins `procedures.code` to `subjects.id` (primary key on the
+pair): a procedure has several subjects, and the same code can appear under two
+schemes with different meanings.
+
+### `procedures`
+
+| column | type | | |
+|---|---|---|---|
+| `code` | varchar(20) | PK | `2025/0227(COD)` |
+| `type` | varchar(10) | nullable | `COD`, `INI`, `NLE`, `BUD` |
+| `title` | text | nullable | process title, English |
+| `stage` | varchar(50) | nullable | current stage (`RDG1`) |
+| `documents` | text | nullable | JSON: every document of the process |
+| `activities` | text | nullable | JSON: `{date, type, document, stage}` |
+| `raw` | text | nullable | the API payload |
+
+`reports.procedure` joins a report to its procedure code.
+
 ### `reports`
 
 Parliamentary reports referenced by roll-call votes.
