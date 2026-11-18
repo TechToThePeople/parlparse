@@ -543,6 +543,12 @@ async function processDate(date, stats) {
       const request = voteRequest(voting);
       if (request && row.vote_request !== request)
         update.vote_request = request;
+
+      // the authoritative list of amendments this vote is about ("4= 7=",
+      // "274D", "9-14"): the names derived from labels are lossy
+      const amendments = txt(voting.amendmentNumber);
+      if (/\d/.test(amendments) && row.amendment_number !== amendments)
+        update.amendment_number = amendments.slice(0, 100);
       // "2/RCV", "3/EV", ... = the n-th part of a split vote: keep the text that
       // was voted, it exists nowhere else in machine-readable form
       if (isSplitPart(request)) {
