@@ -209,6 +209,35 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
+## The procedure behind a report (`procedures`)
+
+A report is one step of a procedure; the EP open data publishes the whole chain
+of documents around it. `openapi/procedure.js` takes the code from the report's
+own `<DocRef>` (already in `data/content/oeil/<ref>.md`, e.g. `2025/0227(COD)` —
+1,576 of the 1,589 markdowns carry one), then
+
+```
+GET https://data.europarl.europa.eu/api/v2/procedures/2025-0227?format=application/ld+json
+```
+
+and stores what that returns in `procedures`, keyed by the code:
+
+| field | from the API |
+|---|---|
+| `type` | `process_type` (`COD`, `INI`, `NLE`, `BUD`, …) |
+| `title` | `process_title.en` |
+| `stage` | `current_stage` (`RDG1`, `CONCILIA_RDG3`, …) |
+| `documents` | `created_a_realization_of` — every document of the process (committee opinions, Council position, the report itself) |
+| `activities` | `consists_of` — `{date, type, document, stage}` for each step |
+
+`reports.procedure` joins the two. The API needs a browser `User-Agent` (it
+answers 403 without one) and ~1 request/second (429 otherwise).
+
+```sh
+node openapi/procedure.js            # extract + fetch what is missing
+node openapi/procedure.js --dry      # only print the codes found
+```
+
 ## Where the text of a vote comes from (`rollcall_texts`)
 
 One row per vote (`rollcall` = `rollcalls.id`), with `kind` saying what the text
