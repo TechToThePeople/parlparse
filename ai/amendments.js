@@ -53,7 +53,7 @@ Usage: node ai/amendments.js [options]
   --ref <ref>  only that report (e.g. A10-0271/2026)
   --limit, -n  stop after N reports
   --dry        show what would be written
-  --force      re-download the amendment documents
+  --force      ignore the saved markdown and fetch the documents again
   --help, -h
 `);
   process.exit(0);
@@ -123,7 +123,6 @@ const stats = {
   missing: 0,
   parked: 0,
   blocked: 0,
-  skipped: 0,
   failed: 0,
 };
 
@@ -133,7 +132,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const MAX_ATTEMPTS = 3;
 
 /** The AM-<from>-<to> documents linked from a report's doceo page. */
-/** The range documents already downloaded for this report (--cached). */
+/** The range documents already saved for this report. */
 function cachedDocuments(eli) {
   if (!fs.existsSync(AMEND_DIR)) return [];
   const prefix = `${eli}-AM-`;
@@ -355,9 +354,9 @@ async function processReport(reference, votes) {
   }
 
   // 2. the amendments tabled in plenary are published as range documents
-  const docs = argv.cached
-    ? cachedDocuments(eli)
-    : await amendmentDocuments(eli);
+  //    (already saved ones are reused; a report with none saved is fetched once)
+  const saved = argv.force ? [] : cachedDocuments(eli);
+  const docs = saved.length ? saved : await amendmentDocuments(eli);
   if (docs === null) {
     // no page, no verdict: leave the votes alone so the next run retries them
     console.warn(
@@ -367,11 +366,6 @@ async function processReport(reference, votes) {
     return "blocked";
   }
   if (!docs.length) {
-    if (argv.cached) {
-      // nothing was downloaded for this report: not a verdict, just no data
-      stats.skipped++;
-      return;
-    }
     if (!index.size) {
       // the page exists and lists nothing: there is no document to fetch, so
       // retrying this report on the next run only costs a request
@@ -523,8 +517,7 @@ async function main() {
       `${stats.amendments} amendments in ${stats.ranges} document(s), ` +
       `${stats.reports} report(s)\n${stats.missing} vote(s) whose amendment ` +
       `is not in those documents, ${stats.failed} failure(s), ` +
-      `${stats.blocked} blocked by the WAF, ${stats.skipped} without a cached ` +
-      `document, ` +
+      `${stats.blocked} blocked by the WAF, ` +
       `${stats.parked} parked as unpublished`
   );
   const [left] = await db.raw(
