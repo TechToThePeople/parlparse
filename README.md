@@ -272,6 +272,10 @@ OEIL shows several subjects per procedure (that is why the junction table), and 
 procedure whose documents carry no classification keeps none — the API publishes
 it for about half of them.
 
+`procedures.subjects_checked` is set only when **both sources answered**: a
+procedure that could not be read (429, timeout) is left unmarked and retried on
+the next run, so "publishes nothing" and "we could not look" never get confused.
+
 ## Where the text of a vote comes from (`rollcall_texts`)
 
 One row per vote (`rollcall` = `rollcalls.id`), with `kind` saying what the text
