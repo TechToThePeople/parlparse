@@ -300,6 +300,13 @@ votes that already have text are skipped:
 for i in $(seq 1 10); do node ai/amendments.js --limit 60; sleep 600; done
 ```
 
+`--cached` re-parses what is already in `data/content/amendments/` and touches the
+network not at all — the way to redo the texts after a parser fix:
+
+```sh
+node ai/amendments.js --cached
+```
+
 **Paragraphs (`ai/split.js`).** The resolution's paragraphs are the `1, 2, 3 …`
 run **after the first body heading**, where the body heading is
 
