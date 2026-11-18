@@ -580,6 +580,21 @@ async function processDate(date, stats) {
       const name = votingName(voting);
       const update = {};
 
+      // A vote whose row carries only a date gets the time of its own timestamp
+      // — but only when that timestamp is on the sitting's day: for a show of
+      // hands it is the day the minutes were published (a July sitting stamped
+      // in October), and for a roll-call the row already has the RCV time.
+      const stamp = voting.$ && voting.$.voteTimestamp;
+      if (stamp && !String(row.date).includes(":")) {
+        const day = stamp.slice(0, 10);
+        const time = stamp.slice(11, 19);
+        if (
+          day === String(date).slice(0, 10) &&
+          /^\d{2}:\d{2}:\d{2}$/.test(time)
+        )
+          update.date = `${day} ${time}`;
+      }
+
       const request = voteRequest(voting);
       if (request && row.vote_request !== request)
         update.vote_request = request;
