@@ -109,7 +109,7 @@ Vocabulary worth knowing:
 | --- | --- | --- |
 | `data/meps.csv` | `csv.js` | `epid,firstname,lastname,active,start,end,birthdate,country,gender,eugroup,party,email,twitter,term,voteid` |
 | `data/item_rollcall.csv` | `csv.js` | `identifier,date,report,desc,title,for,against,abstention,no_show,excused,requested_by,outcome,committee,method,doc_ref,vote_request,split_requested_by,requested_source,text` |
-| `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc` |
+| `data/text_tabled.csv` | `csv.js` | `date,reference,type,title,rapporteur,committee,intra,oeil,doc,procedure` |
 | `data/cordon.csv` | `sql/cordon.sql` | `rollcall,date,far_right_epp_position,report_title,reference,name,for,against,abstention,epp_cohesion` |
 | `data/cordon-report.csv` | `sql/cordon-report.sql` | `votes_together,reference,report_title` |
 | `data/cordon-total.csv` | `sql/cordon-total.sql` | `votes_in_common,total_votes,pct_of_total` (single row) |
@@ -137,6 +137,8 @@ Formats the site relies on:
   `meps.eugroup` uses (`ECR, Renew, S&D, EPP`). The header stays `committee`
   because `../10` reads `docs[...].committee`; in the database the column is
   `reports.creator` (filled by `openapi/report-creator.js`).
+- **`text_tabled.procedure`** is the procedure code (`2025/0227(COD)`) linked to
+  `procedures.code`; `votes.html` shows it under the report reference.
 - **`text_tabled.oeil`** is an HTML-escaped URL as copied from the source
   (`&amp;` instead of `&`) — the site does not unescape it.
 - **`meps.country`** is lowercase ISO-3166 alpha-2 (`hu`, `fr`), `term` is `10`,
