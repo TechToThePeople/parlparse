@@ -268,6 +268,16 @@ async function main() {
     }
 
     stats.subjects += found.length;
+    const byScheme = found.reduce(
+      (a, s) => ((a[s.scheme] = (a[s.scheme] || 0) + 1), a),
+      {}
+    );
+    console.log(
+      `   \u00b7 ${code}: ${found.length} subject(s) ` +
+        `(${Object.entries(byScheme)
+          .map(([k, v]) => `${k} ${v}`)
+          .join(", ")})`
+    );
     if (argv.dry) {
       console.log(`   ${code}:`);
       for (const s of found)
