@@ -98,40 +98,11 @@ async function processDate(date, force) {
   const rcvDir = path.resolve(__dirname, "..", "data", "RCV");
   const zipPath = path.join(rcvDir, `${date}.xml.zip`);
 
-  // Check if already downloaded
-  if (!force && fs.existsSync(zipPath)) {
-    console.log(`   ⏭️  Already downloaded (use --force to re-download)`);
-    return "skip";
-  }
-
-  // Download English RCV XML from doceo
-  const doceoUrl = `https://www.europarl.europa.eu/doceo/document/${identifier}_EN.xml`;
-
-  console.log(`📥 Downloading RCV XML via browser…`);
-  try {
-    const result = await getWaf().downloadViaBrowser(doceoUrl);
-    if (
-      result.status === 200 &&
-      result.body.includes("<PV.RollCallVoteResults")
-    ) {
-      saveRcvXml(date, result.body);
-    } else if (result.status === 202) {
-      console.error(
-        `   ❌ WAF challenge failed after retry — cannot download ${identifier}`
-      );
-      process.exit(1);
-    } else {
-      console.warn(
-        `   ⚠️  HTTP ${result.status} — not valid RCV XML (${result.body.length} bytes)`
-      );
-      if (result.body.length < 500)
-        console.warn(`      ${result.body.substring(0, 300)}`);
-      return "skip";
-    }
-  } catch (e) {
-    console.warn(`   ⚠️  ${e.message}`);
-    return "skip";
-  }
+  // A downloaded file was not always processed (the old code returned here), so
+  // the database step below runs for every date, cached or not.
+  const cached = !force && fs.existsSync(zipPath);
+  if (cached) console.log(`   ⏭️  Already downloaded, importing it`);
+  else await download(date, identifier, zipPath);
 
   // Process into database via lib/rollcall.js
   if (fs.existsSync(zipPath)) {
@@ -164,7 +135,39 @@ async function processDate(date, force) {
   }
 
   console.log(`\n✅ Done — roll-call votes saved.`);
-  return "ok";
+  return cached ? "skip" : "ok";
+}
+
+/** Download English RCV XML from doceo into data/RCV/. */
+async function download(date, identifier, zipPath) {
+  const doceoUrl = `https://www.europarl.europa.eu/doceo/document/${identifier}_EN.xml`;
+
+  console.log(`📥 Downloading RCV XML via browser…`);
+  try {
+    const result = await getWaf().downloadViaBrowser(doceoUrl);
+    if (
+      result.status === 200 &&
+      result.body.includes("<PV.RollCallVoteResults")
+    ) {
+      saveRcvXml(date, result.body);
+    } else if (result.status === 202) {
+      console.error(
+        `   ❌ WAF challenge failed after retry — cannot download ${identifier}`
+      );
+      process.exit(1);
+    } else {
+      console.warn(
+        `   ⚠️  HTTP ${result.status} — not valid RCV XML (${result.body.length} bytes)`
+      );
+      if (result.body.length < 500)
+        console.warn(`      ${result.body.substring(0, 300)}`);
+      return false;
+    }
+  } catch (e) {
+    console.warn(`   ⚠️  ${e.message}`);
+    return false;
+  }
+  return fs.existsSync(zipPath);
 }
 
 main().catch((err) => {

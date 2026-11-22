@@ -211,6 +211,19 @@ node ai/oeil.js --all --dry          # fetch + convert only, no API call
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
+## Per-MEP votes (`positions`)
+
+`openapi/rcv.js` downloads `PV-10-<date>-RCV` from doceo (gzip, despite the
+`.xml.zip` name) and hands it to `lib/rollcall.js`, which is idempotent: it
+compares the stored `positions` count with `for + against + abstention` and
+re-imports a partial vote. A date whose file is already cached is imported too —
+it used to return before that step, so any date downloaded but not imported kept
+its votes empty (303 roll-calls were affected).
+
+A roll-call vote can still have no per-MEP rows: `outcome = 'LAPSED'` (the
+amendment was never put to the vote) or `'WITHDRAWN'` — 398 of the 6,905. One more,
+172953, is simply absent from the RCV document although the VOT reports its counts.
+
 ## The procedure behind a report (`procedures`)
 
 A report is one step of a procedure; the EP open data publishes the whole chain
