@@ -62,7 +62,14 @@ async function downloadPublished(urls) {
   for (const url of urls) {
     try {
       const res = await fetch(url, {
-        headers: { "User-Agent": UA, Accept: "*/*" },
+        headers: {
+          "User-Agent": UA,
+          // the redmapl3-hosted XML 500s on "accept: */*" but is fine with a
+          // browser-ish accept header (see openapi/vot-xml.js)
+          accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "accept-language": "en-US,en;q=0.9",
+        },
         redirect: "follow",
         signal: AbortSignal.timeout(120000),
       });
