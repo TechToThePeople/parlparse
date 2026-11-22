@@ -14,11 +14,57 @@
 
 const {
   fetchDocumentList,
+  fetchDocumentById,
   extractDateFromId,
   parseArgs,
   printUsage,
   getWaf,
 } = require("./lib");
+
+const UA =
+  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/120.0 Safari/537.36";
+
+/**
+ * The XML the API publishes for this document, when it names one: doceo's
+ * `-ATT_EN.xml` shortcut is not always the final version (2024-07-16: 69,675
+ * bytes here against 69,762 published).
+ */
+async function publishedBody(identifier) {
+  let urls = [];
+  try {
+    const json = await fetchDocumentById(identifier);
+    const doc = (json.data || [json])[0] || {};
+    for (const expression of doc.is_realized_by || []) {
+      if (!String(expression.id || "").endsWith("/en")) continue;
+      for (const m of expression.is_embodied_by || [])
+        if (/\.xml$/i.test(m.is_exemplified_by || ""))
+          urls.push(
+            `https://data.europarl.europa.eu/${m.is_exemplified_by.replace(
+              /^\//,
+              ""
+            )}`
+          );
+    }
+  } catch {
+    return null;
+  }
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, {
+        headers: { "User-Agent": UA, Accept: "*/*" },
+        redirect: "follow",
+        signal: AbortSignal.timeout(120000),
+      });
+      if (res.status !== 200) continue;
+      const body = await res.text();
+      if (body.includes("<PV.AttendanceRegister")) return body;
+    } catch {
+      // try the next one
+    }
+  }
+  return null;
+}
 const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
@@ -111,36 +157,48 @@ async function processDate(date, force) {
     return "skip";
   }
 
-  // 3. Download English XML from doceo and save gzip-compressed to data/ATT/
+  // 3. Download the published English XML, falling back to doceo's shortcut
   const doceoUrl = `https://www.europarl.europa.eu/doceo/document/${resolved.identifier}_EN.xml`;
 
-  console.log(`📥 Downloading English XML via browser…`);
-  try {
-    const result = await getWaf().downloadViaBrowser(doceoUrl);
-    if (
-      result.status === 200 &&
-      result.body.includes("<PV.AttendanceRegister")
-    ) {
-      fs.mkdirSync(attDir, { recursive: true });
-      const compressed = zlib.gzipSync(result.body, { level: 9 });
-      fs.writeFileSync(zipPath, compressed);
-      console.log(
-        `   ✓ saved ${zipPath} (${result.body.length} → ${compressed.length} bytes)`
-      );
-    } else if (result.status === 202) {
-      console.error(
-        `   ❌ WAF challenge failed after retry — cannot download ${resolved.identifier}`
-      );
-      process.exit(1);
-    } else {
-      console.warn(
-        `   ⚠️  HTTP ${result.status} — not valid attendance XML (${result.body.length} bytes)`
-      );
-      if (result.body.length < 500)
-        console.warn(`      ${result.body.substring(0, 300)}`);
+  const published = await publishedBody(resolved.identifier);
+  if (published) {
+    fs.mkdirSync(attDir, { recursive: true });
+    const compressed = zlib.gzipSync(published, { level: 9 });
+    fs.writeFileSync(zipPath, compressed);
+    console.log(
+      `   ✓ saved the published XML (${published.length} → ${compressed.length} bytes)`
+    );
+  }
+
+  if (!published) {
+    console.log(`📥 Downloading English XML via browser…`);
+    try {
+      const result = await getWaf().downloadViaBrowser(doceoUrl);
+      if (
+        result.status === 200 &&
+        result.body.includes("<PV.AttendanceRegister")
+      ) {
+        fs.mkdirSync(attDir, { recursive: true });
+        const compressed = zlib.gzipSync(result.body, { level: 9 });
+        fs.writeFileSync(zipPath, compressed);
+        console.log(
+          `   ✓ saved ${zipPath} (${result.body.length} → ${compressed.length} bytes)`
+        );
+      } else if (result.status === 202) {
+        console.error(
+          `   ❌ WAF challenge failed after retry — cannot download ${resolved.identifier}`
+        );
+        process.exit(1);
+      } else {
+        console.warn(
+          `   ⚠️  HTTP ${result.status} — not valid attendance XML (${result.body.length} bytes)`
+        );
+        if (result.body.length < 500)
+          console.warn(`      ${result.body.substring(0, 300)}`);
+      }
+    } catch (e) {
+      console.warn(`   ⚠️  ${e.message}`);
     }
-  } catch (e) {
-    console.warn(`   ⚠️  ${e.message}`);
   }
 
   // 6. Parse the downloaded XML and insert into attendances table
