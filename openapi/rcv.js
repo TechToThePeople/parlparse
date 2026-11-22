@@ -77,6 +77,7 @@ async function downloadPublished(urls) {
 }
 
 const WORK_TYPE = "VOTE_ROLLCALL_PLENARY";
+const TERM = 10;
 
 async function main() {
   const { help, input, force, all } = parseArgs();
@@ -84,6 +85,30 @@ async function main() {
   if (help) {
     printUsage(process.argv[1], "roll-call vote XML");
     process.exit(0);
+  }
+
+  const wantsCheck = process.argv.includes("--check");
+  const wantsRefresh = process.argv.includes("--refresh");
+  if (wantsCheck || wantsRefresh) {
+    const stale = await staleDates();
+    if (!wantsRefresh) {
+      await Promise.race([
+        getWaf().closeBrowser(),
+        new Promise((r) => setTimeout(r, 5000)),
+      ]);
+      return;
+    }
+    console.log(`🔁 refreshing ${stale.length} stale date(s)`);
+    for (const [i, date] of stale.entries()) {
+      console.log(`\n[${i + 1}/${stale.length}] ${date}`);
+      await processDate(date, true, true);
+    }
+    console.log(`\n✅ ${stale.length} date(s) refreshed`);
+    await Promise.race([
+      getWaf().closeBrowser(),
+      new Promise((r) => setTimeout(r, 5000)),
+    ]);
+    return;
   }
 
   let dates;
@@ -140,11 +165,95 @@ async function main() {
   }
 }
 
+/** Uncompressed size of a gzip file: the last 4 bytes are the size mod 2^32. */
+function inflatedSize(file) {
+  try {
+    const buf = fs.readFileSync(file);
+    return buf.readUInt32LE(buf.length - 4);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Which cached dates are not the version the API publishes? Compares the size the
+ * metadata gives with the uncompressed size of our file — no download needed.
+ */
+async function staleDates() {
+  const rcvDir = path.resolve(__dirname, "..", "data", "RCV");
+  const dates = fs
+    .readdirSync(rcvDir)
+    .filter((f) => /^\d{4}-\d{2}-\d{2}\.xml\.zip$/.test(f))
+    .map((f) => f.slice(0, 10))
+    .sort();
+  console.log(`🔍 ${dates.length} cached date(s)`);
+
+  const same = [];
+  const differ = [];
+  const unknown = [];
+  const stale = [];
+  for (const [i, date] of dates.entries()) {
+    if (i === dates.length - 1 || i % 10 === 0)
+      process.stdout.write(`   ${i + 1}/${dates.length}\r`);
+    const local = inflatedSize(path.join(rcvDir, `${date}.xml.zip`));
+    let doc = null;
+    try {
+      const json = await fetchDocumentById(`PV-${TERM}-${date}-RCV`);
+      doc = (json.data || [json])[0] || null;
+    } catch {
+      doc = null;
+    }
+    const files = [];
+    for (const expression of (doc && doc.is_realized_by) || []) {
+      if (!String(expression.id || "").endsWith("/en")) continue;
+      for (const m of expression.is_embodied_by || [])
+        if (/\.xml$/i.test(m.is_exemplified_by || "")) files.push(m);
+    }
+    if (!files.length) {
+      unknown.push([date, local]);
+    } else {
+      const f = files[0];
+      const remote = Number(f.byteSize);
+      const row = [
+        date,
+        local,
+        remote,
+        path.basename(f.is_exemplified_by || ""),
+        String(f.issued || "").slice(0, 10),
+      ];
+      if (local === remote) same.push(row);
+      else {
+        differ.push(row);
+        stale.push(date);
+      }
+    }
+    await new Promise((r) => setTimeout(r, 350));
+  }
+
+  console.log(`\n✅ ${same.length} cached file(s) match the published size`);
+  if (differ.length) {
+    console.log(`\n⚠️  ${differ.length} differ (local, published, file):`);
+    for (const [date, l, r, name, issued] of differ)
+      console.log(
+        `   ${date}  ${String(l).padStart(9)} vs ${String(r).padStart(
+          9
+        )}  ${name} (${issued})`
+      );
+  }
+  if (unknown.length) {
+    console.log(`\n❔ ${unknown.length} without XML metadata in the API:`);
+    console.log("   " + unknown.map(([d]) => d).join(" "));
+  }
+  if (differ.length)
+    console.log(`\nTo refresh them all:\n   node openapi/rcv.js --refresh`);
+  return stale;
+}
+
 /**
  * Process a single roll-call date.
  * @returns {'ok' | 'skip'}
  */
-async function processDate(date, force) {
+async function processDate(date, force, reimportPositions = false) {
   // Construct identifier directly — pattern is always PV-10-YYYY-MM-DD-RCV
   const identifier = `PV-10-${date}-RCV`;
   const rcvDir = path.resolve(__dirname, "..", "data", "RCV");
@@ -177,6 +286,8 @@ async function processDate(date, force) {
       const result = await processRollCall(plenary, {
         folder: "./data/RCV/",
         force,
+        // the counts can stay the same while the members behind them change
+        position: reimportPositions,
       });
       if (result) {
         console.log(`   → ${result.votes} votes, ${result.added} positions`);
