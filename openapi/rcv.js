@@ -17,12 +17,64 @@ const fs = require("fs");
 const path = require("path");
 const {
   fetchDocumentList,
+  fetchDocumentById,
   extractDateFromId,
   parseArgs,
   printUsage,
   getWaf,
   saveRcvXml,
 } = require("./lib");
+
+const UA =
+  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/120.0 Safari/537.36";
+
+/**
+ * The XML the API publishes for this sitting, when it names one: doceo's
+ * `-RCV_EN.xml` shortcut can be a preliminary version — for 2025-03-12 it holds
+ * 172620 where the final file holds 172953, the vote the VOT document reports.
+ */
+async function publishedXml(identifier) {
+  try {
+    const json = await fetchDocumentById(identifier);
+    const doc = (json.data || [json])[0] || {};
+    const urls = [];
+    for (const expression of doc.is_realized_by || []) {
+      if (!String(expression.id || "").endsWith("/en")) continue;
+      for (const m of expression.is_embodied_by || []) {
+        if (String(m.format || "").includes("XML") && m.is_exemplified_by)
+          urls.push(
+            `https://data.europarl.europa.eu/${m.is_exemplified_by.replace(
+              /^\//,
+              ""
+            )}`
+          );
+      }
+    }
+    return urls;
+  } catch {
+    return [];
+  }
+}
+
+/** Download the first URL that answers with real roll-call XML. */
+async function downloadPublished(urls) {
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, {
+        headers: { "User-Agent": UA, Accept: "*/*" },
+        redirect: "follow",
+        signal: AbortSignal.timeout(120000),
+      });
+      if (res.status !== 200) continue;
+      const body = await res.text();
+      if (body.includes("<PV.RollCallVoteResults")) return body;
+    } catch {
+      // try the next one
+    }
+  }
+  return null;
+}
 
 const WORK_TYPE = "VOTE_ROLLCALL_PLENARY";
 
@@ -141,6 +193,14 @@ async function processDate(date, force) {
 /** Download English RCV XML from doceo into data/RCV/. */
 async function download(date, identifier, zipPath) {
   const doceoUrl = `https://www.europarl.europa.eu/doceo/document/${identifier}_EN.xml`;
+
+  // the API's own distribution first (it is the final version when one exists)
+  const published = await publishedXml(identifier);
+  const body = await downloadPublished(published);
+  if (body) {
+    saveRcvXml(date, body);
+    return true;
+  }
 
   console.log(`📥 Downloading RCV XML via browser…`);
   try {
