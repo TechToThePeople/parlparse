@@ -39,7 +39,7 @@ steps write):
 3. `node positions.js -d -u` / `-d-1 -u` — per-MEP `positions` from the RCV XML
    (`doceo` is behind the EP's WAF, so the download falls back to the same XML on
    `data.europarl.europa.eu/distribution/doc/PV-10-<date>-RCV_en.xml`).
-4. `node report.js` then `node openapi/report-creator.js` — report rows, then the
+4. `node openapi/report.js` — report rows, and their committees/groups
    committee(s) or political group(s) behind each one.
 5. `node csv.js`, `node cards.js`, `npm run majority:csv` — the static files.
 6. `sh prod.sh` — publish to `../10/data` (fails loudly on an empty CSV, and
@@ -50,7 +50,7 @@ One-off backfills, not part of the daily run:
 ```bash
 node openapi/decisions.js --all              # all vote-result dates (116), ~4 min
 node openapi/decisions.js --all --no-rollcall # hand/electronic only, leaves RCV rows alone
-node openapi/report-creator.js             # committees/groups for all 655 reports
+node openapi/report.js                     # missing rows + committees/groups
 ```
 
 ## openapi/ scripts
@@ -61,9 +61,8 @@ node openapi/report-creator.js             # committees/groups for all 655 repor
 | `openapi/vot.js [<date> \| --all]` | `votes` + `votings` (from the VOT documents) |
 | `openapi/rcv.js [<id> \| <date>]` | `data/openapi/rcv/*.json` |
 | `openapi/att.js [<id> \| <date>]` | `data/openapi/att/*.json` |
-| `openapi/report-creator.js [--dry]` | `reports.creator` |
+| `openapi/report.js [--dry]` | missing `reports` rows, then `reports.creator` |
 | `openapi/vot-xml.js [<date> \| --all]` | `rollcalls.ref`, `name`, `committee` (and `doc_ref` for the individual motions of a resolution) from the VOT XML |
-| `openapi/reports-backfill.js [--dry]` | creates the missing `reports` rows for the references `rollcalls.ref` points at |
 
 See `openapi/README.md` for endpoints and `openapi/SQL.md` for the schema.
 
@@ -136,7 +135,7 @@ Formats the site relies on:
   `ECON, BUDG`) or, for motions tabled by groups, the groups in the same names
   `meps.eugroup` uses (`ECR, Renew, S&D, EPP`). The header stays `committee`
   because `../10` reads `docs[...].committee`; in the database the column is
-  `reports.creator` (filled by `openapi/report-creator.js`).
+  `reports.creator` (filled by `openapi/report.js`).
 - **`text_tabled.procedure`** is the procedure code (`2025/0227(COD)`) linked to
   `procedures.code`; `votes.html` shows it under the report reference.
 - **`text_tabled.oeil`** is an HTML-escaped URL as copied from the source
@@ -280,9 +279,9 @@ SELECT date, agenda_order, title, report, votes, final_vote
 ```
 
 A forthcoming vote names a report we may not have yet, so a **stub** row is
-inserted with the title the agenda gives; `openapi/reports-backfill.js` then fills
-date, committees and URL from the document API (it looks at `agenda_items.report`
-as well as `rollcalls.ref`), and `openapi/report-creator.js` sets the creator.
+inserted with the title the agenda gives; `openapi/report.js` then fills title,
+date, URL and creator from the document API (it looks at `agenda_items.report` as
+well as `rollcalls.ref`).
 
 ```sh
 node openapi/agenda.js --upcoming     # the next sittings

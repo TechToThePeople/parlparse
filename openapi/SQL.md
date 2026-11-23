@@ -310,7 +310,7 @@ Parliamentary reports referenced by roll-call votes.
 | `reference` | varchar(255) | NOT NULL | Document reference (e.g. `A10-0001/2024`) |
 | `title` | text | nullable | Report title |
 | `date` | date | nullable | Publication date |
-| `creator` | varchar(255) | nullable | Committee(s) responsible, or the political group(s) that tabled the report — comma-separated (`ECON, BUDG`, `ECR, Greens/EFA, Renew, S&D, EPP`); `0`/NULL when neither is known. Filled by `openapi/report-creator.js`; exported to `text_tabled.csv` as `committee` |
+| `creator` | varchar(255) | nullable | Committee(s) responsible, or the political group(s) that tabled the report — comma-separated (`ECON, BUDG`, `ECR, Greens/EFA, Renew, S&D, EPP`); `0`/NULL when neither is known. Filled by `openapi/report.js`; exported to `text_tabled.csv` as `committee` |
 | `url` | varchar(255) | nullable | Document URL |
 | `raw` | text | nullable | Raw metadata |
 | `topic` | varchar(255) | nullable | Topic tag |

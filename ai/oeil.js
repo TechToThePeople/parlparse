@@ -56,7 +56,16 @@ const PRICE_OUT = 0.6;
 const CHUNK = 600000;
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["all", "force", "dry", "attach", "report", "motions", "help"],
+  boolean: [
+    "all",
+    "force",
+    "dry",
+    "attach",
+    "report",
+    "motions",
+    "missing",
+    "help",
+  ],
   string: ["model"],
   alias: { h: "help", a: "all", n: "limit" },
 });
@@ -65,8 +74,10 @@ if (argv.help) {
   console.log(`
 Usage: node ai/oeil.js [<reference> | --all] [options]
 
-  <reference>  a reports.reference, e.g. A10-0275/2026 or RC-B10-0191/2024
+  <reference>  one or more reports.reference values, e.g. A10-0275/2026
   --all, -a    every A / B / RC report
+  --missing    only the reports that have no summary on disk yet
+               (with --all or on its own; the cheap way to run after a sitting)
   --limit, -n  stop after N documents
   --force      redo documents and summaries that already exist
   --dry        fetch and convert only, no DeepSeek call
@@ -127,7 +138,7 @@ const stats = {
 async function references() {
   const input = argv._[0];
   if (input) return [input];
-  if (!argv.all) {
+  if (!argv.all && !argv.missing) {
     console.error("Error: give a reference or --all");
     process.exit(1);
   }
@@ -135,9 +146,14 @@ async function references() {
     .whereNotNull("reference")
     .select("reference")
     .orderBy("reference");
-  return rows
+  const refs = rows
     .map((r) => r.reference)
     .filter((r) => /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}$/.test(r));
+  if (!argv.missing) return refs;
+  // only what has no summary yet: no API call, no token, for the rest
+  return refs.filter(
+    (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
+  );
 }
 
 /** Download the DOCX (preferred) or PDF of a report. Returns {file, url, doc}. */
@@ -531,16 +547,28 @@ async function main() {
     process.exit(1);
   }
   const model = argv.model || MODEL;
-  const single = argv._[0];
+  const inputs = argv._.filter(Boolean);
 
-  // one reference: attach the summary both as a report (by ref) and as a motion
-  // (by doc_ref), which is what a single reference can be
-  if (single && !argv.motions) {
-    console.log(`📚 ${single}, model ${argv.dry ? "(none, --dry)" : model}`);
-    await runList([single], model, async (reference, summary) => {
-      await storeWholeTextVotes(reference, summary);
-      await storeMotionVotes(reference, summary);
-    });
+  // explicit references: attach the summary both as a report (by ref) and as a
+  // motion (by doc_ref), which is what one reference can be
+  if (inputs.length && !argv.motions) {
+    console.log(
+      `📚 ${inputs.length} reference(s), model ${
+        argv.dry ? "(none, --dry)" : model
+      }`
+    );
+    await runList(
+      argv.missing
+        ? inputs.filter(
+            (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
+          )
+        : inputs,
+      model,
+      async (reference, summary) => {
+        await storeWholeTextVotes(reference, summary);
+        await storeMotionVotes(reference, summary);
+      }
+    );
     reportCost();
     return;
   }

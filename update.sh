@@ -46,8 +46,7 @@ node openapi/att.js "$(date +%F)"
 #    then reports rows for the new references — including the stubs the agenda
 #    created — and their committee/group creators
 node openapi/agenda.js --upcoming
-node openapi/reports-backfill.js
-node openapi/report-creator.js
+node openapi/report.js
 
 # 8. static files
 node csv.js

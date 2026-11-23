@@ -149,7 +149,7 @@ async function ensurePlenary(date, source) {
 
 /**
  * A forthcoming vote names a report we may not have yet: stub the row with what
- * the agenda gives, and leave the metadata to openapi/reports-backfill.js (title,
+ * the agenda gives, and leave the metadata to openapi/report.js (title,
  * date, committees, procedure) which finds the document in the API.
  */
 async function stubReport(reference, title) {
@@ -217,7 +217,7 @@ async function processDate(date, source) {
     if (row.report && byRef.has(row.report)) stats.voted++;
     count++;
     // the report is only stubbed here: procedure, committees and the rest are
-    // filled by openapi/reports-backfill.js from the document API
+    // filled by openapi/report.js from the document API
     if (kind === "vote" && row.report) await stubReport(row.report, row.title);
     if (argv.dry) continue;
     await db("agenda_items").insert(row).onConflict("id").merge();

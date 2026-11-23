@@ -194,7 +194,7 @@ these (404), so the block is used instead: `reports.title` comes from the block
 `<title>`, and the procedure reference in the block label
 (`Proposal for a regulation (COM(2026)0569 – C10-0258/2026 – 2026/0325(COD))`)
 gives the oeil URL
-(`…/ficheprocedure.do?reference=2026/0325(COD)`), which `report-creator.js` then
+(`…/ficheprocedure.do?reference=2026/0325(COD)`), which `openapi/report.js` then
 scrapes for the committee — including "Joint committee responsible" tables.
 
 Rapporteurs are in the XML (`author="ŽALIMAS"`) but are not imported yet.
@@ -212,46 +212,36 @@ motion's reference and `amendmentAuthor` the tabling group, and they are usually
 | `doc_ref` | the individual motion, e.g. `B10-0496/2026` |
 | `name` | `<motion> (<tabling group>) – <subject>`, e.g. `B10-0496/2026 (The Left) – Ukrainian children …` |
 
-### `node openapi/reports-backfill.js [--dry] [--limit N]`
+### `node openapi/report.js [--dry] [--limit N] [--force]`
 
-Creates the `reports` rows that `rollcalls.ref` (and `agenda_items.report`) point at but that the old scraper
-never scraped: 944 references were missing, including all the joint motions.
-Only `(RC-)?[AB]\d+-\d+/YYYY` references are attempted (via
-`/documents/<eli>`, e.g. `A-10-2024-0008`); `C10-…` Commission proposals are not
-published by the API (404). A `…/REV1` suffix is stripped for the lookup and the
-row is stored under the revised reference, so `B10-0245/2026/REV1` resolves to
-the `B-10-2026-0245` document.
+The `reports` table in one pass: create the row for a reference we vote on (or
+are about to), and fill `creator`.
 
-Each row gets `title` (from `title_dcterms.en`), `url` (the predictable
-`doceo/document/<ELI>_EN.html`) and `raw` (the document JSON), so running
-`node openapi/report-creator.js` afterwards fills `creator` without extra
-requests.
+**Which references.** `rollcalls.ref`, plus `agenda_items.report` for a vote that
+has not happened yet (the stub `agenda.js` writes), plus rows that exist with no
+`url`, `raw` or `creator`. Only `(RC-)?[AB]\d+-\d+/YYYY` is attempted — `C10-…`
+Commission proposals are not published by the API (404), and the virtual
+`budget-<year>` / `agenda-<date>` references have no document at all. A `…/REV1`
+suffix is stripped for the lookup and the row is kept under the revised
+reference, so `B10-0245/2026/REV1` resolves to the `B-10-2026-0245` document.
 
-Rapporteurs are in the XML (`author="ŽALIMAS"`) but are not imported yet.
+**What a row gets**, from one `GET /documents/<eli>`:
 
-### `node openapi/report-creator.js [--dry] [--limit N]`
+| column | from |
+|---|---|
+| `title` | `title_dcterms.en` |
+| `date` | `document_date` |
+| `url` | `doceo/document/<ELI>_EN.html` |
+| `raw` | the whole document JSON |
+| `creator` | `creator` entries — `org/ENVI` is a committee, `org/PPE` a group, mapped to the names in `meps.eugroup` |
 
-Fills `reports.creator` with the committee(s) or political group(s) behind each
-report, comma-separated (`ECON, BUDG`, `ECR, Greens/EFA, Renew, S&D, EPP`).
+For a motion whose API entry lists only groups, the oeil page in `url` is scraped
+for the `Committee responsible` table (including "Joint committee responsible").
 
-Resolution order per report:
-
-1. `reports.raw` when it is an OpenAPI document — `creator` entries are
-   `org/<CODE>`, e.g. `org/ENVI` (committee) or `org/PPE` (political group).
-2. `GET /documents/<eli>` built from the reference (`A10-0098/2025` →
-   `A-10-2025-0098`, `A9-0162/2024` → `A-9-2024-0162`).
-3. The oeil procedure page in `reports.url` (parses the `Committee responsible`
-   table) for motions where the API lists only groups.
-
-Group codes are mapped to the names used in `meps.eugroup` (`PPE` → `EPP`,
-`S-D` → `S&D`, `VERTS-ALE` → `Greens/EFA`, `PFE` → `PfE`, `THE-LEFT` →
-`The Left`, `NI` → `NA`, …), so `../10` can colour them like MEP rows. Reports
-keep committee acronyms as the EP writes them (`ENVI`, `SANT`, `ECON, BUDG`).
-
-Only 16 of 655 rows resolve to nothing (the junk `--force` reference and a few
-`RC-B10-*` consolidated resolutions); they stay `0`/NULL. Re-run `node csv.js`
-afterwards to publish the values to `../10/data/text_tabled.csv`, where the
-column is still headed `committee` because that is what the site reads.
+Reports keep committee acronyms as the EP writes them (`ENVI`, `ECON, BUDG`);
+motions get the groups that tabled them (`ECR, Greens/EFA, Renew, S&D, EPP`).
+Re-run `node csv.js` afterwards to publish to `../10/data/text_tabled.csv`, where
+the column is still headed `committee` because that is what the site reads.
 
 ---
 

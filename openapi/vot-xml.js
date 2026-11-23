@@ -508,7 +508,7 @@ async function ensureBudgetReport(reference, title) {
  * A C10-xxxx/yyyy reference is a Commission proposal: the OpenAPI publishes no
  * document for it (404), but the block knows enough to describe it — the title,
  * and the procedure reference ("2026/0325(COD)") that the oeil page answers to,
- * which is also where `report-creator.js` picks up the committee.
+ * which is also where `openapi/report.js` picks up the committee.
  */
 function oeilUrlFor(label) {
   const m = String(label).match(/(\d{4}\/\d{4}\([A-Z]+\))/);
