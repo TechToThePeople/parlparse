@@ -296,6 +296,24 @@ SELECT date, agenda_order, title, report, votes, final_vote
  ORDER BY date, agenda_order;
 ```
 
+**The time of the day** lives on the *meeting part*, not on the point: the API
+returns `MEETING_PART MTG-PL-2026-11-24-TF-1200`, label `PLENARY SESSION VOTES`,
+`activity_start_date 2026-11-24T12:00`, `…T13:00`, and its `consists_of` lists the
+agenda points inside it. `agenda.js` stores those parts as rows of their own
+(`kind = 'part'`) and copies their start/end onto every point they contain:
+
+```sql
+SELECT substr(start, 12, 5) AS from_time, substr("end", 12, 5) AS to_time, title
+  FROM agenda_items
+ WHERE kind = 'part' AND date = '2026-11-24' ORDER BY start;
+```
+
+```
+09:00-12:00  PLENARY SESSION DEBATES
+12:00-13:00  PLENARY SESSION VOTES
+13:00-15:00  PLENARY SESSION DEBATES
+```
+
 A forthcoming vote names a report we may not have yet, so a **stub** row is
 inserted with the title the agenda gives; `openapi/report.js` then fills title,
 date, URL and creator from the document API (it looks at `agenda_items.report` as
