@@ -81,6 +81,9 @@ async function apiFetch(urlPath, params = {}) {
       );
       continue;
     }
+    // 204 = the resource exists but has nothing today (a sitting without an
+    // agenda), which is an answer, not a failure
+    if (res.status === 204) return null;
     if (res.ok) return res.json();
     if (res.status === 404)
       throw new ApiError(`not published: 404 for ${url}`, 404);
@@ -382,6 +385,7 @@ module.exports = {
   METHOD_NAMES,
   methodName,
   normalizeRequestedBy,
+  apiFetch,
   fetchDocumentList,
   fetchDocumentById,
   ApiError,

@@ -33,12 +33,9 @@
 
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { apiFetch } = require("./lib");
 
-const API = "https://data.europarl.europa.eu/api/v2";
 const TERM = 10;
-const UA =
-  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
-  "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ["all", "upcoming", "minutes", "today", "force", "dry", "help"],
@@ -66,24 +63,18 @@ Usage: node openapi/agenda.js [options]
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const get = async (path, attempt = 1) => {
+/**
+ * GET a JSON-LD resource through the shared apiFetch (browser User-Agent, 429 and
+ * 5xx retried). A 404 and a 204 both mean "nothing to say", not an error.
+ */
+async function get(path, params = {}) {
   try {
-    const res = await fetch(`${API}${path}`, {
-      headers: { Accept: "application/ld+json", "User-Agent": UA },
-      signal: AbortSignal.timeout(30000),
-    });
-    if (res.status === 429) {
-      // 500 requests per 5 minutes
-      await sleep(5000);
-      return attempt < 5 ? get(path, attempt + 1) : null;
-    }
-    return res.status === 200 ? res.json() : null;
-  } catch {
-    // a timeout or a dropped connection: back off and try once more
-    await sleep(3000 * attempt);
-    return attempt < 3 ? get(path, attempt + 1) : null;
+    return await apiFetch(path, params);
+  } catch (e) {
+    if (e.status === 404) return null;
+    throw e;
   }
-};
+}
 
 /** A-10-2026-0041 -> A10-0041/2026 */
 const referenceOf = (identifier) => {
@@ -239,9 +230,7 @@ async function meetingDates() {
   const thisYear = new Date().getFullYear();
   const dates = [];
   for (let year = 2024; year <= thisYear + 1; year++) {
-    const json = await get(
-      `/meetings?year=${year}&limit=500&format=application/ld%2Bjson`
-    );
+    const json = await get("/meetings", { year, limit: 500 });
     await sleep(300);
     for (const m of (json && json.data) || []) {
       const found = String(m.activity_id || m.id || "").match(
@@ -262,7 +251,8 @@ async function main() {
     const candidates = [day(today), day(new Date(today.getTime() - 86400000))];
     for (const candidate of candidates) {
       const json = await get(
-        `/meetings/MTG-PL-${candidate}/foreseen-activities?limit=200&format=application/ld%2Bjson`
+        `/meetings/MTG-PL-${candidate}/foreseen-activities`,
+        { limit: 200 }
       );
       await sleep(Number(argv.sleep || 700));
       if (json && (json.data || []).length) dates.push(candidate);
@@ -281,9 +271,11 @@ async function main() {
     dates = all.filter((d) => d >= today).slice(0, Number(argv.limit || 3));
   } else if (argv.minutes) {
     // sittings the minutes mention but that no vote ever created a row for
-    const json = await get(
-      `/documents?work-type=MINUTES_PLENARY&parliamentary-term=${TERM}&limit=1000&format=application/ld%2Bjson`
-    );
+    const json = await get("/documents", {
+      "work-type": "MINUTES_PLENARY",
+      "parliamentary-term": TERM,
+      limit: 1000,
+    });
     const known = new Set(
       (await db("plenaries").select("date")).map((p) => p.date)
     );

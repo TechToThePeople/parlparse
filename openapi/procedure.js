@@ -28,13 +28,12 @@
 
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { apiFetch } = require("./lib");
 
 const ROOT = path.join(__dirname, "..");
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
-const API = "https://data.europarl.europa.eu/api/v2/procedures";
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ["dry", "force", "help"],
@@ -67,35 +66,6 @@ function procedureCode(markdown) {
   const first = markdown.slice(0, 6000).match(/\d{4}\/\d{4}\s*\([A-Z]+\)/);
   return first ? first[0].replace(/\s+/g, "") : null;
 }
-
-const UA =
-  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
-  "Chrome/120.0 Safari/537.36";
-
-const get = (url) =>
-  new Promise((resolve) => {
-    const req = https.get(
-      url,
-      {
-        headers: {
-          Accept: "application/ld+json",
-          // the API answers 403 to a request without a browser User-Agent
-          "User-Agent": UA,
-        },
-        timeout: 30000,
-      },
-      (res) => {
-        let body = "";
-        res.on("data", (c) => (body += c));
-        res.on("end", () => resolve({ status: res.statusCode, body }));
-      }
-    );
-    req.on("error", () => resolve({ status: 0, body: "" }));
-    req.on("timeout", () => {
-      req.destroy();
-      resolve({ status: 0, body: "" });
-    });
-  });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const short = (id) => String(id || "").replace(/^eli\/dl\/(doc|event)\//, "");
@@ -145,21 +115,14 @@ const stats = {
 
 async function fetchProcedure(code) {
   const eli = code.match(/(\d{4})\/(\d{4})/);
-  const url = `${API}/${eli[1]}-${eli[2]}?format=application/ld%2Bjson`;
-  for (let attempt = 1; attempt <= 4; attempt++) {
-    const { status, body } = await get(url);
-    if (status === 200) {
-      try {
-        return JSON.parse(body).data[0] || null;
-      } catch {
-        return null;
-      }
-    }
-    if (status === 404) return null;
-    // 429 or a hiccup: the API wants a pause
-    await sleep(4000 * attempt);
+  try {
+    const json = await apiFetch(`/procedures/${eli[1]}-${eli[2]}`);
+    return (json.data || [json])[0] || null;
+  } catch (e) {
+    // a procedure the API does not know; anything else is a failed read
+    if (e.status === 404) return null;
+    throw e;
   }
-  throw new Error(`could not fetch ${url}`);
 }
 
 async function main() {

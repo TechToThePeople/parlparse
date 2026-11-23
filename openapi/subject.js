@@ -34,8 +34,8 @@
 
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { fetchDocumentById } = require("./lib");
 
-const API = "https://data.europarl.europa.eu/api/v2";
 const OEIL = "https://oeil.europarl.europa.eu/oeil/en/procedure-file";
 const UA =
   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
@@ -74,7 +74,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // fetch rather than https.get: the Publications Office URIs are http:// and
 // redirect to https, and OEIL is not the same host as the API
-const get = async (url, accept) => {
+const fetchText = async (url, accept) => {
   try {
     const res = await fetch(url, {
       headers: { Accept: accept, "User-Agent": UA },
@@ -88,9 +88,9 @@ const get = async (url, accept) => {
 };
 
 /** Repeated 429/5xx: the API allows 500 requests per 5 minutes. */
-async function getWithBackoff(url, accept) {
+async function fetchTextWithBackoff(url, accept) {
   for (let attempt = 1; attempt <= 4; attempt++) {
-    const r = await get(url, accept);
+    const r = await fetchText(url, accept);
     if (r.status === 200 || r.status === 404) return r;
     await sleep(3000 * attempt);
   }
@@ -162,7 +162,9 @@ async function subjectId(scheme, code, label, pause) {
   if (row && row.label) return row.id;
   let resolved = label || null;
   if (!resolved && LABEL_URL[scheme]) {
-    const { status, body } = await getWithBackoff(LABEL_URL[scheme](code));
+    const { status, body } = await fetchTextWithBackoff(
+      LABEL_URL[scheme](code)
+    );
     if (status === 200) {
       resolved = prefLabel(body);
       stats.labels++;
@@ -208,7 +210,7 @@ async function main() {
     const found = [];
 
     // 1. the OEIL page
-    const oeil = await getWithBackoff(
+    const oeil = await fetchTextWithBackoff(
       `${OEIL}?reference=${encodeURIComponent(code)}`,
       "text/html"
     );
@@ -228,19 +230,18 @@ async function main() {
     }
     let apiOk = docs.length === 0;
     for (const doc of docs) {
-      const { status, body } = await getWithBackoff(
-        `${API}/documents/${doc}?format=application/ld%2Bjson`,
-        "application/ld+json"
-      );
-      await sleep(pause);
-      if (status !== 200) continue;
-      apiOk = true;
       let record;
       try {
-        record = JSON.parse(body).data[0];
-      } catch {
+        const json = await fetchDocumentById(doc);
+        record = (json.data || [json])[0];
+        apiOk = true;
+      } catch (e) {
+        // 404: nothing on that document; a 429 or timeout was retried already
+        if (e.status !== 404) console.warn(`   ⚠️  ${doc}: ${e.message}`);
+        await sleep(pause);
         continue;
       }
+      await sleep(pause);
       const fromApi = apiSubjects(record || {});
       if (fromApi.length) {
         found.push(...fromApi);
