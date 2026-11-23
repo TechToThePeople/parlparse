@@ -111,6 +111,8 @@ const kindOf = (activityType) => {
   const type = String(activityType || "");
   if (type.endsWith("PLENARY_VOTE")) return "vote";
   if (type.includes("PLENARY_DEBATE")) return "debate";
+  // a meeting part is a slot in the day ("PLENARY SESSION VOTES 12:00-13:00")
+  if (type.endsWith("MEETING_PART")) return "part";
   return "other";
 };
 
@@ -187,12 +189,32 @@ async function processDate(date, source) {
   const byRef = new Map();
   for (const v of votes) if (v.ref && !byRef.has(v.ref)) byRef.set(v.ref, v.id);
 
+  // The time lives on the meeting part; `consists_of` says which agenda points
+  // are scheduled inside it, so an item inherits its part's start and end.
+  const parts = new Map();
+  for (const a of activities) {
+    if (kindOf(a.had_activity_type) !== "part") continue;
+    parts.set(a.activity_id, {
+      start: a.activity_start_date || null,
+      end: a.activity_end_date || null,
+    });
+  }
+  const partOf = new Map();
+  for (const a of activities) {
+    for (const child of a.consists_of || []) {
+      const id = String(child).replace(/^eli\/dl\/event\//, "");
+      if (parts.has(a.activity_id)) partOf.set(id, a.activity_id);
+    }
+  }
+
   let count = 0;
   for (const a of activities) {
     const kind = kindOf(a.had_activity_type);
     if (kind === "other") continue;
     const structured = (a.structuredContent || {}).en || "";
     const parsed = parseStructured(structured);
+    const part = kind === "part" ? a.activity_id : partOf.get(a.activity_id);
+    const times = parts.get(part) || {};
     const row = {
       id: a.activity_id,
       plenary,
@@ -202,6 +224,10 @@ async function processDate(date, source) {
       kind,
       title: (a.activity_label || {}).en || parsed.title || null,
       report: parsed.report,
+      start:
+        kind === "part" ? a.activity_start_date || null : times.start || null,
+      end: kind === "part" ? a.activity_end_date || null : times.end || null,
+      part: kind === "part" ? null : part || null,
       raw: structured || null,
       updated_at: new Date().toISOString(),
     };
