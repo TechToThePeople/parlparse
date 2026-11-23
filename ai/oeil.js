@@ -56,16 +56,7 @@ const PRICE_OUT = 0.6;
 const CHUNK = 600000;
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: [
-    "all",
-    "force",
-    "dry",
-    "attach",
-    "report",
-    "motions",
-    "missing",
-    "help",
-  ],
+  boolean: ["all", "force", "dry", "attach", "report", "motions", "help"],
   string: ["model"],
   alias: { h: "help", a: "all", n: "limit" },
 });
@@ -75,11 +66,9 @@ if (argv.help) {
 Usage: node ai/oeil.js [<reference> | --all] [options]
 
   <reference>  one or more reports.reference values, e.g. A10-0275/2026
-  --all, -a    every A / B / RC report
-  --missing    only the reports that have no summary on disk yet
-               (with --all or on its own; the cheap way to run after a sitting)
-  --limit, -n  stop after N documents
+  --all, -a    every A / B / RC report (the default with no reference)
   --force      redo documents and summaries that already exist
+  --limit, -n  stop after N documents
   --dry        fetch and convert only, no DeepSeek call
   --report     only the A/B/RC reports (the default with --motions)
   --motions    only the individual motions (B10-… tabled by a group)
@@ -138,10 +127,7 @@ const stats = {
 async function references() {
   const input = argv._[0];
   if (input) return [input];
-  if (!argv.all && !argv.missing) {
-    console.error("Error: give a reference or --all");
-    process.exit(1);
-  }
+  // no reference: the whole term, like --all
   const rows = await db("reports")
     .whereNotNull("reference")
     .select("reference")
@@ -149,8 +135,9 @@ async function references() {
   const refs = rows
     .map((r) => r.reference)
     .filter((r) => /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}$/.test(r));
-  if (!argv.missing) return refs;
-  // only what has no summary yet: no API call, no token, for the rest
+  // by default only what has no summary yet — no API call, no token for the
+  // rest; --force walks every report again
+  if (argv.force) return refs;
   return refs.filter(
     (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
   );
@@ -576,11 +563,11 @@ async function main() {
       }`
     );
     await runList(
-      argv.missing
-        ? inputs.filter(
+      argv.force
+        ? inputs
+        : inputs.filter(
             (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
-          )
-        : inputs,
+          ),
       model,
       async (reference, summary) => {
         await storeWholeTextVotes(reference, summary);
