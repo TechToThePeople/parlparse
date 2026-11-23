@@ -157,18 +157,32 @@ async function references() {
 }
 
 /** Download the DOCX (preferred) or PDF of a report. Returns {file, url, doc}. */
+/** The document record `openapi/report.js` already stored, when it has one. */
+async function storedDocument(reference) {
+  try {
+    const row = await db("reports").where("reference", reference).first("raw");
+    const doc = JSON.parse((row && row.raw) || "null");
+    return doc && doc.is_realized_by ? doc : null;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchDocument(reference) {
   const eli = eliId(reference);
   if (!eli) return null;
-  let doc;
-  try {
-    const json = await fetchDocumentById(eli);
-    doc = (json.data || [json])[0] || null;
-  } catch (e) {
-    // only a 404 means the API does not publish it; anything else is a failure
-    // to read, which must not be reported as "no document"
-    if (e.status === 404) return null;
-    throw e;
+  // reports.raw holds the same JSON-LD record: no second metadata call
+  let doc = await storedDocument(reference);
+  if (!doc) {
+    try {
+      const json = await fetchDocumentById(eli);
+      doc = (json.data || [json])[0] || null;
+    } catch (e) {
+      // only a 404 means the API does not publish it; anything else is a failure
+      // to read, which must not be reported as "no document"
+      if (e.status === 404) return null;
+      throw e;
+    }
   }
   if (!doc) return null;
 
