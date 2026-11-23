@@ -107,6 +107,26 @@ function parseStructured(xml) {
   };
 }
 
+/**
+ * A JSON-LD value as a string. `activity_start_date` / `activity_end_date` come
+ * back as a plain string, an array (a part split into several ranges) or an
+ * object; binding the last two wrote "[object Object]" into the column.
+ */
+function textValue(value, which = "last") {
+  if (value === null || value === undefined) return null;
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) {
+    const list = value.map((v) => textValue(v, which)).filter(Boolean);
+    return which === "first" ? list[0] || null : list[list.length - 1] || null;
+  }
+  if (typeof value === "object")
+    return textValue(
+      value["@value"] ?? value.en ?? Object.values(value)[0],
+      which
+    );
+  return String(value);
+}
+
 const kindOf = (activityType) => {
   const type = String(activityType || "");
   if (type.endsWith("PLENARY_VOTE")) return "vote";
@@ -195,8 +215,8 @@ async function processDate(date, source) {
   for (const a of activities) {
     if (kindOf(a.had_activity_type) !== "part") continue;
     parts.set(a.activity_id, {
-      start: a.activity_start_date || null,
-      end: a.activity_end_date || null,
+      start: textValue(a.activity_start_date, "first"),
+      end: textValue(a.activity_end_date),
     });
   }
   const partOf = new Map();
@@ -225,8 +245,10 @@ async function processDate(date, source) {
       title: (a.activity_label || {}).en || parsed.title || null,
       report: parsed.report,
       start:
-        kind === "part" ? a.activity_start_date || null : times.start || null,
-      end: kind === "part" ? a.activity_end_date || null : times.end || null,
+        kind === "part"
+          ? textValue(a.activity_start_date, "first")
+          : times.start || null,
+      end: kind === "part" ? textValue(a.activity_end_date) : times.end || null,
       part: kind === "part" ? null : part || null,
       raw: structured || null,
       updated_at: new Date().toISOString(),
