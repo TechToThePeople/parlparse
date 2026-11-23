@@ -465,14 +465,20 @@ async function summarise(
  * resolution (as a whole)`, `Proposition de la Commission`) is about the report
  * itself, so its text in rollcall_texts is the summary.
  */
-const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposition de r[ée]solution|proposals? for (?:a )?decisions?|proposition de la commission|commission proposal|projet de d[ée]cision|draft council decision|projet du conseil|draft legislative act|approval without vote/i;
+const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposition de r[ée]solution|proposals? for (?:a )?decisions?|proposition de la commission|commission proposal|projet de d[ée]cision|draft council decision|projet du conseil|draft legislative act|approval without vote|joint text|texte conjoint|provisional agreement|accord provisoire/i;
+
+// "… – Am 1", "§ 3", "Article 2" is a part of the text, never the text itself:
+// an amendment to an alternative motion mentions "motion for a resolution" too
+const PART_OF_TEXT = /[–-]\s*Am\s|\bAm\s*\d|§|Article/i;
 
 async function storeWholeTextVotes(reference, summary) {
   const all = await db("rollcalls")
     .where("ref", reference)
     .select("id", "name", "vote_type");
   const rows = all.filter(
-    (v) => v.vote_type === "main" || WHOLE_TEXT.test(v.name || "")
+    (v) =>
+      v.vote_type === "main" ||
+      (WHOLE_TEXT.test(v.name || "") && !PART_OF_TEXT.test(v.name || ""))
   );
   for (const row of rows) {
     await db("rollcall_texts")
