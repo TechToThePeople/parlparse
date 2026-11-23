@@ -59,18 +59,19 @@ const argv = minimist(process.argv.slice(2), {
   boolean: [
     "all",
     "force",
-    "dry",
+    "force-ai",
+    "fetch",
+    "ai",
     "attach",
-    "attach-only",
     "report",
     "motions",
     "help",
   ],
   string: ["model"],
   alias: { h: "help", a: "all", n: "limit" },
-  // a summary nobody can read is a summary nobody needs: attach what is on disk
-  // at the end of every run (--no-attach to skip, --attach-only to do just that)
-  default: { attach: true },
+  // every step on by default; --no-fetch / --no-ai / --no-attach turn one off.
+  // A summary nobody can read is a summary nobody needs, so attach always runs.
+  default: { fetch: true, ai: true, attach: true },
 });
 
 if (argv.help) {
@@ -79,14 +80,14 @@ Usage: node ai/oeil.js [<reference> | --all] [options]
 
   <reference>  one or more reports.reference values, e.g. A10-0275/2026
   --all, -a    every A / B / RC report (the default with no reference)
-  --force      redo documents and summaries that already exist
+  --force      redo every step for documents that already exist
+  --force-ai   re-run the model on the markdown already on disk (no download)
   --limit, -n  stop after N documents
-  --dry        fetch and convert only, no DeepSeek call
+  --no-fetch   use the markdown on disk only, download nothing
+  --no-ai      stop before DeepSeek: fetch and convert, no tokens
+  --no-attach  skip the attach pass that ends the run
   --report     only the A/B/RC reports (the default with --motions)
   --motions    only the individual motions (B10-… tabled by a group)
-  --attach     attach the stored summaries at the end of the run (default on;
-               --no-attach skips it)
-  --attach-only  only re-attach what is on disk, generate nothing
   --help, -h   this text
 
 Needs DEEPSEEK_API_KEY, read from the environment or from .env in the repo root.
@@ -151,7 +152,7 @@ async function references() {
     .filter((r) => /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}$/.test(r));
   // by default only what has no summary yet — no API call, no token for the
   // rest; --force walks every report again
-  if (argv.force) return refs;
+  if (argv.force || argv.forceAi) return refs;
   return refs.filter(
     (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
   );
@@ -263,9 +264,11 @@ async function documentMarkdown(reference) {
   const dest = path.join(OEIL_DIR, fileName(reference));
   fs.mkdirSync(OEIL_DIR, { recursive: true });
 
-  if (fs.existsSync(dest) && !argv.force) {
+  if (fs.existsSync(dest) && !argv.force && !argv.forceAi) {
     return fs.readFileSync(dest, "utf8");
   }
+  // --no-fetch: never download, a report without markdown is simply skipped
+  if (argv.forceAi || !argv.fetch) return null;
 
   const found = await fetchDocument(reference);
   if (!found) return null;
@@ -396,7 +399,7 @@ async function summarise(
 ) {
   const dest = path.join(SUMMARY_DIR, fileName(reference));
   fs.mkdirSync(SUMMARY_DIR, { recursive: true });
-  if (fs.existsSync(dest) && !argv.force) {
+  if (fs.existsSync(dest) && !argv.force && !argv.forceAi) {
     stats.skipped++;
     // a summary written before this pass existed still has to reach its votes
     const existing = fs.readFileSync(dest, "utf8").trim();
@@ -537,13 +540,29 @@ async function motionReferences() {
 async function runList(list, model, attach) {
   for (const reference of list) {
     try {
-      const markdown = await documentMarkdown(reference);
+      // --force-ai and --no-fetch work from the markdown on disk: no download
+      // and no conversion, the model is the only step left
+      let markdown;
+      if (argv.forceAi || !argv.fetch) {
+        const file = path.join(OEIL_DIR, fileName(reference));
+        if (!fs.existsSync(file)) {
+          stats.skipped++;
+          if (argv.forceAi)
+            console.warn(
+              `   ⚠️  ${reference}: no markdown on disk to summarise`
+            );
+          continue;
+        }
+        markdown = fs.readFileSync(file, "utf8");
+      } else {
+        markdown = await documentMarkdown(reference);
+      }
       if (!markdown) {
         stats.failed++;
         console.warn(`   ⚠️  ${reference}: no document published by the API`);
         continue;
       }
-      if (argv.dry) continue;
+      if (!argv.ai) continue;
       await summarise(reference, markdown, model, attach);
     } catch (e) {
       stats.failed++;
@@ -560,7 +579,7 @@ async function runList(list, model, attach) {
  */
 async function finish() {
   reportCost();
-  if (argv.attach && !argv.dry) await attachExisting();
+  if (argv.attach) await attachExisting();
 }
 
 async function main() {
@@ -568,7 +587,7 @@ async function main() {
     await attachExisting();
     return;
   }
-  if (!argv.dry && !process.env.DEEPSEEK_API_KEY) {
+  if (argv.ai && !process.env.DEEPSEEK_API_KEY) {
     console.error(
       "DEEPSEEK_API_KEY is not set. Add it to .env in the repo root (DEEPSEEK_API_KEY=sk-…) or export it."
     );
@@ -582,7 +601,7 @@ async function main() {
   if (inputs.length && !argv.motions) {
     console.log(
       `📚 ${inputs.length} reference(s), model ${
-        argv.dry ? "(none, --dry)" : model
+        argv.ai ? model : "(none, --no-ai)"
       }`
     );
     await runList(
@@ -609,7 +628,9 @@ async function main() {
     let list = await references();
     if (argv.limit) list = list.slice(0, Number(argv.limit));
     console.log(
-      `📚 ${list.length} report(s), model ${argv.dry ? "(none, --dry)" : model}`
+      `📚 ${list.length} report(s), model ${
+        argv.ai ? model : "(none, --no-ai)"
+      }`
     );
     await runList(list, model, storeWholeTextVotes);
   }
@@ -617,7 +638,9 @@ async function main() {
     let list = await motionReferences();
     if (argv.limit) list = list.slice(0, Number(argv.limit));
     console.log(
-      `🗳  ${list.length} motion(s), model ${argv.dry ? "(none, --dry)" : model}`
+      `🗳  ${list.length} motion(s), model ${
+        argv.ai ? model : "(none, --no-ai)"
+      }`
     );
     await runList(list, model, storeMotionVotes);
   }

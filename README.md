@@ -185,12 +185,22 @@ Formats the site relies on:
 Fetches a report, converts it to markdown and asks DeepSeek for a citizen-facing
 summary. Key from `DEEPSEEK_API_KEY` (environment or `.env` in the repo root).
 
+Every step runs by default, on the reports that have no summary yet:
+**fetch** (download the DOCX/PDF) → **convert** (markitdown) → **AI** (DeepSeek) →
+**attach** (link the summary to its votes). Each can be turned off:
+
 ```bash
-node ai/oeil.js A10-0275/2026        # one report
-node ai/oeil.js --all                # every A / B / RC report
-node ai/oeil.js --all --limit 5      # trial run
-node ai/oeil.js --all --dry          # fetch + convert only, no API call
+node ai/oeil.js A10-0275/2026        # one report, all four steps
+node ai/oeil.js --limit 5            # a trial run
+node ai/oeil.js --no-ai              # fetch + convert, no tokens
+node ai/oeil.js --no-fetch           # markdown on disk only (with --no-ai: relink)
+node ai/oeil.js --force              # redo every step for every report
+node ai/oeil.js --force-ai A10-0023/2026   # new summary from the saved markdown
 ```
+
+`--force-ai` is the cheap one when a summary is bad: no 40 MB download, just the
+model again. The attach pass costs nothing (it reads `data/content/summary/` and
+upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 
 - document: the DOCX from the Open Data distribution (PDF as fallback, `doceo`
   is WAF-blocked), converted with `markitdown` → `data/content/oeil/<ref>.md`
