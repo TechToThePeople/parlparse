@@ -252,11 +252,11 @@ node openapi/procedure.js            # extract + fetch what is missing
 node openapi/procedure.js --dry      # only print the codes found
 ```
 
-It runs on the report markdown, so a report only gets a procedure after
-`ai/oeil.js` has fetched its document; `node openapi/procedure.js` without new
-markdown has nothing to do. `update.sh` runs it (step 8) followed by
-`node openapi/subject.js`, which fills the subjects of the procedures that have
-none yet.
+It runs on the report **document** (`data/content/oeil/<ref>.md`, written by
+`ai/oeil.js` when it fetches a report), so a report gets its procedure only once
+that file exists — the AI summary is not involved. `openapi/report.js` runs
+`procedure.js` and then `subject.js` at the end unless `--no-procedure` /
+`--no-subject`; both only touch what is new.
 
 ## The agenda of a sitting (`agenda_items`)
 

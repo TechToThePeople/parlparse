@@ -27,6 +27,8 @@
  *   node openapi/report.js --force    # re-fetch and rewrite every row
  */
 
+const path = require("path");
+const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
 const { fetchDocumentById, TERM } = require("./lib");
@@ -53,8 +55,11 @@ const GROUP_NAMES = {
 const REF = /^(?:RC-)?[AB]\d+-\d+\/\d{4}$/;
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["dry", "force", "help"],
+  boolean: ["dry", "force", "procedure", "subject", "help"],
   alias: { h: "help", n: "limit" },
+  // a report brings its procedure, and the procedure its subjects: both run
+  // unless --no-procedure / --no-subject say otherwise
+  default: { procedure: true, subject: true },
 });
 
 if (argv.help) {
@@ -68,6 +73,8 @@ Options:
   --dry         Show what would change, write nothing
   --limit, -n   Process at most N references
   --force       Re-fetch and rewrite every row
+  --procedure   then openapi/procedure.js (default on, --no-procedure to skip)
+  --subject     then openapi/subject.js   (default on, --no-subject to skip)
   --help, -h    Show this help
 `);
   process.exit(0);
@@ -302,6 +309,23 @@ async function main() {
   if (!argv.dry && (stats.created || stats.updated))
     console.log("note: run csv.js next to publish text_tabled.csv to ../10");
   await db.destroy();
+
+  // A report belongs to a procedure, and the procedure has its own subjects.
+  // Both passes are incremental, so they only cost requests for what is new.
+  if (!argv.dry && !argv.help) {
+    for (const [flag, script] of [
+      ["procedure", "procedure.js"],
+      ["subject", "subject.js"],
+    ]) {
+      if (!argv[flag]) continue;
+      console.log(`\n→ ${script}`);
+      const run = spawnSync(process.execPath, [path.join(__dirname, script)], {
+        stdio: "inherit",
+      });
+      if (run.status !== 0)
+        console.warn(`   ⚠️  ${script} exited with ${run.status}`);
+    }
+  }
 }
 
 main()

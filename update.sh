@@ -48,14 +48,11 @@ node openapi/att.js "$(date +%F)"
 node openapi/agenda.js --upcoming
 node openapi/report.js
 
-# 8. the procedure each report belongs to (2025/0227(COD), read from the report
-#    markdown), then what that procedure is about (OEIL subject + the API's
-#    vocabularies). Both only touch what is not done yet; the subjects belong to
-#    the procedure, not to the report, which is why they are a separate step.
-node openapi/procedure.js
-node openapi/subject.js
+# (report.js also runs procedure.js and subject.js for what is new: the
+#  procedure a report belongs to, and what that procedure is about. Skip them
+#  with --no-procedure / --no-subject.)
 
-# 9. static files
+# 8. static files
 node csv.js
 node cards.js
 npm run -s majority:csv
