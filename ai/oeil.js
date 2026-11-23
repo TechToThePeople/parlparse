@@ -164,8 +164,11 @@ async function fetchDocument(reference) {
   try {
     const json = await fetchDocumentById(eli);
     doc = (json.data || [json])[0] || null;
-  } catch {
-    return null;
+  } catch (e) {
+    // only a 404 means the API does not publish it; anything else is a failure
+    // to read, which must not be reported as "no document"
+    if (e.status === 404) return null;
+    throw e;
   }
   if (!doc) return null;
 
@@ -187,7 +190,8 @@ async function fetchDocument(reference) {
   // DOCX first: smaller, best structure; then the English version
   candidates.sort((a) => (a.format === "DOCX" ? -1 : 1));
   candidates.sort((a) => (a.language === "ENG" ? -1 : 1));
-  if (!candidates.length) return null;
+  // the document exists but publishes neither a DOCX nor a PDF
+  if (!candidates.length) throw new Error("no DOCX or PDF distribution");
 
   const pick = candidates[0];
   const ext = pick.format.toLowerCase();

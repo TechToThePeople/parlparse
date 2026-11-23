@@ -136,6 +136,7 @@ const stats = {
   unchanged: 0,
   noCreator: 0,
   notFound: 0,
+  failed: 0,
 };
 
 /** The document behind a reference, or null when the API does not publish it. */
@@ -146,8 +147,10 @@ async function document(reference) {
     const json = await fetchDocumentById(eli);
     const doc = (json.data || [json])[0];
     return doc ? { doc, eli } : null;
-  } catch {
-    return null;
+  } catch (e) {
+    // 404 = not published; a 429 or a timeout is not an answer at all
+    if (e.status === 404) return null;
+    throw e;
   }
 }
 
@@ -210,7 +213,14 @@ async function main() {
       continue;
     }
     process.stdout.write(`   [${i + 1}/${list.length}] ${reference} … `);
-    const found = await document(reference);
+    let found;
+    try {
+      found = await document(reference);
+    } catch (e) {
+      stats.failed++;
+      console.log(`API error: ${e.message}`);
+      continue;
+    }
     if (!found) {
       stats.notFound++;
       console.log("not published by the API");
@@ -286,7 +296,8 @@ async function main() {
     `\n${argv.dry ? "would create" : "created"} ${stats.created}, ` +
       `${argv.dry ? "would update" : "updated"} ${stats.updated}, ` +
       `unchanged ${stats.unchanged}, no creator ${stats.noCreator}, ` +
-      `not published ${stats.notFound} (${list.length} reference(s))`
+      `not published ${stats.notFound}, unreadable ${stats.failed} ` +
+      `(${list.length} reference(s))`
   );
   if (!argv.dry && (stats.created || stats.updated))
     console.log("note: run csv.js next to publish text_tabled.csv to ../10");

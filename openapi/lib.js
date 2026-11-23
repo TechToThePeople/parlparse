@@ -40,26 +40,67 @@ function buildUrl(path, params) {
   return url.toString();
 }
 
+/** An API failure, with the HTTP status: 404 is the only "not published". */
+class ApiError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status; // 0 for a network error / timeout
+  }
+}
+
+// the API answers 403 to a request without a browser User-Agent
+const API_HEADERS = {
+  Accept: "application/ld+json",
+  "User-Agent":
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
+    "Chrome/120.0 Safari/537.36",
+};
+
 /**
  * Generic fetch wrapper — GET a JSON-LD resource.
- * Retries with exponential backoff on 429 (rate limit).
+ *
+ * Retries 429 (500 requests per 5 minutes), 5xx and network errors with
+ * exponential backoff; everything else is final. A 404 means the API does not
+ * publish that document, which is a real answer, so it is not retried.
  */
 async function apiFetch(urlPath, params = {}) {
   const url = buildUrl(urlPath, { format: "application/ld+json", ...params });
+  let last = null;
   for (let attempt = 0; attempt < 5; attempt++) {
-    const res = await fetch(url);
+    let res;
+    try {
+      res = await fetch(url, {
+        headers: API_HEADERS,
+        signal: AbortSignal.timeout(60000),
+      });
+    } catch (e) {
+      last = new ApiError(`${e.message} for ${url}`, 0);
+      await new Promise((r) =>
+        setTimeout(r, Math.min(2000 * 2 ** attempt, 30000))
+      );
+      continue;
+    }
     if (res.ok) return res.json();
-    if (res.status === 429) {
+    if (res.status === 404)
+      throw new ApiError(`not published: 404 for ${url}`, 404);
+    if (res.status === 429 || res.status >= 500) {
       const delay = Math.min(2000 * Math.pow(2, attempt), 30000);
       console.warn(
-        `   ⏳ rate limited, retrying in ${delay}ms (attempt ${attempt + 1}/5)`
+        `   ⏳ API ${res.status}, retrying in ${delay}ms (attempt ${
+          attempt + 1
+        }/5)`
       );
+      last = new ApiError(`API ${res.status} for ${url}`, res.status);
       await new Promise((r) => setTimeout(r, delay));
       continue;
     }
-    throw new Error(`API ${res.status} for ${url}: ${res.statusText}`);
+    throw new ApiError(
+      `API ${res.status} for ${url}: ${res.statusText}`,
+      res.status
+    );
   }
-  throw new Error(`API rate limit exceeded for ${url} after 5 retries`);
+  throw last || new ApiError(`API unavailable for ${url}`, 0);
 }
 
 /**
@@ -343,6 +384,7 @@ module.exports = {
   normalizeRequestedBy,
   fetchDocumentList,
   fetchDocumentById,
+  ApiError,
   fetchDecisions,
   fetchDecisionById,
   fetchMeetingByDate,
