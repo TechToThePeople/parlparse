@@ -75,6 +75,17 @@ async function main() {
       ORDER BY votes DESC`
   );
 
+  // stubs written by openapi/agenda.js for reports that have not been voted yet:
+  // the row exists (so the join from the agenda works) but has no metadata
+  const stubs = await db.raw(
+    `SELECT rep.reference, 0 AS votes, 1 AS stub
+       FROM reports rep
+      WHERE rep.reference IS NOT NULL AND rep.creator IS NULL
+        AND rep.title IS NOT NULL`
+  );
+  const seen = new Set(missing.map((m) => m.reference));
+  for (const stub of stubs) if (!seen.has(stub.reference)) missing.push(stub);
+
   const resolvable = missing.filter((m) => REF.test(m.reference));
   const skipped = missing.filter((m) => !REF.test(m.reference));
   console.log(
@@ -87,7 +98,8 @@ async function main() {
   let created = 0;
   let notFound = 0;
 
-  for (const { reference } of todo) {
+  for (const item of todo) {
+    const reference = item.reference;
     const eli = eliId(reference);
     let doc = null;
     try {
@@ -106,6 +118,8 @@ async function main() {
     const row = {
       reference,
       title,
+      // when the document was tabled; the agenda shows a report before its vote
+      date: doc.document_date || null,
       url: doceoUrl(eli),
       term: TERM,
       raw: JSON.stringify(doc),
@@ -115,6 +129,9 @@ async function main() {
       console.log(
         `   ${reference} → ${JSON.stringify(title || "").slice(0, 90)}`
       );
+    } else if (item.stub) {
+      // a stub from openapi/agenda.js: fill it instead of inserting a second row
+      await db("reports").where("reference", reference).update(row);
     } else {
       await db("reports").insert(row);
     }

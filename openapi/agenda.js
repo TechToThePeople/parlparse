@@ -1,0 +1,301 @@
+#!/usr/bin/env node
+/**
+ * The agenda of a sitting — what will be voted, and what was.
+ *
+ * `GET /api/v2/meetings/MTG-PL-<date>/foreseen-activities` returns one entry per
+ * agenda point, past or future:
+ *
+ *   activity_id      MTG-PL-2026-11-24-OJ-ITM-V-29
+ *   activity_order   9.0                  the agenda point
+ *   notation_agendaPoint  V-29
+ *   had_activity_type     …/PLENARY_VOTE  or …/PLENARY_DEBATE
+ *   activity_label.en     the topic
+ *   structuredContent.en  the report, the procedure, the committees:
+ *                         <label typeof="def/ep-document-types/REPORT"
+ *                                resource="doc/A-10-2026-0041">A10-0041/2026</label>
+ *
+ * Stored in `agenda_items` with status 'planned'; when a rollcall for that report
+ * and date exists the same row becomes 'voted' and points at it. Membership of a
+ * report that does not exist yet is created from the document API, so the report
+ * page is there before the vote.
+ *
+ * Usage:
+ *   node openapi/agenda.js --upcoming        next sittings (default 3 dates)
+ *   node openapi/agenda.js --date 2026-11-24
+ *   node openapi/agenda.js --all             every sitting of the term
+ *   node openapi/agenda.js --minutes         also the sittings with no votes
+ *
+ *   --force      re-fetch agenda points of dates already stored
+ *   --dry        fetch and print, write nothing
+ *   --sleep      ms between requests (default 700)
+ */
+"use strict";
+
+const minimist = require("minimist");
+const db = require("../lib/db");
+
+const API = "https://data.europarl.europa.eu/api/v2";
+const TERM = 10;
+const UA =
+  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/120.0 Safari/537.36";
+
+const argv = minimist(process.argv.slice(2), {
+  boolean: ["all", "upcoming", "minutes", "force", "dry", "help"],
+  string: ["date", "sleep", "limit"],
+  alias: { h: "help" },
+});
+
+if (argv.help) {
+  console.log(`
+Usage: node openapi/agenda.js [options]
+
+  --date <d>       one sitting (2026-11-24)
+  --upcoming       the next sittings (3 dates, or --limit N)
+  --all            every sitting of the term
+  --minutes        include the sittings that have minutes but no votes
+  --force          re-fetch dates already stored
+  --dry            print, write nothing
+  --sleep          ms between requests (default 700)
+  --help, -h
+`);
+  process.exit(0);
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const get = async (path, attempt = 1) => {
+  try {
+    const res = await fetch(`${API}${path}`, {
+      headers: { Accept: "application/ld+json", "User-Agent": UA },
+      signal: AbortSignal.timeout(30000),
+    });
+    if (res.status === 429) {
+      // 500 requests per 5 minutes
+      await sleep(5000);
+      return attempt < 5 ? get(path, attempt + 1) : null;
+    }
+    return res.status === 200 ? res.json() : null;
+  } catch {
+    // a timeout or a dropped connection: back off and try once more
+    await sleep(3000 * attempt);
+    return attempt < 3 ? get(path, attempt + 1) : null;
+  }
+};
+
+/** A-10-2026-0041 -> A10-0041/2026 */
+const referenceOf = (identifier) => {
+  const m = String(identifier || "").match(
+    /^([A-Z]+)-(\d+)-(\d{4})-(\d{4})(?:$|-)/
+  );
+  return m ? `${m[1]}${m[2]}-${m[4]}/${m[3]}` : null;
+};
+
+const tagText = (xml, tag) => {
+  const m = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`));
+  return m ? m[1].trim() : null;
+};
+
+/** The report / procedure / committees named by one structuredContent block. */
+function parseStructured(xml) {
+  if (!xml) return {};
+  const report = (xml.match(
+    /typeof="def\/ep-document-types\/REP[A-Z_]*" resource="doc\/([^"]+)"/
+  ) || [])[1];
+  const proc = (xml.match(/typeof="proc" resource="proc\/([^"]+)"/) || [])[1];
+  const committees = [...xml.matchAll(/typeof="org" resource="org\/([^"]+)"/g)]
+    .map((m) => m[1])
+    .join(", ");
+  return {
+    title: tagText(xml, "title"),
+    report: referenceOf(report),
+    procedure: proc ? proc.replace("-", "/") : null,
+    committees: committees || null,
+  };
+}
+
+const kindOf = (activityType) => {
+  const type = String(activityType || "");
+  if (type.endsWith("PLENARY_VOTE")) return "vote";
+  if (type.includes("PLENARY_DEBATE")) return "debate";
+  return "other";
+};
+
+const stats = {
+  dates: 0,
+  plenariesCreated: 0,
+  items: 0,
+  reportsCreated: 0,
+  voted: 0,
+  failed: 0,
+};
+
+/** A plenaries row for the date, created when it does not exist yet. */
+async function ensurePlenary(date, source) {
+  const row = await db("plenaries").where("date", date).first("id", "date");
+  if (row) return row.id;
+  stats.plenariesCreated++;
+  if (argv.dry) return null;
+  const [id] = await db("plenaries").insert({
+    date,
+    term: TERM,
+    source,
+    status: "provisional",
+  });
+  return id;
+}
+
+/**
+ * A forthcoming vote names a report we may not have yet: stub the row with what
+ * the agenda gives, and leave the metadata to openapi/reports-backfill.js (title,
+ * date, committees, procedure) which finds the document in the API.
+ */
+async function stubReport(reference, title) {
+  if (!reference) return;
+  const existing = await db("reports")
+    .where("reference", reference)
+    .first("id");
+  if (existing) return;
+  stats.reportsCreated++;
+  if (argv.dry) {
+    console.log(
+      `   + report stub ${reference}: ${String(title || "").slice(0, 60)}`
+    );
+    return;
+  }
+  await db("reports").insert({
+    reference,
+    title: title || null,
+    term: TERM,
+  });
+  console.log(
+    `   + report stub ${reference}: ${String(title || "").slice(0, 60)}`
+  );
+}
+
+/** Agenda points of one sitting, plus the link to the vote they produced. */
+async function processDate(date, source) {
+  stats.dates++;
+  const plenary = await ensurePlenary(date, source);
+  const json = await get(
+    `/meetings/MTG-PL-${date}/foreseen-activities?limit=200&format=application/ld%2Bjson`
+  );
+  await sleep(Number(argv.sleep || 700));
+  const activities = (json && json.data) || [];
+  if (!activities.length) {
+    console.log(`   ⚠️  ${date}: no agenda published`);
+    stats.failed++;
+    return;
+  }
+
+  const votes = await db("rollcalls").whereRaw("substr(date, 1, 10) = ?", [
+    date,
+  ]);
+  const byRef = new Map();
+  for (const v of votes) if (v.ref && !byRef.has(v.ref)) byRef.set(v.ref, v.id);
+
+  let count = 0;
+  for (const a of activities) {
+    const kind = kindOf(a.had_activity_type);
+    if (kind === "other") continue;
+    const structured = (a.structuredContent || {}).en || "";
+    const parsed = parseStructured(structured);
+    const row = {
+      id: a.activity_id,
+      plenary,
+      date,
+      agenda_order: a.activity_order ? String(a.activity_order) : null,
+      notation: a.notation_agendaPoint || null,
+      kind,
+      title: (a.activity_label || {}).en || parsed.title || null,
+      report: parsed.report,
+      raw: structured || null,
+      updated_at: new Date().toISOString(),
+    };
+    if (row.report && byRef.has(row.report)) stats.voted++;
+    count++;
+    // the report is only stubbed here: procedure, committees and the rest are
+    // filled by openapi/reports-backfill.js from the document API
+    if (kind === "vote" && row.report) await stubReport(row.report, row.title);
+    if (argv.dry) continue;
+    await db("agenda_items").insert(row).onConflict("id").merge();
+  }
+  stats.items += count;
+  console.log(
+    `   ${date}: ${count} agenda point(s)` +
+      (argv.dry ? " (dry)" : "") +
+      `, ${votes.length} vote(s) matched`
+  );
+}
+
+/**
+ * The sitting dates the API knows about. The meetings endpoint answers oldest
+ * first and its parliamentary-term filter does not narrow it down, so ask year by
+ * year (2024 onwards is this term).
+ */
+async function meetingDates() {
+  const thisYear = new Date().getFullYear();
+  const dates = [];
+  for (let year = 2024; year <= thisYear + 1; year++) {
+    const json = await get(
+      `/meetings?year=${year}&limit=500&format=application/ld%2Bjson`
+    );
+    await sleep(300);
+    for (const m of (json && json.data) || []) {
+      const found = String(m.activity_id || m.id || "").match(
+        /(\d{4}-\d{2}-\d{2})/
+      );
+      if (found) dates.push(found[1]);
+    }
+  }
+  return [...new Set(dates)].sort();
+}
+
+async function main() {
+  let dates = [];
+  if (argv.date) dates = [argv.date];
+  else if (argv.all) dates = await meetingDates();
+  else if (argv.upcoming) {
+    const today = new Date().toISOString().slice(0, 10);
+    const all = await meetingDates();
+    dates = all.filter((d) => d >= today).slice(0, Number(argv.limit || 3));
+  } else if (argv.minutes) {
+    // sittings the minutes mention but that no vote ever created a row for
+    const json = await get(
+      `/documents?work-type=MINUTES_PLENARY&parliamentary-term=${TERM}&limit=1000&format=application/ld%2Bjson`
+    );
+    const known = new Set(
+      (await db("plenaries").select("date")).map((p) => p.date)
+    );
+    dates = [
+      ...new Set(
+        ((json && json.data) || [])
+          .map((d) => String(d.identifier || "").match(/(\d{4}-\d{2}-\d{2})/))
+          .map((m) => m && m[1])
+          .filter(Boolean)
+          .filter((d) => !known.has(d))
+      ),
+    ].sort();
+  } else {
+    console.log("nothing to do: --date, --upcoming, --all or --minutes");
+    process.exit(1);
+  }
+
+  console.log(`📅 ${dates.length} sitting(s)`);
+  for (const date of dates) await processDate(date, "agenda");
+
+  console.log(
+    `\n${stats.items} agenda point(s) over ${stats.dates} sitting(s), ` +
+      `${stats.plenariesCreated} plenaries row(s) created, ` +
+      `${stats.reportsCreated} report(s) created, ${stats.voted} already voted, ` +
+      `${stats.failed} failure(s)`
+  );
+  await db.destroy();
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });

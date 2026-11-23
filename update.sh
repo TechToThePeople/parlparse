@@ -27,7 +27,10 @@ node openapi/vot-xml.js "$(date +%F)"
 node openapi/att.js "$(date -d '-1 day' +%F)"
 node openapi/att.js "$(date +%F)"
 
-# 6. reports rows for any new reference, then their committee/group creators
+# 6. the agenda of the next sittings (what will be voted, and on which report),
+#    then reports rows for the new references — including the stubs the agenda
+#    created — and their committee/group creators
+node openapi/agenda.js --upcoming
 node openapi/reports-backfill.js
 node report.js
 node openapi/report-creator.js

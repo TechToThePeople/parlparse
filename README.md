@@ -253,6 +253,49 @@ node openapi/procedure.js            # extract + fetch what is missing
 node openapi/procedure.js --dry      # only print the codes found
 ```
 
+## The agenda of a sitting (`agenda_items`)
+
+An agenda point is a fact; the vote is its outcome. `openapi/agenda.js` reads
+`GET /api/v2/meetings/MTG-PL-<date>/foreseen-activities` and stores one row per
+point, past or future, with the report the point is about:
+
+```xml
+<item><title>Report on the proposal …</title><type>Report:</type>
+  <process><label typeof="proc" resource="proc/2025-0130">2025/0130(COD)</label>…</process>
+  <references><label typeof="def/ep-document-types/REPORT"
+                     resource="doc/A-10-2026-0041">A10-0041/2026</label></references>
+  <creators><label typeof="org" resource="org/ECON"/>…</creators></item>
+```
+
+There is **no stored link to the roll-calls**: one agenda point can produce dozens
+of them (A10-0271/2026 had 61 on 2026-11-12), so the join is the pair
+`(date, report)` and the view does it:
+
+```sql
+-- planned = votes 0, voted = votes > 0
+SELECT date, agenda_order, title, report, votes, final_vote
+  FROM agenda_items_with_votes
+ WHERE kind = 'vote' AND date >= date('now')
+ ORDER BY date, agenda_order;
+```
+
+A forthcoming vote names a report we may not have yet, so a **stub** row is
+inserted with the title the agenda gives; `openapi/reports-backfill.js` then fills
+date, committees and URL from the document API (it looks at `agenda_items.report`
+as well as `rollcalls.ref`), and `openapi/report-creator.js` sets the creator.
+
+```sh
+node openapi/agenda.js --upcoming     # the next sittings
+node openapi/agenda.js --date 2026-11-24
+node openapi/agenda.js --all
+node openapi/agenda.js --minutes      # sittings that have minutes but no vote
+```
+
+`--minutes` also creates the `plenaries` row for a sitting that produced no vote
+(9 of them: 2024-07-16, 2024-07-19, 2024-09-17, 2024-11-19, 2024-12-16,
+2025-01-29, 2025-11-12, 2026-01-19, 2026-01-27) and for the future ones, with
+`sitting_id` left NULL until a document supplies it.
+
 ## What a procedure is about (`subjects`, `procedure_subjects`)
 
 Two sources, four vocabularies, one table keyed by `(scheme, code)` — because the

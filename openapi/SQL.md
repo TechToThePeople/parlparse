@@ -254,6 +254,25 @@ split ("Text as a whole without the words: …"), so the literal text has to be
 reconstructed from the document; `words` is the other half of that split — the
 words themselves, copied from the sibling part that names them.
 
+### `agenda_items`
+
+| column | type | | |
+|---|---|---|---|
+| `id` | text | PK | the API activity id (`MTG-PL-2026-11-24-OJ-ITM-V-29`) |
+| `plenary` | integer | nullable | `plenaries.id` |
+| `date` | varchar(10) | not null | the sitting's date |
+| `agenda_order` | varchar(10) | nullable | the agenda point (`9.0`) |
+| `notation` | varchar(30) | nullable | `V-29` |
+| `kind` | varchar(20) | not null | `vote`, `debate`, `other` |
+| `title` | text | nullable | `activity_label.en` |
+| `report` | varchar(30) | nullable | `A10-0041/2026`, joins `reports.reference` |
+| `raw` | text | nullable | `structuredContent.en` |
+
+The view `agenda_items_with_votes` adds `votes` (count of `rollcalls` with the
+same `ref` on the same day) and `final_vote` (the highest rollcall id): a point is
+*planned* while `votes = 0` and *voted* after. The link is deliberately not stored
+— one agenda point can produce dozens of roll-calls.
+
 ### `subjects` / `procedure_subjects`
 
 | column | type | | |
