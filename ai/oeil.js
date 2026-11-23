@@ -56,9 +56,21 @@ const PRICE_OUT = 0.6;
 const CHUNK = 600000;
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["all", "force", "dry", "attach", "report", "motions", "help"],
+  boolean: [
+    "all",
+    "force",
+    "dry",
+    "attach",
+    "attach-only",
+    "report",
+    "motions",
+    "help",
+  ],
   string: ["model"],
   alias: { h: "help", a: "all", n: "limit" },
+  // a summary nobody can read is a summary nobody needs: attach what is on disk
+  // at the end of every run (--no-attach to skip, --attach-only to do just that)
+  default: { attach: true },
 });
 
 if (argv.help) {
@@ -72,7 +84,9 @@ Usage: node ai/oeil.js [<reference> | --all] [options]
   --dry        fetch and convert only, no DeepSeek call
   --report     only the A/B/RC reports (the default with --motions)
   --motions    only the individual motions (B10-… tabled by a group)
-  --attach     re-attach the summaries already on disk to their votes
+  --attach     attach the stored summaries at the end of the run (default on;
+               --no-attach skips it)
+  --attach-only  only re-attach what is on disk, generate nothing
   --help, -h   this text
 
 Needs DEEPSEEK_API_KEY, read from the environment or from .env in the repo root.
@@ -540,8 +554,17 @@ async function runList(list, model, attach) {
   }
 }
 
+/**
+ * End of a run: the cost line, then the summaries on disk are attached to the
+ * votes that arrived since they were written (--no-attach skips it).
+ */
+async function finish() {
+  reportCost();
+  if (argv.attach && !argv.dry) await attachExisting();
+}
+
 async function main() {
-  if (argv.attach) {
+  if (argv["attach-only"]) {
     await attachExisting();
     return;
   }
@@ -574,7 +597,7 @@ async function main() {
         await storeMotionVotes(reference, summary);
       }
     );
-    reportCost();
+    await finish();
     return;
   }
 
@@ -599,7 +622,7 @@ async function main() {
     await runList(list, model, storeMotionVotes);
   }
 
-  reportCost();
+  await finish();
 }
 
 function reportCost() {
