@@ -325,25 +325,32 @@ every sitting whose attendance list has been imported:
 |---|---|
 | `mep` | `meps.id` |
 | `plenary` | `plenaries.id` |
-| `status` | `attended`, `excused` — from the register — or `absent` (a member that day with no row in it) |
+| `status` | `attended` / `excused` (the register), `present_unregistered` (no register row but votes: the register is incomplete), `absent` (neither) |
 | `rcv_held` | RCVs taken in the sitting |
 | `rcv_voted` | RCVs where `positions` holds a row for that MEP |
 
 ```sql
 -- one MEP, the breakdown the site wants
-SELECT sum(rcv_held)                                              AS could_have,
-       sum(CASE WHEN status = 'absent'  THEN rcv_held END)        AS absent,
-       sum(CASE WHEN status = 'excused' THEN rcv_held END)        AS excused,
-       sum(CASE WHEN status = 'attended' THEN rcv_held END)       AS present,
-       sum(rcv_voted)                                             AS did,
-       sum(CASE WHEN status = 'attended' THEN rcv_held - rcv_voted END) AS present_but_silent
+SELECT sum(rcv_held)                                                       AS held,
+       sum(CASE WHEN status = 'attended' THEN rcv_held END)                AS registered,
+       sum(CASE WHEN status = 'present_unregistered' THEN rcv_held END)    AS unregistered,
+       sum(CASE WHEN status = 'absent'  THEN rcv_held END)                 AS absent,
+       sum(CASE WHEN status = 'excused' THEN rcv_held END)                 AS excused,
+       sum(rcv_voted)                                                      AS voted,
+       sum(CASE WHEN status IN ('attended', 'present_unregistered')
+                THEN rcv_held - rcv_voted END)                             AS present_no_vote
   FROM mep_sitting_stats WHERE mep = 1;
 ```
 
-**The register is not complete**: 8,412 rows are `absent` yet carry 91,751 votes
-between them (e.g. Sjöstedt cast 94 of 94 votes on 2026-11-12 and appears in
-neither our ATT file nor the one the API publishes). So `absent` means "not in the
-register", not "not in the building" — the two figures are kept separate on purpose.
+`absent` and `excused` hold `rcv_held` for information but are not part of
+"present": a MEP who was not in the register could not have voted, and one excused
+was authorised not to.
+
+**Why `present_unregistered` exists**: the register is not complete. 1,679 rows
+have no register row yet carry 91,751 votes — Sjöstedt cast 94 of 94 votes on
+2026-11-12 and appears in neither our ATT file nor the one the API publishes (594
+entries, no `2268`). A vote is better evidence of presence than a missing line in a
+list, so those rows are not `absent`.
 
 It runs from `npm run majority:csv` (step 1 of `sql/run.js`) and takes ~1.5 s.
 

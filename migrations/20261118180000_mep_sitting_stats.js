@@ -11,7 +11,11 @@ exports.up = async function (knex) {
   await knex.schema.createTable("mep_sitting_stats", function (table) {
     table.integer("mep").notNullable(); // meps.id
     table.integer("plenary").notNullable(); // plenaries.id
-    table.string("status", 10).notNullable(); // attended | excused | absent
+    // attended | excused     the register says so
+    // present_unregistered   no register row, but positions has votes: they were
+    //                        there (the register is not complete)
+    // absent                 no register row and no vote
+    table.string("status", 20).notNullable();
     table.integer("rcv_held").notNullable().defaultTo(0);
     table.integer("rcv_voted").notNullable().defaultTo(0);
     table.datetime("updated_at").defaultTo(knex.fn.now());

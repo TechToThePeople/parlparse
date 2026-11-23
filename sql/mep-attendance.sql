@@ -6,9 +6,11 @@
 -- Only RCV votes can be counted (hand, electronic and secret votes publish no
 -- per-MEP data) and an abstention counts as a vote cast.
 --
--- status: attended | excused (both from the register) | absent (a member on that
--- date with no row in it). A sitting whose attendance list was never imported is
--- left out entirely, so an empty figure means "no register", not "0% present".
+-- status: attended | excused (from the register), present_unregistered (no row in
+-- the register but votes in `positions`: the register is not complete, so the vote
+-- is the better evidence of presence), absent (neither). A sitting whose
+-- attendance list was never imported is left out entirely, so an empty figure
+-- means "no register", not "0% present".
 --
 -- Rebuilt from scratch for every sitting that has a register, so re-running it is
 -- the same as running it once.
@@ -21,7 +23,11 @@ DELETE FROM mep_sitting_stats WHERE plenary IN (
 INSERT INTO mep_sitting_stats (mep, plenary, status, rcv_held, rcv_voted)
 SELECT m.id,
        p.id,
-       COALESCE(a.status, 'absent'),
+       CASE
+         WHEN a.status IS NOT NULL THEN a.status
+         WHEN COALESCE(v.n, 0) > 0 THEN 'present_unregistered'
+         ELSE 'absent'
+       END,
        rcv.n,
        COALESCE(v.n, 0)
   FROM plenaries p
