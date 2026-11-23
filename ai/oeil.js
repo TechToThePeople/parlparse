@@ -164,7 +164,9 @@ async function storedDocument(reference) {
   try {
     const row = await db("reports").where("reference", reference).first("raw");
     const doc = JSON.parse((row && row.raw) || "null");
-    return doc && doc.is_realized_by ? doc : null;
+    // an empty is_realized_by means the document was not published yet when the
+    // row was written: not a usable record, ask the API again
+    return doc && doc.is_realized_by && doc.is_realized_by.length ? doc : null;
   } catch {
     return null;
   }
@@ -200,7 +202,12 @@ async function fetchDocument(reference) {
         .split("/")
         .pop();
       if (["DOCX", "PDF"].includes(format) && m.is_exemplified_by)
-        candidates.push({ format, language, url: m.is_exemplified_by });
+        candidates.push({
+          format,
+          language,
+          url: m.is_exemplified_by,
+          bytes: Number(m.byteSize) || 0,
+        });
     }
   }
   // DOCX first: smaller, best structure; then the English version
@@ -215,6 +222,8 @@ async function fetchDocument(reference) {
   fs.mkdirSync(TMP_DIR, { recursive: true });
 
   if (!fs.existsSync(dest)) {
+    const kb = pick.bytes ? ` ${Math.round(pick.bytes / 1024)} KB` : "";
+    console.log(`   ⬇️  ${pick.format}${kb}…`);
     const res = await fetch(
       `https://data.europarl.europa.eu/${pick.url.replace(/^\//, "")}`,
       {
@@ -227,6 +236,8 @@ async function fetchDocument(reference) {
           "accept-language": "en-US,en;q=0.9",
         },
         redirect: "follow",
+        // without this a stalled connection hangs the run for ever
+        signal: AbortSignal.timeout(180000),
       }
     );
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${pick.url}`);
@@ -270,20 +281,17 @@ async function documentMarkdown(reference) {
   // --no-fetch: never download, a report without markdown is simply skipped
   if (argv.forceAi || !argv.fetch) return null;
 
+  const started = Date.now();
   const found = await fetchDocument(reference);
   if (!found) return null;
   const body = toMarkdown(found.file);
   fs.writeFileSync(dest, body);
   stats.documents++;
+  const kb = Math.round(fs.statSync(found.file).size / 1024);
   console.log(
-    `   📄 ${reference} ${found.format} ${body.length} chars → ${path.relative(
-      ROOT,
-      dest
-    )}` +
-      `\n      title: ${
-        (found.doc.title_dcterms && found.doc.title_dcterms.en) || "?"
-      }` +
-      `\n      source: ${found.url}`
+    `   📄 ${found.format} ${kb} KB → ${Math.round(
+      body.length / 1000
+    )}k chars ` + `markdown (${((Date.now() - started) / 1000).toFixed(1)}s)`
   );
   return body;
 }
@@ -331,25 +339,37 @@ async function complete(prompt, { model, maxTokens = 900 } = {}) {
     throw new Error("DEEPSEEK_API_KEY is not set (environment or .env)");
 
   for (let attempt = 0; attempt < 5; attempt++) {
-    const res = await fetch(API, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: "system", content: SYSTEM },
-          { role: "user", content: prompt },
-        ],
-        temperature: 0.3,
-        max_tokens: maxTokens,
-        // thinking mode is the default and its reasoning is billed as output;
-        // summarising does not need it
-        thinking: { type: "disabled" },
-      }),
-    });
+    let res;
+    try {
+      res = await fetch(API, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${key}`,
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: SYSTEM },
+            { role: "user", content: prompt },
+          ],
+          temperature: 0.3,
+          max_tokens: maxTokens,
+          // thinking mode is the default and its reasoning is billed as output;
+          // summarising does not need it
+          thinking: { type: "disabled" },
+        }),
+        // a stalled stream must not hang the run
+        signal: AbortSignal.timeout(180000),
+      });
+    } catch (e) {
+      const delay = Math.min(2000 * 2 ** attempt, 30000);
+      console.warn(
+        `   ⏳ DeepSeek unreachable (${e.name}), retrying in ${delay}ms`
+      );
+      await new Promise((r) => setTimeout(r, delay));
+      continue;
+    }
 
     if (res.ok) {
       const json = await res.json();
@@ -407,6 +427,7 @@ async function summarise(
     return;
   }
 
+  const started = Date.now();
   const body = markdown.trim();
   const parts = chunks(body, CHUNK);
   const tokens = { in: stats.tokensIn, out: stats.tokensOut };
@@ -432,11 +453,10 @@ async function summarise(
   stats.summaries++;
   await attach(reference, answer.trim());
   console.log(
-    `   ✍️  ${reference} → ${path.relative(ROOT, dest)} (${model}, ${
-      body.length
-    } chars in, ${stats.tokensIn - tokens.in} tokens in / ${
-      stats.tokensOut - tokens.out
-    } out)`
+    `   ✍️  ${answer.length} chars summary ` +
+      `(${stats.tokensIn - tokens.in} tokens in / ${
+        stats.tokensOut - tokens.out
+      } out, ${((Date.now() - started) / 1000).toFixed(1)}s)`
   );
 }
 
@@ -476,26 +496,52 @@ async function storeWholeTextVotes(reference, summary) {
     );
 }
 
-/** Attach every summary already on disk to its whole-text votes. */
+/**
+ * Attach the summaries on disk to their votes — only the ones whose text the
+ * votes do not carry yet. Re-attaching 1,648 unchanged summaries on every run
+ * was both slow and meaningless.
+ */
 async function attachExisting() {
   if (!fs.existsSync(SUMMARY_DIR)) {
     console.error("no summaries in " + path.relative(ROOT, SUMMARY_DIR));
     return;
   }
   const files = fs.readdirSync(SUMMARY_DIR).filter((f) => f.endsWith(".md"));
-  console.log(`🔗 ${files.length} summaries to attach`);
+
+  // what the votes already carry, by every reference a summary can hang on
+  const attached = new Map();
+  for (const row of await db.raw(
+    `SELECT r.ref AS ref, r.doc_ref AS doc_ref, t.text AS text
+       FROM rollcall_texts t JOIN rollcalls r ON r.id = t.rollcall
+      WHERE t.kind = 'summary'`
+  )) {
+    for (const key of [row.ref, row.doc_ref])
+      if (key && !attached.has(key)) attached.set(key, row.text);
+  }
+
+  let written = 0;
+  let unchanged = 0;
+  let awaiting = 0;
   for (const file of files) {
     const reference = file.replace(/\.md$/, "").replace(/_(\d{4})$/, "/$1");
     const summary = fs
       .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
       .trim();
     if (!summary) continue;
+    if (attached.get(reference) === summary) {
+      unchanged++;
+      continue;
+    }
+    const before = stats.attached;
     // the same text can be a report reference and a motion's doc_ref
     await storeWholeTextVotes(reference, summary);
     await storeMotionVotes(reference, summary);
+    if (stats.attached === before) awaiting++;
+    else written++;
   }
   console.log(
-    `${stats.attached} vote(s) attached across ${files.length} summaries`
+    `🔗 summaries: ${written} attached now, ${unchanged} already there, ` +
+      `${awaiting} waiting for their vote`
   );
 }
 
@@ -538,7 +584,8 @@ async function motionReferences() {
 }
 
 async function runList(list, model, attach) {
-  for (const reference of list) {
+  for (const [i, reference] of list.entries()) {
+    console.log(`\n▸ [${i + 1}/${list.length}] ${reference}`);
     try {
       // --force-ai and --no-fetch work from the markdown on disk: no download
       // and no conversion, the model is the only step left
