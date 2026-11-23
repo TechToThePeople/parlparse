@@ -296,6 +296,19 @@ SELECT date, agenda_order, title, report, votes, final_vote
  ORDER BY date, agenda_order;
 ```
 
+Three kinds of row, all in the same table:
+
+| `kind` | what it is | has |
+|---|---|---|
+| `part` | a meeting part from the API (`MEETING_PART`): a slot in the day | `start`/`end`, a label (`PLENARY SESSION VOTES`) or `Votes`/`Debates` when the API gives none |
+| `vote` | an agenda point that will be voted | `agenda_order`, `title`, `report`, and the time of its part |
+| `debate` | an agenda point that is debated | `agenda_order`, `title`, time of its part |
+
+Parts **nest**: `09:00-11:50 PLENARY SESSION DEBATES` contains a `10:30-11:50`
+sub-slot, which is where its first debate point is scheduled. Every point also
+carries the time of its own part, so a timetable built from the points
+(`kind IN ('vote','debate')`) has no overlap.
+
 **The time of the day** lives on the *meeting part*, not on the point: the API
 returns `MEETING_PART MTG-PL-2026-11-24-TF-1200`, label `PLENARY SESSION VOTES`,
 `activity_start_date 2026-11-24T12:00`, `…T13:00`, and its `consists_of` lists the

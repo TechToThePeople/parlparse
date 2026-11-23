@@ -220,11 +220,22 @@ async function processDate(date, source) {
     });
   }
   const partOf = new Map();
+  const partHasVote = new Map();
   for (const a of activities) {
+    const isPart = parts.has(a.activity_id);
     for (const child of a.consists_of || []) {
       const id = String(child).replace(/^eli\/dl\/event\//, "");
-      if (parts.has(a.activity_id)) partOf.set(id, a.activity_id);
+      if (!isPart) continue;
+      partOf.set(id, a.activity_id);
+      if (kindOf(a.had_activity_type) === "part" && !partHasVote.has(id))
+        partHasVote.set(a.activity_id, false);
     }
+  }
+  // a part whose own label is missing is named after what it holds
+  for (const a of activities) {
+    const isVote = kindOf(a.had_activity_type) === "vote";
+    const parent = partOf.get(a.activity_id);
+    if (isVote && parent) partHasVote.set(parent, true);
   }
 
   let count = 0;
@@ -242,7 +253,11 @@ async function processDate(date, source) {
       agenda_order: a.activity_order ? String(a.activity_order) : null,
       notation: a.notation_agendaPoint || null,
       kind,
-      title: (a.activity_label || {}).en || parsed.title || null,
+      title:
+        kind === "part"
+          ? (a.activity_label || {}).en ||
+            (partHasVote.get(a.activity_id) ? "Votes" : "Debates")
+          : (a.activity_label || {}).en || parsed.title || null,
       report: parsed.report,
       start:
         kind === "part"
