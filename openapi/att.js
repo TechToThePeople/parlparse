@@ -78,6 +78,16 @@ const zlib = require("zlib");
 
 const WORK_TYPE = "LIST_ATTEND_PLENARY";
 
+/** Uncompressed size of our gzip: the last 4 bytes are the size mod 2^32. */
+function inflatedSize(file) {
+  try {
+    const buf = fs.readFileSync(file);
+    return buf.readUInt32LE(buf.length - 4);
+  } catch {
+    return 0;
+  }
+}
+
 async function main() {
   const { help, input, force, all } = parseArgs();
 
@@ -158,26 +168,37 @@ async function processDate(date, force) {
   const attDir = path.resolve(__dirname, "..", "data", "ATT");
   const zipPath = path.join(attDir, `${resolved.date}.xml.zip`);
 
-  // Check if already downloaded
-  if (!force && fs.existsSync(zipPath)) {
-    console.log(`   ⏭️  Already downloaded (use --force to re-download)`);
-    return "skip";
-  }
+  // A cached file still has to reach the database: the import below runs for
+  // every date, and lib/attendance.js replaces a sitting's rows.
+  const cached = !force && fs.existsSync(zipPath);
+  if (cached) console.log(`   ⏭️  Already downloaded, importing it`);
 
   // 3. Download the published English XML, falling back to doceo's shortcut
   const doceoUrl = `https://www.europarl.europa.eu/doceo/document/${resolved.identifier}_EN.xml`;
 
-  const published = await publishedBody(resolved.identifier);
-  if (published) {
-    fs.mkdirSync(attDir, { recursive: true });
-    const compressed = zlib.gzipSync(published, { level: 9 });
-    fs.writeFileSync(zipPath, compressed);
-    console.log(
-      `   ✓ saved the published XML (${published.length} → ${compressed.length} bytes)`
-    );
-  }
+  const before = fs.existsSync(zipPath) ? inflatedSize(zipPath) : 0;
 
-  if (!published) {
+  /** Write only what is not shorter than what we already have. */
+  const save = (body, what) => {
+    const size = Buffer.byteLength(body, "utf8");
+    if (before && size < before) {
+      console.warn(
+        `   ⚠️  ${what} is smaller than the file we have ` +
+          `(${size} vs ${before} bytes) — kept the existing one`
+      );
+      return false;
+    }
+    fs.mkdirSync(attDir, { recursive: true });
+    const compressed = zlib.gzipSync(body, { level: 9 });
+    fs.writeFileSync(zipPath, compressed);
+    console.log(`   ✓ saved ${what} (${size} → ${compressed.length} bytes)`);
+    return true;
+  };
+
+  const published = cached ? null : await publishedBody(resolved.identifier);
+  if (published) save(published, "the published XML");
+
+  if (!cached && !published) {
     console.log(`📥 Downloading English XML via browser…`);
     try {
       const result = await getWaf().downloadViaBrowser(doceoUrl);
@@ -185,12 +206,7 @@ async function processDate(date, force) {
         result.status === 200 &&
         result.body.includes("<PV.AttendanceRegister")
       ) {
-        fs.mkdirSync(attDir, { recursive: true });
-        const compressed = zlib.gzipSync(result.body, { level: 9 });
-        fs.writeFileSync(zipPath, compressed);
-        console.log(
-          `   ✓ saved ${zipPath} (${result.body.length} → ${compressed.length} bytes)`
-        );
+        save(result.body, "the doceo XML");
       } else if (result.status === 202) {
         console.error(
           `   ❌ WAF challenge failed after retry — cannot download ${resolved.identifier}`

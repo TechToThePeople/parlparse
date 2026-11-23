@@ -11,20 +11,28 @@ npm run -s db:migrate || exit 1
 node openapi/decisions.js -d-1
 node openapi/decisions.js -d0
 
-# 3. per-MEP positions from the RCV XML
-node positions.js -d -u
-node positions.js -d-1 -u
+# 3. per-MEP positions from the RCV XML. --force is required: step 2 already
+#    created the plenaries row, which positions.js would otherwise take as
+#    "already processed" and skip before importing any positions.
+node positions.js -d -u -f
+node positions.js -d-1 -u -f
 
 # 4. VOT XML: references, names, committees, vote requests and who asked
 node openapi/vot-xml.js "$(date -d '-1 day' +%F)"
 node openapi/vot-xml.js "$(date +%F)"
 
-# 5. reports rows for any new reference, then their committee/group creators
+# 5. attendance list of the sitting (who was present, who was excused).
+#    A cached file is imported too, so a date downloaded but never parsed is fixed
+#    by simply running this again.
+node openapi/att.js "$(date -d '-1 day' +%F)"
+node openapi/att.js "$(date +%F)"
+
+# 6. reports rows for any new reference, then their committee/group creators
 node openapi/reports-backfill.js
 node report.js
 node openapi/report-creator.js
 
-# 6. static files
+# 7. static files
 node csv.js
 node cards.js
 npm run -s majority:csv
