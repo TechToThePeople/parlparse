@@ -214,7 +214,7 @@ motion's reference and `amendmentAuthor` the tabling group, and they are usually
 
 ### `node openapi/reports-backfill.js [--dry] [--limit N]`
 
-Creates the `reports` rows that `rollcalls.ref` points at but that `report.js`
+Creates the `reports` rows that `rollcalls.ref` (and `agenda_items.report`) point at but that the old scraper
 never scraped: 944 references were missing, including all the joint motions.
 Only `(RC-)?[AB]\d+-\d+/YYYY` references are attempted (via
 `/documents/<eli>`, e.g. `A-10-2024-0008`); `C10-…` Commission proposals are not

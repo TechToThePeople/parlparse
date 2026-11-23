@@ -75,13 +75,13 @@ async function main() {
       ORDER BY votes DESC`
   );
 
-  // stubs written by openapi/agenda.js for reports that have not been voted yet:
-  // the row exists (so the join from the agenda works) but has no metadata
+  // rows that exist but were never enriched: the stubs openapi/agenda.js writes
+  // for a forthcoming vote, and anything the old report.js left with no url
   const stubs = await db.raw(
     `SELECT rep.reference, 0 AS votes, 1 AS stub
        FROM reports rep
-      WHERE rep.reference IS NOT NULL AND rep.creator IS NULL
-        AND rep.title IS NOT NULL`
+      WHERE rep.reference IS NOT NULL
+        AND (rep.url IS NULL OR rep.raw IS NULL)`
   );
   const seen = new Set(missing.map((m) => m.reference));
   for (const stub of stubs) if (!seen.has(stub.reference)) missing.push(stub);
