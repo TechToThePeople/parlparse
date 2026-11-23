@@ -34,7 +34,7 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
-const { fetchDocumentById } = require("../openapi/lib");
+const { fetchDocumentById, getWaf } = require("../openapi/lib");
 
 const ROOT = path.resolve(__dirname, "..");
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
@@ -158,6 +158,30 @@ async function references() {
   );
 }
 
+/** The DOCX/PDF doceo serves when the document record names no distribution. */
+async function doceoFile(eli) {
+  fs.mkdirSync(TMP_DIR, { recursive: true });
+  for (const ext of ["docx", "pdf"]) {
+    const dest = path.join(TMP_DIR, `${eli}.${ext}`);
+    if (!fs.existsSync(dest)) {
+      const url = `https://www.europarl.europa.eu/doceo/document/${String(
+        eli
+      ).toUpperCase()}_EN.${ext}`;
+      console.log(`   ⬇️  doceo ${ext} (the API names no file)…`);
+      const res = await getWaf().downloadBuffer(url);
+      if (res.status !== 200 || !res.buffer) continue;
+      fs.writeFileSync(dest, res.buffer);
+    }
+    return {
+      file: dest,
+      url: `doceo/${eli}_EN.${ext}`,
+      format: ext.toUpperCase(),
+      doc: {},
+    };
+  }
+  return null;
+}
+
 /** Download the DOCX (preferred) or PDF of a report. Returns {file, url, doc}. */
 /** The document record `openapi/report.js` already stored, when it has one. */
 async function storedDocument(reference) {
@@ -213,8 +237,13 @@ async function fetchDocument(reference) {
   // DOCX first: smaller, best structure; then the English version
   candidates.sort((a) => (a.format === "DOCX" ? -1 : 1));
   candidates.sort((a) => (a.language === "ENG" ? -1 : 1));
-  // the document exists but publishes neither a DOCX nor a PDF
-  if (!candidates.length) throw new Error("no DOCX or PDF distribution");
+  // A handful of document records name no distribution at all; doceo still
+  // serves the file. One WAF download instead of no summary.
+  if (!candidates.length) {
+    const fromDoceo = await doceoFile(eli);
+    if (!fromDoceo) throw new Error("no DOCX or PDF distribution");
+    return fromDoceo;
+  }
 
   const pick = candidates[0];
   const ext = pick.format.toLowerCase();

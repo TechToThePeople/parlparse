@@ -202,8 +202,10 @@ node ai/oeil.js --force-ai A10-0023/2026   # new summary from the saved markdown
 model again. The attach pass costs nothing (it reads `data/content/summary/` and
 upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 
-- document: the DOCX from the Open Data distribution (PDF as fallback, `doceo`
-  is WAF-blocked), converted with `markitdown` → `data/content/oeil/<ref>.md`
+- document: the DOCX from the Open Data distribution (PDF as fallback), converted
+  with `markitdown` → `data/content/oeil/<ref>.md`. When the record names no
+  distribution at all — it happens for a handful of reports — the file comes from
+  doceo through the WAF browser instead (A10-0277/2026, B10-0427/2026, …)
 - summary: `deepseek-flash` (DeepSeek-V4.1-Flash, their cheapest — 1M token
   context, thinking mode switched off since its reasoning is billed as output),
   one paragraph of 60–90 words + 3 bullets, or a chunk/map-reduce pass for a
