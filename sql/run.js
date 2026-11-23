@@ -15,6 +15,7 @@ const db = require("../lib/db.js");
 // CSV file to write its result set into relative to the repo root.
 const steps = [
   { sql: "updatemajority.sql" }, // recompute groupmajority (upsert), no CSV
+  { sql: "mep-attendance.sql" }, // rebuild mep_sitting_stats, no CSV
   { sql: "cohesion.sql", csv: "data/cohesion.csv" },
   { sql: "cordon.sql", csv: "data/cordon.csv" },
   { sql: "cordon-report.sql", csv: "data/cordon-report.csv" },

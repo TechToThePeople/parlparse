@@ -348,7 +348,10 @@ async function download(date, identifier, zipPath) {
   return fs.existsSync(zipPath);
 }
 
-main().catch((err) => {
-  console.error("❌", err.message);
-  process.exit(1);
-});
+main()
+  // the sqlite pool keeps the process alive after the work is done
+  .then(() => process.exit(0))
+  .catch((err) => {
+    console.error("❌", err.message);
+    process.exit(1);
+  });

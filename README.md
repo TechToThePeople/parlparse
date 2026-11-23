@@ -311,6 +311,42 @@ node openapi/agenda.js --minutes      # sittings that have minutes but no vote
 2025-01-29, 2025-11-12, 2026-01-19, 2026-01-27) and for the future ones, with
 `sitting_id` left NULL until a document supplies it.
 
+## How much of the votes a MEP took part in (`mep_sitting_stats`)
+
+Presence is a daily register (`attendances`), so "could have taken part" is every
+RCV of that sitting and "did" is whether `positions` has a row for it. Only RCV
+votes count (hand, electronic and secret votes publish no per-MEP data) and an
+abstention counts as a vote cast.
+
+`sql/mep-attendance.sql` rebuilds the table, one row per MEP per sitting, for
+every sitting whose attendance list has been imported:
+
+| column | meaning |
+|---|---|
+| `mep` | `meps.id` |
+| `plenary` | `plenaries.id` |
+| `status` | `attended`, `excused` — from the register — or `absent` (a member that day with no row in it) |
+| `rcv_held` | RCVs taken in the sitting |
+| `rcv_voted` | RCVs where `positions` holds a row for that MEP |
+
+```sql
+-- one MEP, the breakdown the site wants
+SELECT sum(rcv_held)                                              AS could_have,
+       sum(CASE WHEN status = 'absent'  THEN rcv_held END)        AS absent,
+       sum(CASE WHEN status = 'excused' THEN rcv_held END)        AS excused,
+       sum(CASE WHEN status = 'attended' THEN rcv_held END)       AS present,
+       sum(rcv_voted)                                             AS did,
+       sum(CASE WHEN status = 'attended' THEN rcv_held - rcv_voted END) AS present_but_silent
+  FROM mep_sitting_stats WHERE mep = 1;
+```
+
+**The register is not complete**: 8,412 rows are `absent` yet carry 91,751 votes
+between them (e.g. Sjöstedt cast 94 of 94 votes on 2026-11-12 and appears in
+neither our ATT file nor the one the API publishes). So `absent` means "not in the
+register", not "not in the building" — the two figures are kept separate on purpose.
+
+It runs from `npm run majority:csv` (step 1 of `sql/run.js`) and takes ~1.5 s.
+
 ## What a procedure is about (`subjects`, `procedure_subjects`)
 
 Two sources, four vocabularies, one table keyed by `(scheme, code)` — because the
