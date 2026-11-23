@@ -222,6 +222,28 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
+## Is there anything new? (`openapi/status.js`)
+
+Both documents are plain entries in the Open Data API, so their existence is a
+`200` or a `404` — two cheap requests per date and **no headless browser** (the
+WAF is only in the way of *downloading* the XML from doceo, and that is the
+fallback; `rcv.js` and `att.js` prefer the distribution the API names).
+
+```sh
+node openapi/status.js --days 6
+```
+
+```
+date        RCV         ATT         local
+2026-11-11  —           published   0 RCV, 0 positions, 496 attended
+2026-11-12  published   published   95 RCV, 56639 positions, 591 attended
+2026-11-24  —           —           planned: 9 vote(s)
+```
+
+`published` but nothing local means the import has not run: that is the signal to
+call `./update.sh`. The script reports `? 429` when the API refuses to answer, so
+"not published" is never confused with "could not ask".
+
 ## Per-MEP votes (`positions`)
 
 `openapi/rcv.js` downloads `PV-10-<date>-RCV` from doceo (gzip, despite the
