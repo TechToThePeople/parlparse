@@ -46,6 +46,10 @@ if (argv.date) {
   console.log("processing only " + date);
 }
 
+// a 0-byte csv means a previous run found no positions (e.g. the RCV import
+// was skipped); treat it as missing so the card is regenerated
+const hasCsv = (file) => fs.existsSync(file) && fs.statSync(file).size > 0;
+
 const writePositions = async (id, date) => {
   const positions = await db
     .select(
@@ -116,7 +120,7 @@ db("rollcall_texts")
       try {
         if (date && !argv.force && vdate !== date) continue;
         // existing card: refresh the metadata json only, the csv is expensive
-        if (fs.existsSync(csv) && !argv.force) {
+        if (hasCsv(csv) && !argv.force) {
           fs.writeFileSync(
             "../" + term + "/cards/" + vote.id + ".json",
             JSON.stringify(vote)
@@ -132,7 +136,7 @@ db("rollcall_texts")
       fs.writeFileSync(dest, JSON.stringify(vote));
       // the per-MEP csv only changes when positions change; rewriting the json
       // keeps name/ref/committee/outcome/requested_by fresh for existing cards
-      if (fs.existsSync(csv) && !argv.force) continue;
+      if (hasCsv(csv) && !argv.force) continue;
       // only roll-call votes have individual positions; a hand/electronic/secret
       // vote would just produce an empty csv, so don't write one at all
       if (vote.method && vote.method !== "RCV") continue;
