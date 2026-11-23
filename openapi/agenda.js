@@ -41,7 +41,7 @@ const UA =
   "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["all", "upcoming", "minutes", "force", "dry", "help"],
+  boolean: ["all", "upcoming", "minutes", "today", "force", "dry", "help"],
   string: ["date", "sleep", "limit"],
   alias: { h: "help" },
 });
@@ -50,6 +50,8 @@ if (argv.help) {
   console.log(`
 Usage: node openapi/agenda.js [options]
 
+  --today          today's sitting, or yesterday's if today has none; exits 3
+                   when there is neither (update.sh uses that to stop early)
   --date <d>       one sitting (2026-11-24)
   --upcoming       the next sittings (3 dates, or --limit N)
   --all            every sitting of the term
@@ -253,7 +255,25 @@ async function meetingDates() {
 
 async function main() {
   let dates = [];
-  if (argv.date) dates = [argv.date];
+  if (argv.today) {
+    // a sitting day answers with activities, a day without one answers 204
+    const today = new Date();
+    const day = (d) => d.toISOString().slice(0, 10);
+    const candidates = [day(today), day(new Date(today.getTime() - 86400000))];
+    for (const candidate of candidates) {
+      const json = await get(
+        `/meetings/MTG-PL-${candidate}/foreseen-activities?limit=200&format=application/ld%2Bjson`
+      );
+      await sleep(Number(argv.sleep || 700));
+      if (json && (json.data || []).length) dates.push(candidate);
+    }
+    if (!dates.length) {
+      console.log(
+        `🛑 no sitting on ${candidates[0]} nor ${candidates[1]} — nothing to update`
+      );
+      process.exit(3);
+    }
+  } else if (argv.date) dates = [argv.date];
   else if (argv.all) dates = await meetingDates();
   else if (argv.upcoming) {
     const today = new Date().toISOString().slice(0, 10);
