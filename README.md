@@ -252,6 +252,12 @@ node openapi/procedure.js            # extract + fetch what is missing
 node openapi/procedure.js --dry      # only print the codes found
 ```
 
+It runs on the report markdown, so a report only gets a procedure after
+`ai/oeil.js` has fetched its document; `node openapi/procedure.js` without new
+markdown has nothing to do. `update.sh` runs it (step 8) followed by
+`node openapi/subject.js`, which fills the subjects of the procedures that have
+none yet.
+
 ## The agenda of a sitting (`agenda_items`)
 
 An agenda point is a fact; the vote is its outcome. `openapi/agenda.js` reads
