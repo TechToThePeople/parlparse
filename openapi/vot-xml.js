@@ -727,10 +727,12 @@ async function processDate(date, stats) {
         if (ref && !row.ref) update.ref = ref;
         const named = withPart(name, request);
         if (named && named !== row.name) {
+          // an English label may replace what is there; a non-English one only
+          // fills an empty name (--force overrides both, see the motion branch)
           const mayRename =
-            argv.force || lastLanguage === "ENG"
+            lastLanguage === "ENG"
               ? argv.force || argv["force-names"] || looksLikeRcvName(row.name)
-              : !row.name;
+              : !row.name || argv.force;
           if (mayRename) update.name = named;
         }
       }
