@@ -292,6 +292,10 @@ that file exists — the AI summary is not involved. `openapi/report.js` runs
 `procedure.js` and then `subject.js` at the end unless `--no-procedure` /
 `--no-subject`; both only touch what is new.
 
+The vocabularies the pipeline reads — document `work-type`s, activity types, decision
+methods, procedure types, roles, statuses — are listed with their meanings in
+[`openapi/doc.md`](openapi/doc.md), generated from the API's concept schemes.
+
 ## The agenda of a sitting (`agenda_items`)
 
 An agenda point is a fact; the vote is its outcome. `openapi/agenda.js` reads
