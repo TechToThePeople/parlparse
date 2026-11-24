@@ -206,7 +206,12 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
   with `markitdown` → `data/content/oeil/<ref>.md`. When the record names no
   distribution at all — it happens for a handful of reports — the file comes from
   doceo through the WAF browser instead (A10-0277/2026, B10-0427/2026, …)
-- summary: `deepseek-flash` (DeepSeek-V4.1-Flash, their cheapest — 1M token
+- summary: written to the report row itself (`reports.summary`,
+  `summary_model`, `summary_at`) as well as the file, so it exists in the database
+  even when no vote carries it — `rollcall_texts` holds one text per vote, and an
+  amendment or split vote keeps its own wording. 1,672 of the 1,678 summaries are
+  on a report row; six `B10-*` motions have a file but no `reports` row because no
+  vote references them. Model: `deepseek-flash` (DeepSeek-V4.1-Flash, their cheapest — 1M token
   context, thinking mode switched off since its reasoning is billed as output),
   one paragraph of 60–90 words + 3 bullets, or a chunk/map-reduce pass for a
   report over ~600k characters → `data/content/summary/<ref>.md`

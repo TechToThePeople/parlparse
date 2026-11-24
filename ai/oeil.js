@@ -500,6 +500,7 @@ async function summarise(
   }
 
   fs.writeFileSync(dest, answer.trim() + "\n");
+  await storeSummary(reference, answer, model);
   stats.summaries++;
   await attach(reference, answer.trim());
   console.log(
@@ -552,6 +553,19 @@ async function storeWholeTextVotes(reference, summary) {
     );
 }
 
+/** The summary on the report row itself, so it survives having no vote. */
+async function storeSummary(reference, text, model) {
+  const body = String(text || "").trim();
+  if (!body) return;
+  await db("reports")
+    .where("reference", reference)
+    .update({
+      summary: body,
+      summary_model: model || MODEL,
+      summary_at: new Date().toISOString(),
+    });
+}
+
 /**
  * Attach the summaries on disk to their votes — only the ones whose text the
  * votes do not carry yet. Re-attaching 1,648 unchanged summaries on every run
@@ -579,11 +593,18 @@ async function attachExisting() {
   let unchanged = 0;
   let awaiting = 0;
   for (const file of files) {
-    const reference = file.replace(/\.md$/, "").replace(/_(\d{4})$/, "/$1");
+    // B10-0245_2026_REV1.md -> B10-0245/2026/REV1
+    const reference = file
+      .replace(/\.md$/, "")
+      .replace(
+        /_(\d{4})(_REV\d+)?$/,
+        (m, year, rev) => "/" + year + (rev ? "/" + rev.slice(1) : "")
+      );
     const summary = fs
       .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
       .trim();
     if (!summary) continue;
+    await storeSummary(reference, summary);
     if (attached.get(reference) === summary) {
       unchanged++;
       continue;
