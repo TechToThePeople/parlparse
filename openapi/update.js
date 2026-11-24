@@ -214,6 +214,9 @@ function statusOf(doc, published, mine) {
   return doc.have(mine) ? "ok" : "new";
 }
 
+const votPath = (date) =>
+  path.join(__dirname, "..", "data", "VOT", `${date}.xml`);
+
 /** Run one importer, keeping the loop going when it throws. */
 async function step(name, fn) {
   try {
@@ -243,7 +246,11 @@ async function sync(rows) {
     await step("decisions", () => decisions.run({ date }));
     if (row.docs.RCV === "new") await step("rcv", () => rcv.run({ _: [date] }));
     if (row.docs.ATT === "new") await step("att", () => att.run({ _: [date] }));
-    if (row.docs.VOT === "new")
+    // VOT is the authority on how a vote was taken (ROLL_CALL vs ELECTRONICAL),
+    // and decisions.js re-applies the API's ambiguous decision_method each run —
+    // so vot-xml has to run again, not only when the document is new. Its XML is
+    // cached after the first import, so this costs a local parse.
+    if (row.docs.VOT === "new" || fs.existsSync(votPath(date)))
       await step("vot-xml", () => votXml.run({ _: [date] }));
     // the agenda's "planned" votes become "voted" once the roll-calls are in
     await step("agenda", () => agenda.run({ date }));
