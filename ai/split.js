@@ -30,7 +30,7 @@ const ROOT = path.resolve(__dirname, "..");
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
 
 const PARAGRAPH = /^§\s*(\d{1,3})$/;
-const RECITAL = /^Recital\s+([A-Z]|\d{1,3})$/i;
+const RECITAL = /^(?:Recital|Considérant)\s+([A-Z]|\d{1,3})$/i;
 const CITATION = /^Citation\s+(\d{1,3})$/i;
 const ITEM = /^([A-Z]|\d{1,3})[.)]\s+(.*)$/;
 // the resolution's operative part starts under one of these headings
@@ -168,7 +168,13 @@ async function processReport(reference, votes) {
 
   for (const vote of votes) {
     // the API sometimes prefixes the name with a dash: "– § 6", "– Recital E"
-    const name = String(vote.name || "").replace(/^[–—−-]\s*/, "");
+    // The name can carry a prefix ("A10-0288/2026 – Zdechovský – § 28"): the key
+    // is what comes after the last separator, as in ai/amendments.js
+    const full = String(vote.name || "").replace(/^[–—−-]\s*/, "");
+    const name = full
+      .split(/\s[–—−-]\s/)
+      .pop()
+      .trim();
     let found = null;
     let kind = null;
     let bucket = null;
@@ -326,10 +332,13 @@ async function main() {
     `SELECT r.id, r.ref, r.name
        FROM rollcalls r
       WHERE NOT EXISTS (SELECT 1 FROM rollcall_texts t WHERE t.rollcall = r.id)
-        AND (r.name GLOB '[–—-] § [0-9]*' OR r.name GLOB '[–—-] Recital *'
-             OR r.name GLOB '[–—-] Article [0-9]*' OR r.name GLOB '[–—-] Citation *'
-             OR r.name GLOB '§ [0-9]*' OR r.name GLOB 'Recital *'
-             OR r.name GLOB 'Article [0-9]*' OR r.name GLOB 'Citation *')
+        -- the key is either the whole name ("§ 28") or its tail
+        -- ("Zdechovský – § 28"): the regexes below re-check it exactly
+        AND (r.name GLOB '§ [0-9]*' OR r.name GLOB '* § [0-9]*'
+             OR r.name GLOB 'Recital *' OR r.name GLOB '* Recital *'
+             OR r.name GLOB 'Consid*nt *' OR r.name GLOB '* Consid*nt *'
+             OR r.name GLOB 'Article [0-9]*' OR r.name GLOB '* Article [0-9]*'
+             OR r.name GLOB 'Citation *' OR r.name GLOB '* Citation *')
       ${argv.ref ? "AND r.ref = ?" : ""}
       ORDER BY r.ref, r.id`,
     argv.ref ? [argv.ref] : []
@@ -374,9 +383,22 @@ async function main() {
   );
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
+/**
+ * Importable entry point: `run({ ref: "A10-0288/2026" })` merges the options over
+ * the parsed argv and does what the CLI does. openapi/update.js calls this.
+ */
+async function run(options = {}) {
+  Object.assign(argv, options);
+  await main();
+}
+
+module.exports = { run, main, argv };
+
+if (require.main === module) {
+  run()
+    .then(() => process.exit(0))
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
+}

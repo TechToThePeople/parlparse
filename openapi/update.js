@@ -36,6 +36,8 @@ const cards = require("../cards");
 const sqlRun = require("../sql/run");
 const report = require("./report");
 const oeil = require("../ai/oeil");
+const split = require("../ai/split");
+const amendments = require("../ai/amendments");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -266,6 +268,10 @@ async function sync(rows) {
   if (aiMax > 0)
     await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
   else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
+  // the texts that come from the report's own document (paragraphs, recitals) and
+  // from the amendment range documents — both cached locally after the import
+  await step("ai/split", () => split.run({}));
+  await step("ai/amendments", () => amendments.run({ limit: 20 }));
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));
