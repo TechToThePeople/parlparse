@@ -231,10 +231,8 @@ async function sync(rows) {
   const dates = rows
     .filter((r) => Object.values(r.docs).includes("new"))
     .map((r) => r.date);
-  if (!dates.length) {
-    console.log("→ nothing published that is not here already");
-    return [];
-  }
+  // nothing to do: the table above already said so
+  if (!dates.length) return [];
   console.log(`\n→ importing ${dates.length} sitting(s): ${dates.join(" ")}\n`);
 
   for (const [i, date] of dates.entries()) {
@@ -282,8 +280,13 @@ async function main() {
   const out = await readStatus(dates);
 
   if (argv.sync) {
-    const dates2 = await sync(out);
-    if (dates2.length) printStatus(await readStatus(dates2));
+    // what was found, then what was done — the table is the point of the check
+    printStatus(out);
+    const imported = await sync(out);
+    if (imported.length) {
+      console.log("\n→ after the import:");
+      printStatus(await readStatus(imported));
+    }
     await db.destroy();
     return;
   }
