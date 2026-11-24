@@ -3,22 +3,25 @@
 /**
  * openapi/status.js — is there anything new to import?
  *
- * The quick question after a sitting: has the roll-call XML been published, and
- * the attendance list? Both are documents in the Open Data API, so a plain
- * `GET /documents/PV-10-<date>-RCV` answers 200 or 404 — no headless browser, no
- * WAF challenge, two cheap requests per date.
+ * A plenary day publishes four documents, all plain entries in the Open Data API,
+ * so their existence is a status code — no headless browser, no WAF challenge
+ * (the browser is only needed to *download* the XML from doceo, which is the
+ * fallback path anyway):
  *
- * It also says whether the local database already carries them, so the answer is
- * actionable: "published but not imported" means run update.sh.
+ *   PV-10-<date>-RCV   VOTE_ROLLCALL_PLENARY   the roll-call results
+ *   PV-10-<date>-ATT   LIST_ATTEND_PLENARY     the attendance list
+ *   PV-10-<date>-VOT   VOTE_RESULTS_PLENARY    every vote, roll-call or not
+ *   PV-10-<date>       MINUTES_PLENARY         the minutes (nothing imports them)
  *
- *   date        RCV            ATT            local
- *   2026-11-12  published      published      95 RCV, 594 attended
- *   2026-11-24  —              —              planned 24 Nov: 9 votes
+ * The local column says what this database already holds, so the interesting
+ * value is `new`: published, not imported yet — run update.sh.
  *
  * Usage:
- *   node openapi/status.js [--days N] [--date YYYY-MM-DD]
+ *   node openapi/status.js [--days N] [--date YYYY-MM-DD] [--json]
  */
 
+const fs = require("fs");
+const path = require("path");
 const minimist = require("minimist");
 const db = require("../lib/db");
 
@@ -37,8 +40,8 @@ if (argv.help) {
   console.log(`
 Usage: node openapi/status.js [options]
 
-Says whether the roll-call XML and the attendance list of the recent sittings are
-published by the API, and whether this database already has them.
+Says whether the RCV, ATT, VOT and MINUTES documents of the recent sittings are
+published, and whether this database already has them.
 
   --days, -n N     how many recent sitting dates to look at (default 5)
   --date <d>       one date instead
@@ -48,11 +51,19 @@ published by the API, and whether this database already has them.
   process.exit(0);
 }
 
+/** The four documents of a sitting, and what says we already have one. */
+const DOCUMENTS = [
+  { key: "RCV", suffix: "-RCV", local: "positions" },
+  { key: "ATT", suffix: "-ATT", local: "attended" },
+  { key: "VOT", suffix: "-VOT", local: "vot" },
+  { key: "MIN", suffix: "", local: null }, // minutes: published, never imported
+];
+
 /** 200 = published, 404 = not yet, anything else = could not tell. */
-async function published(date, kind) {
+async function published(date, suffix) {
   try {
     const res = await fetch(
-      `${API}/documents/PV-10-${date}-${kind}?format=application/ld%2Bjson`,
+      `${API}/documents/PV-10-${date}${suffix}?format=application/ld%2Bjson`,
       {
         headers: { Accept: "application/ld+json", "User-Agent": UA },
         signal: AbortSignal.timeout(20000),
@@ -60,9 +71,9 @@ async function published(date, kind) {
     );
     if (res.status === 200) return "published";
     if (res.status === 404) return "—";
-    return `? ${res.status}`;
+    return `?${res.status}`;
   } catch {
-    return "? net";
+    return "?net";
   }
 }
 
@@ -83,8 +94,8 @@ async function local(date) {
     ? (
         await db.raw(
           `SELECT count(*) AS n FROM positions p
-           JOIN rollcalls r ON r.id = p.rollcall
-          WHERE r.plenary = ?`,
+             JOIN rollcalls r ON r.id = p.rollcall
+            WHERE r.plenary = ?`,
           [plenary.id]
         )
       )[0].n
@@ -97,13 +108,24 @@ async function local(date) {
           .first()
       ).n
     : 0;
+  // openapi/vot-xml.js caches the VOT XML, which is what its import reads
+  const vot = fs.existsSync(
+    path.join(__dirname, "..", "data", "VOT", `${date}.xml`)
+  );
   const planned = (
     await db("agenda_items")
       .where({ date, kind: "vote" })
       .count("* as n")
       .first()
   ).n;
-  return { rcv, positions, attended, planned };
+  return { rcv, positions, attended, vot, planned };
+}
+
+/** ok = published and here, new = published not imported, pub = not imported ever. */
+function statusOf(doc, published, have) {
+  if (published !== "published") return published;
+  if (!doc.local) return "pub";
+  return have ? "ok" : "new";
 }
 
 async function main() {
@@ -114,8 +136,7 @@ async function main() {
       `SELECT DISTINCT date FROM agenda_items ORDER BY date DESC LIMIT ?`,
       [Number(argv.days || 5)]
     );
-    dates = rows.map((r) => r.date).sort();
-    // the two days a run normally cares about, in case the agenda is empty
+    dates = rows.map((r) => r.date);
     const today = new Date().toISOString().slice(0, 10);
     for (const d of [
       today,
@@ -127,11 +148,17 @@ async function main() {
 
   const out = [];
   for (const date of dates) {
-    // the document status and the local counts must not share a key: `local()`
-    // returns its own `rcv`
-    const rcvDoc = await published(date, "RCV");
-    const attDoc = await published(date, "ATT");
-    out.push({ date, rcvDoc, attDoc, ...(await local(date)) });
+    const mine = await local(date);
+    const docs = {};
+    for (const doc of DOCUMENTS) {
+      const status = await published(date, doc.suffix);
+      docs[doc.key] = statusOf(
+        doc,
+        status,
+        doc.local ? mine[doc.local] : false
+      );
+    }
+    out.push({ date, ...mine, docs });
   }
 
   if (argv.json) {
@@ -141,7 +168,12 @@ async function main() {
   }
 
   const pad = (v, n) => String(v).padEnd(n);
-  console.log(`${pad("date", 12)}${pad("RCV", 12)}${pad("ATT", 12)}local`);
+  console.log(
+    `${pad("date", 12)}${pad("RCV", 5)}${pad("ATT", 5)}${pad("VOT", 5)}${pad(
+      "MIN",
+      5
+    )}local`
+  );
   for (const r of out) {
     const local =
       r.rcv || r.positions || r.attended
@@ -150,17 +182,23 @@ async function main() {
         ? `planned: ${r.planned} vote(s)`
         : "—";
     console.log(
-      `${pad(r.date, 12)}${pad(r.rcvDoc, 12)}${pad(r.attDoc, 12)}${local}`
+      `${pad(r.date, 12)}${pad(r.docs.RCV, 5)}${pad(r.docs.ATT, 5)}${pad(
+        r.docs.VOT,
+        5
+      )}${pad(r.docs.MIN, 5)}${local}`
     );
   }
-  const pending = out.filter(
-    (r) =>
-      (r.rcvDoc === "published" && !r.positions) ||
-      (r.attDoc === "published" && !r.attended)
-  );
+
+  const pending = out.filter((r) => Object.values(r.docs).includes("new"));
   if (pending.length)
     console.log(
-      `\n→ ${pending.length} sitting(s) published but not imported: run ./update.sh`
+      `\n→ ${pending.length} sitting(s) with a document published but not imported: run ./update.sh`
+    );
+  else
+    console.log(
+      "\n→ nothing to import.   ok = published and here · pub = published (nothing " +
+        "imports the minutes) · new = published, not imported · — = not published " +
+        "· ?nnn = the API did not answer"
     );
   await db.destroy();
 }

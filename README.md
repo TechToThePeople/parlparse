@@ -224,25 +224,37 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 
 ## Is there anything new? (`openapi/status.js`)
 
-Both documents are plain entries in the Open Data API, so their existence is a
-`200` or a `404` — two cheap requests per date and **no headless browser** (the
-WAF is only in the way of *downloading* the XML from doceo, and that is the
-fallback; `rcv.js` and `att.js` prefer the distribution the API names).
+A plenary day publishes four documents, all plain entries in the Open Data API, so
+their existence is a `200` or a `404` — four cheap requests per date and **no
+headless browser** (the WAF is only in the way of *downloading* the XML from
+doceo, and that is the fallback; `rcv.js` and `att.js` prefer the distribution the
+API names):
+
+| document | work-type | imported by |
+|---|---|---|
+| `PV-10-<date>-RCV` | `VOTE_ROLLCALL_PLENARY` | `openapi/rcv.js` → `rollcalls`, `positions` |
+| `PV-10-<date>-ATT` | `LIST_ATTEND_PLENARY` | `openapi/att.js` → `attendances` |
+| `PV-10-<date>-VOT` | `VOTE_RESULTS_PLENARY` | `openapi/vot-xml.js` (from `data/VOT/`) |
+| `PV-10-<date>` | `MINUTES_PLENARY` | nothing — the minutes are not imported |
 
 ```sh
 node openapi/status.js --days 6
 ```
 
 ```
-date        RCV         ATT         local
-2026-11-11  —           published   0 RCV, 0 positions, 496 attended
-2026-11-12  published   published   95 RCV, 56639 positions, 591 attended
-2026-11-24  —           —           planned: 9 vote(s)
+date        RCV  ATT  VOT  MIN  local
+2026-11-12  ok   ok   ok   pub  95 RCV, 56639 positions, 591 attended
+2026-11-23  —    —    new  —    —
+2026-11-24  —    —    —    —    planned: 9 vote(s)
 ```
 
-`published` but nothing local means the import has not run: that is the signal to
-call `./update.sh`. The script reports `? 429` when the API refuses to answer, so
-"not published" is never confused with "could not ask".
+`ok` published and imported · `new` published, not imported (run `./update.sh`) ·
+`pub` published but nothing imports it (the minutes) · `—` not published ·
+`?429`/`?net` the API refused to answer, which is never read as "not published".
+
+Note 2026-11-23: a `VOT` document with no `RCV` at all — a sitting where every vote
+was by show of hands. And a sitting can have `ATT` without `RCV` for the same
+reason.
 
 ## Per-MEP votes (`positions`)
 
