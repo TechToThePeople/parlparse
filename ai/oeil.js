@@ -553,17 +553,27 @@ async function storeWholeTextVotes(reference, summary) {
     );
 }
 
-/** The summary on the report row itself, so it survives having no vote. */
+/**
+ * The summary on the report row itself, so it survives having no vote. A summary
+ * can exist for a reference with no row at all (six B10 motions were like that):
+ * the row is created then, with nothing but the reference — `openapi/report.js`
+ * fills title, date and creator later, since it looks for rows with no url.
+ */
 async function storeSummary(reference, text, model) {
   const body = String(text || "").trim();
   if (!body) return;
-  await db("reports")
+  const fields = {
+    summary: body,
+    summary_model: model || MODEL,
+    summary_at: new Date().toISOString(),
+  };
+  const updated = await db("reports")
     .where("reference", reference)
-    .update({
-      summary: body,
-      summary_model: model || MODEL,
-      summary_at: new Date().toISOString(),
-    });
+    .update(fields);
+  if (!updated) {
+    await db("reports").insert({ reference, term: 10, ...fields });
+    stats.createdReport = (stats.createdReport || 0) + 1;
+  }
 }
 
 /**
@@ -598,7 +608,7 @@ async function attachExisting() {
       .replace(/\.md$/, "")
       .replace(
         /_(\d{4})(_REV\d+)?$/,
-        (m, year, rev) => "/" + year + (rev ? "/" + rev.slice(1) : "")
+        (_match, year, rev) => "/" + year + (rev ? "/" + rev.slice(1) : "")
       );
     const summary = fs
       .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
