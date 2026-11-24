@@ -103,9 +103,18 @@ async function main() {
   signale.complete("all SQL scripts executed");
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    signale.error(err);
-    process.exit(1);
-  });
+/** Importable entry point: does what the CLI does. openapi/update.js calls this. */
+async function run() {
+  await main();
+}
+
+module.exports = { run, main };
+
+if (require.main === module) {
+  run()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      signale.error(err);
+      process.exit(1);
+    });
+}

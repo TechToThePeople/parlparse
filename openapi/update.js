@@ -21,7 +21,6 @@
  */
 
 const fs = require("fs");
-const { spawnSync } = require("child_process");
 const path = require("path");
 const minimist = require("minimist");
 const db = require("../lib/db");
@@ -31,6 +30,10 @@ const rcv = require("./rcv");
 const att = require("./att");
 const votXml = require("./vot-xml");
 const agenda = require("./agenda");
+// the builders: CSV files, the per-vote cards, and the SQL aggregates
+const csvBuilder = require("../csv");
+const cards = require("../cards");
+const sqlRun = require("../sql/run");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -129,6 +132,25 @@ async function local(date) {
   return { rcv, positions, attended, vot, planned };
 }
 
+/** One row per date: the four document statuses and what we already have. */
+async function readStatus(dates) {
+  const out = [];
+  for (const date of dates) {
+    const mine = await local(date);
+    const docs = {};
+    for (const doc of DOCUMENTS) {
+      const status = await published(date, doc.suffix);
+      docs[doc.key] = statusOf(
+        doc,
+        status,
+        doc.local ? mine[doc.local] : false
+      );
+    }
+    out.push({ date, ...mine, docs });
+  }
+  return out;
+}
+
 /** ok = published and here, new = published not imported, pub = not imported ever. */
 function statusOf(doc, published, have) {
   if (published !== "published") return published;
@@ -145,23 +167,6 @@ async function step(name, fn) {
   }
 }
 
-/** The importers live in openapi/, the CSV/card builders at the repo root. */
-function scriptPath(name) {
-  const local = path.join(__dirname, name);
-  return fs.existsSync(local) ? local : path.join(__dirname, "..", name);
-}
-
-/** Run one of the importers for a single date, output passed straight through. */
-function run(script, args) {
-  const result = spawnSync(process.execPath, [scriptPath(script), ...args], {
-    stdio: "inherit",
-    cwd: path.join(__dirname, ".."),
-  });
-  if (result.status !== 0)
-    console.warn(`   ⚠️  ${script} exited with ${result.status}`);
-  return result.status === 0;
-}
-
 /**
  * Import only what is missing: each new document with its own script, then the
  * derived files (CSVs, cards for those dates) once.
@@ -172,7 +177,7 @@ async function sync(rows) {
     .map((r) => r.date);
   if (!dates.length) {
     console.log("→ nothing published that is not here already");
-    return;
+    return [];
   }
   console.log(`\n→ importing ${dates.length} sitting(s): ${dates.join(" ")}\n`);
 
@@ -191,14 +196,12 @@ async function sync(rows) {
   }
 
   console.log("\n→ derived files");
-  run("csv.js", []);
-  for (const date of dates) run("cards.js", [`--date=${date}`]);
-  spawnSync("npm", ["run", "-s", "majority:csv"], {
-    stdio: "inherit",
-    cwd: path.join(__dirname, ".."),
-  });
-  run("update.js", ["--days", String(rows.length)]);
+  await step("csv.js", () => csvBuilder.run());
+  for (const date of dates)
+    await step(`cards ${date}`, () => cards.run({ date }));
+  await step("majority:csv", () => sqlRun.run());
   console.log("\nnext: sh prod.sh (publishes the CSVs to ../10/data)");
+  return dates;
 }
 
 async function main() {
@@ -219,23 +222,11 @@ async function main() {
     dates.sort();
   }
 
-  const out = [];
-  for (const date of dates) {
-    const mine = await local(date);
-    const docs = {};
-    for (const doc of DOCUMENTS) {
-      const status = await published(date, doc.suffix);
-      docs[doc.key] = statusOf(
-        doc,
-        status,
-        doc.local ? mine[doc.local] : false
-      );
-    }
-    out.push({ date, ...mine, docs });
-  }
+  const out = await readStatus(dates);
 
   if (argv.sync) {
-    await sync(out);
+    const dates2 = await sync(out);
+    if (dates2.length) printStatus(await readStatus(dates2));
     await db.destroy();
     return;
   }
@@ -246,6 +237,12 @@ async function main() {
     return;
   }
 
+  printStatus(out);
+  await db.destroy();
+}
+
+/** The table: one line per sitting, four documents and the local counts. */
+function printStatus(out) {
   const pad = (v, n) => String(v).padEnd(n);
   console.log(
     `${pad("date", 12)}${pad("RCV", 5)}${pad("ATT", 5)}${pad("VOT", 5)}${pad(
@@ -279,7 +276,6 @@ async function main() {
         "imports the minutes) · new = published, not imported · — = not published " +
         "· ?nnn = the API did not answer"
     );
-  await db.destroy();
 }
 
 main()

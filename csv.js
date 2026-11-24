@@ -181,10 +181,22 @@ const textTabled = async () => {
   });
 };
 
-Promise.all([textTabled(), rollcall(), mep()]).then((values) => {
+/** Write the three CSVs. Importable: openapi/update.js calls this. */
+async function main() {
+  const values = await Promise.all([textTabled(), rollcall(), mep()]);
   console.log("done", values);
-  process.exit();
-});
+}
+
+module.exports = { run: main, main };
+
+if (require.main === module) {
+  main()
+    .then(() => process.exit(0))
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
+}
 
 /*
 (async function() {

@@ -28,15 +28,17 @@ const help = (error = false) => {
   process.exit(error);
 };
 
-if (argv.help) {
-  help();
-}
-if (argv.date) {
+/** Read the CLI options into `date`; called by run(), not on import. */
+function prepare() {
+  if (argv.help) help();
+  if (!argv.date) return;
   if (argv.date <= 0) {
-    const t = new Date(new Date().valueOf() + 1000 * 3600 * 24 * argv.date);
+    const t = new Date(
+      new Date().valueOf() + 1000 * 3600 * 24 * Number(argv.date)
+    );
     date = t.toISOString().substring(0, 10);
   } else {
-    date = argv.date;
+    date = String(argv.date);
   }
   const d = date.split("-");
   if (d.length !== 3) {
@@ -87,68 +89,98 @@ const writePositions = async (id, date) => {
   );
 };
 
-log.time("cards");
 let written = 0;
 let refreshed = 0;
-// the text the vote was about (a split part, or the report summary for a vote on
-// the whole text): one query, then attached by rollcall id
-db("rollcall_texts")
-  .then((rows) => new Map(rows.map((r) => [r.rollcall, r])))
-  .then((texts) =>
-    db
-      .select(db.raw("rollcalls.*,title,url"))
-      .from("rollcalls")
-      .leftJoin("reports", "rollcalls.ref", "reports.reference")
-      .orderBy("rollcalls.id", "desc")
-      .where("rollcalls.term", term)
-      .then((votes) => ({ votes, texts }))
-  )
-  .then(async ({ votes, texts }) => {
-    for (const vote of votes) {
-      const voted = texts.get(vote.id);
-      if (voted) {
-        vote.section = voted.section;
-        vote.part = voted.part;
-        vote.part_text = voted.text;
-        vote.part_kind = voted.kind;
-        vote.part_source = voted.source;
-        vote.part_context = voted.context;
-      }
-      const csv = "../" + term + "/cards/" + vote.id + ".csv";
-      const vdate = vote.date.substring(0, 10);
-      console.log(vdate);
-      try {
-        if (date && !argv.force && vdate !== date) continue;
-        // existing card: refresh the metadata json only, the csv is expensive
-        if (hasCsv(csv) && !argv.force) {
-          fs.writeFileSync(
-            "../" + term + "/cards/" + vote.id + ".json",
-            JSON.stringify(vote)
-          );
-          refreshed++;
-          continue;
+
+/** Write (or refresh) every card. Importable: openapi/update.js calls this. */
+async function main() {
+  log.time("cards");
+  written = 0;
+  refreshed = 0;
+  await new Promise((resolve, reject) => {
+    // the text the vote was about (a split part, or the report summary for a vote on
+    // the whole text): one query, then attached by rollcall id
+    db("rollcall_texts")
+      .then((rows) => new Map(rows.map((r) => [r.rollcall, r])))
+      .then((texts) =>
+        db
+          .select(db.raw("rollcalls.*,title,url"))
+          .from("rollcalls")
+          .leftJoin("reports", "rollcalls.ref", "reports.reference")
+          .orderBy("rollcalls.id", "desc")
+          .where("rollcalls.term", term)
+          .then((votes) => ({ votes, texts }))
+      )
+      .then(async ({ votes, texts }) => {
+        for (const vote of votes) {
+          const voted = texts.get(vote.id);
+          if (voted) {
+            vote.section = voted.section;
+            vote.part = voted.part;
+            vote.part_text = voted.text;
+            vote.part_kind = voted.kind;
+            vote.part_source = voted.source;
+            vote.part_context = voted.context;
+          }
+          const csv = "../" + term + "/cards/" + vote.id + ".csv";
+          const vdate = vote.date.substring(0, 10);
+          console.log(vdate);
+          try {
+            if (date && !argv.force && vdate !== date) continue;
+            // existing card: refresh the metadata json only, the csv is expensive
+            if (hasCsv(csv) && !argv.force) {
+              fs.writeFileSync(
+                "../" + term + "/cards/" + vote.id + ".json",
+                JSON.stringify(vote)
+              );
+              refreshed++;
+              continue;
+            }
+          } catch {
+            // nothing special to do, let's create the card that doesn't exist
+          }
+          written++;
+          const dest = "../" + term + "/cards/" + vote.id + ".json";
+          fs.writeFileSync(dest, JSON.stringify(vote));
+          // the per-MEP csv only changes when positions change; rewriting the json
+          // keeps name/ref/committee/outcome/requested_by fresh for existing cards
+          if (hasCsv(csv) && !argv.force) continue;
+          // only roll-call votes have individual positions; a hand/electronic/secret
+          // vote would just produce an empty csv, so don't write one at all
+          if (vote.method && vote.method !== "RCV") continue;
+          await writePositions(vote.id, vdate);
+          //      mepid,mep,result,group,identifier
         }
-      } catch {
-        // nothing special to do, let's create the card that doesn't exist
-      }
-      written++;
-      const dest = "../" + term + "/cards/" + vote.id + ".json";
-      fs.writeFileSync(dest, JSON.stringify(vote));
-      // the per-MEP csv only changes when positions change; rewriting the json
-      // keeps name/ref/committee/outcome/requested_by fresh for existing cards
-      if (hasCsv(csv) && !argv.force) continue;
-      // only roll-call votes have individual positions; a hand/electronic/secret
-      // vote would just produce an empty csv, so don't write one at all
-      if (vote.method && vote.method !== "RCV") continue;
-      await writePositions(vote.id, vdate);
-      //      mepid,mep,result,group,identifier
-    }
-    log.success(votes.length, "votes processed");
-    if (refreshed) log.info(refreshed, "card metadata refreshed");
-    if (votes.length !== written + refreshed) log.info(written, "new votes");
-    log.timeEnd("cards");
-    process.exit(1);
+        log.success(votes.length, "votes processed");
+        if (refreshed) log.info(refreshed, "card metadata refreshed");
+        if (votes.length !== written + refreshed)
+          log.info(written, "new votes");
+        log.timeEnd("cards");
+        resolve();
+      })
+      .catch(reject);
   });
+}
+
+module.exports = {
+  run: async (options = {}) => {
+    Object.assign(argv, options);
+    prepare();
+    await main();
+  },
+  main,
+  prepare,
+};
+
+if (require.main === module) {
+  module.exports
+    .run()
+    .then(() => process.exit(0))
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
+}
 /*
   {
     id: 109161,
