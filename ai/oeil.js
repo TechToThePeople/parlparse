@@ -162,7 +162,9 @@ async function references() {
   const planned = new Set(
     (
       await db.raw(
-        "select distinct report from agenda_items where report is not null"
+        // only a *forthcoming* agenda point counts: the July 2024 agendas list 81
+        // A9-* reports, and any past agenda would make every old report "useful"
+        "select distinct report from agenda_items where report is not null and date >= date('now')"
       )
     ).map((r) => r.report)
   );
