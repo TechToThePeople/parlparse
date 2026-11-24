@@ -67,10 +67,10 @@ published, and whether this database already has them.
 
 /** The four documents of a sitting, and what says we already have one. */
 const DOCUMENTS = [
-  { key: "RCV", suffix: "-RCV", local: "positions" },
-  { key: "ATT", suffix: "-ATT", local: "attended" },
-  { key: "VOT", suffix: "-VOT", local: "vot" },
-  { key: "MIN", suffix: "", local: null }, // minutes: published, never imported
+  { key: "RCV", suffix: "-RCV", have: (m) => m.positions > 0 },
+  { key: "ATT", suffix: "-ATT", have: (m) => m.attended > 0 },
+  { key: "VOT", suffix: "-VOT", have: (m) => m.vot },
+  { key: "MIN", suffix: "", have: null }, // minutes: nothing imports them
 ];
 
 /** 200 = published, 404 = not yet, anything else = could not tell. */
@@ -84,7 +84,7 @@ async function published(date, suffix) {
       }
     );
     if (res.status === 200) return "published";
-    if (res.status === 404) return "—";
+    if (res.status === 404) return "";
     return `?${res.status}`;
   } catch {
     return "?net";
@@ -96,14 +96,17 @@ async function local(date) {
   const plenary = await db("plenaries")
     .where("date", date)
     .first("id", "sitting_id");
-  const rcv = plenary
-    ? (
-        await db("rollcalls")
-          .where({ plenary: plenary.id, method: "RCV" })
-          .count("* as n")
-          .first()
-      ).n
-    : 0;
+  // every vote this database has for the sitting, by how it was taken: a row can
+  // exist without the RCV document (an electronic roll-call, a show of hands)
+  const byMethod = plenary
+    ? await db("rollcalls")
+        .where("plenary", plenary.id)
+        .select("method")
+        .count("* as n")
+        .groupBy("method")
+    : [];
+  const counts = {};
+  for (const row of byMethod) counts[row.method || "?"] = Number(row.n);
   const positions = plenary
     ? (
         await db.raw(
@@ -132,7 +135,7 @@ async function local(date) {
       .count("* as n")
       .first()
   ).n;
-  return { rcv, positions, attended, vot, planned };
+  return { counts, positions, attended, vot, planned };
 }
 
 /**
@@ -160,8 +163,11 @@ async function recentSittings(count) {
 async function forthcomingSittings(limit = 4) {
   const today = new Date().toISOString().slice(0, 10);
   const rows = await db.raw(
-    `SELECT DISTINCT date FROM agenda_items WHERE date > ? ORDER BY date ASC LIMIT ?`,
-    [today, limit]
+    `SELECT date FROM agenda_items WHERE date > ?
+     UNION
+     SELECT date FROM plenaries  WHERE date > ?
+     ORDER BY date ASC LIMIT ?`,
+    [today, today, limit]
   );
   return rows.map((r) => r.date);
 }
@@ -169,27 +175,28 @@ async function forthcomingSittings(limit = 4) {
 /** One row per date: the four document statuses and what we already have. */
 async function readStatus(dates) {
   const out = [];
+  const today = new Date().toISOString().slice(0, 10);
   for (const date of dates) {
     const mine = await local(date);
     const docs = {};
-    for (const doc of DOCUMENTS) {
-      const status = await published(date, doc.suffix);
-      docs[doc.key] = statusOf(
-        doc,
-        status,
-        doc.local ? mine[doc.local] : false
-      );
-    }
+    // a sitting that has not happened cannot have documents: leave the cells
+    // empty rather than asking four times for a 404
+    for (const doc of DOCUMENTS)
+      docs[doc.key] =
+        date > today
+          ? ""
+          : statusOf(doc, await published(date, doc.suffix), mine);
     out.push({ date, ...mine, docs });
   }
   return out;
 }
 
 /** ok = published and here, new = published not imported, pub = not imported ever. */
-function statusOf(doc, published, have) {
+/** ok = published and here, new = published not imported, pub = not imported ever. */
+function statusOf(doc, published, mine) {
   if (published !== "published") return published;
-  if (!doc.local) return "pub";
-  return have ? "ok" : "new";
+  if (!doc.have) return "pub";
+  return doc.have(mine) ? "ok" : "new";
 }
 
 /** Run one importer, keeping the loop going when it throws. */
@@ -267,6 +274,22 @@ async function main() {
   await db.destroy();
 }
 
+/**
+ * What we hold for a sitting: the vote rows by method (only the non-zero ones),
+ * then positions and attendance. A future sitting only has its planned votes.
+ */
+function localText(row) {
+  const parts = [];
+  for (const method of ["RCV", "HAND", "ELECTRONIC", "SECRET"]) {
+    const n = row.counts[method] || 0;
+    if (n) parts.push(`${n} ${method}`);
+  }
+  if (row.positions) parts.push(`${row.positions} pos`);
+  if (row.attended) parts.push(`${row.attended} attended`);
+  if (!parts.length && row.planned) return `planned: ${row.planned} vote(s)`;
+  return parts.join(" · ");
+}
+
 /** The table: one line per sitting, four documents and the local counts. */
 function printStatus(out) {
   const pad = (v, n) => String(v).padEnd(n);
@@ -277,12 +300,7 @@ function printStatus(out) {
     )}local`
   );
   for (const r of out) {
-    const local =
-      r.rcv || r.positions || r.attended
-        ? `${r.rcv} RCV, ${r.positions} positions, ${r.attended} attended`
-        : r.planned
-        ? `planned: ${r.planned} vote(s)`
-        : "—";
+    const local = localText(r);
     console.log(
       `${pad(r.date, 12)}${pad(r.docs.RCV, 5)}${pad(r.docs.ATT, 5)}${pad(
         r.docs.VOT,
@@ -299,8 +317,8 @@ function printStatus(out) {
   else
     console.log(
       "\n→ nothing to import.   ok = published and here · pub = published (nothing " +
-        "imports the minutes) · new = published, not imported · — = not published " +
-        "· ?nnn = the API did not answer"
+        "imports the minutes) · new = published, not imported · blank = not " +
+        "published, or a sitting that has not happened · ?nnn = the API did not answer"
     );
 }
 

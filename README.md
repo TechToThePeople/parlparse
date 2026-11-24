@@ -248,22 +248,35 @@ recent dates in `plenaries` ∪ `agenda_items` that are not in the future, oldes
 first. Today counts as a sitting only if it is one, so `--days 2` on a Monday
 after a Thursday sitting shows Monday and Thursday, not "Monday and Sunday".
 
-On top of that window, the sittings whose agenda is already published are listed
-too (max 4) — `--no-forthcoming` leaves them out. They cost four requests each
-that answer 404, about 0.8 s per sitting, and they are the only way to see
-"planned, nothing published yet":
+On top of that window the **next 4 sittings** are listed too, from `plenaries` as
+well as `agenda_items` — `--no-forthcoming` leaves them out:
 
 ```
-2026-11-24  —    —    —    —    planned: 9 vote(s)
-2026-11-25  —    —    —    —    planned: 17 vote(s)
-2026-11-26  —    —    —    —    planned: 6 vote(s)
+2026-11-24                      planned: 9 vote(s)
+2026-11-25                      planned: 17 vote(s)
+2026-11-26                      planned: 6 vote(s)
+2026-12-14
+```
+
+Their four document cells are left **empty without asking**: a sitting that has not
+happened cannot have documents, so four requests would only buy four 404s. Blank
+means "not published" for a past sitting and "not yet" for a future one.
+
+The last column is what the database holds, and it counts votes by how they were
+taken — a row can exist without the RCV document, because `decisions.js` creates
+it from the meeting (`1 RCV · 1 HAND` on 2026-11-23, whose RCV document was never
+published):
+
+```
+2026-11-12  95 RCV · 122 HAND · 9 ELECTRONIC · 56639 pos · 591 attended
+2026-11-23  1 RCV · 1 HAND
 ```
 
 ```
 date        RCV  ATT  VOT  MIN  local
-2026-11-12  ok   ok   ok   pub  95 RCV, 56639 positions, 591 attended
-2026-11-23  —    —    new  —    —
-2026-11-24  —    —    —    —    planned: 9 vote(s)
+2026-11-12  ok   ok   ok   pub  95 RCV · 122 HAND · 9 ELECTRONIC · 56639 pos · 591 attended
+2026-11-23            ok        1 RCV · 1 HAND
+2026-11-24                      planned: 9 vote(s)
 ```
 
 `ok` published and imported · `new` published, not imported · `pub` published but
