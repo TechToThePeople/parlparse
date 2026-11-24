@@ -248,6 +248,17 @@ recent dates in `plenaries` ∪ `agenda_items` that are not in the future, oldes
 first. Today counts as a sitting only if it is one, so `--days 2` on a Monday
 after a Thursday sitting shows Monday and Thursday, not "Monday and Sunday".
 
+On top of that window, the sittings whose agenda is already published are listed
+too (max 4) — `--no-forthcoming` leaves them out. They cost four requests each
+that answer 404, about 0.8 s per sitting, and they are the only way to see
+"planned, nothing published yet":
+
+```
+2026-11-24  —    —    —    —    planned: 9 vote(s)
+2026-11-25  —    —    —    —    planned: 17 vote(s)
+2026-11-26  —    —    —    —    planned: 6 vote(s)
+```
+
 ```
 date        RCV  ATT  VOT  MIN  local
 2026-11-12  ok   ok   ok   pub  95 RCV, 56639 positions, 591 attended

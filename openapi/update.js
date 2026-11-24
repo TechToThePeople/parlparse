@@ -41,7 +41,8 @@ const UA =
   "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["help", "json", "sync"],
+  boolean: ["help", "json", "sync", "forthcoming"],
+  default: { forthcoming: true },
   string: ["date"],
   alias: { h: "help", n: "days" },
 });
@@ -57,6 +58,7 @@ published, and whether this database already has them.
                    (default 3, today included, never a future one)
   --date <d>       one date instead
   --json           machine-readable output
+  --no-forthcoming leave out the sittings that have not happened yet
   --sync           import what is new, then rebuild the CSVs and cards
   --help, -h       this text
 `);
@@ -150,6 +152,20 @@ async function recentSittings(count) {
   return rows.map((r) => r.date).sort();
 }
 
+/**
+ * The sittings after today whose agenda is published (max 4). A date only in
+ * `plenaries` has no agenda yet, so there is nothing to check and nothing planned
+ * to show.
+ */
+async function forthcomingSittings(limit = 4) {
+  const today = new Date().toISOString().slice(0, 10);
+  const rows = await db.raw(
+    `SELECT DISTINCT date FROM agenda_items WHERE date > ? ORDER BY date ASC LIMIT ?`,
+    [today, limit]
+  );
+  return rows.map((r) => r.date);
+}
+
 /** One row per date: the four document statuses and what we already have. */
 async function readStatus(dates) {
   const out = [];
@@ -225,7 +241,12 @@ async function sync(rows) {
 async function main() {
   let dates = [];
   if (argv.date) dates = [argv.date];
-  else dates = await recentSittings(Number(argv.days || 3));
+  else {
+    dates = await recentSittings(Number(argv.days || 3));
+    // A forthcoming sitting costs four requests that answer 404 — ~0.8 s — and
+    // is the only way to see "planned, nothing published yet".
+    if (argv.forthcoming) dates = dates.concat(await forthcomingSittings());
+  }
 
   const out = await readStatus(dates);
 
