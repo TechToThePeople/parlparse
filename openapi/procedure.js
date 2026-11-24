@@ -128,14 +128,33 @@ async function fetchProcedure(code) {
 }
 
 async function main() {
-  // A term-9 report (A9-0306/2023) points at a term-9 procedure (2022/0269(COD)):
-  // following it means fetching an old OEIL page and its document chain for a
-  // report that is not part of this legislature.
-  const THIS_TERM = /^(?:A10|B10|RC-B10)-/;
+  // A report matters when something points at it: a vote (term 10 voted on 7
+  // term-9 reports as well) or an agenda entry. 81 of the 88 A9-* reports were
+  // never voted here, and their term-9 procedures would only buy old OEIL fetches.
+  const voted = new Set(
+    (
+      await db.raw("select distinct ref from rollcalls where ref is not null")
+    ).map((r) => r.ref)
+  );
+  // only a *forthcoming* agenda point counts: the July 2024 agendas list 88 A9-*
+  // reports because the first term-10 sittings voted on term-9 texts
+  const today = new Date().toISOString().slice(0, 10);
+  const planned = new Set(
+    (
+      await db.raw(
+        "select distinct report from agenda_items where report is not null and date >= ?",
+        [today]
+      )
+    ).map((r) => r.report)
+  );
   const files = fs
     .readdirSync(OEIL_DIR)
     .filter((f) => f.endsWith(".md"))
-    .filter((f) => argv.all || THIS_TERM.test(f))
+    .filter((f) => {
+      if (argv.all) return true;
+      const reference = referenceOf(f);
+      return voted.has(reference) || planned.has(reference);
+    })
     .sort();
   const known = new Map(
     (await db("procedures").select("code", "updated_at")).map((r) => [
