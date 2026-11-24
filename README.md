@@ -239,8 +239,11 @@ times), `openapi/report.js` (report rows, procedure, subjects), `csv.js`,
 `cards.js` for those dates and `npm run majority:csv` (the SQL aggregates:
 `groupmajority`, `mep_sitting_stats`, the cohesion and cordon CSVs).
 
-**Not in the loop:** `ai/oeil.js` — the summaries cost tokens, so they stay a
-manual `node ai/oeil.js` (missing reports only).
+**The AI pass is in the loop but capped.** After an import, `ai/oeil.js` runs for
+the reports that have no summary yet, with `--ai-max-doc 20` (20 documents per
+run). `./update.sh --ai-max-doc 0` disables it; a bare `node ai/oeil.js` keeps no
+cap of its own. `update.sh` forwards its arguments to `update.js` (`"$@"`), which
+is how that reaches it.
 
 The step-by-step version this replaced — `decisions.js -d-1`, `positions.js`,
 `vot-xml.js`, `att.js`, `csv.js`, `cards.js`, `majority:csv` — is kept in

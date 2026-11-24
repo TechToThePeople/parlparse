@@ -79,6 +79,15 @@ const DOCUMENTS = [
   { key: "MIN", suffix: "", have: null }, // minutes: nothing imports them
 ];
 
+/**
+ * A repeated flag is an array in minimist (`--days=2 --days=5` → [2, 5]), which is
+ * what happens when update.sh appends "$@" after its own defaults: the last value
+ * wins, the one the caller typed.
+ */
+function lastOf(value) {
+  return Array.isArray(value) ? value[value.length - 1] : value;
+}
+
 /** 200 = published, 404 = not yet, anything else = could not tell. */
 async function published(date, suffix) {
   try {
@@ -248,7 +257,7 @@ async function sync(rows) {
   await step("agenda --upcoming", () => agenda.run({ upcoming: true }));
   await step("report.js", () => report.run({}));
   // summaries for the reports that have none yet, at most ai-max-doc of them
-  const aiMax = Number(argv["ai-max-doc"]);
+  const aiMax = Number(lastOf(argv["ai-max-doc"]));
   if (aiMax > 0)
     await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
   else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
@@ -262,9 +271,9 @@ async function sync(rows) {
 
 async function main() {
   let dates = [];
-  if (argv.date) dates = [argv.date];
+  if (argv.date) dates = [lastOf(argv.date)];
   else {
-    dates = await recentSittings(Number(argv.days || 3));
+    dates = await recentSittings(Number(lastOf(argv.days)) || 3);
     // A forthcoming sitting costs four requests that answer 404 — ~0.8 s — and
     // is the only way to see "planned, nothing published yet".
     if (argv.forthcoming) dates = dates.concat(await forthcomingSittings());
