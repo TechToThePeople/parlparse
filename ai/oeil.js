@@ -152,10 +152,29 @@ async function references() {
   const refs = rows
     .map((r) => r.reference)
     .filter((r) => /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}$/.test(r));
-  // by default only what has no summary yet — no API call, no token for the
+  // A reference with no vote and nothing on an agenda has nowhere a summary could
+  // show: 61 orphan `A9-*` rows (term 9) were being summarised for nothing.
+  const voted = new Set(
+    (
+      await db.raw("select distinct ref from rollcalls where ref is not null")
+    ).map((r) => r.ref)
+  );
+  const planned = new Set(
+    (
+      await db.raw(
+        "select distinct report from agenda_items where report is not null"
+      )
+    ).map((r) => r.report)
+  );
+  const useful = refs.filter((r) => voted.has(r) || planned.has(r));
+  const orphans = refs.length - useful.length;
+  if (orphans)
+    console.log(`   (${orphans} report(s) skipped: no vote, no agenda)`);
+
+  // by default only what has no summary yet — no API call and no token for the
   // rest; --force walks every report again
-  if (argv.force || argv.forceAi) return refs;
-  return refs.filter(
+  if (argv.force || argv.forceAi) return useful;
+  return useful.filter(
     (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
   );
 }
