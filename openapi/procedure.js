@@ -22,7 +22,9 @@
  *   --limit, -n  stop after N reports
  *   --sleep      milliseconds between requests (default 1000: the API answers
  *                429 under a burst)
- *   --help, -h
+ *   --all        also the reports of earlier terms (A9-*, …); by default the
+               pipeline only follows this term, so their procedures are skipped
+  --help, -h
  */
 "use strict";
 
@@ -36,7 +38,7 @@ const ROOT = path.join(__dirname, "..");
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["dry", "force", "help"],
+  boolean: ["dry", "force", "all", "help"],
   string: ["sleep"],
   alias: { h: "help", n: "limit" },
 });
@@ -126,9 +128,14 @@ async function fetchProcedure(code) {
 }
 
 async function main() {
+  // A term-9 report (A9-0306/2023) points at a term-9 procedure (2022/0269(COD)):
+  // following it means fetching an old OEIL page and its document chain for a
+  // report that is not part of this legislature.
+  const THIS_TERM = /^(?:A10|B10|RC-B10)-/;
   const files = fs
     .readdirSync(OEIL_DIR)
     .filter((f) => f.endsWith(".md"))
+    .filter((f) => argv.all || THIS_TERM.test(f))
     .sort();
   const known = new Map(
     (await db("procedures").select("code", "updated_at")).map((r) => [
