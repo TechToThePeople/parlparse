@@ -43,7 +43,7 @@ const argv = minimist(process.argv.slice(2), {
   alias: { h: "help" },
 });
 
-if (argv.help) {
+if (require.main === module && argv.help) {
   console.log(`
 Usage: node openapi/agenda.js [options]
 

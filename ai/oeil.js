@@ -67,14 +67,14 @@ const argv = minimist(process.argv.slice(2), {
     "motions",
     "help",
   ],
-  string: ["model"],
+  string: ["model", "ai-max-doc"],
   alias: { h: "help", a: "all", n: "limit" },
   // every step on by default; --no-fetch / --no-ai / --no-attach turn one off.
   // A summary nobody can read is a summary nobody needs, so attach always runs.
   default: { fetch: true, ai: true, attach: true },
 });
 
-if (argv.help) {
+if (require.main === module && argv.help) {
   console.log(`
 Usage: node ai/oeil.js [<reference> | --all] [options]
 
@@ -83,6 +83,8 @@ Usage: node ai/oeil.js [<reference> | --all] [options]
   --force      redo every step for documents that already exist
   --force-ai   re-run the model on the markdown already on disk (no download)
   --limit, -n  stop after N documents
+  --ai-max-doc N  at most N documents may reach the model in this run
+               (default: no cap; 0 = never call the model)
   --no-fetch   use the markdown on disk only, download nothing
   --no-ai      stop before DeepSeek: fetch and convert, no tokens
   --no-attach  skip the attach pass that ends the run
@@ -618,7 +620,20 @@ async function motionReferences() {
   return rows.map((r) => r.ref);
 }
 
+/**
+ * How many documents this run may send to the model. Unset means no cap (the
+ * CLI); openapi/update.js passes 20 so a periodic run cannot spend a fortune, and
+ * 0 means "never call the model" — fetch, convert and attach only.
+ */
+function aiBudget() {
+  if (argv["ai-max-doc"] === undefined) return Number.POSITIVE_INFINITY;
+  const n = Number(argv["ai-max-doc"]);
+  return Number.isFinite(n) && n >= 0 ? n : Number.POSITIVE_INFINITY;
+}
+
 async function runList(list, model, attach) {
+  let spent = 0;
+  const budget = aiBudget();
   for (const [i, reference] of list.entries()) {
     console.log(`\n▸ [${i + 1}/${list.length}] ${reference}`);
     try {
@@ -645,6 +660,11 @@ async function runList(list, model, attach) {
         continue;
       }
       if (!argv.ai) continue;
+      if (spent >= budget) {
+        stats.skipped++;
+        continue;
+      }
+      spent++;
       await summarise(reference, markdown, model, attach);
     } catch (e) {
       stats.failed++;
@@ -674,6 +694,10 @@ async function main() {
       "DEEPSEEK_API_KEY is not set. Add it to .env in the repo root (DEEPSEEK_API_KEY=sk-…) or export it."
     );
     process.exit(1);
+  }
+  if (aiBudget() === 0 && argv.ai) {
+    console.log("🤖 --ai-max-doc 0: no document will reach the model");
+    argv.ai = false;
   }
   const model = argv.model || MODEL;
   const inputs = argv._.filter(Boolean);
@@ -740,9 +764,22 @@ function reportCost() {
   );
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
+/**
+ * Importable entry point: `run({ "ai-max-doc": 20 })` merges the options over the
+ * parsed argv and does what the CLI does. openapi/update.js calls this.
+ */
+async function run(options = {}) {
+  Object.assign(argv, options);
+  await main();
+}
+
+module.exports = { run, main, argv };
+
+if (require.main === module) {
+  run()
+    .then(() => process.exit(0))
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
+}

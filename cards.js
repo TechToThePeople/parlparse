@@ -30,7 +30,7 @@ const help = (error = false) => {
 
 /** Read the CLI options into `date`; called by run(), not on import. */
 function prepare() {
-  if (argv.help) help();
+  if (require.main === module && argv.help) help();
   if (!argv.date) return;
   if (argv.date <= 0) {
     const t = new Date(

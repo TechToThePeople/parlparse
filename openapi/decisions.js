@@ -90,7 +90,7 @@ const argv = minimist(
   }
 );
 
-if (argv.help) {
+if (require.main === module && argv.help) {
   console.log(`
 Usage:
   node openapi/decisions.js [options] [<date>]

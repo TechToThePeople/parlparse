@@ -78,7 +78,7 @@ const argv = minimist(process.argv.slice(2), {
   alias: { h: "help", a: "all" },
 });
 
-if (argv.help) {
+if (require.main === module && argv.help) {
   console.log(`
 Usage: node openapi/vot-xml.js [<date> | --all] [options]
 

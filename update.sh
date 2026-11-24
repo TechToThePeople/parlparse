@@ -15,7 +15,7 @@ date
 npm run -s db:migrate || exit 1
 
 # 2. is anything new? import it, and only then the derived files
-node openapi/update.js --days=2 --no-forthcoming --sync
+node openapi/update.js --days=2 --no-forthcoming --sync "$@"
 
 # 3. static files -> ../10/data (a local copy, no request)
 sh prod.sh

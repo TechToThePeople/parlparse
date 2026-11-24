@@ -62,7 +62,7 @@ const argv = minimist(process.argv.slice(2), {
   default: { procedure: true, subject: true },
 });
 
-if (argv.help) {
+if (require.main === module && argv.help) {
   console.log(`
 Usage: node openapi/report.js [options]
 

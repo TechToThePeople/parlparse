@@ -35,6 +35,7 @@ const csvBuilder = require("../csv");
 const cards = require("../cards");
 const sqlRun = require("../sql/run");
 const report = require("./report");
+const oeil = require("../ai/oeil");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -43,8 +44,10 @@ const UA =
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ["help", "json", "sync", "forthcoming"],
-  default: { forthcoming: true },
-  string: ["date"],
+  // a periodic run must not spend a fortune on summaries: at most 20 documents
+  // per run, 0 to disable the AI pass entirely
+  default: { forthcoming: true, "ai-max-doc": "20" },
+  string: ["date", "ai-max-doc"],
   alias: { h: "help", n: "days" },
 });
 
@@ -60,6 +63,8 @@ published, and whether this database already has them.
   --date <d>       one date instead
   --json           machine-readable output
   --no-forthcoming leave out the sittings that have not happened yet
+  --ai-max-doc N   documents the AI pass may summarise after an import
+                   (default 20; 0 disables it)
   --sync           import what is new, then rebuild the CSVs and cards
   --help, -h       this text
 `);
@@ -242,6 +247,11 @@ async function sync(rows) {
   // procedure/subjects), the CSVs, the cards of those dates and the SQL aggregates
   await step("agenda --upcoming", () => agenda.run({ upcoming: true }));
   await step("report.js", () => report.run({}));
+  // summaries for the reports that have none yet, at most ai-max-doc of them
+  const aiMax = Number(argv["ai-max-doc"]);
+  if (aiMax > 0)
+    await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
+  else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));
