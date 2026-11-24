@@ -595,6 +595,21 @@ async function processDate(date, stats) {
       const name = votingName(voting);
       const update = {};
 
+      // The VOT document is the authority on how a vote was taken: ROLL_CALL,
+      // ELECTRONICAL, RAISE_HAND, SECRET. `decisions.js` reads the API's
+      // decision_method, which can be a list — 2026-11-23/201109 came back as
+      // ["VOTE_ELECTRONIC_ROLLCALL", "VOTE_ELECTRONIC"] for an electronic vote that
+      // never produced an RCV document, and the row was stored as RCV.
+      const RESULT_METHOD = {
+        ROLL_CALL: "RCV",
+        ELECTRONICAL: "ELECTRONIC",
+        RAISE_HAND: "HAND",
+        SECRET: "SECRET",
+      };
+      const resultMethod = RESULT_METHOD[voting.$ && voting.$.resultType];
+      if (resultMethod && row.method !== resultMethod)
+        update.method = resultMethod;
+
       // A vote whose row carries only a date gets the time of its own timestamp
       // — but only when that timestamp is on the sitting's day: for a show of
       // hands it is the day the minutes were published (a July sitting stamped
