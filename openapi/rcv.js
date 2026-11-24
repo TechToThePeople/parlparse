@@ -15,11 +15,11 @@
 
 const fs = require("fs");
 const path = require("path");
+const minimist = require("minimist");
 const {
   fetchDocumentList,
   fetchDocumentById,
   extractDateFromId,
-  parseArgs,
   printUsage,
   getWaf,
   saveRcvXml,
@@ -84,10 +84,25 @@ async function downloadPublished(urls) {
 }
 
 const WORK_TYPE = "VOTE_ROLLCALL_PLENARY";
+
+// parsed once, so `run({ ... })` can override it instead of re-reading the CLI
+const argv = minimist(process.argv.slice(2), {
+  alias: { d: "date", h: "help", f: "force", a: "all" },
+});
+
+/** The same shape parseArgs() returned, from the argv above. */
+function parseOptions() {
+  return {
+    help: Boolean(argv.help),
+    input: argv._[0] || argv.date || null,
+    force: Boolean(argv.force),
+    all: Boolean(argv.all),
+  };
+}
 const TERM = 10;
 
 async function main() {
-  const { help, input, force, all } = parseArgs();
+  const { help, input, force, all } = parseOptions();
 
   if (help) {
     printUsage(process.argv[1], "roll-call vote XML");
@@ -348,10 +363,22 @@ async function download(date, identifier, zipPath) {
   return fs.existsSync(zipPath);
 }
 
-main()
-  // the sqlite pool keeps the process alive after the work is done
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("❌", err.message);
-    process.exit(1);
-  });
+/**
+ * Importable entry point: `run({ d: '2026-11-23' })` merges the options over the
+ * parsed argv and does exactly what the CLI does. openapi/update.js calls this.
+ */
+async function run(options = {}) {
+  Object.assign(argv, options);
+  await main();
+}
+
+module.exports = { run, main, argv };
+
+if (require.main === module) {
+  run()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      console.error("❌", err.message);
+      process.exit(1);
+    });
+}

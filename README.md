@@ -222,7 +222,7 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
-## Is there anything new? (`openapi/status.js`)
+## Is there anything new? (`openapi/update.js`)
 
 A plenary day publishes four documents, all plain entries in the Open Data API, so
 their existence is a `200` or a `404` — four cheap requests per date and **no
@@ -238,7 +238,7 @@ API names):
 | `PV-10-<date>` | `MINUTES_PLENARY` | nothing — the minutes are not imported |
 
 ```sh
-node openapi/status.js --days 6
+node openapi/update.js --days 6
 ```
 
 ```
@@ -255,8 +255,8 @@ refused to answer, which is never read as "not published".
 `--sync` then imports exactly what is missing, for each sitting:
 
 ```sh
-node openapi/status.js --sync           # last 5 sitting dates
-node openapi/status.js --date 2026-11-23 --sync
+node openapi/update.js --sync           # last 5 sitting dates
+node openapi/update.js --date 2026-11-23 --sync
 ```
 
 `decisions.js -d <date>` first (it is what creates a row for hand and electronic

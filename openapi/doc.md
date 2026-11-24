@@ -877,6 +877,6 @@ Taxonomy of the European Parliament on statuses.
 
 ---
 
-Generated from the API's own concept schemes; `openapi/status.js` and the import
+Generated from the API's own concept schemes; `openapi/update.js` and the import
 scripts read them only through `work-type` / `had_activity_type` / `decision_method`,
 so a renamed or added entry shows up as an unmatched value in those columns.

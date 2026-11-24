@@ -368,9 +368,22 @@ async function main() {
   await db.destroy();
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
+/**
+ * Importable entry point: `run({ d: '2026-11-23' })` merges the options over the
+ * parsed argv and does exactly what the CLI does. openapi/update.js calls this.
+ */
+async function run(options = {}) {
+  Object.assign(argv, options);
+  await main();
+}
+
+module.exports = { run, main, argv };
+
+if (require.main === module) {
+  run()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      console.error("❌", err.message);
+      process.exit(1);
+    });
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-env node */
 /**
- * openapi/status.js — is there anything new to import?
+ * openapi/update.js — is there anything new to import, and import only that?
  *
  * A plenary day publishes four documents, all plain entries in the Open Data API,
  * so their existence is a status code — no headless browser, no WAF challenge
@@ -17,7 +17,7 @@
  * value is `new`: published, not imported yet — run update.sh.
  *
  * Usage:
- *   node openapi/status.js [--days N] [--date YYYY-MM-DD] [--json]
+ *   node openapi/update.js [--days N] [--date YYYY-MM-DD] [--json] [--sync]
  */
 
 const fs = require("fs");
@@ -25,6 +25,12 @@ const { spawnSync } = require("child_process");
 const path = require("path");
 const minimist = require("minimist");
 const db = require("../lib/db");
+// the importers are modules: run(options) does what their CLI does, in-process
+const decisions = require("./decisions");
+const rcv = require("./rcv");
+const att = require("./att");
+const votXml = require("./vot-xml");
+const agenda = require("./agenda");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -39,7 +45,7 @@ const argv = minimist(process.argv.slice(2), {
 
 if (argv.help) {
   console.log(`
-Usage: node openapi/status.js [options]
+Usage: node openapi/update.js [options]
 
 Says whether the RCV, ATT, VOT and MINUTES documents of the recent sittings are
 published, and whether this database already has them.
@@ -130,6 +136,15 @@ function statusOf(doc, published, have) {
   return have ? "ok" : "new";
 }
 
+/** Run one importer, keeping the loop going when it throws. */
+async function step(name, fn) {
+  try {
+    await fn();
+  } catch (e) {
+    console.warn(`   ⚠️  ${name}: ${e.message}`);
+  }
+}
+
 /** The importers live in openapi/, the CSV/card builders at the repo root. */
 function scriptPath(name) {
   const local = path.join(__dirname, name);
@@ -166,12 +181,13 @@ async function sync(rows) {
     console.log(`\n[${i + 1}/${dates.length}] ${date}`);
     // decisions first: it creates the row of every vote taken that day (hand and
     // electronic ones included), which the XML importers then enrich
-    run("decisions.js", ["-d", date]);
-    if (row.docs.RCV === "new") run("rcv.js", [date]);
-    if (row.docs.ATT === "new") run("att.js", [date]);
-    if (row.docs.VOT === "new") run("vot-xml.js", [date]);
+    await step("decisions", () => decisions.run({ d: date }));
+    if (row.docs.RCV === "new") await step("rcv", () => rcv.run({ _: [date] }));
+    if (row.docs.ATT === "new") await step("att", () => att.run({ _: [date] }));
+    if (row.docs.VOT === "new")
+      await step("vot-xml", () => votXml.run({ _: [date] }));
     // the agenda's "planned" votes become "voted" once the roll-calls are in
-    run("agenda.js", ["--date", date]);
+    await step("agenda", () => agenda.run({ date }));
   }
 
   console.log("\n→ derived files");
@@ -181,7 +197,7 @@ async function sync(rows) {
     stdio: "inherit",
     cwd: path.join(__dirname, ".."),
   });
-  run("status.js", ["--days", String(rows.length)]);
+  run("update.js", ["--days", String(rows.length)]);
   console.log("\nnext: sh prod.sh (publishes the CSVs to ../10/data)");
 }
 
