@@ -75,11 +75,31 @@ published, and whether this database already has them.
 
 /** The four documents of a sitting, and what says we already have one. */
 const DOCUMENTS = [
-  { key: "RCV", suffix: "-RCV", have: (m) => m.positions > 0 },
-  { key: "ATT", suffix: "-ATT", have: (m) => m.attended > 0 },
-  { key: "VOT", suffix: "-VOT", have: (m) => m.vot },
+  {
+    key: "RCV",
+    suffix: "-RCV",
+    have: (m) => m.positions > 0,
+    sizeOf: (m) => m.rcvSize,
+  },
+  {
+    key: "ATT",
+    suffix: "-ATT",
+    have: (m) => m.attended > 0,
+    sizeOf: (m) => m.attSize,
+  },
+  { key: "VOT", suffix: "-VOT", have: (m) => m.vot, sizeOf: (m) => m.votSize },
   { key: "MIN", suffix: "", have: null }, // minutes: nothing imports them
 ];
+
+/** Uncompressed size of one of our gzip files (the last 4 bytes hold it). */
+function inflatedSize(file) {
+  try {
+    const buf = fs.readFileSync(file);
+    return buf.readUInt32LE(buf.length - 4);
+  } catch {
+    return null;
+  }
+}
 
 /**
  * A repeated flag is an array in minimist (`--days=2 --days=5` → [2, 5]), which is
@@ -100,11 +120,28 @@ async function published(date, suffix) {
         signal: AbortSignal.timeout(20000),
       }
     );
-    if (res.status === 200) return "published";
-    if (res.status === 404) return "";
-    return `?${res.status}`;
+    if (res.status === 404) return { status: "" };
+    if (res.status !== 200) return { status: `?${res.status}` };
+    const doc = ((await res.json()).data || [])[0] || {};
+    let lang = null;
+    let size = null;
+    for (const expression of doc.is_realized_by || []) {
+      const code = String(expression.language || "")
+        .split("/")
+        .pop();
+      const english = code === "ENG";
+      for (const m of expression.is_embodied_by || []) {
+        if (!/\.xml$/i.test(String(m.is_exemplified_by || ""))) continue;
+        if (!lang || english) {
+          lang = code || null;
+          size = Number(m.byteSize) || null;
+        }
+        if (english) break;
+      }
+    }
+    return { status: "published", lang, size };
   } catch {
-    return "?net";
+    return { status: "?net" };
   }
 }
 
@@ -143,8 +180,14 @@ async function local(date) {
       ).n
     : 0;
   // openapi/vot-xml.js caches the VOT XML, which is what its import reads
-  const vot = fs.existsSync(
-    path.join(__dirname, "..", "data", "VOT", `${date}.xml`)
+  const votFile = path.join(__dirname, "..", "data", "VOT", `${date}.xml`);
+  const vot = fs.existsSync(votFile);
+  const votSize = vot ? fs.statSync(votFile).size : null;
+  const rcvSize = inflatedSize(
+    path.join(__dirname, "..", "data", "RCV", `${date}.xml.zip`)
+  );
+  const attSize = inflatedSize(
+    path.join(__dirname, "..", "data", "ATT", `${date}.xml.zip`)
   );
   const planned = (
     await db("agenda_items")
@@ -152,7 +195,16 @@ async function local(date) {
       .count("* as n")
       .first()
   ).n;
-  return { counts, positions, attended, vot, planned };
+  return {
+    counts,
+    positions,
+    attended,
+    vot,
+    votSize,
+    rcvSize,
+    attSize,
+    planned,
+  };
 }
 
 /**
@@ -211,9 +263,20 @@ async function readStatus(dates) {
 /** ok = published and here, new = published not imported, pub = not imported ever. */
 /** ok = published and here, new = published not imported, pub = not imported ever. */
 function statusOf(doc, published, mine) {
-  if (published !== "published") return published;
+  if (published.status !== "published") return published.status;
   if (!doc.have) return "pub";
-  return doc.have(mine) ? "ok" : "new";
+  if (!doc.have(mine)) return "new";
+  // the EP republishes (French first, English later): a different size means our
+  // copy is not the document that is there now
+  const ours = doc.sizeOf ? doc.sizeOf(mine) : null;
+  if (ours && published.size && ours !== published.size) return "new";
+  // and say so when the version we hold is not the English one
+  if (published.lang && published.lang !== "ENG")
+    // FRA -> fr, MUL -> mul: the language of the version we hold
+    return published.lang === "MUL"
+      ? "mul"
+      : published.lang.slice(0, 2).toLowerCase();
+  return "ok";
 }
 
 const votPath = (date) =>
@@ -246,13 +309,19 @@ async function sync(rows) {
     // decisions first: it creates the row of every vote taken that day (hand and
     // electronic ones included), which the XML importers then enrich
     await step("decisions", () => decisions.run({ date }));
-    if (row.docs.RCV === "new") await step("rcv", () => rcv.run({ _: [date] }));
-    if (row.docs.ATT === "new") await step("att", () => att.run({ _: [date] }));
+    // "new" also covers a document that was republished (the EP adds the other
+    // languages later), so force re-reads it instead of the cached copy
+    if (row.docs.RCV === "new")
+      await step("rcv", () => rcv.run({ _: [date], force: true }));
+    if (row.docs.ATT === "new")
+      await step("att", () => att.run({ _: [date], force: true }));
     // VOT is the authority on how a vote was taken (ROLL_CALL vs ELECTRONICAL),
     // and decisions.js re-applies the API's ambiguous decision_method each run —
     // so vot-xml has to run again, not only when the document is new. Its XML is
     // cached after the first import, so this costs a local parse.
-    if (row.docs.VOT === "new" || fs.existsSync(votPath(date)))
+    if (row.docs.VOT === "new")
+      await step("vot-xml", () => votXml.run({ _: [date], force: true }));
+    else if (fs.existsSync(votPath(date)))
       await step("vot-xml", () => votXml.run({ _: [date] }));
     // the agenda's "planned" votes become "voted" once the roll-calls are in
     await step("agenda", () => agenda.run({ date }));

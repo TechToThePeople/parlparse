@@ -718,7 +718,9 @@ async function processDate(date, stats) {
             : blockTitle;
         // a French-only VOT document is still worth reading for refs and
         // committees, but its labels must not replace the English names
-        const mayRename = lastLanguage === "ENG" || !row.name;
+        // --force re-read the document on purpose: let an English label replace a
+        // French one from the version we had before
+        const mayRename = argv.force || lastLanguage === "ENG" || !row.name;
         if (label && row.name !== label && mayRename)
           update.name = label.slice(0, 255);
       } else {
@@ -726,8 +728,8 @@ async function processDate(date, stats) {
         const named = withPart(name, request);
         if (named && named !== row.name) {
           const mayRename =
-            lastLanguage === "ENG"
-              ? argv["force-names"] || looksLikeRcvName(row.name)
+            argv.force || lastLanguage === "ENG"
+              ? argv.force || argv["force-names"] || looksLikeRcvName(row.name)
               : !row.name;
           if (mayRename) update.name = named;
         }
