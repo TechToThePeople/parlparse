@@ -74,7 +74,7 @@ const COMMITTEES = {
 };
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["all", "dry", "force-names", "help"],
+  boolean: ["all", "dry", "force", "force-names", "help"],
   alias: { h: "help", a: "all" },
 });
 
@@ -89,6 +89,7 @@ Arguments:
 Options:
   --dry           Show what would change, write nothing
   --force-names   Replace names even when the current one is not a French RCV string
+  --force         download the VOT XML again (it is cached per date)
   --help, -h      Show this help
 `);
   process.exit(0);
@@ -479,7 +480,9 @@ let lastXmlUrl = null;
 async function fetchXml(date) {
   fs.mkdirSync(VOT_DIR, { recursive: true });
   const file = path.join(VOT_DIR, `${date}.xml`);
-  if (fs.existsSync(file)) return fs.readFileSync(file, "utf8");
+  // --force re-reads the document: the EP first publishes a French VOT and the
+  // English translation can follow days later, which the cache would hide
+  if (fs.existsSync(file) && !argv.force) return fs.readFileSync(file, "utf8");
 
   let lastError = null;
   for (const url of await xmlUrls(date)) {
