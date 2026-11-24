@@ -444,23 +444,35 @@ async function xmlUrls(date) {
   try {
     const json = await fetchDocumentById(`PV-${TERM}-${date}-VOT`);
     const doc = (json.data || [json])[0] || {};
+    const candidates = [];
     for (const expression of doc.is_realized_by || []) {
-      if (!String(expression.language || "").endsWith("ENG")) continue;
+      // "…/language/ENG" or an id ending "/en"; a document that exists only in
+      // French (2026-11-23) is still usable — the names come out in French
+      const language = String(expression.language || "");
+      const english =
+        language.endsWith("ENG") || String(expression.id || "").endsWith("/en");
       for (const m of expression.is_embodied_by || []) {
-        if (String(m.format || "").includes("XML") && m.is_exemplified_by)
-          urls.push(
-            `https://data.europarl.europa.eu/${m.is_exemplified_by.replace(
-              /^\//,
-              ""
-            )}`
-          );
+        if (!String(m.format || "").includes("XML") || !m.is_exemplified_by)
+          continue;
+        candidates.push({
+          english,
+          url: `https://data.europarl.europa.eu/${String(
+            m.is_exemplified_by
+          ).replace(/^\//, "")}`,
+        });
       }
     }
+    candidates.sort((a) => (a.english ? -1 : 1));
+    for (const candidate of candidates) urls.push(candidate.url);
   } catch {
     // no metadata: the shortcut was the only hope
   }
   return urls;
 }
+
+/** The language of the XML last read: a French-only document exists for a few
+ *  sittings, and its labels must not overwrite the English names. */
+let lastLanguage = "ENG";
 
 async function fetchXml(date) {
   fs.mkdirSync(VOT_DIR, { recursive: true });
@@ -485,6 +497,9 @@ async function fetchXml(date) {
       lastError = `HTTP ${res.status} for ${url}`;
       continue;
     }
+    lastLanguage = /_en\./.test(url)
+      ? "ENG"
+      : (String(url).match(/_([a-z]{2})\.[a-z]+$/i) || [])[1] || "UNK";
     const xml = await res.text();
     fs.writeFileSync(file, xml);
     return xml;
@@ -679,13 +694,20 @@ async function processDate(date, stats) {
           motion && group
             ? `${motion} (${group})` + (blockTitle ? ` – ${blockTitle}` : "")
             : blockTitle;
-        if (label && row.name !== label) update.name = label.slice(0, 255);
+        // a French-only VOT document is still worth reading for refs and
+        // committees, but its labels must not replace the English names
+        const mayRename = lastLanguage === "ENG" || !row.name;
+        if (label && row.name !== label && mayRename)
+          update.name = label.slice(0, 255);
       } else {
         if (ref && !row.ref) update.ref = ref;
         const named = withPart(name, request);
         if (named && named !== row.name) {
-          if (argv["force-names"] || looksLikeRcvName(row.name))
-            update.name = named;
+          const mayRename =
+            lastLanguage === "ENG"
+              ? argv["force-names"] || looksLikeRcvName(row.name)
+              : !row.name;
+          if (mayRename) update.name = named;
         }
       }
       if (committee && !row.committee) update.committee = committee;

@@ -357,8 +357,15 @@ const METHOD_NAMES = {
 
 /** "def/ep-decision-methods/VOTE_HAND" -> "HAND"; "VOTE_HAND" -> "HAND". */
 function methodName(rawMethod) {
-  const api = String(rawMethod || "").replace("def/ep-decision-methods/", "");
-  return METHOD_NAMES[api] || api;
+  // `decision_method` can be a list — ["VOTE_ELECTRONIC_ROLLCALL",
+  // "…/VOTE_ELECTRONIC"] for an electronic roll-call. The first entry we know
+  // wins, so that one is RCV and not the joined string.
+  const list = Array.isArray(rawMethod) ? rawMethod : [rawMethod];
+  const names = list.map((m) =>
+    String(m || "").replace("def/ep-decision-methods/", "")
+  );
+  for (const api of names) if (METHOD_NAMES[api]) return METHOD_NAMES[api];
+  return names[0] || "";
 }
 
 /**

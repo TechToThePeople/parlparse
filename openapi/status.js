@@ -21,6 +21,7 @@
  */
 
 const fs = require("fs");
+const { spawnSync } = require("child_process");
 const path = require("path");
 const minimist = require("minimist");
 const db = require("../lib/db");
@@ -31,7 +32,7 @@ const UA =
   "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["help", "json"],
+  boolean: ["help", "json", "sync"],
   string: ["date"],
   alias: { h: "help", n: "days" },
 });
@@ -46,6 +47,7 @@ published, and whether this database already has them.
   --days, -n N     how many recent sitting dates to look at (default 5)
   --date <d>       one date instead
   --json           machine-readable output
+  --sync           import what is new, then rebuild the CSVs and cards
   --help, -h       this text
 `);
   process.exit(0);
@@ -128,6 +130,61 @@ function statusOf(doc, published, have) {
   return have ? "ok" : "new";
 }
 
+/** The importers live in openapi/, the CSV/card builders at the repo root. */
+function scriptPath(name) {
+  const local = path.join(__dirname, name);
+  return fs.existsSync(local) ? local : path.join(__dirname, "..", name);
+}
+
+/** Run one of the importers for a single date, output passed straight through. */
+function run(script, args) {
+  const result = spawnSync(process.execPath, [scriptPath(script), ...args], {
+    stdio: "inherit",
+    cwd: path.join(__dirname, ".."),
+  });
+  if (result.status !== 0)
+    console.warn(`   ⚠️  ${script} exited with ${result.status}`);
+  return result.status === 0;
+}
+
+/**
+ * Import only what is missing: each new document with its own script, then the
+ * derived files (CSVs, cards for those dates) once.
+ */
+async function sync(rows) {
+  const dates = rows
+    .filter((r) => Object.values(r.docs).includes("new"))
+    .map((r) => r.date);
+  if (!dates.length) {
+    console.log("→ nothing published that is not here already");
+    return;
+  }
+  console.log(`\n→ importing ${dates.length} sitting(s): ${dates.join(" ")}\n`);
+
+  for (const [i, date] of dates.entries()) {
+    const row = rows.find((r) => r.date === date);
+    console.log(`\n[${i + 1}/${dates.length}] ${date}`);
+    // decisions first: it creates the row of every vote taken that day (hand and
+    // electronic ones included), which the XML importers then enrich
+    run("decisions.js", ["-d", date]);
+    if (row.docs.RCV === "new") run("rcv.js", [date]);
+    if (row.docs.ATT === "new") run("att.js", [date]);
+    if (row.docs.VOT === "new") run("vot-xml.js", [date]);
+    // the agenda's "planned" votes become "voted" once the roll-calls are in
+    run("agenda.js", ["--date", date]);
+  }
+
+  console.log("\n→ derived files");
+  run("csv.js", []);
+  for (const date of dates) run("cards.js", [`--date=${date}`]);
+  spawnSync("npm", ["run", "-s", "majority:csv"], {
+    stdio: "inherit",
+    cwd: path.join(__dirname, ".."),
+  });
+  run("status.js", ["--days", String(rows.length)]);
+  console.log("\nnext: sh prod.sh (publishes the CSVs to ../10/data)");
+}
+
 async function main() {
   let dates = [];
   if (argv.date) dates = [argv.date];
@@ -159,6 +216,12 @@ async function main() {
       );
     }
     out.push({ date, ...mine, docs });
+  }
+
+  if (argv.sync) {
+    await sync(out);
+    await db.destroy();
+    return;
   }
 
   if (argv.json) {
