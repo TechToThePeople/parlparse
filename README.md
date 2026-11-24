@@ -238,8 +238,15 @@ API names):
 | `PV-10-<date>` | `MINUTES_PLENARY` | nothing — the minutes are not imported |
 
 ```sh
-node openapi/update.js --days 6
+node openapi/update.js            # the 3 most recent sitting dates
+node openapi/update.js --days 1   # just today
+node openapi/update.js --days 10  # the last ten sittings
 ```
+
+`--days N` is a count of **sitting dates**, not of calendar days: the N most
+recent dates in `plenaries` ∪ `agenda_items` that are not in the future, oldest
+first. Today counts as a sitting only if it is one, so `--days 2` on a Monday
+after a Thursday sitting shows Monday and Thursday, not "Monday and Sunday".
 
 ```
 date        RCV  ATT  VOT  MIN  local

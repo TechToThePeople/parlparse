@@ -53,7 +53,8 @@ Usage: node openapi/update.js [options]
 Says whether the RCV, ATT, VOT and MINUTES documents of the recent sittings are
 published, and whether this database already has them.
 
-  --days, -n N     how many recent sitting dates to look at (default 5)
+  --days, -n N     how many of the most recent sitting dates to look at
+                   (default 3, today included, never a future one)
   --date <d>       one date instead
   --json           machine-readable output
   --sync           import what is new, then rebuild the CSVs and cards
@@ -132,6 +133,23 @@ async function local(date) {
   return { rcv, positions, attended, vot, planned };
 }
 
+/**
+ * The N most recent sitting dates, today included, oldest first. A sitting is a
+ * date in `agenda_items` (planned) or in `plenaries` (known), and only dates up
+ * to today — a sitting that has not happened has no documents to check.
+ */
+async function recentSittings(count) {
+  const today = new Date().toISOString().slice(0, 10);
+  const rows = await db.raw(
+    `SELECT date FROM agenda_items WHERE date <= ?
+     UNION
+     SELECT date FROM plenaries  WHERE date <= ?
+     ORDER BY date DESC LIMIT ?`,
+    [today, today, count]
+  );
+  return rows.map((r) => r.date).sort();
+}
+
 /** One row per date: the four document statuses and what we already have. */
 async function readStatus(dates) {
   const out = [];
@@ -207,20 +225,7 @@ async function sync(rows) {
 async function main() {
   let dates = [];
   if (argv.date) dates = [argv.date];
-  else {
-    const rows = await db.raw(
-      `SELECT DISTINCT date FROM agenda_items ORDER BY date DESC LIMIT ?`,
-      [Number(argv.days || 5)]
-    );
-    dates = rows.map((r) => r.date);
-    const today = new Date().toISOString().slice(0, 10);
-    for (const d of [
-      today,
-      new Date(Date.now() - 86400000).toISOString().slice(0, 10),
-    ])
-      if (!dates.includes(d)) dates.push(d);
-    dates.sort();
-  }
+  else dates = await recentSittings(Number(argv.days || 3));
 
   const out = await readStatus(dates);
 
