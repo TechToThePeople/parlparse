@@ -33,12 +33,44 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
-const { getWaf } = require("../openapi/lib");
+const { apiFetch } = require("../openapi/lib");
 
 const ROOT = path.resolve(__dirname, "..");
 const AMEND_DIR = path.join(ROOT, "data", "content", "amendments");
 const TMP_DIR = path.join(ROOT, "data", "tmp");
 const DOCEO = "https://www.europarl.europa.eu/doceo/document";
+// the open data host: the amendment lists live here, not behind the WAF
+const BASE = "https://data.europarl.europa.eu";
+// the files themselves are served from redmapl3: data.europarl.europa.eu answers
+// 302 to curl but 500 to node's fetch, so the media host is used directly
+const MEDIA = "https://redmapl3.europarl.europa.eu/RedmapFront/media";
+// the container depends on the document: reports live in reds_iPlRp_Amd, motions
+// in reds_iPlRe_Amd. The identifier and the file name are the same in each.
+const DIST_AMEND = [
+  "reds_iPlRp_Amd",
+  "reds_iPlRe_Amd",
+  "reds_iPlRc_Amd",
+  "reds_iCmDoc_Amd",
+];
+
+/** One file from the open data host; no browser, a browser-ish Accept. */
+async function download(url) {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "User-Agent":
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+      },
+      redirect: "follow",
+      signal: AbortSignal.timeout(120000),
+    });
+    return { status: res.status, buffer: Buffer.from(await res.arrayBuffer()) };
+  } catch {
+    return { status: 0, buffer: null };
+  }
+}
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ["dry", "force", "help"],
@@ -126,7 +158,6 @@ const stats = {
   written: 0,
   missing: 0,
   parked: 0,
-  blocked: 0,
   failed: 0,
 };
 
@@ -148,52 +179,81 @@ function cachedDocuments(eli) {
 }
 
 /** null when the WAF kept answering, an empty list when nothing is published. */
-async function amendmentDocuments(eli) {
-  const waf = getWaf();
-  const url = `${DOCEO}/${eli}_EN.html`;
-  let links = [];
-  let blocked = false;
-  // a page that comes back too short is the WAF asking again, not a report
-  // without amendments: real ones are 40 KB and up
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    blocked = true;
-    const page = await waf.downloadViaBrowser(url);
-    const body = String(page.body || "");
-    links = [
-      ...new Set(
-        [
-          ...body.matchAll(/href="([^"]*\/doceo\/document\/[^"]*AM-[^"]*)"/g),
-        ].map((m) => m[1].replace(/^\//, ""))
-      ),
-    ];
-    if (links.length || (page.status === 200 && body.length > 20000)) {
-      blocked = false;
-      break;
+/**
+ * The AMENDMENT_LIST documents of a year, cached for the run: the API publishes
+ * every range (`A-10-2026-0271-AM-340-346`, AMENDMENT_LIST) with a DOCX in
+ * `distribution/reds_iPlRp_Amd/`, so neither the doceo page nor the browser is
+ * needed to find them.
+ */
+const yearLists = new Map();
+
+async function amendmentList(year) {
+  if (yearLists.has(year)) return yearLists.get(year);
+  // the enumeration is the expensive part (a year has ~1,000 documents and the
+  // later pages are slow), so it is kept on disk between runs
+  const cache = path.join(AMEND_DIR, `list-${year}.json`);
+  if (!argv.force && fs.existsSync(cache)) {
+    try {
+      const ids = JSON.parse(fs.readFileSync(cache, "utf8"));
+      yearLists.set(year, ids);
+      return ids;
+    } catch {
+      // a half-written cache is no cache
     }
-    console.warn(
-      `   ⏳ ${eli}: WAF again, refreshing the token (${attempt}/3)`
-    );
-    await waf.refreshToken();
-    await sleep(2000 * attempt);
   }
-  if (blocked) return null;
-  const base = "https://www.europarl.europa.eu/";
-  const docs = new Map();
-  for (const link of links.filter(
-    (l) => l.endsWith(".docx") || l.endsWith(".pdf")
-  )) {
-    // one document per range: the docx, whose table cells markitdown keeps
-    const name = path.basename(link).replace(/_EN\.(docx|pdf)$/, "");
-    if (!docs.has(name) || link.endsWith(".docx"))
-      docs.set(name, {
-        url: base + link,
-        name: path.basename(link),
+  const ids = [];
+  try {
+    for (let offset = 0; ; offset += 500) {
+      const json = await apiFetch("/documents", {
+        "work-type": "AMENDMENT_LIST",
+        year,
+        limit: 500,
+        offset,
       });
+      const batch = (json && json.data) || [];
+      for (const doc of batch) if (doc.identifier) ids.push(doc.identifier);
+      if (batch.length < 500) break;
+    }
+  } catch (e) {
+    // a cached list is better than none: the caller falls back to what it has
+    if (fs.existsSync(cache)) {
+      console.warn(
+        `   ⚠️  ${year}: list unavailable (${e.message}), using the cache`
+      );
+      let cached = [];
+      try {
+        cached = JSON.parse(fs.readFileSync(cache, "utf8"));
+      } catch {
+        cached = [];
+      }
+      if (!cached.length) throw e;
+      yearLists.set(year, cached);
+      return cached;
+    }
+    throw e;
   }
-  return [...docs.values()];
+  console.log(`   📚 ${year}: ${ids.length} amendment list(s)`);
+  fs.mkdirSync(AMEND_DIR, { recursive: true });
+  fs.writeFileSync(cache, JSON.stringify(ids));
+  yearLists.set(year, ids);
+  return ids;
 }
 
-/** The amendment column of a two-column table ("Text proposed… | Amendment"). */
+/** The range documents of one report, from the API's list. */
+async function amendmentDocuments(eli) {
+  const year = String(eli).match(/-(\d{4})-/);
+  if (!year) return [];
+  const ids = await amendmentList(year[1]);
+  const prefix = `${eli}-AM-`;
+  return ids
+    .filter((id) => id.startsWith(prefix))
+    .sort()
+    .map((id) => ({
+      name: `${id}_en.docx`,
+      urls: DIST_AMEND.map((dir) => `${MEDIA}/${dir}/${id}/${id}_en.docx`),
+    }));
+}
+
 function amendmentText(block) {
   const lines = block.split("\n");
   // start after the header row's "| --- | --- |" separator: without it the
@@ -322,12 +382,33 @@ async function rangeMarkdown(doc) {
     TMP_DIR,
     String(doc.url).split("/").pop() || "am.doc"
   );
-  const waf = getWaf();
-  const res = await waf.downloadBuffer(doc.url);
-  if (res.status !== 200 || !res.buffer) {
-    // a pdf may exist where the docx does not, but both were requested
-    throw new Error(`HTTP ${res.status} for ${doc.url}`);
+  let res = { status: 0, buffer: null };
+  for (const url of doc.urls || [doc.url]) {
+    res = await download(url);
+    if (res.buffer && res.status === 200) break;
   }
+  if ((!res.buffer || res.status !== 200) && doc.name) {
+    // the container can change (reds_iPlRp_Amd, reds_iCmDoc_Amd): ask the
+    // document itself where its DOCX is
+    const id = String(doc.name).replace(/_en\.docx$/, "");
+    const json = await apiFetch(`/documents/${id}`).catch(() => null);
+    const record = json && (json.data || [json])[0];
+    for (const expression of (record && record.is_realized_by) || []) {
+      if (!String(expression.id || "").endsWith("/en")) continue;
+      for (const m of expression.is_embodied_by || []) {
+        if (!/docx$/i.test(m.is_exemplified_by || "")) continue;
+        res = await download(
+          `${MEDIA}/${String(m.is_exemplified_by).replace(
+            /^distribution\//,
+            ""
+          )}`
+        );
+        if (res.buffer && res.status === 200) break;
+      }
+    }
+  }
+  if (res.status !== 200 || !res.buffer)
+    throw new Error(`HTTP ${res.status} for ${doc.name}`);
   fs.writeFileSync(binary, res.buffer);
 
   const md = spawnSync("markitdown", [binary], {
@@ -350,14 +431,6 @@ async function processReport(reference, votes) {
   //    they carry the numbering the vote names use ("Après le § 64 - Am 25")
   const docs = argv.force ? [] : cachedDocuments(eli);
   const list = docs.length ? docs : await amendmentDocuments(eli);
-  if (list === null) {
-    // no page, no verdict: leave the votes alone so the next run retries them
-    console.warn(
-      `   ⛔ ${reference}: the WAF kept answering with an empty page`
-    );
-    stats.blocked++;
-    return "blocked";
-  }
   if (list.length)
     console.log(`   📑 ${reference}: ${list.length} amendment document(s)`);
   for (const doc of list) {
@@ -393,7 +466,7 @@ async function processReport(reference, votes) {
   }
 
   if (!index.size) {
-    console.log(`   ⚠️  ${reference}: no amendment document listed on doceo`);
+    console.log(`   ⚠️  ${reference}: no amendment document published`);
     if (!argv.dry)
       await db("rollcalls")
         .whereIn(
@@ -495,40 +568,22 @@ async function main() {
     `📑 ${refs.length} report(s), ${rows.length} amendment vote(s) without text`
   );
 
-  let blockedInARow = 0;
   for (const reference of refs) {
     try {
-      const outcome = await processReport(reference, byRef.get(reference));
-      blockedInARow = outcome === "blocked" ? blockedInARow + 1 : 0;
-      if (blockedInARow >= 3) {
-        // three empty pages in a row is not bad luck, it is the WAF refusing us
-        const minutes = 15;
-        console.log(
-          `\n⛔ doceo is blocking us (WAF): pausing ${minutes} minutes, ` +
-            `then resuming with ${refs.length - refs.indexOf(reference) - 1} ` +
-            `report(s) left`
-        );
-        getWaf().clearWafToken();
-        await sleep(minutes * 60 * 1000);
-        blockedInARow = 0;
-      }
-      // doceo throttles a burst: a report every second keeps the token alive
-      await sleep(1000);
+      await processReport(reference, byRef.get(reference));
+      // the API allows 500 requests per 5 minutes; a report is a handful
+      await sleep(300);
     } catch (e) {
       stats.failed++;
       console.warn(`   ⚠️  ${reference}: ${e.message}`);
     }
   }
 
-  const waf = getWaf();
-  await waf.closeBrowser();
-
   console.log(
     `\n${stats.written} text(s) ${argv.dry ? "would be " : ""}written from ` +
       `${stats.amendments} amendments in ${stats.ranges} document(s), ` +
       `${stats.reports} report(s)\n${stats.missing} vote(s) whose amendment ` +
       `is not in those documents, ${stats.failed} failure(s), ` +
-      `${stats.blocked} blocked by the WAF, ` +
       `${stats.parked} parked as unpublished`
   );
   const [left] = await db.raw(
