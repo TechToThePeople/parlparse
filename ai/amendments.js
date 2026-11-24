@@ -342,22 +342,11 @@ async function processReport(reference, votes) {
   if (!eli) return;
   const index = new Map();
 
-  // 1. the report's own document already holds the committee amendments
-  const local = reportMarkdown(reference);
-  if (fs.existsSync(local)) {
-    const fromReport = parseAmendmentDocument(fs.readFileSync(local, "utf8"));
-    for (const [n, a] of fromReport) index.set(n, a);
-    if (fromReport.size)
-      console.log(
-        `   📄 ${reference}: ${fromReport.size} amendment(s) in the report itself`
-      );
-  }
-
-  // 2. the amendments tabled in plenary are published as range documents
-  //    (already saved ones are reused; a report with none saved is fetched once)
-  const saved = argv.force ? [] : cachedDocuments(eli);
-  const docs = saved.length ? saved : await amendmentDocuments(eli);
-  if (docs === null) {
+  // 1. the amendments tabled in plenary are published as range documents, and
+  //    they carry the numbering the vote names use ("Après le § 64 - Am 25")
+  const docs = argv.force ? [] : cachedDocuments(eli);
+  const list = docs.length ? docs : await amendmentDocuments(eli);
+  if (list === null) {
     // no page, no verdict: leave the votes alone so the next run retries them
     console.warn(
       `   ⛔ ${reference}: the WAF kept answering with an empty page`
@@ -365,26 +354,9 @@ async function processReport(reference, votes) {
     stats.blocked++;
     return "blocked";
   }
-  if (!docs.length) {
-    if (!index.size) {
-      // the page exists and lists nothing: there is no document to fetch, so
-      // retrying this report on the next run only costs a request
-      console.log(`   ⚠️  ${reference}: no amendment document listed on doceo`);
-      if (!argv.dry)
-        await db("rollcalls")
-          .whereIn(
-            "id",
-            votes.map((v) => v.id)
-          )
-          .update({ amendment_status: "unavailable" });
-      stats.parked += votes.length;
-      return;
-    }
-  } else {
-    console.log(`   📑 ${reference}: ${docs.length} amendment document(s)`);
-  }
-  stats.reports++;
-  for (const doc of docs) {
+  if (list.length)
+    console.log(`   📑 ${reference}: ${list.length} amendment document(s)`);
+  for (const doc of list) {
     try {
       const amendments = parseAmendmentDocument(await rangeMarkdown(doc));
       for (const [n, a] of amendments) if (!index.has(n)) index.set(n, a);
@@ -393,6 +365,34 @@ async function processReport(reference, votes) {
       console.warn(`   ⚠️  ${doc.name}: ${e.message}`);
       stats.failed++;
     }
+  }
+
+  // 2. the report's own document: the committee amendments, numbered 1..N in their
+  //    own sequence — only the numbers the tabled amendments do not cover
+  const local = reportMarkdown(reference);
+  if (fs.existsSync(local)) {
+    const fromReport = parseAmendmentDocument(fs.readFileSync(local, "utf8"));
+    let added = 0;
+    for (const [n, a] of fromReport)
+      if (!index.has(n)) {
+        index.set(n, a);
+        added++;
+      }
+    if (added)
+      console.log(`   📄 ${reference}: ${added} only in the report itself`);
+  }
+
+  if (!index.size) {
+    console.log(`   ⚠️  ${reference}: no amendment document listed on doceo`);
+    if (!argv.dry)
+      await db("rollcalls")
+        .whereIn(
+          "id",
+          votes.map((v) => v.id)
+        )
+        .update({ amendment_status: "unavailable" });
+    stats.parked += votes.length;
+    return;
   }
   stats.amendments += index.size;
 
