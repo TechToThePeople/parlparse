@@ -248,9 +248,22 @@ date        RCV  ATT  VOT  MIN  local
 2026-11-24  —    —    —    —    planned: 9 vote(s)
 ```
 
-`ok` published and imported · `new` published, not imported (run `./update.sh`) ·
-`pub` published but nothing imports it (the minutes) · `—` not published ·
-`?429`/`?net` the API refused to answer, which is never read as "not published".
+`ok` published and imported · `new` published, not imported · `pub` published but
+nothing imports it (the minutes) · `—` not published · `?429`/`?net` the API
+refused to answer, which is never read as "not published".
+
+`--sync` then imports exactly what is missing, for each sitting:
+
+```sh
+node openapi/status.js --sync           # last 5 sitting dates
+node openapi/status.js --date 2026-11-23 --sync
+```
+
+`decisions.js -d <date>` first (it is what creates a row for hand and electronic
+votes), then `rcv.js` / `att.js` / `vot-xml.js` only for the documents actually
+missing, then `agenda.js --date` to turn planned votes into voted ones, and
+finally `csv.js`, `cards.js --date` and `npm run majority:csv`. `update.sh` stays
+for the full run; this is the cheap path after a sitting.
 
 Note 2026-11-23: a `VOT` document with no `RCV` at all — a sitting where every vote
 was by show of hands. And a sitting can have `ATT` without `RCV` for the same
