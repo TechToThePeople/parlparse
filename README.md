@@ -222,6 +222,26 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 
+## Running an update (`update.sh`)
+
+```sh
+./update.sh
+```
+
+Five steps: `npm run db:migrate`, `openapi/agenda.js --upcoming` (the planned
+votes and their times), `openapi/update.js --days=2 --no-forthcoming --sync` (the
+last two sittings' documents — imported only if they are published), then
+`openapi/report.js` (report rows, procedure, subjects) and `sh prod.sh` (publish
+to `../10/data`).
+
+The step-by-step version this replaced — `decisions.js -d-1`, `positions.js`,
+`vot-xml.js`, `att.js`, `csv.js`, `cards.js`, `majority:csv` — is kept in
+`legacy/update.sh` for reference. Two differences worth knowing: the importers
+now run **only for the sittings whose documents are new** (the old script ran them
+for yesterday and today unconditionally), and `positions.js` is gone from the
+pipeline — `openapi/rcv.js` reads the distribution the API publishes instead of
+scraping RegData.
+
 ## Is there anything new? (`openapi/update.js`)
 
 A plenary day publishes four documents, all plain entries in the Open Data API, so
