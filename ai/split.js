@@ -163,6 +163,9 @@ async function processReport(reference, votes) {
   );
   stats.reports++;
 
+  const stored = await db("reports").where("reference", reference).first("url");
+  const sourceUrl = stored && stored.url ? stored.url : null;
+
   for (const vote of votes) {
     // the API sometimes prefixes the name with a dash: "– § 6", "– Recital E"
     const name = String(vote.name || "").replace(/^[–—−-]\s*/, "");
@@ -230,6 +233,7 @@ async function processReport(reference, votes) {
           text: found,
           kind,
           source: "markdown",
+          source_url: sourceUrl,
           chars: found.length,
           updated_at: new Date().toISOString(),
         })

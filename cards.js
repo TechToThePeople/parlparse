@@ -120,6 +120,7 @@ async function main() {
             vote.part_text = voted.text;
             vote.part_kind = voted.kind;
             vote.part_source = voted.source;
+            vote.part_source_url = voted.source_url;
             vote.part_context = voted.context;
           }
           const csv = "../" + term + "/cards/" + vote.id + ".csv";

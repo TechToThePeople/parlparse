@@ -110,6 +110,10 @@ function amendmentKeys(vote) {
   return fromDocRef ? [fromDocRef[1]] : [];
 }
 
+/** The PDF of a range document, from the name of the file we parsed. */
+const rangePdf = (name) =>
+  `${DOCEO}/${String(name).replace(/_EN\.(docx|pdf)$/i, "_EN.pdf")}`;
+
 /** data/content/oeil/<ref>.md — the report as markitdown saved it */
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
 const reportMarkdown = (reference) =>
@@ -359,7 +363,9 @@ async function processReport(reference, votes) {
   for (const doc of list) {
     try {
       const amendments = parseAmendmentDocument(await rangeMarkdown(doc));
-      for (const [n, a] of amendments) if (!index.has(n)) index.set(n, a);
+      const url = rangePdf(doc.name);
+      for (const [n, a] of amendments)
+        if (!index.has(n)) index.set(n, { ...a, url });
       await sleep(300);
     } catch (e) {
       console.warn(`   ⚠️  ${doc.name}: ${e.message}`);
@@ -372,10 +378,14 @@ async function processReport(reference, votes) {
   const local = reportMarkdown(reference);
   if (fs.existsSync(local)) {
     const fromReport = parseAmendmentDocument(fs.readFileSync(local, "utf8"));
+    const stored = await db("reports")
+      .where("reference", reference)
+      .first("url");
+    const url = stored && stored.url ? stored.url : `${DOCEO}/${eli}_EN.html`;
     let added = 0;
     for (const [n, a] of fromReport)
       if (!index.has(n)) {
-        index.set(n, a);
+        index.set(n, { ...a, url });
         added++;
       }
     if (added)
@@ -445,6 +455,7 @@ async function processReport(reference, votes) {
         text,
         kind: "amendment",
         source: "doceo",
+        source_url: found[0].url || null,
         chars: text.length,
         updated_at: new Date().toISOString(),
       })

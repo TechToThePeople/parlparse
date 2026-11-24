@@ -523,6 +523,8 @@ const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposi
 const PART_OF_TEXT = /[–-]\s*Am\s|\bAm\s*\d|§|Article/i;
 
 async function storeWholeTextVotes(reference, summary) {
+  const stored = await db("reports").where("reference", reference).first("url");
+  const sourceUrl = stored && stored.url ? stored.url : null;
   const all = await db("rollcalls")
     .where("ref", reference)
     .select("id", "name", "vote_type");
@@ -540,6 +542,7 @@ async function storeWholeTextVotes(reference, summary) {
         text: summary,
         kind: "summary",
         source: "summary",
+        source_url: sourceUrl,
         chars: summary.length,
         updated_at: new Date().toISOString(),
       })
@@ -637,6 +640,8 @@ async function attachExisting() {
  * found by that column, not by `ref` (which is the joint motion or the report).
  */
 async function storeMotionVotes(reference, summary) {
+  const stored = await db("reports").where("reference", reference).first("url");
+  const sourceUrl = stored && stored.url ? stored.url : null;
   const rows = await db("rollcalls").where("doc_ref", reference).pluck("id");
   for (const id of rows) {
     await db("rollcall_texts")
@@ -647,6 +652,7 @@ async function storeMotionVotes(reference, summary) {
         text: summary,
         kind: "summary",
         source: "summary",
+        source_url: sourceUrl,
         chars: summary.length,
         updated_at: new Date().toISOString(),
       })

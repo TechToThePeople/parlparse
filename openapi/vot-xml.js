@@ -473,6 +473,8 @@ async function xmlUrls(date) {
 /** The language of the XML last read: a French-only document exists for a few
  *  sittings, and its labels must not overwrite the English names. */
 let lastLanguage = "ENG";
+/** The XML the parts came from, for the "source" link on the vote page. */
+let lastXmlUrl = null;
 
 async function fetchXml(date) {
   fs.mkdirSync(VOT_DIR, { recursive: true });
@@ -497,6 +499,7 @@ async function fetchXml(date) {
       lastError = `HTTP ${res.status} for ${url}`;
       continue;
     }
+    lastXmlUrl = url;
     lastLanguage = /_en\./.test(url)
       ? "ENG"
       : (String(url).match(/_([a-z]{2})\.[a-z]+$/i) || [])[1] || "UNK";
@@ -651,6 +654,7 @@ async function processDate(date, stats) {
                 text: part.text,
                 kind: part.kind,
                 source: "vot-xml",
+                source_url: lastXmlUrl,
                 chars: part.text.length,
                 updated_at: new Date().toISOString(),
               })

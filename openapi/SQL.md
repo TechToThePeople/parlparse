@@ -247,6 +247,7 @@ report. One row per rollcall (`rollcall` is the primary key, = `rollcalls.id`).
 | `kind` | varchar(20) | nullable | `quoted`, `without-words`, `with-words`, `words`, `other` (split wording, from the VOT XML); `summary` (the AI summary of a whole-text vote); `paragraph`, `recital`, `citation` (extracted from the report markdown); `amendment` (ai/amendments.js) |
 | `source` | varchar(20) | nullable | `vot-xml` (the split remark), `summary` (ai/oeil.js), `markdown` (ai/split.js), `doceo` (ai/amendments.js) |
 | `chars` | integer | nullable | length of `text` |
+| `source_url` | text | nullable | where the text came from: the amendment range PDF, the VOT XML, or the report's doceo page |
 | `context` | text | nullable | for a split part of a paragraph: that paragraph, with the words the part is about wrapped in `<b>` (kept / the words themselves) or `<del>` (removed) |
 
 `kind = quoted` is the wording itself; `without-words` / `with-words` describe a
