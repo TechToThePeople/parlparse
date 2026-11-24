@@ -276,6 +276,19 @@ async function processDate(date, source) {
     if (argv.dry) continue;
     await db("agenda_items").insert(row).onConflict("id").merge();
   }
+  // A vote that was moved to another day is gone from this day's agenda: the
+  // upsert only adds, so drop the rows this fetch did not list.
+  const seen = activities
+    .filter((a) => kindOf(a.had_activity_type) !== "other")
+    .map((a) => a.activity_id);
+  if (!argv.dry && seen.length) {
+    const gone = await db("agenda_items")
+      .where("date", date)
+      .whereNotIn("id", seen)
+      .del();
+    if (gone) console.log(`   ${date}: ${gone} stale point(s) removed`);
+  }
+
   stats.items += count;
   console.log(
     `   ${date}: ${count} agenda point(s)` +
