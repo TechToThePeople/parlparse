@@ -308,7 +308,6 @@ async function main() {
   );
   if (!argv.dry && (stats.created || stats.updated))
     console.log("note: run csv.js next to publish text_tabled.csv to ../10");
-  await db.destroy();
 
   // A report belongs to a procedure, and the procedure has its own subjects.
   // Both passes are incremental, so they only cost requests for what is new.
@@ -328,9 +327,22 @@ async function main() {
   }
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
+/**
+ * Importable entry point: `run({ limit: 5 })` merges the options over the parsed
+ * argv and does what the CLI does. openapi/update.js calls this.
+ */
+async function run(options = {}) {
+  Object.assign(argv, options);
+  await main();
+}
+
+module.exports = { run, main, argv };
+
+if (require.main === module) {
+  run()
+    .then(() => process.exit(0))
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    });
+}

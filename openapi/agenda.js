@@ -365,7 +365,6 @@ async function main() {
       `${stats.reportsCreated} report(s) created, ${stats.voted} already voted, ` +
       `${stats.failed} failure(s)`
   );
-  await db.destroy();
 }
 
 /**

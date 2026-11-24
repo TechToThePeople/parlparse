@@ -34,6 +34,7 @@ const agenda = require("./agenda");
 const csvBuilder = require("../csv");
 const cards = require("../cards");
 const sqlRun = require("../sql/run");
+const report = require("./report");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -227,7 +228,7 @@ async function sync(rows) {
     console.log(`\n[${i + 1}/${dates.length}] ${date}`);
     // decisions first: it creates the row of every vote taken that day (hand and
     // electronic ones included), which the XML importers then enrich
-    await step("decisions", () => decisions.run({ d: date }));
+    await step("decisions", () => decisions.run({ date }));
     if (row.docs.RCV === "new") await step("rcv", () => rcv.run({ _: [date] }));
     if (row.docs.ATT === "new") await step("att", () => att.run({ _: [date] }));
     if (row.docs.VOT === "new")
@@ -237,6 +238,10 @@ async function sync(rows) {
   }
 
   console.log("\n→ derived files");
+  // only now: the agenda of the next sittings, the report rows (and their
+  // procedure/subjects), the CSVs, the cards of those dates and the SQL aggregates
+  await step("agenda --upcoming", () => agenda.run({ upcoming: true }));
+  await step("report.js", () => report.run({}));
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));

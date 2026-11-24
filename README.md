@@ -228,11 +228,19 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 ./update.sh
 ```
 
-Five steps: `npm run db:migrate`, `openapi/agenda.js --upcoming` (the planned
-votes and their times), `openapi/update.js --days=2 --no-forthcoming --sync` (the
-last two sittings' documents — imported only if they are published), then
-`openapi/report.js` (report rows, procedure, subjects) and `sh prod.sh` (publish
-to `../10/data`).
+Three steps: `npm run db:migrate`, `openapi/update.js --days=2
+--no-forthcoming --sync`, `sh prod.sh`.
+
+`--sync` is the whole check: **eight requests** (four documents for each of the
+last two sittings). If nothing is published it stops there — ~1.3 s, no writes — so
+it is safe to run every few minutes. When a document *is* new it imports it and
+then, in the same process, refreshes `agenda.js --upcoming` (planned votes and
+times), `openapi/report.js` (report rows, procedure, subjects), `csv.js`,
+`cards.js` for those dates and `npm run majority:csv` (the SQL aggregates:
+`groupmajority`, `mep_sitting_stats`, the cohesion and cordon CSVs).
+
+**Not in the loop:** `ai/oeil.js` — the summaries cost tokens, so they stay a
+manual `node ai/oeil.js` (missing reports only).
 
 The step-by-step version this replaced — `decisions.js -d-1`, `positions.js`,
 `vot-xml.js`, `att.js`, `csv.js`, `cards.js`, `majority:csv` — is kept in

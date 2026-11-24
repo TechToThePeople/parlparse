@@ -286,7 +286,6 @@ async function main() {
       /* waf unavailable or browser already closed */
     }
   }
-  process.exit(0);
 }
 
 /**
