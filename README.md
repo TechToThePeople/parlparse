@@ -648,6 +648,13 @@ attached by two rules:
    with markitdown and kept in `data/content/amendments/`) — the amendments tabled
    in plenary.
 
+A converted document keeps its horizontal rules as a run of underscores — the
+line separating a text from its footnotes comes out as `______`, or `\_\_\_\_\_\_`
+once markitdown escapes it. `lib/markdown.js` turns that into `---` for both
+`ai/amendments.js` and `ai/split.js`, so a footnote block starts after a rule
+instead of after a wall of underscores (372 rows rewritten, 468 amendment and
+137 report markdown files carry the artefact).
+
 A table row's amendment is the **last** column: the first is empty for new text,
 so dropping empty cells shifts every amendment into it. The number comes from
 `rollcalls.amendment_number` — the VOT XML's own list (`4= 7=` identical

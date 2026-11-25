@@ -25,6 +25,7 @@ const fs = require("fs");
 const path = require("path");
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { toRules } = require("../lib/markdown");
 
 const ROOT = path.resolve(__dirname, "..");
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
@@ -236,7 +237,7 @@ async function processReport(reference, votes) {
           rollcall: vote.id,
           section: name,
           part: null,
-          text: found,
+          text: toRules(found),
           kind,
           source: "markdown",
           source_url: sourceUrl,

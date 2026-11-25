@@ -33,6 +33,7 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { toRules } = require("../lib/markdown");
 const { apiFetch } = require("../openapi/lib");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -40,7 +41,6 @@ const AMEND_DIR = path.join(ROOT, "data", "content", "amendments");
 const TMP_DIR = path.join(ROOT, "data", "tmp");
 const DOCEO = "https://www.europarl.europa.eu/doceo/document";
 // the open data host: the amendment lists live here, not behind the WAF
-const BASE = "https://data.europarl.europa.eu";
 // the files themselves are served from redmapl3: data.europarl.europa.eu answers
 // 302 to curl but 500 to node's fetch, so the media host is used directly
 const MEDIA = "https://redmapl3.europarl.europa.eu/RedmapFront/media";
@@ -502,7 +502,7 @@ async function processReport(reference, votes) {
     }
     // a block vote can carry dozens of amendments: keep the page readable, the
     // text stays verbatim up to the cut
-    let text = found.map((f) => f.text).join(" / ");
+    let text = toRules(found.map((f) => f.text).join(" / "));
     if (text.length > 4000)
       text = text.slice(0, text.lastIndexOf(" ", 4000)) + " …";
     const section =
