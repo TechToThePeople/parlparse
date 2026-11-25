@@ -120,7 +120,7 @@ loadEnv();
 function eliId(reference) {
   const m = String(reference)
     .replace(/\/REV\d+$/, "")
-    .match(/^(RC-)?([AB])(\d+)-(\d+)\/(\d{4})$/);
+    .match(/^(RC-)?([ABC])(\d+)-(\d+)\/(\d{4})$/);
   if (!m) return null;
   // RC-B10-… is published as RC-10-…: no B, the term takes its place
   if (m[1]) return `RC-${m[3]}-${m[5]}-${m[4]}`;
@@ -210,6 +210,31 @@ async function doceoFile(eli) {
   return null;
 }
 
+/**
+ * A C-series reference is a Commission proposal (C10-0258/2026). The open data has
+ * no record of it — `C-10-2026-0258` answers 404 — but the EP hosts the COM
+ * document itself under RegData, and the WAF-guarded session can read it.
+ */
+async function commissionFile(reference) {
+  const m = String(reference).match(/^(?:RC-)?C\d+-(\d{1,4})\/(\d{4})$/);
+  if (!m) return null;
+  const number = m[1].padStart(4, "0");
+  const year = m[2];
+  const url =
+    "https://www.europarl.europa.eu/RegData/docs_autres_institutions/" +
+    `commission_europeenne/com/${year}/${number}/` +
+    `COM_COM(${year})${number}_EN.pdf`;
+  fs.mkdirSync(TMP_DIR, { recursive: true });
+  const dest = path.join(TMP_DIR, `COM_${year}_${number}_EN.pdf`);
+  if (!fs.existsSync(dest)) {
+    console.log(`   ⬇️  COM(${year})${number} (a Commission proposal)…`);
+    const res = await getWaf().downloadBuffer(url);
+    if (res.status !== 200 || !res.buffer) return null;
+    fs.writeFileSync(dest, res.buffer);
+  }
+  return { file: dest, url, format: "PDF", doc: {} };
+}
+
 /** Download the DOCX (preferred) or PDF of a report. Returns {file, url, doc}. */
 /** The document record `openapi/report.js` already stored, when it has one. */
 async function storedDocument(reference) {
@@ -227,6 +252,8 @@ async function storedDocument(reference) {
 async function fetchDocument(reference) {
   const eli = eliId(reference);
   if (!eli) return null;
+  // the C-series never reaches the API: go to the COM document directly
+  if (/^(?:RC-)?C\d+-/.test(reference)) return commissionFile(reference);
   // reports.raw holds the same JSON-LD record: no second metadata call
   let doc = await storedDocument(reference);
   if (!doc) {
@@ -236,11 +263,13 @@ async function fetchDocument(reference) {
     } catch (e) {
       // only a 404 means the API does not publish it; anything else is a failure
       // to read, which must not be reported as "no document"
-      if (e.status === 404) return null;
+      // a 404 is "the API does not publish it" — but doceo may still have the
+      // document (the C-series: a Commission proposal the open data never lists)
+      if (e.status === 404) return doceoFile(eli);
       throw e;
     }
   }
-  if (!doc) return null;
+  if (!doc) return doceoFile(eli);
 
   // English first; a few reports are published only in another language, and
   // the model reads those (it is told to answer in English either way)
@@ -638,7 +667,9 @@ async function runList(list, model, attach) {
       }
       if (!markdown) {
         stats.failed++;
-        console.warn(`   ⚠️  ${reference}: no document published by the API`);
+        console.warn(
+          `   ⚠️  ${reference}: no document found (API, doceo, RegData)`
+        );
         continue;
       }
       if (!argv.ai) continue;

@@ -188,9 +188,18 @@ citations), `amendments.js` (the range documents). The folder used to be called
 `ai/`, which was misleading: only `oeil.js` calls a model — the other two are
 deterministic parsers of the converted markdown.
 
-The `C10-*` series (a Commission proposal, e.g. `C10-0263/2025`) is out of every
-queue on purpose: the OpenAPI has no record for it — `C10-0351/2025` answers 400,
-`C-10-2025-0351` 404 — so no document can ever be fetched and no text extracted.
+A `C10-*` reference is a Commission proposal (`C10-0258/2026`). The OpenAPI has no
+record of it — `C-10-2026-0258` answers 404 — but the EP hosts the COM document
+under RegData, and the WAF-guarded session reads it:
+
+```
+documents/oeil.js: C10-0258/2026
+  ⬇️  COM(2026)0258 (a Commission proposal)…
+  1 fetched, 1 summarised
+```
+
+The path is derivable from the reference:
+`…/commission_europeenne/com/<year>/<number>/COM_COM(<year>)<number>_EN.pdf`.
 
 Fetches a report, converts it to markdown and asks DeepSeek for a citizen-facing
 summary. Key from `DEEPSEEK_API_KEY` (environment or `.env` in the repo root).
