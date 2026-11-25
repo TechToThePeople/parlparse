@@ -22,7 +22,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 });
 
 // the vote is on the report/recommendation itself…
-const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposition de r[ée]solution|proposals? for (?:a )?decisions?|proposition de la commission|commission proposal|projet de d[ée]cision|proposition de d[ée]cision|draft council decision|projet du conseil|draft legislative act|approval without vote|joint text|texte conjoint|provisional agreement|accord provisoire/i;
+const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposition de r[ée]solution|proposals? for (?:a )?decisions?|proposition de la commission|commission proposal|projet de d[ée]cision|proposition de d[ée]cision|draft council decision|projet du conseil|draft legislative act|approval without vote|joint text|texte conjoint|projet commun|common text|provisional agreement|accord provisoire/i;
 
 // …but "… – Am 1", "§ 3", "Article 2" is a part of the text, never the text itself
 const PART_OF_TEXT = /[–-]\s*Am\s|\bAm\s*\d|§|Article/i;
