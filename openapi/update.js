@@ -271,9 +271,18 @@ function statusOf(doc, published, mine) {
   if (!doc.have) return "pub";
   if (!doc.have(mine)) return "new";
   // the EP republishes (French first, English later): a different size means our
-  // copy is not the document that is there now
+  // copy is not the document that is there now. Only the English one can be
+  // compared — without it the API's first language is another translation, and
+  // its size says nothing about ours (an all-languages sitting showed "new" for
+  // ever, re-imported on every run)
   const ours = doc.sizeOf ? doc.sizeOf(mine) : null;
-  if (ours && published.size && ours !== published.size) return "new";
+  if (
+    published.lang === "ENG" &&
+    ours &&
+    published.size &&
+    ours !== published.size
+  )
+    return "new";
   // and say so when the version we hold is not the English one
   if (published.lang && published.lang !== "ENG")
     // FRA -> fr, MUL -> mul: the language of the version we hold
@@ -465,7 +474,8 @@ function printStatus(out) {
   const pending = out.filter((r) => Object.values(r.docs).includes("new"));
   if (pending.length)
     console.log(
-      `\n→ ${pending.length} sitting(s) with a document published but not imported: run ./update.sh`
+      `\n→ ${pending.length} sitting(s) with a document published but not imported:` +
+        ` run ./update.sh, or node openapi/update.js --sync for this check alone`
     );
   else
     console.log(
