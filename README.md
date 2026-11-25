@@ -629,6 +629,14 @@ amendments voted together, `274D` a variant, `9-14` a range), which is more
 reliable than the name: 139 votes spell the variant `S` where the XML says `D`,
 and a name holds at most two of them. The name is the fallback.
 
+`lib/rollcall.js` fills `amendment_number` from the name as soon as the RCV is
+imported, so a vote does not sit empty while the VOT is untranslated — but only
+when the name says `Am` (`Am 261`, `Am 4= 7=`, `Am 11/1` → `11`). A number
+anywhere else is the paragraph or recital the amendment targets: `After § 3` is
+amendment 5. Measured against the VOT's own numbers, the gated guess agrees on
+4,087 of 4,306 votes, the rest differing only in notation (`4= 7=` vs `4 7`);
+ungated it would be wrong on 1,968. The VOT still overwrites it.
+
 A vote that stays without text is not retried for ever: `rollcalls.amendment_attempts` counts the
 runs it survived (three, then it drops out of the queue), a report whose page lists no amendment
 document at all is parked at once as `amendment_status = 'unavailable'`, and a vote that needs a
