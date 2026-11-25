@@ -34,7 +34,7 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
-const { attachReference } = require("./attach");
+const { attachReference, attachAll } = require("./attach");
 const { fetchDocumentById, getWaf } = require("../openapi/lib");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -527,6 +527,58 @@ async function storeWholeTextVotes(reference, summary) {
 }
 
 const storeMotionVotes = storeWholeTextVotes;
+
+/**
+ * The summary on the report row itself, so it survives having no vote. A summary
+ * can exist for a reference with no row at all (six B10 motions were like that):
+ * the row is created then, with nothing but the reference — `openapi/report.js`
+ * fills title, date and creator later, since it looks for rows with no url.
+ */
+async function storeSummary(reference, text, model) {
+  const body = String(text || "").trim();
+  if (!body) return;
+  const fields = {
+    summary: body,
+    summary_model: model || MODEL,
+    summary_at: new Date().toISOString(),
+  };
+  const updated = await db("reports")
+    .where("reference", reference)
+    .update(fields);
+  if (!updated) {
+    await db("reports").insert({ reference, term: 10, ...fields });
+    stats.createdReport = (stats.createdReport || 0) + 1;
+  }
+}
+
+/**
+ * Take the summaries on disk into the database — a file written before
+ * `reports.summary` existed still has to reach its votes — then let ai/attach.js
+ * put them on the votes it recognises, which is idempotent and also covers the
+ * votes created after the file was written.
+ */
+async function attachExisting() {
+  if (!fs.existsSync(SUMMARY_DIR)) {
+    console.error("no summaries in " + path.relative(ROOT, SUMMARY_DIR));
+    return;
+  }
+  const files = fs.readdirSync(SUMMARY_DIR).filter((f) => f.endsWith(".md"));
+  for (const file of files) {
+    // B10-0245_2026_REV1.md -> B10-0245/2026/REV1
+    const reference = file
+      .replace(/\.md$/, "")
+      .replace(
+        /_(\d{4})(_REV\d+)?$/,
+        (_match, year, rev) => "/" + year + (rev ? "/" + rev.slice(1) : "")
+      );
+    const summary = fs
+      .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
+      .trim();
+    if (summary) await storeSummary(reference, summary);
+  }
+  const written = await attachAll();
+  console.log(`🔗 summaries: ${written} attached now, ${files.length} on disk`);
+}
 
 /** The motions that still have no text: one document each. */
 async function motionReferences() {
