@@ -171,15 +171,16 @@ async function references() {
   );
   const useful = refs.filter((r) => voted.has(r) || planned.has(r));
   const orphans = refs.length - useful.length;
-  if (orphans)
-    console.log(`   (${orphans} report(s) skipped: no vote, no agenda)`);
 
   // by default only what has no summary yet — no API call and no token for the
   // rest; --force walks every report again
   if (argv.force || argv.forceAi) return useful;
-  return useful.filter(
+  const list = useful.filter(
     (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))
   );
+  stats.summarisedBefore = useful.length - list.length;
+  stats.orphans = orphans;
+  return list;
 }
 
 /** The DOCX/PDF doceo serves when the document record names no distribution. */
@@ -712,9 +713,12 @@ async function main() {
     let list = await references();
     if (argv.limit) list = list.slice(0, Number(argv.limit));
     console.log(
-      `📚 ${list.length} report(s), model ${
-        argv.ai ? model : "(none, --no-ai)"
-      }`
+      `📚 ${list.length} to summarise, ${
+        stats.summarisedBefore || 0
+      } already ` +
+        `there, ${stats.orphans || 0} with no vote or agenda, model ${
+          argv.ai ? model : "(none, --no-ai)"
+        }`
     );
     await runList(list, model, storeWholeTextVotes);
   }
