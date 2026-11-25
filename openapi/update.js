@@ -303,8 +303,14 @@ async function sync(rows) {
   const dates = rows
     .filter((r) => Object.values(r.docs).includes("new"))
     .map((r) => r.date);
-  // nothing to do: the table above already said so
-  if (!dates.length) return [];
+  // Nothing new to import — but the derived files still have to run: a --sync
+  // that found every document already here used to do nothing at all, which is
+  // how a vote imported by hand stayed out of the CSVs and the cards.
+  if (!dates.length) {
+    console.log("\n→ nothing new to import");
+    await derive(rows.map((r) => r.date));
+    return [];
+  }
   console.log(`\n→ importing ${dates.length} sitting(s): ${dates.join(" ")}\n`);
 
   for (const [i, date] of dates.entries()) {
