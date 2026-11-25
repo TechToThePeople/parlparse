@@ -244,11 +244,12 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 ```
 
 Three steps: `npm run db:migrate`, `openapi/update.js --days=2
---no-forthcoming --sync`, `sh prod.sh`.
+--no-forthcoming`, `sh prod.sh`.
 
-`--sync` is the whole check: **eight requests** (four documents for each of the
-last two sittings). If nothing is published it stops there — ~1.3 s, no writes — so
-it is safe to run every few minutes. When a document *is* new it imports it and
+The check is **eight requests** (four documents for each of the last two
+sittings) and importing is the default: `--no-db` is the check alone. When a
+sitting has nothing new the derived files are still rebuilt, which is the slow
+part of a quiet day (~1 min, all local). When a document *is* new it imports it and
 then, in the same process, refreshes `agenda.js --upcoming` (planned votes and
 times), `openapi/report.js` (report rows, procedure, subjects), `csv.js`,
 `cards.js` for those dates and `npm run majority:csv` (the SQL aggregates:
@@ -329,11 +330,12 @@ date        RCV  ATT  VOT  MIN  local
 nothing imports it (the minutes) · `—` not published · `?429`/`?net` the API
 refused to answer, which is never read as "not published".
 
-`--sync` then imports exactly what is missing, for each sitting:
+It imports what is missing, for each sitting, by default:
 
 ```sh
-node openapi/update.js --sync           # last 5 sitting dates
-node openapi/update.js --date 2026-11-23 --sync
+node openapi/update.js                  # last 3 sitting dates: check, import, rebuild
+node openapi/update.js --no-db          # the check alone, nothing written
+node openapi/update.js --date 2026-11-23
 ```
 
 `decisions.js -d <date>` first (it is what creates a row for hand and electronic
@@ -344,7 +346,7 @@ every whole-text vote), `ai/split.js`, `ai/amendments.js` — and finally `csv.j
 `cards.js --date` and `npm run majority:csv`. `update.sh` stays for the full run;
 this is the cheap path after a sitting.
 
-**The derived files are not conditional on an import.** A `--sync` that finds
+**The derived files are not conditional on an import.** A run that finds
 every document already here still runs them (it used to return before, so a vote
 imported by hand stayed out of the CSVs and the cards until the next full run).
 And when only the local part is wanted — after a manual `rcv.js`, say — `--local`

@@ -14,8 +14,8 @@ date
 # 1. schema first: the importers and csv.js assume the current migrations
 npm run -s db:migrate || exit 1
 
-# 2. is anything new? import it, and only then the derived files
-node openapi/update.js --days=2 --no-forthcoming --sync "$@"
+# 2. is anything new? import it (the default), then the derived files
+node openapi/update.js --days=2 --no-forthcoming "$@"
 
 # 3. static files -> ../10/data (a local copy, no request)
 sh prod.sh

@@ -46,10 +46,11 @@ const UA =
   "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["help", "json", "sync", "forthcoming", "local"],
+  boolean: ["help", "json", "db", "sync", "forthcoming", "local"],
   // a periodic run must not spend a fortune on summaries: at most 20 documents
   // per run, 0 to disable the AI pass entirely
-  default: { forthcoming: true, "ai-max-doc": "20" },
+  // `db` is what writes: --no-db turns the run back into a check
+  default: { db: true, forthcoming: true, "ai-max-doc": "20" },
   string: ["date", "ai-max-doc"],
   alias: { h: "help", n: "days" },
 });
@@ -59,7 +60,8 @@ if (argv.help) {
 Usage: node openapi/update.js [options]
 
 Says whether the RCV, ATT, VOT and MINUTES documents of the recent sittings are
-published, and whether this database already has them.
+published, imports the ones that are missing, then rebuilds the derived files.
+--no-db only looks, --local rebuilds from what is already here without a request.
 
   --days, -n N     how many of the most recent sitting dates to look at
                    (default 3, today included, never a future one)
@@ -68,10 +70,11 @@ published, and whether this database already has them.
   --no-forthcoming leave out the sittings that have not happened yet
   --ai-max-doc N   documents the AI pass may summarise after an import
                    (default 20; 0 disables it)
-  --sync           import what is new, then rebuild the CSVs and cards
+  --no-db          check only: do not import, do not rebuild anything
   --local          no network at all: the steps that read this database and the
                    documents already on disk (ai/attach, ai/split, ai/amendments
                    from the cache, csv, cards, majority) for the same dates
+  --sync           kept for the old scripts; importing is the default now
   --help, -h       this text
 `);
   process.exit(0);
@@ -414,7 +417,13 @@ async function main() {
 
   const out = await readStatus(dates);
 
-  if (argv.sync) {
+  if (argv.json) {
+    console.log(JSON.stringify(out, null, 1));
+    await db.destroy();
+    return;
+  }
+
+  if (argv.db) {
     // what was found, then what was done — the table is the point of the check
     printStatus(out);
     const imported = await sync(out);
@@ -422,12 +431,6 @@ async function main() {
       console.log("\n→ after the import:");
       printStatus(await readStatus(imported));
     }
-    await db.destroy();
-    return;
-  }
-
-  if (argv.json) {
-    console.log(JSON.stringify(out, null, 1));
     await db.destroy();
     return;
   }
