@@ -35,6 +35,7 @@ const path = require("path");
 const minimist = require("minimist");
 const { parseStringPromise } = require("xml2js");
 const db = require("../lib/db");
+const { toRules } = require("../lib/markdown");
 const { TERM, fetchDocumentById } = require("./lib");
 const { parseMentions, votingKeys, mentionMatches } = require("./remarks");
 
@@ -648,17 +649,18 @@ async function processDate(date, stats) {
         const part = (remarks.parts.get(subject) || new Map()).get(num);
         if (part) {
           stats.texts++;
+          const body = toRules(part.text);
           if (!argv.dry)
             await db("rollcall_texts")
               .insert({
                 rollcall: id,
                 section: txt(voting.amendmentSubject),
                 part: num,
-                text: part.text,
+                text: body,
                 kind: part.kind,
                 source: "vot-xml",
                 source_url: lastXmlUrl,
-                chars: part.text.length,
+                chars: body.length,
                 updated_at: new Date().toISOString(),
               })
               .onConflict("rollcall")

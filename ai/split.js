@@ -313,7 +313,7 @@ async function contextPass(rows) {
         continue;
       }
       const tag = row.kind === "without-words" ? "del" : "b";
-      const context = markWords(bucket[0].text, wordsOf(row), tag);
+      const context = toRules(markWords(bucket[0].text, wordsOf(row), tag));
       if (argv.dry) {
         console.log(`   ${row.rollcall} § ${n} → "${context.slice(0, 90)}…"`);
         written++;
