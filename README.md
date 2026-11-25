@@ -188,6 +188,10 @@ citations), `amendments.js` (the range documents). The folder used to be called
 `ai/`, which was misleading: only `oeil.js` calls a model — the other two are
 deterministic parsers of the converted markdown.
 
+The `C10-*` series (a Commission proposal, e.g. `C10-0263/2025`) is out of every
+queue on purpose: the OpenAPI has no record for it — `C10-0351/2025` answers 400,
+`C-10-2025-0351` 404 — so no document can ever be fetched and no text extracted.
+
 Fetches a report, converts it to markdown and asks DeepSeek for a citizen-facing
 summary. Key from `DEEPSEEK_API_KEY` (environment or `.env` in the repo root).
 
