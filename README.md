@@ -342,6 +342,22 @@ every whole-text vote), `ai/split.js`, `ai/amendments.js` — and finally `csv.j
 `cards.js --date` and `npm run majority:csv`. `update.sh` stays for the full run;
 this is the cheap path after a sitting.
 
+**The derived files are not conditional on an import.** A `--sync` that finds
+every document already here still runs them (it used to return before, so a vote
+imported by hand stayed out of the CSVs and the cards until the next full run).
+And when only the local part is wanted — after a manual `rcv.js`, say — `--local`
+skips the whole status check and every request, and rebuilds the texts we already
+have on disk, the CSVs, the cards and the aggregates in about a minute:
+
+```sh
+node openapi/update.js --days 1 --local && sh prod.sh
+```
+
+It runs `ai/attach.js`, `ai/split.js`, `ai/amendments.js` (cached range documents
+only, `--limit 0` — nothing is downloaded), `csv.js`, `cards.js --date` and
+`npm run majority:csv`. `agenda --upcoming`, `report.js` and `ai/oeil.js` need the
+API or a model, so they are the part `--local` leaves out.
+
 Note 2026-11-23: a `VOT` document with no `RCV` at all — a sitting where every vote
 was by show of hands. And a sitting can have `ATT` without `RCV` for the same
 reason.

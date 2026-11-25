@@ -46,7 +46,7 @@ const UA =
   "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["help", "json", "sync", "forthcoming"],
+  boolean: ["help", "json", "sync", "forthcoming", "local"],
   // a periodic run must not spend a fortune on summaries: at most 20 documents
   // per run, 0 to disable the AI pass entirely
   default: { forthcoming: true, "ai-max-doc": "20" },
@@ -69,6 +69,9 @@ published, and whether this database already has them.
   --ai-max-doc N   documents the AI pass may summarise after an import
                    (default 20; 0 disables it)
   --sync           import what is new, then rebuild the CSVs and cards
+  --local          no network at all: the steps that read this database and the
+                   documents already on disk (ai/attach, ai/split, ai/amendments
+                   from the cache, csv, cards, majority) for the same dates
   --help, -h       this text
 `);
   process.exit(0);
@@ -328,28 +331,44 @@ async function sync(rows) {
     await step("agenda", () => agenda.run({ date }));
   }
 
+  await derive(dates);
+  return dates;
+}
+
+/**
+ * Everything derived from what we already hold. `network: false` (--local) keeps
+ * only the steps that read our database and the documents already on disk: no
+ * API status, no report backfill, no model call, no download.
+ */
+async function derive(dates, { network = true } = {}) {
   console.log("\n→ derived files");
   // only now: the agenda of the next sittings, the report rows (and their
   // procedure/subjects), the CSVs, the cards of those dates and the SQL aggregates
-  await step("agenda --upcoming", () => agenda.run({ upcoming: true }));
-  await step("report.js", () => report.run({}));
-  // summaries for the reports that have none yet, at most ai-max-doc of them
-  const aiMax = Number(lastOf(argv["ai-max-doc"]));
-  if (aiMax > 0)
-    await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
-  else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
+  if (!network) {
+    console.log("   · agenda --upcoming, report.js, ai/oeil skipped (--local)");
+  } else {
+    await step("agenda --upcoming", () => agenda.run({ upcoming: true }));
+    await step("report.js", () => report.run({}));
+    // summaries for the reports that have none yet, at most ai-max-doc of them
+    const aiMax = Number(lastOf(argv["ai-max-doc"]));
+    if (aiMax > 0)
+      await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
+    else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
+  }
   // a whole-text vote has no wording to extract: its text is the report summary
   await step("ai/attach", () => attach.attachAll());
   // the texts that come from the report's own document (paragraphs, recitals) and
   // from the amendment range documents — both cached locally after the import
   await step("ai/split", () => split.run({}));
-  await step("ai/amendments", () => amendments.run({ limit: 20 }));
+  // --local keeps to the cached range documents: nothing is downloaded
+  await step("ai/amendments", () =>
+    amendments.run({ limit: network ? 20 : 0 })
+  );
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));
   await step("majority:csv", () => sqlRun.run());
   console.log("\nnext: sh prod.sh (publishes the CSVs to ../10/data)");
-  return dates;
 }
 
 async function main() {
@@ -360,6 +379,22 @@ async function main() {
     // A forthcoming sitting costs four requests that answer 404 — ~0.8 s — and
     // is the only way to see "planned, nothing published yet".
     if (argv.forthcoming) dates = dates.concat(await forthcomingSittings());
+  }
+
+  if (argv.local) {
+    // no network at all: the steps that read this database and the documents
+    // already on disk. --forthcoming would only add future dates, so it is out.
+    console.log(
+      `→ local update of ${dates.length} sitting(s): ${dates.join(" ")}`
+    );
+    await derive(
+      dates.filter((d) => d <= new Date().toISOString().slice(0, 10)),
+      {
+        network: false,
+      }
+    );
+    await db.destroy();
+    return;
   }
 
   const out = await readStatus(dates);
