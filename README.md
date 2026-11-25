@@ -232,6 +232,8 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
 - the prompt tells the model to ignore the committee's own votes, the list of
   members who voted and the procedural references — how the text was adopted,
   not what it changes;
+- a motion's revised version is its own reference (`RC-B10-0146/2025/REV1`, a
+  document of its own on the API), so it is summarised like any other;
 - the run prints tokens used and an estimated cost; `401`/`402` abort, other
   errors skip the document. Existing files are kept unless `--force`.
 

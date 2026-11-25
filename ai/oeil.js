@@ -152,7 +152,8 @@ async function references() {
     .orderBy("reference");
   const refs = rows
     .map((r) => r.reference)
-    .filter((r) => /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}$/.test(r));
+    // a motion's revised version is its own document: RC-B10-0162/2025/REV1
+    .filter((r) => /^(?:RC-)?[AB]\d+-\d{4}\/\d{4}(?:\/REV\d+)?$/.test(r));
   // A reference with no vote and nothing on an agenda has nowhere a summary could
   // show: 61 orphan `A9-*` rows (term 9) were being summarised for nothing.
   const voted = new Set(
