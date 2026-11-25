@@ -158,9 +158,21 @@ async function references() {
     .filter(isDocumentRef);
   // A reference with no vote and nothing on an agenda has nowhere a summary could
   // show: 61 orphan `A9-*` rows (term 9) were being summarised for nothing.
+  // --dates limits the queue to the sittings of this run
+  const days = Array.isArray(argv.dates)
+    ? argv.dates
+    : argv.dates
+    ? [argv.dates]
+    : [];
   const voted = new Set(
     (
-      await db.raw("select distinct ref from rollcalls where ref is not null")
+      await db.raw(
+        "select distinct ref from rollcalls where ref is not null" +
+          (days.length
+            ? ` and substr(date, 1, 10) in (${days.map(() => "?").join(", ")})`
+            : ""),
+        days
+      )
     ).map((r) => r.ref)
   );
   const planned = new Set(

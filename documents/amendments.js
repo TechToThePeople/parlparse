@@ -539,6 +539,14 @@ async function processReport(reference, votes) {
   }
 }
 
+/** --dates: only the votes of these sittings (openapi/update.js passes them). */
+function dateClause(dates) {
+  const list = Array.isArray(dates) ? dates : dates ? [dates] : [];
+  return list.length
+    ? `AND substr(r.date, 1, 10) IN (${list.map(() => "?").join(", ")})`
+    : "";
+}
+
 async function main() {
   const rows = await db.raw(
     `SELECT r.id, r.ref, r.name, r.doc_ref, r.amendment_number
@@ -550,6 +558,7 @@ async function main() {
              OR r.name GLOB '* [–-] [0-9]*' OR r.name GLOB '§ * – *'
              OR r.doc_ref LIKE '%-AM-%')
       ${argv.ref ? "AND r.ref = ?" : ""}
+      ${dateClause(argv.dates)}
       -- newest vote first: the refs are taken in the order they appear, so the
       -- most recent report is fetched first
       ORDER BY r.date DESC, r.id DESC`,

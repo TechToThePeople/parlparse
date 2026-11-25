@@ -46,7 +46,7 @@ const UA =
   "Chrome/120.0 Safari/537.36";
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ["help", "json", "db", "sync", "forthcoming", "local"],
+  boolean: ["help", "json", "db", "sync", "forthcoming", "local", "force"],
   // a periodic run must not spend a fortune on summaries: at most 20 documents
   // per run, 0 to disable the AI pass entirely
   // `db` is what writes: --no-db turns the run back into a check
@@ -71,6 +71,7 @@ published, imports the ones that are missing, then rebuilds the derived files.
   --ai-max-doc N   documents the AI pass may summarise after an import
                    (default 20; 0 disables it)
   --no-db          check only: do not import, do not rebuild anything
+  --force          rebuild the derived files even when nothing has changed
   --local          no network at all: the steps that read this database and the
                    documents already on disk (documents/attach, documents/split, documents/amendments
                    from the cache, csv, cards, majority) for the same dates
@@ -295,6 +296,8 @@ function statusOf(doc, published, mine) {
   return "ok";
 }
 
+const DERIVED_STATE = path.join(__dirname, "..", "data", ".derived.json");
+
 const votPath = (date) =>
   path.join(__dirname, "..", "data", "VOT", `${date}.xml`);
 
@@ -320,7 +323,10 @@ async function sync(rows) {
   // how a vote imported by hand stayed out of the CSVs and the cards.
   if (!dates.length) {
     console.log("\n→ nothing new to import");
-    await derive(rows.map((r) => r.date));
+    await derive(
+      rows.map((r) => r.date),
+      { force: argv.force }
+    );
     return [];
   }
   console.log(`\n→ importing ${dates.length} sitting(s): ${dates.join(" ")}\n`);
@@ -349,7 +355,7 @@ async function sync(rows) {
     await step("agenda", () => agenda.run({ date }));
   }
 
-  await derive(dates);
+  await derive(dates, { force: argv.force });
   return dates;
 }
 
@@ -358,7 +364,32 @@ async function sync(rows) {
  * only the steps that read our database and the documents already on disk: no
  * API status, no report backfill, no model call, no download.
  */
-async function derive(dates, { network = true } = {}) {
+/** What the derived files were last built from — four counts, 20 ms. */
+async function derivedState() {
+  const votes = Number((await db("rollcalls").max("id as m").first()).m || 0);
+  const texts = Number(
+    (await db("rollcall_texts").count("* as n").first()).n || 0
+  );
+  const positions = Number(
+    (await db("positions").count("* as n").first()).n || 0
+  );
+  const at =
+    (await db("rollcall_texts").max("updated_at as t").first()).t || "";
+  return { votes, texts, positions, at };
+}
+
+async function derive(dates, { network = true, force = false } = {}) {
+  const before = await derivedState();
+  const state = JSON.stringify(before);
+  if (!force && fs.existsSync(DERIVED_STATE)) {
+    if (fs.readFileSync(DERIVED_STATE, "utf8").trim() === state) {
+      console.log(
+        "\n→ nothing has changed since the last rebuild — derived files left alone " +
+          "(downloads and imports still ran; --force rebuilds anyway)"
+      );
+      return;
+    }
+  }
   console.log("\n→ derived files");
   // only now: the agenda of the next sittings, the report rows (and their
   // procedure/subjects), the CSVs, the cards of those dates and the SQL aggregates
@@ -371,25 +402,30 @@ async function derive(dates, { network = true } = {}) {
     await step("report.js", () => report.run({}));
     // summaries for the reports that have none yet, at most ai-max-doc of them
     const aiMax = Number(lastOf(argv["ai-max-doc"]));
+    // --force is this script's flag (rebuild the derived files); the children read
+    // their own argv from the same command line, and --force there means
+    // "download and summarise again" — a 17-minute run for nothing
     if (aiMax > 0)
       await step("documents/oeil", () =>
-        oeil.run({ "ai-max-doc": String(aiMax) })
+        oeil.run({ "ai-max-doc": String(aiMax), force: false })
       );
     else console.log("   · documents/oeil skipped (--ai-max-doc 0)");
   }
   // a whole-text vote has no wording to extract: its text is the report summary
-  await step("documents/attach", () => attach.attachAll());
+  await step("documents/attach", () => attach.attachAll({ dates }));
   // the texts that come from the report's own document (paragraphs, recitals) and
   // from the amendment range documents — both cached locally after the import
-  await step("documents/split", () => split.run({}));
+  await step("documents/split", () => split.run({ dates, force: false }));
   // --local keeps to the cached range documents: nothing is downloaded
   await step("documents/amendments", () =>
-    amendments.run({ limit: network ? 20 : 0 })
+    amendments.run({ limit: network ? 20 : 0, dates, force: false })
   );
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));
   await step("majority:csv", () => sqlRun.run());
+  fs.mkdirSync(path.dirname(DERIVED_STATE), { recursive: true });
+  fs.writeFileSync(DERIVED_STATE, JSON.stringify(await derivedState()));
   console.log("\nnext: sh prod.sh (publishes the CSVs to ../10/data)");
 }
 
@@ -413,6 +449,7 @@ async function main() {
       dates.filter((d) => d <= new Date().toISOString().slice(0, 10)),
       {
         network: false,
+        force: argv.force,
       }
     );
     await db.destroy();

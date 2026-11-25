@@ -43,6 +43,12 @@ function belongsTo(vote, reference) {
 /**
  * Write the summary on the votes of one reference. Returns the rows written.
  */
+/** --dates: only the votes of these sittings (openapi/update.js passes them). */
+function daysOnly(query, dates) {
+  if (!dates || !dates.length) return;
+  query.whereIn(db.raw("substr(date, 1, 10)"), dates);
+}
+
 async function attachReference(reference, summary) {
   const { url } =
     (await db("reports").where("reference", reference).first("url")) || {};
@@ -58,7 +64,7 @@ async function attachReference(reference, summary) {
 /**
  * Every summary we have, against every vote that should carry it.
  */
-async function attachAll() {
+async function attachAll({ dates = null } = {}) {
   const summaries = await db("reports")
     .whereNotNull("summary")
     .select("reference", "summary", "url");
@@ -70,8 +76,8 @@ async function attachAll() {
   for (let i = 0; i < references.length; i += 400) {
     const chunk = references.slice(i, i + 400);
     const votes = await db("rollcalls")
-      .whereIn("ref", chunk)
-      .orWhereIn("doc_ref", chunk)
+      .where((q) => q.whereIn("ref", chunk).orWhereIn("doc_ref", chunk))
+      .modify(daysOnly, dates)
       .select("id", "name", "vote_type", "ref", "doc_ref");
     const bySummary = new Map();
     for (const vote of votes) {

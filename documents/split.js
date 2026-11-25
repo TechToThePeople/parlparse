@@ -332,6 +332,14 @@ async function contextPass(rows) {
   return { written, noParagraph };
 }
 
+/** --dates: only the votes of these sittings (openapi/update.js passes them). */
+function dateClause(dates) {
+  const list = Array.isArray(dates) ? dates : dates ? [dates] : [];
+  return list.length
+    ? `AND substr(r.date, 1, 10) IN (${list.map(() => "?").join(", ")})`
+    : "";
+}
+
 async function main() {
   const rows = await db.raw(
     `SELECT r.id, r.ref, r.name
@@ -345,6 +353,7 @@ async function main() {
              OR r.name GLOB 'Article [0-9]*' OR r.name GLOB '* Article [0-9]*'
              OR r.name GLOB 'Citation *' OR r.name GLOB '* Citation *')
       ${argv.ref ? "AND r.ref = ?" : ""}
+      ${dateClause(argv.dates)}
       ORDER BY r.ref, r.id`,
     argv.ref ? [argv.ref] : []
   );
