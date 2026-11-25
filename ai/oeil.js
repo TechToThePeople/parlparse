@@ -563,6 +563,13 @@ async function attachExisting() {
     return;
   }
   const files = fs.readdirSync(SUMMARY_DIR).filter((f) => f.endsWith(".md"));
+  // 1,742 UPDATEs for text that has not changed is most of what a run costs
+  const stored = new Map(
+    (await db("reports").select("reference", "summary")).map((row) => [
+      row.reference,
+      row.summary,
+    ])
+  );
   for (const file of files) {
     // B10-0245_2026_REV1.md -> B10-0245/2026/REV1
     const reference = file
@@ -574,7 +581,8 @@ async function attachExisting() {
     const summary = fs
       .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
       .trim();
-    if (summary) await storeSummary(reference, summary);
+    if (summary && stored.get(reference) !== summary)
+      await storeSummary(reference, summary);
   }
   const written = await attachAll();
   console.log(`🔗 summaries: ${written} attached now, ${files.length} on disk`);
