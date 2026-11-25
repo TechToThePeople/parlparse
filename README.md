@@ -180,7 +180,13 @@ Formats the site relies on:
 - **`cordon.far_right_epp_position`** is one of `for` / `against` / `abstention`;
   `epp_cohesion` is 0–100.
 
-## AI summaries (`ai/oeil.js`)
+## AI summaries (`documents/oeil.js`)
+
+`documents/` holds the passes that turn a published document into the text of a
+vote: `oeil.js` (the report, and its summary), `split.js` (paragraphs, recitals,
+citations), `amendments.js` (the range documents). The folder used to be called
+`ai/`, which was misleading: only `oeil.js` calls a model — the other two are
+deterministic parsers of the converted markdown.
 
 Fetches a report, converts it to markdown and asks DeepSeek for a citizen-facing
 summary. Key from `DEEPSEEK_API_KEY` (environment or `.env` in the repo root).
@@ -190,12 +196,12 @@ Every step runs by default, on the reports that have no summary yet:
 **attach** (link the summary to its votes). Each can be turned off:
 
 ```bash
-node ai/oeil.js A10-0275/2026        # one report, all four steps
-node ai/oeil.js --limit 5            # a trial run
-node ai/oeil.js --no-ai              # fetch + convert, no tokens
-node ai/oeil.js --no-fetch           # markdown on disk only (with --no-ai: relink)
-node ai/oeil.js --force              # redo every step for every report
-node ai/oeil.js --force-ai A10-0023/2026   # new summary from the saved markdown
+node documents/oeil.js A10-0275/2026        # one report, all four steps
+node documents/oeil.js --limit 5            # a trial run
+node documents/oeil.js --no-ai              # fetch + convert, no tokens
+node documents/oeil.js --no-fetch           # markdown on disk only (with --no-ai: relink)
+node documents/oeil.js --force              # redo every step for every report
+node documents/oeil.js --force-ai A10-0023/2026   # new summary from the saved markdown
 ```
 
 `--force-ai` is the cheap one when a summary is bad: no 40 MB download, just the
@@ -219,13 +225,13 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
   report over ~600k characters → `data/content/summary/<ref>.md`
 - no front-matter in either file: reference, title, distribution, source and
   token counts are printed to the console instead, so the markdown stays plain;
-- `ai/attach.js` puts that summary on the votes about the whole text — a vote
+- `documents/attach.js` puts that summary on the votes about the whole text — a vote
   has no wording of its own when what it adopts *is* the report
   (`Proposition de résolution (ensemble du texte)`, `Projet de décision du
   Conseil`, a motion's own document). `kind = 'summary'`, driven by
   `reports.summary` rather than by the files, so a vote created after the
   summary was written still picks it up, with no model call;
-- `ai/split.js` fills the votes on a paragraph (`§ 19`), a recital (`Recital U`)
+- `documents/split.js` fills the votes on a paragraph (`§ 19`), a recital (`Recital U`)
   or a citation (`Citation 9`) from that markdown, deterministically: the
   numbered items after the resolution heading, the `X. whereas` run, and the
   N-th "having regard to" bullet;
@@ -255,9 +261,9 @@ times), `openapi/report.js` (report rows, procedure, subjects), `csv.js`,
 `cards.js` for those dates and `npm run majority:csv` (the SQL aggregates:
 `groupmajority`, `mep_sitting_stats`, the cohesion and cordon CSVs).
 
-**The AI pass is in the loop but capped.** After an import, `ai/oeil.js` runs for
+**The AI pass is in the loop but capped.** After an import, `documents/oeil.js` runs for
 the reports that have no summary yet, with `--ai-max-doc 20` (20 documents per
-run). `./update.sh --ai-max-doc 0` disables it; a bare `node ai/oeil.js` keeps no
+run). `./update.sh --ai-max-doc 0` disables it; a bare `node documents/oeil.js` keeps no
 cap of its own. `update.sh` forwards its arguments to `update.js` (`"$@"`), which
 is how that reaches it.
 
@@ -341,8 +347,8 @@ node openapi/update.js --date 2026-11-23
 `decisions.js -d <date>` first (it is what creates a row for hand and electronic
 votes), then `rcv.js` / `att.js` / `vot-xml.js` only for the documents actually
 missing, then `agenda.js --date` to turn planned votes into voted ones, then the
-derived files — `agenda --upcoming`, `report.js`, `ai/attach.js` (the summary on
-every whole-text vote), `ai/split.js`, `ai/amendments.js` — and finally `csv.js`,
+derived files — `agenda --upcoming`, `report.js`, `documents/attach.js` (the summary on
+every whole-text vote), `documents/split.js`, `documents/amendments.js` — and finally `csv.js`,
 `cards.js --date` and `npm run majority:csv`. `update.sh` stays for the full run;
 this is the cheap path after a sitting.
 
@@ -357,9 +363,9 @@ have on disk, the CSVs, the cards and the aggregates in about a minute:
 node openapi/update.js --days 1 --local && sh prod.sh
 ```
 
-It runs `ai/attach.js`, `ai/split.js`, `ai/amendments.js` (cached range documents
+It runs `documents/attach.js`, `documents/split.js`, `documents/amendments.js` (cached range documents
 only, `--limit 0` — nothing is downloaded), `csv.js`, `cards.js --date` and
-`npm run majority:csv`. `agenda --upcoming`, `report.js` and `ai/oeil.js` need the
+`npm run majority:csv`. `agenda --upcoming`, `report.js` and `documents/oeil.js` need the
 API or a model, so they are the part `--local` leaves out.
 
 Note 2026-11-23: a `VOT` document with no `RCV` at all — a sitting where every vote
@@ -409,7 +415,7 @@ node openapi/procedure.js --dry      # only print the codes found
 ```
 
 It runs on the report **document** (`data/content/oeil/<ref>.md`, written by
-`ai/oeil.js` when it fetches a report), so a report gets its procedure only once
+`documents/oeil.js` when it fetches a report), so a report gets its procedure only once
 that file exists — the AI summary is not involved. `openapi/report.js` runs
 `procedure.js` and then `subject.js` at the end unless `--no-procedure` /
 `--no-subject`; both only touch what is new.
@@ -591,7 +597,7 @@ is and `source` saying where it was found. 5,159 of the 14,117 votes have one:
 
 **Which votes are candidates.** Names are first stripped of a leading dash
 (`– § 6` → `§ 6`). `openapi/vot-xml.js` takes the split parts; the
-AI summary attaches to two different things; `ai/split.js` only looks at votes
+AI summary attaches to two different things; `documents/split.js` only looks at votes
 whose name matches one of:
 
 ```
@@ -613,7 +619,7 @@ wording taken from the sibling part that names it (`… without the words: ‘wi
 DG FINS’`, also written `…’ without the words: …` and `…’ excluding the words …`) —
 without that, `§ 140/2` would only say "those words"; anything else → `other`.
 
-**The paragraph behind a split part (`ai/split.js`).** A part vote names the
+**The paragraph behind a split part (`documents/split.js`).** A part vote names the
 paragraph (`§ 140/2`) and its own words; `rollcall_texts.context` also holds
 paragraph 140 itself, with those words wrapped in `<b>` when the part is (or
 keeps) them and `<del>` when it removes them:
@@ -627,7 +633,7 @@ keeps) them and `<del>` when it removes them:
 934 of the 1,219 words/without-words/with-words parts got it; the rest name a
 paragraph the report markdown does not carry (or a report with no markdown).
 
-**Summaries (`ai/oeil.js`).** Written after the model summarises a document, and
+**Summaries (`documents/oeil.js`).** Written after the model summarises a document, and
 attached by two rules:
 
 - report: the votes whose `ref` is that report **and** either `vote_type = main`
@@ -640,7 +646,7 @@ attached by two rules:
 - motion: the votes whose `doc_ref` is that motion's reference (a motion is its
   own document, so the name test does not apply).
 
-**Amendments (`ai/amendments.js`).** Two sources, indexed per report as
+**Amendments (`documents/amendments.js`).** Two sources, indexed per report as
 `number → {article, text}`:
 
 1. the report's own markdown (`data/content/oeil/<ref>.md`) — the committee
@@ -653,7 +659,7 @@ attached by two rules:
 A converted document keeps its horizontal rules as a run of underscores — the
 line separating a text from its footnotes comes out as `______`, or `\_\_\_\_\_\_`
 once markitdown escapes it. `lib/markdown.js` turns that into `---` for both
-`ai/amendments.js` and `ai/split.js`, so a footnote block starts after a rule
+`documents/amendments.js` and `documents/split.js`, so a footnote block starts after a rule
 instead of after a wall of underscores (372 rows rewritten, 468 amendment and
 137 report markdown files carry the artefact).
 
@@ -693,7 +699,7 @@ because retrying inside a block only deepens it. To resume where a throttled run
 votes that already have text are skipped:
 
 ```sh
-for i in $(seq 1 10); do node ai/amendments.js --limit 60; sleep 600; done
+for i in $(seq 1 10); do node documents/amendments.js --limit 60; sleep 600; done
 ```
 
 The markdown of every range document is kept in `data/content/amendments/`, and a
@@ -701,7 +707,7 @@ run uses it: only a report with **nothing** saved is fetched (its page lists the
 documents), so re-running after a parser fix touches the network not at all.
 `--force` ignores the saved markdown and downloads again.
 
-**Paragraphs (`ai/split.js`).** The resolution's paragraphs are the `1, 2, 3 …`
+**Paragraphs (`documents/split.js`).** The resolution's paragraphs are the `1, 2, 3 …`
 run **after the first body heading**, where the body heading is
 
 ```
@@ -716,13 +722,13 @@ append committee opinions that restart their own numbering. If the run finds
 nothing, a number that occurs **exactly once in the whole document** is used
 instead (28 of the 317 paragraphs come from that fallback).
 
-**Recitals (`ai/split.js`).** Items of the form `<A-Z or number>. whereas …`;
+**Recitals (`documents/split.js`).** Items of the form `<A-Z or number>. whereas …`;
 the vote name gives the key. Only written when the key appears **once** in the
 document: a document can hold two lettered lists (the report's, and the amended
 ones further down), and the run prints both candidates with their line numbers
 instead of guessing.
 
-**Citations (`ai/split.js`).** The `– having regard to …` items, in document
+**Citations (`documents/split.js`).** The `– having regard to …` items, in document
 order, 1-based — the EP numbers them the same way. Written only when the index
 is within the list, which is how a wrong `ref` shows up (a vote "Citation 11"
 attached to a document with 7 citations).
@@ -738,7 +744,7 @@ and unambiguous; every skip is counted (`not found`, `ambiguous`,
 
 | category | votes | why not | what it would take |
 |---|---|---|---|
-| amendments (`… Am 26`, `§ 6 – 12`, `After § 3`, `Before § 1`) | ~4,950 | the wording lives in the amendment range documents on doceo, which is behind a WAF that throttles a burst | `ai/amendments.js` fetches them in batches (see above); each run picks up where the last stopped |
+| amendments (`… Am 26`, `§ 6 – 12`, `After § 3`, `Before § 1`) | ~4,950 | the wording lives in the amendment range documents on doceo, which is behind a WAF that throttles a burst | `documents/amendments.js` fetches them in batches (see above); each run picks up where the last stopped |
 | `Article N` and `Article 2, § 2 – 20` | 703 | the article text lives in the **Commission proposal** (`C10-…`), a different document, which the API does not publish either | scrape the procedure page, or accept the proposal document as a second input |
 | split parts with no wording in the XML | 481 | the block's "Requests for split votes" remark does not list that part | nothing reliable: the text was never published |
 | procedural / appointments (`Request by…`, `Appointment of…`) | 358 | there is no text — the vote is about the agenda or a person | nothing |
@@ -746,7 +752,7 @@ and unambiguous; every skip is counted (`not found`, `ambiguous`,
 | recitals not found or ambiguous | 264 | 18 are documents with two lettered lists (line numbers printed by the run); the rest have no `X. whereas` in the report | review the 18 by hand; the others are missing in the source |
 | sub-paragraphs (`§ 100, point ix`, `§ 88, indent 7`) | 20 | the vote is on one indent inside a paragraph, and markdown loses that structure | needs the DOCX's list levels, not the flat markdown |
 | individual motions with no document | 40 | the API lists the motion but publishes no English file, and no other language either | nothing |
-| whole-text votes without a summary | 37 | the report has no summary yet (94 of the 1,683 reports have no document at all) | `node ai/oeil.js <ref>` |
+| whole-text votes without a summary | 37 | the report has no summary yet (94 of the 1,683 reports have no document at all) | `node documents/oeil.js <ref>` |
 | paragraphs / citations not found | 19 | the number has no match in the markdown | check case by case |
 
 Also unprocessed at the document level: **94 reports have no summary/markdown**
@@ -759,9 +765,9 @@ fetch.
 ```bash
 sqlite3 -column -header data/term10.db \
   "select rollcall, kind, chars from rollcall_texts where rollcall = 200501;"
-node ai/split.js --dry --ref A10-0075/2025   # what would be written for one report
-node ai/split.js                             # write it
-node ai/oeil.js --motions                    # fetch + summarise the missing motions
+node documents/split.js --dry --ref A10-0075/2025   # what would be written for one report
+node documents/split.js                             # write it
+node documents/oeil.js --motions                    # fetch + summarise the missing motions
 ```
 
 ## Gotchas

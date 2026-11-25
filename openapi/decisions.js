@@ -19,6 +19,7 @@
 
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { cleanRef } = require("../lib/refs");
 const {
   fetchMeetingByDate,
   fetchDecisions,
@@ -154,7 +155,9 @@ async function fixRefs(dates) {
       if (!row) continue;
       checked++;
       if (row.ref === headingRef) continue;
-      await db("rollcalls").where("id", id).update({ ref: headingRef });
+      await db("rollcalls")
+        .where("id", id)
+        .update({ ref: cleanRef(headingRef) });
       fixed++;
       if (fixed <= 20)
         console.log(`   ${id}: ${row.ref || "(none)"} → ${headingRef}`);
@@ -426,11 +429,11 @@ async function processDate(dateStr) {
       id,
       date: dateStr,
       name: title,
-      ref: docRef,
+      ref: cleanRef(docRef) || null,
       method,
       outcome,
       requested_by: requestedBy,
-      doc_ref: detailedRef,
+      doc_ref: cleanRef(detailedRef) || null,
       vote_type: voteType,
       for: dec.number_of_votes_favor ?? null,
       against: dec.number_of_votes_against ?? null,

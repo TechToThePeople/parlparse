@@ -1705,14 +1705,14 @@ identifier,date,report,desc,title,for,against,abstention,no_show,excused,request
 172773,2025-03-12 13:03:18,RC-B10-0146/2025/REV1,,– After § 48 – Am 9,188,473,20,0,5,PfE,REJECTED,,RCV,,RCV,,remarks,
 172774,2025-03-12 13:03:43,RC-B10-0146/2025,,§ 49 – 81,235,409,35,679,5,Renew,REJECTED,,ELECTRONIC,,EV,,api,amendment
 172775,2025-03-12 13:03:58,RC-B10-0146/2025,,§ 50 – 88,330,298,42,679,5,PPE,ADOPTED,,ELECTRONIC,,EV,,api,amendment
-172776,2025-03-12 13:04:11,RC-B10-0146/2025/REV1,,– § 52,439,136,96,8,5,Verts/ALE,ADOPTED,,RCV,,RCV,,remarks,
+172776,2025-03-12 13:04:11,RC-B10-0146/2025/REV1,,– § 52,439,136,96,8,5,Verts/ALE,ADOPTED,,RCV,,RCV,,remarks,paragraph
 172777,2025-03-12 13:04:27,RC-B10-0146/2025,,§ 53 – 82,407,238,20,679,5,Renew,ADOPTED,,ELECTRONIC,,EV,,api,amendment
 172779,2025-03-12,RC-B10-0146/2025,,§ 53/1,,,,679,5,ECR,LAPSED,,HAND,,1,ECR,remarks,quoted
 172780,2025-03-12,RC-B10-0146/2025,,§ 53/2,,,,679,5,ECR,LAPSED,,HAND,,2,ECR,remarks,quoted
 172781,2025-03-12 13:04:43,RC-B10-0146/2025/REV1,,– § 54 – Am 61,176,459,25,19,5,The Left,REJECTED,,RCV,,RCV,,api,
 172782,2025-03-12 13:04:56,RC-B10-0146/2025/REV1,,– After § 55 – Am 98,92,541,40,6,5,ESN,REJECTED,,RCV,,RCV,,remarks,
 172783,2025-03-12 13:05:07,RC-B10-0146/2025/REV1,,– After § 56 – Am 12,209,283,180,7,5,Verts/ALE,REJECTED,,RCV,,RCV,,remarks,
-172784,2025-03-12 13:05:19,RC-B10-0146/2025/REV1,,– § 57,466,176,36,1,5,ECR,ADOPTED,,RCV,,RCV,,remarks,
+172784,2025-03-12 13:05:19,RC-B10-0146/2025/REV1,,– § 57,466,176,36,1,5,ECR,ADOPTED,,RCV,,RCV,,remarks,paragraph
 172785,2025-03-12 13:05:31,RC-B10-0146/2025/REV1,,– After § 57 – Am 13,191,445,31,12,5,Verts/ALE,REJECTED,,RCV,,RCV,,remarks,
 172786,2025-03-12 13:05:43,RC-B10-0146/2025/REV1,,– § 58 – Am 62,258,383,35,3,5,"PPE, The Left, PfE, ECR",REJECTED,,RCV,,RCV,,remarks,
 172788,2025-03-12,RC-B10-0146/2025,,§ 58/1,,,,679,5,"PPE, The Left, PfE, ECR",ADOPTED,,HAND,,1,"PPE, The Left, PfE, ECR",remarks,quoted
@@ -1740,7 +1740,7 @@ identifier,date,report,desc,title,for,against,abstention,no_show,excused,request
 172812,2025-03-12 13:09:04,RC-B10-0146/2025/REV1,,– § 68 – Am 14,231,390,53,5,5,"Verts/ALE, ECR",REJECTED,,RCV,,RCV,,remarks,
 172813,2025-03-12,RC-B10-0146/2025,,§ 68 – 72,,,,679,5,The Left,REJECTED,,HAND,,,,api,amendment
 172814,2025-03-12 13:09:19,RC-B10-0146/2025/REV1,,– § 68 – Am 108,97,517,56,9,5,ECR,REJECTED,,RCV,,RCV,,remarks,
-172815,2025-03-12 13:09:30,RC-B10-0146/2025/REV1,,– § 68,480,130,67,2,5,ECR,ADOPTED,,RCV,,RCV,,remarks,
+172815,2025-03-12 13:09:30,RC-B10-0146/2025/REV1,,– § 68,480,130,67,2,5,ECR,ADOPTED,,RCV,,RCV,,remarks,paragraph
 172816,2025-03-12 13:09:42,RC-B10-0146/2025/REV1,,– After § 68 – Am 15,198,459,14,8,5,Verts/ALE,REJECTED,,RCV,,RCV,,remarks,
 172817,2025-03-12 13:09:52,RC-B10-0146/2025/REV1,,– After § 68 – Am 16,208,400,70,1,5,Verts/ALE,REJECTED,,RCV,,RCV,,remarks,
 172818,2025-03-12,RC-B10-0146/2025,,After § 68,,,,679,5,The Left,REJECTED,,HAND,,,,api,amendment
@@ -14166,25 +14166,25 @@ Article 75 – § 1 – 87",,,,591,3,ESN,LAPSED,DEVE,HAND,,,,api,amendment
 200501,2026-11-12 11:57:10,RC-B10-0497/2026,,– § 19/2,411,111,62,7,3,"ECR, PPE",ADOPTED,,RCV,,2/RCV,"ECR, PPE",remarks,quoted
 200502,2026-11-12 11:57:22,RC-B10-0497/2026,,– After § 20 – Am 3,103,398,86,4,3,The Left,REJECTED,,RCV,,RCV,,remarks,amendment
 200503,2026-11-12 11:57:33,RC-B10-0497/2026,,– Motion for a resolution (as a whole),536,8,37,10,3,"PPE, Renew",ADOPTED,,RCV,,RCV,,remarks,summary
-200529,2026-11-24 12:26:11,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – Motion for a resolution (as a whole)",552,9,101,5,3,,ADOPTED,CONT,RCV,,RCV,,,summary
-200531,2026-11-24 12:15:57,A10-0023/2026,,A10-0023/2026 – Reinier Van Lanschot – Provisional agreement – Am 181,627,4,36,0,3,,ADOPTED,,RCV,,RCV,,,amendment
-200533,2026-11-24 12:16:29,A10-0024/2026,,A10-0024/2026 – Reinier Van Lanschot – Provisional agreement – Am 86,622,2,38,5,3,,ADOPTED,,RCV,,RCV,,,amendment
+200529,2026-11-24 12:26:11,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – Motion for a resolution (as a whole)",552,9,101,5,3,,ADOPTED,CONT,RCV,,RCV,,,summary
+200531,2026-11-24 12:15:57,A10-0023/2026,,– Reinier Van Lanschot – Provisional agreement – Am 181,627,4,36,0,3,,ADOPTED,,RCV,,RCV,,,amendment
+200533,2026-11-24 12:16:29,A10-0024/2026,,– Reinier Van Lanschot – Provisional agreement – Am 86,622,2,38,5,3,,ADOPTED,,RCV,,RCV,,,amendment
 200537,2026-11-25 12:26:55,A10-0298/2026,,Juan Fernando López Aguilar - Proposition de décision,627,25,5,0,0,,,,RCV,,,,,summary
-200539,2026-11-24 12:13:04,A10-0034/2026,,"A10-0034/2026 – Mariateresa Vivaldini, Kristian Vigenin – Provisional agreement – Am 15",575,46,34,12,3,,ADOPTED,,RCV,,RCV,,,amendment
-200541,2026-11-24 12:11:06,A10-0041/2026,,"A10-0041/2026 – Mariateresa Vivaldini, Niels Flemming Hansen, Lukas Mandl – Provisional agreement – Am 44",572,44,42,9,3,,ADOPTED,,RCV,,RCV,,,amendment
+200539,2026-11-24 12:13:04,A10-0034/2026,,"– Mariateresa Vivaldini, Kristian Vigenin – Provisional agreement – Am 15",575,46,34,12,3,,ADOPTED,,RCV,,RCV,,,amendment
+200541,2026-11-24 12:11:06,A10-0041/2026,,"– Mariateresa Vivaldini, Niels Flemming Hansen, Lukas Mandl – Provisional agreement – Am 44",572,44,42,9,3,,ADOPTED,,RCV,,RCV,,,amendment
 200542,2026-11-24 13:46:26,A10-0279/2026,,"§ 2, point a, first indent – 7",,,,667,3,The Left,REJECTED,PECH,HAND,,sep,,remarks,amendment
 200546,2026-11-24 13:46:26,A10-0279/2026,,After § 14 – 15,,,,667,3,,REJECTED,PECH,HAND,,,,,amendment
 200549,2026-11-24 13:46:26,A10-0279/2026,,After § 20 – 17,,,,667,3,,REJECTED,PECH,HAND,,,,,amendment
 200550,2026-11-24 13:46:26,A10-0279/2026,,After § 28 – 18,,,,667,3,,REJECTED,PECH,HAND,,,,,amendment
 200551,2026-11-24 13:46:26,A10-0279/2026,,After recital D – 4,,,,667,3,,REJECTED,PECH,HAND,,,,,amendment
 200556,2026-11-24 13:46:26,A10-0279/2026,,After recital AE – 12,,,,667,3,,REJECTED,PECH,HAND,,,,,amendment
-200557,2026-11-24 12:31:37,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – Motion for a resolution (as a whole),515,99,14,39,3,,ADOPTED,PECH,RCV,,RCV,,,summary
+200557,2026-11-24 12:31:37,A10-0279/2026,,– Carmen Crespo Díaz – Motion for a resolution (as a whole),515,99,14,39,3,,ADOPTED,PECH,RCV,,RCV,,,summary
 200558,2026-11-25 12:55:29,A10-0235/2026,,Christophe Grudler - Proposition de résolution (ensemble du texte),554,22,79,0,0,,,,RCV,,,,,summary
 200559,2026-11-25 12:55:50,A10-0236/2026,,Christophe Grudler - Projet de décision du Conseil,584,13,60,0,0,,,,RCV,,,,,summary
 200563,2026-11-25 12:45:36,A10-0272/2025,,Tomislav Sokol - Accord provisoire - Am 261,592,35,30,0,0,,,,RCV,,,,,
 200572,2026-11-25 12:59:55,A10-0300/2026,,Pierre Pimpie - Proposition de résolution (ensemble du texte),409,185,30,0,0,,,,RCV,,,,,summary
-200575,2026-11-24 12:06:24,A10-0230/2026,,A10-0230/2026 – Pierfrancesco Maran – Provisional agreement – Am 10,403,78,146,40,3,,ADOPTED,,RCV,,RCV,,,
-200577,2026-11-24 12:22:12,A10-0209/2026,,A10-0209/2026 – Camilla Laureti – Provisional agreement – Am 51,486,39,140,2,3,,ADOPTED,AGRI,RCV,,RCV,,,amendment
+200575,2026-11-24 12:06:24,A10-0230/2026,,– Pierfrancesco Maran – Provisional agreement – Am 10,403,78,146,40,3,,ADOPTED,,RCV,,RCV,,,
+200577,2026-11-24 12:22:12,A10-0209/2026,,– Camilla Laureti – Provisional agreement – Am 51,486,39,140,2,3,,ADOPTED,AGRI,RCV,,RCV,,,amendment
 200579,2026-11-24 13:46:25,A10-0209/2026,,Commission statements – 52,,,,667,3,,ADOPTED,AGRI,HAND,,,,,amendment
 200581,2026-11-24 13:46:25,A10-0209/2026,,Text as a whole – 51,,,,667,3,,LAPSED,AGRI,HAND,,,,,summary
 200585,2026-11-24 13:46:25,A10-0209/2026,,Commission proposal,,,,667,3,,LAPSED,AGRI,RCV,,RCV,,,summary
@@ -14196,51 +14196,51 @@ Article 75 – § 1 – 87",,,,591,3,ESN,LAPSED,DEVE,HAND,,,,api,amendment
 200637,2026-11-25 12:53:02,A10-0304/2026,,"Marta Temido, Adam Jarubas - Proposition de la Commission",351,176,132,0,0,,,,RCV,,,,,summary
 200870,2026-11-24 13:46:26,A10-0279/2026,,"§ 2, point a, first indent/1",,,,667,3,The Left,ADOPTED,PECH,HAND,,1,The Left,remarks,without-words
 200871,2026-11-24 13:46:26,A10-0279/2026,,"§ 2, point a, first indent/2",,,,667,3,The Left,ADOPTED,PECH,HAND,,2,The Left,remarks,words
-200872,2026-11-24 12:27:22,A10-0279/2026,,"A10-0279/2026 – Carmen Crespo Díaz – § 2, point a, after fifth indent – Am 13",234,427,4,2,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
-200873,2026-11-24 12:27:35,A10-0279/2026,,"A10-0279/2026 – Carmen Crespo Díaz – § 2, point a, after fifth indent – Am 14",123,526,11,7,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
-200874,2026-11-24 12:27:48,A10-0279/2026,,"A10-0279/2026 – Carmen Crespo Díaz – § 2, point c, first indent – Am 8",226,416,15,10,3,"Verts/ALE, The Left",REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200872,2026-11-24 12:27:22,A10-0279/2026,,"– Carmen Crespo Díaz – § 2, point a, after fifth indent – Am 13",234,427,4,2,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200873,2026-11-24 12:27:35,A10-0279/2026,,"– Carmen Crespo Díaz – § 2, point a, after fifth indent – Am 14",123,526,11,7,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200874,2026-11-24 12:27:48,A10-0279/2026,,"– Carmen Crespo Díaz – § 2, point c, first indent – Am 8",226,416,15,10,3,"Verts/ALE, The Left",REJECTED,PECH,RCV,,RCV,,remarks,amendment
 200879,2026-11-24 13:46:26,A10-0279/2026,,§ 4/1,,,,667,3,PfE,ADOPTED,PECH,HAND,,1,PfE,remarks,without-words
 200880,2026-11-24 13:46:26,A10-0279/2026,,§ 4/2,,,,667,3,PfE,ADOPTED,PECH,HAND,,2,PfE,remarks,words
 200882,2026-11-24 13:46:26,A10-0279/2026,,§ 7/1,,,,667,3,The Left,ADOPTED,PECH,HAND,,1,The Left,remarks,without-words
 200883,2026-11-24 13:46:26,A10-0279/2026,,§ 7/2,,,,667,3,The Left,ADOPTED,PECH,HAND,,2,The Left,remarks,words
-200885,2026-11-24 12:28:34,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – § 13/1,655,3,5,4,3,PfE,ADOPTED,PECH,RCV,,1/RCV,PfE,remarks,without-words
-200886,2026-11-24 12:28:46,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – § 13/2,453,191,7,16,3,PfE,ADOPTED,PECH,RCV,,2/RCV,PfE,remarks,words
-200887,2026-11-24 12:29:04,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – After § 20 – Am 9,301,291,73,2,3,Verts/ALE,ADOPTED,PECH,RCV,,RCV,,remarks,amendment
-200888,2026-11-24 12:29:19,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – After § 20 – Am 16,120,438,101,8,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200885,2026-11-24 12:28:34,A10-0279/2026,,– Carmen Crespo Díaz – § 13/1,655,3,5,4,3,PfE,ADOPTED,PECH,RCV,,1/RCV,PfE,remarks,without-words
+200886,2026-11-24 12:28:46,A10-0279/2026,,– Carmen Crespo Díaz – § 13/2,453,191,7,16,3,PfE,ADOPTED,PECH,RCV,,2/RCV,PfE,remarks,words
+200887,2026-11-24 12:29:04,A10-0279/2026,,– Carmen Crespo Díaz – After § 20 – Am 9,301,291,73,2,3,Verts/ALE,ADOPTED,PECH,RCV,,RCV,,remarks,amendment
+200888,2026-11-24 12:29:19,A10-0279/2026,,– Carmen Crespo Díaz – After § 20 – Am 16,120,438,101,8,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
 200890,2026-11-24 13:46:26,A10-0279/2026,,§ 22/1,,,,667,3,PfE,ADOPTED,PECH,HAND,,1,PfE,remarks,without-words
-200891,2026-11-24 12:29:48,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – § 22/2,463,193,10,1,3,PfE,ADOPTED,PECH,RCV,,2/RCV,PfE,remarks,words
+200891,2026-11-24 12:29:48,A10-0279/2026,,– Carmen Crespo Díaz – § 22/2,463,193,10,1,3,PfE,ADOPTED,PECH,RCV,,2/RCV,PfE,remarks,words
 200893,2026-11-24 13:46:26,A10-0279/2026,,§ 25/1,,,,667,3,"Verts/ALE, PfE",ADOPTED,PECH,HAND,,1,PfE,remarks,without-words
-200894,2026-11-24 12:30:09,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – § 25/2,465,189,8,5,3,"PfE, Verts/ALE",ADOPTED,PECH,RCV,,2/RCV,PfE,remarks,words
-200895,2026-11-24 12:30:36,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – After recital AD – Am 5,185,450,28,4,3,Verts/ALE,REJECTED,PECH,RCV,,RCV,,remarks,amendment
-200896,2026-11-24 12:30:50,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – After recital AD – Am 6,184,363,112,8,3,Verts/ALE,REJECTED,PECH,RCV,,RCV,,remarks,amendment
-200897,2026-11-24 12:31:03,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – After recital AD – Am 10,229,416,17,5,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
-200898,2026-11-24 12:31:15,A10-0279/2026,,A10-0279/2026 – Carmen Crespo Díaz – After recital AD – Am 11,170,375,112,10,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
-200972,2026-11-24 12:21:56,A10-0209/2026,,A10-0209/2026 – Camilla Laureti – Proposal to vote on amendments,117,484,61,5,3,,REJECTED,AGRI,RCV,,RCV,,,
+200894,2026-11-24 12:30:09,A10-0279/2026,,– Carmen Crespo Díaz – § 25/2,465,189,8,5,3,"PfE, Verts/ALE",ADOPTED,PECH,RCV,,2/RCV,PfE,remarks,words
+200895,2026-11-24 12:30:36,A10-0279/2026,,– Carmen Crespo Díaz – After recital AD – Am 5,185,450,28,4,3,Verts/ALE,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200896,2026-11-24 12:30:50,A10-0279/2026,,– Carmen Crespo Díaz – After recital AD – Am 6,184,363,112,8,3,Verts/ALE,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200897,2026-11-24 12:31:03,A10-0279/2026,,– Carmen Crespo Díaz – After recital AD – Am 10,229,416,17,5,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200898,2026-11-24 12:31:15,A10-0279/2026,,– Carmen Crespo Díaz – After recital AD – Am 11,170,375,112,10,3,The Left,REJECTED,PECH,RCV,,RCV,,remarks,amendment
+200972,2026-11-24 12:21:56,A10-0209/2026,,– Camilla Laureti – Proposal to vote on amendments,117,484,61,5,3,,REJECTED,AGRI,RCV,,RCV,,,
 200973,2026-11-24 13:46:25,A10-0209/2026,,Recital 12 – 53,,,,667,3,PfE,LAPSED,AGRI,RCV,,RCV,,remarks,amendment
 200974,2026-11-24 13:46:25,A10-0209/2026,,After recital 12 – 54,,,,667,3,PfE,LAPSED,AGRI,RCV,,RCV,,remarks,amendment
 200975,2026-11-24 13:46:25,A10-0209/2026,,Recital 18 – 55,,,,667,3,PfE,LAPSED,AGRI,RCV,,RCV,,remarks,amendment
 200977,2026-11-25 12:56:29,A10-0293/2026,,Sophie Wilmès - Proposition de la Commission au Conseil,512,96,48,0,0,,,,RCV,,,,,summary
-200980,2026-11-24 12:23:00,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 28",133,427,101,6,3,"Members (A), Members (B)",REJECTED,CONT,RCV,,RCV,,remarks,paragraph
+200980,2026-11-24 12:23:00,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 28",133,427,101,6,3,"Members (A), Members (B)",REJECTED,CONT,RCV,,RCV,,remarks,paragraph
 200981,2026-11-24 13:46:25,A10-0288/2026,,§ 30/1,,,,667,3,Members (B),ADOPTED,CONT,HAND,,1,Members (B),remarks,without-words
 200982,2026-11-24 13:46:25,A10-0288/2026,,§ 30/2,,,,667,3,Members (B),ADOPTED,CONT,HAND,,2,Members (B),remarks,words
 200984,2026-11-24 13:46:25,A10-0288/2026,,§ 34/1,,,,667,3,Members (B),ADOPTED,CONT,HAND,,1,Members (B),remarks,without-words
-200985,2026-11-24 12:23:34,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 34/2",525,80,56,6,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
-200986,2026-11-24 12:23:46,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 34/3",523,95,42,7,3,Members (B),ADOPTED,CONT,RCV,,3/RCV,Members (B),remarks,quoted
-200987,2026-11-24 12:23:59,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 34/4",597,55,11,4,3,Members (B),ADOPTED,CONT,RCV,,4/RCV,Members (B),remarks,quoted
+200985,2026-11-24 12:23:34,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 34/2",525,80,56,6,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
+200986,2026-11-24 12:23:46,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 34/3",523,95,42,7,3,Members (B),ADOPTED,CONT,RCV,,3/RCV,Members (B),remarks,quoted
+200987,2026-11-24 12:23:59,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 34/4",597,55,11,4,3,Members (B),ADOPTED,CONT,RCV,,4/RCV,Members (B),remarks,quoted
 200989,2026-11-24 13:46:25,A10-0288/2026,,§ 42/1,,,,667,3,Members (B),ADOPTED,CONT,HAND,,1,Members (B),remarks,without-words
-200990,2026-11-24 12:24:18,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 42/2",516,114,37,0,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
-200991,2026-11-24 12:24:29,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 42/3",508,116,33,10,3,Members (B),ADOPTED,CONT,RCV,,3/RCV,Members (B),remarks,quoted
+200990,2026-11-24 12:24:18,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 42/2",516,114,37,0,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
+200991,2026-11-24 12:24:29,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 42/3",508,116,33,10,3,Members (B),ADOPTED,CONT,RCV,,3/RCV,Members (B),remarks,quoted
 200993,2026-11-24 13:46:25,A10-0288/2026,,§ 43/1,,,,667,3,Members (B),ADOPTED,CONT,HAND,,1,Members (B),remarks,quoted
-200994,2026-11-24 12:24:50,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 43/2",530,122,15,0,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
-200995,2026-11-24 12:25:04,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 47",471,144,48,4,3,Members (B),ADOPTED,CONT,RCV,,RCV,,remarks,paragraph
-200996,2026-11-24 12:25:17,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – § 54",459,109,94,5,3,Members (B),ADOPTED,CONT,RCV,,RCV,,remarks,paragraph
+200994,2026-11-24 12:24:50,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 43/2",530,122,15,0,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
+200995,2026-11-24 12:25:04,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 47",471,144,48,4,3,Members (B),ADOPTED,CONT,RCV,,RCV,,remarks,paragraph
+200996,2026-11-24 12:25:17,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – § 54",459,109,94,5,3,Members (B),ADOPTED,CONT,RCV,,RCV,,remarks,paragraph
 200998,2026-11-24 13:46:25,A10-0288/2026,,Recital E/1,,,,667,3,Members (B),ADOPTED,CONT,HAND,,1,Members (B),remarks,quoted
-200999,2026-11-24 12:25:40,A10-0288/2026,,"A10-0288/2026 – Tomáš Zdechovský, Dick Erixon – Recital E/2",488,137,40,2,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
+200999,2026-11-24 12:25:40,A10-0288/2026,,"– Tomáš Zdechovský, Dick Erixon – Recital E/2",488,137,40,2,3,Members (B),ADOPTED,CONT,RCV,,2/RCV,Members (B),remarks,quoted
 201001,2026-11-24 13:46:25,A10-0288/2026,,Recital G/1,,,,667,3,Members (B),ADOPTED,CONT,HAND,,1,Members (B),remarks,quoted
 201002,2026-11-24 13:46:25,A10-0288/2026,,Recital G/2,,,,667,3,Members (B),ADOPTED,CONT,HAND,,2,Members (B),remarks,quoted
 201003,2026-11-24 13:46:26,A10-0279/2026,,"§ 2, point c, first indent",,,,667,3,The Left,ADOPTED,PECH,HAND,,sep,,remarks,
-201109,2026-11-23 17:08:45,agenda-2026-11-23,,Request by the Verts/ALE Group – Myanmar (resolution),207,185,11,588,1,,ADOPTED,,ELECTRONIC,,EV,,,
-201110,2026-11-23 19:23:27,,,Request by the Verts/ALE Group – Myanmar (debate),,,,588,1,,ADOPTED,,HAND,,,,,
+201109,2026-11-23 17:08:45,agenda-2026-11-23,,Request by the Verts/ALE Group – Myanmar (resolution),207,185,11,588,3,,ADOPTED,,ELECTRONIC,,EV,,,
+201110,2026-11-23 19:23:27,,,Request by the Verts/ALE Group – Myanmar (debate),,,,588,3,,ADOPTED,,HAND,,,,,
 201111,2026-11-25 12:58:45,A10-0300/2026,,Pierre Pimpie - § 5 - Am 4S,217,415,11,0,0,,,,RCV,,,,,amendment
 201112,2026-11-25 12:58:54,A10-0300/2026,,Pierre Pimpie - § 5 - Am 7,199,416,17,0,0,,,,RCV,,,,,amendment
 201113,2026-11-25 12:59:04,A10-0300/2026,,Pierre Pimpie - § 13 - Am 5,123,446,74,0,0,,,,RCV,,,,,amendment

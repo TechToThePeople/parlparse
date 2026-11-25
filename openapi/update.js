@@ -35,10 +35,10 @@ const csvBuilder = require("../csv");
 const cards = require("../cards");
 const sqlRun = require("../sql/run");
 const report = require("./report");
-const oeil = require("../ai/oeil");
-const split = require("../ai/split");
-const amendments = require("../ai/amendments");
-const attach = require("../ai/attach");
+const oeil = require("../documents/oeil");
+const split = require("../documents/split");
+const amendments = require("../documents/amendments");
+const attach = require("../documents/attach");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -72,7 +72,7 @@ published, imports the ones that are missing, then rebuilds the derived files.
                    (default 20; 0 disables it)
   --no-db          check only: do not import, do not rebuild anything
   --local          no network at all: the steps that read this database and the
-                   documents already on disk (ai/attach, ai/split, ai/amendments
+                   documents already on disk (documents/attach, documents/split, documents/amendments
                    from the cache, csv, cards, majority) for the same dates
   --sync           kept for the old scripts; importing is the default now
   --help, -h       this text
@@ -363,23 +363,27 @@ async function derive(dates, { network = true } = {}) {
   // only now: the agenda of the next sittings, the report rows (and their
   // procedure/subjects), the CSVs, the cards of those dates and the SQL aggregates
   if (!network) {
-    console.log("   · agenda --upcoming, report.js, ai/oeil skipped (--local)");
+    console.log(
+      "   · agenda --upcoming, report.js, documents/oeil skipped (--local)"
+    );
   } else {
     await step("agenda --upcoming", () => agenda.run({ upcoming: true }));
     await step("report.js", () => report.run({}));
     // summaries for the reports that have none yet, at most ai-max-doc of them
     const aiMax = Number(lastOf(argv["ai-max-doc"]));
     if (aiMax > 0)
-      await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
-    else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
+      await step("documents/oeil", () =>
+        oeil.run({ "ai-max-doc": String(aiMax) })
+      );
+    else console.log("   · documents/oeil skipped (--ai-max-doc 0)");
   }
   // a whole-text vote has no wording to extract: its text is the report summary
-  await step("ai/attach", () => attach.attachAll());
+  await step("documents/attach", () => attach.attachAll());
   // the texts that come from the report's own document (paragraphs, recitals) and
   // from the amendment range documents — both cached locally after the import
-  await step("ai/split", () => split.run({}));
+  await step("documents/split", () => split.run({}));
   // --local keeps to the cached range documents: nothing is downloaded
-  await step("ai/amendments", () =>
+  await step("documents/amendments", () =>
     amendments.run({ limit: network ? 20 : 0 })
   );
   await step("csv.js", () => csvBuilder.run());

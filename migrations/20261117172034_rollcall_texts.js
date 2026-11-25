@@ -5,7 +5,7 @@
 //   vot-xml   the split-vote remark of the VOT XML (remarkSplitVote), which is
 //             the exact wording put to the vote
 //   summary   the AI summary of the report, for votes on the whole text
-//   ai        filled later by ai/oeil.js when the part had to be extracted from
+//   ai        filled later by documents/oeil.js when the part had to be extracted from
 //             the document
 exports.up = function (knex) {
   return knex.schema.createTable("rollcall_texts", function (table) {

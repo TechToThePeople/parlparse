@@ -3,7 +3,7 @@
  * The procedure a report belongs to (2025/0227(COD)).
  *
  * The code is in the report's own document — `<DocRef>(COM(2025)0557 – C10-… –
- * 2025/0227(COD))</DocRef>` — which `ai/oeil.js` already saved as markdown. From
+ * 2025/0227(COD))</DocRef>` — which `documents/oeil.js` already saved as markdown. From
  * there the EP open data has the whole chain:
  *
  *   GET /api/v2/procedures/2025-0227
