@@ -125,7 +125,6 @@ async function main() {
           }
           const csv = "../" + term + "/cards/" + vote.id + ".csv";
           const vdate = vote.date.substring(0, 10);
-          console.log(vdate);
           try {
             if (date && !argv.force && vdate !== date) continue;
             // existing card: refresh the metadata json only, the csv is expensive
