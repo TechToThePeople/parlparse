@@ -38,6 +38,7 @@ const report = require("./report");
 const oeil = require("../ai/oeil");
 const split = require("../ai/split");
 const amendments = require("../ai/amendments");
+const attach = require("../ai/attach");
 
 const API = "https://data.europarl.europa.eu/api/v2";
 const UA =
@@ -337,6 +338,8 @@ async function sync(rows) {
   if (aiMax > 0)
     await step("ai/oeil", () => oeil.run({ "ai-max-doc": String(aiMax) }));
   else console.log("   · ai/oeil skipped (--ai-max-doc 0)");
+  // a whole-text vote has no wording to extract: its text is the report summary
+  await step("ai/attach", () => attach.attachAll());
   // the texts that come from the report's own document (paragraphs, recitals) and
   // from the amendment range documents — both cached locally after the import
   await step("ai/split", () => split.run({}));

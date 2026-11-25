@@ -34,6 +34,7 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { attachReference } = require("./attach");
 const { fetchDocumentById, getWaf } = require("../openapi/lib");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -514,159 +515,18 @@ async function summarise(
 }
 
 /**
- * A vote "on the whole text" (`Proposal for a decision`, `Motion for a
- * resolution (as a whole)`, `Proposition de la Commission`) is about the report
- * itself, so its text in rollcall_texts is the summary.
+ * The summary is also the text of the votes that are about the whole text
+ * ("Proposition de résolution (ensemble du texte)", a motion's own document):
+ * ai/attach.js keeps that rule, so oeil.js and the routine update agree on it.
  */
-const WHOLE_TEXT = /ensemble du texte|as a whole|motion for a resolution|proposition de r[ée]solution|proposals? for (?:a )?decisions?|proposition de la commission|commission proposal|projet de d[ée]cision|draft council decision|projet du conseil|draft legislative act|approval without vote|joint text|texte conjoint|provisional agreement|accord provisoire/i;
-
-// "… – Am 1", "§ 3", "Article 2" is a part of the text, never the text itself:
-// an amendment to an alternative motion mentions "motion for a resolution" too
-const PART_OF_TEXT = /[–-]\s*Am\s|\bAm\s*\d|§|Article/i;
-
 async function storeWholeTextVotes(reference, summary) {
-  const stored = await db("reports").where("reference", reference).first("url");
-  const sourceUrl = stored && stored.url ? stored.url : null;
-  const all = await db("rollcalls")
-    .where("ref", reference)
-    .select("id", "name", "vote_type");
-  const rows = all.filter(
-    (v) =>
-      v.vote_type === "main" ||
-      (WHOLE_TEXT.test(v.name || "") && !PART_OF_TEXT.test(v.name || ""))
-  );
-  for (const row of rows) {
-    await db("rollcall_texts")
-      .insert({
-        rollcall: row.id,
-        section: null,
-        part: null,
-        text: summary,
-        kind: "summary",
-        source: "summary",
-        source_url: sourceUrl,
-        chars: summary.length,
-        updated_at: new Date().toISOString(),
-      })
-      .onConflict("rollcall")
-      .merge();
-  }
-  stats.attached += rows.length;
-  if (rows.length && !argv.attach)
-    console.log(
-      `   🗳  ${reference}: summary attached to ${rows.length} whole-text vote(s)`
-    );
+  const rows = await attachReference(reference, summary);
+  stats.attached += rows;
+  if (rows && !argv.attach)
+    console.log(`   🗳  ${reference}: summary attached to ${rows} vote(s)`);
 }
 
-/**
- * The summary on the report row itself, so it survives having no vote. A summary
- * can exist for a reference with no row at all (six B10 motions were like that):
- * the row is created then, with nothing but the reference — `openapi/report.js`
- * fills title, date and creator later, since it looks for rows with no url.
- */
-async function storeSummary(reference, text, model) {
-  const body = String(text || "").trim();
-  if (!body) return;
-  const fields = {
-    summary: body,
-    summary_model: model || MODEL,
-    summary_at: new Date().toISOString(),
-  };
-  const updated = await db("reports")
-    .where("reference", reference)
-    .update(fields);
-  if (!updated) {
-    await db("reports").insert({ reference, term: 10, ...fields });
-    stats.createdReport = (stats.createdReport || 0) + 1;
-  }
-}
-
-/**
- * Attach the summaries on disk to their votes — only the ones whose text the
- * votes do not carry yet. Re-attaching 1,648 unchanged summaries on every run
- * was both slow and meaningless.
- */
-async function attachExisting() {
-  if (!fs.existsSync(SUMMARY_DIR)) {
-    console.error("no summaries in " + path.relative(ROOT, SUMMARY_DIR));
-    return;
-  }
-  const files = fs.readdirSync(SUMMARY_DIR).filter((f) => f.endsWith(".md"));
-
-  // what the votes already carry, by every reference a summary can hang on
-  const attached = new Map();
-  for (const row of await db.raw(
-    `SELECT r.ref AS ref, r.doc_ref AS doc_ref, t.text AS text
-       FROM rollcall_texts t JOIN rollcalls r ON r.id = t.rollcall
-      WHERE t.kind = 'summary'`
-  )) {
-    for (const key of [row.ref, row.doc_ref])
-      if (key && !attached.has(key)) attached.set(key, row.text);
-  }
-
-  let written = 0;
-  let unchanged = 0;
-  let awaiting = 0;
-  for (const file of files) {
-    // B10-0245_2026_REV1.md -> B10-0245/2026/REV1
-    const reference = file
-      .replace(/\.md$/, "")
-      .replace(
-        /_(\d{4})(_REV\d+)?$/,
-        (_match, year, rev) => "/" + year + (rev ? "/" + rev.slice(1) : "")
-      );
-    const summary = fs
-      .readFileSync(path.join(SUMMARY_DIR, file), "utf8")
-      .trim();
-    if (!summary) continue;
-    await storeSummary(reference, summary);
-    if (attached.get(reference) === summary) {
-      unchanged++;
-      continue;
-    }
-    const before = stats.attached;
-    // the same text can be a report reference and a motion's doc_ref
-    await storeWholeTextVotes(reference, summary);
-    await storeMotionVotes(reference, summary);
-    if (stats.attached === before) awaiting++;
-    else written++;
-  }
-  console.log(
-    `🔗 summaries: ${written} attached now, ${unchanged} already there, ` +
-      `${awaiting} waiting for their vote`
-  );
-}
-
-/**
- * A motion is its own document (`doc_ref` = B10-0028/2024), so its votes are
- * found by that column, not by `ref` (which is the joint motion or the report).
- */
-async function storeMotionVotes(reference, summary) {
-  const stored = await db("reports").where("reference", reference).first("url");
-  const sourceUrl = stored && stored.url ? stored.url : null;
-  const rows = await db("rollcalls").where("doc_ref", reference).pluck("id");
-  for (const id of rows) {
-    await db("rollcall_texts")
-      .insert({
-        rollcall: id,
-        section: null,
-        part: null,
-        text: summary,
-        kind: "summary",
-        source: "summary",
-        source_url: sourceUrl,
-        chars: summary.length,
-        updated_at: new Date().toISOString(),
-      })
-      .onConflict("rollcall")
-      .merge();
-  }
-  stats.attached += rows.length;
-  if (rows.length && !argv.attach)
-    console.log(
-      `   🗳  ${reference}: summary attached to ${rows.length} motion vote(s)`
-    );
-}
+const storeMotionVotes = storeWholeTextVotes;
 
 /** The motions that still have no text: one document each. */
 async function motionReferences() {

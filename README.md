@@ -219,6 +219,12 @@ upserts `rollcall_texts`), so it ends every run unless `--no-attach`.
   report over ~600k characters → `data/content/summary/<ref>.md`
 - no front-matter in either file: reference, title, distribution, source and
   token counts are printed to the console instead, so the markdown stays plain;
+- `ai/attach.js` puts that summary on the votes about the whole text — a vote
+  has no wording of its own when what it adopts *is* the report
+  (`Proposition de résolution (ensemble du texte)`, `Projet de décision du
+  Conseil`, a motion's own document). `kind = 'summary'`, driven by
+  `reports.summary` rather than by the files, so a vote created after the
+  summary was written still picks it up, with no model call;
 - `ai/split.js` fills the votes on a paragraph (`§ 19`), a recital (`Recital U`)
   or a citation (`Citation 9`) from that markdown, deterministically: the
   numbered items after the resolution heading, the `X. whereas` run, and the
@@ -330,9 +336,11 @@ node openapi/update.js --date 2026-11-23 --sync
 
 `decisions.js -d <date>` first (it is what creates a row for hand and electronic
 votes), then `rcv.js` / `att.js` / `vot-xml.js` only for the documents actually
-missing, then `agenda.js --date` to turn planned votes into voted ones, and
-finally `csv.js`, `cards.js --date` and `npm run majority:csv`. `update.sh` stays
-for the full run; this is the cheap path after a sitting.
+missing, then `agenda.js --date` to turn planned votes into voted ones, then the
+derived files — `agenda --upcoming`, `report.js`, `ai/attach.js` (the summary on
+every whole-text vote), `ai/split.js`, `ai/amendments.js` — and finally `csv.js`,
+`cards.js --date` and `npm run majority:csv`. `update.sh` stays for the full run;
+this is the cheap path after a sitting.
 
 Note 2026-11-23: a `VOT` document with no `RCV` at all — a sitting where every vote
 was by show of hands. And a sitting can have `ATT` without `RCV` for the same
