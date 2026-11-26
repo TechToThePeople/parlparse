@@ -130,19 +130,17 @@ async function main() {
     dates = [input];
   }
 
-  let totalOk = 0;
-  let totalSkip = 0;
+  const total = { attended: 0 };
 
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
     if (dates.length > 1) console.log(`\n[${i + 1}/${dates.length}] ${date}`);
 
     const result = await processDate(date, force);
-    if (result === "ok") totalOk++;
-    else if (result === "skip") totalSkip++;
+    total.attended += result.attended;
 
     // Rate-limit: 1.5s between dates, but only after actual downloads (skip is instant)
-    if (result === "ok" && dates.length > 1 && i < dates.length - 1) {
+    if (result.attended && dates.length > 1 && i < dates.length - 1) {
       await new Promise((r) => setTimeout(r, 1500));
     }
   }
@@ -159,11 +157,10 @@ async function main() {
 
   if (dates.length > 1) {
     console.log(
-      `\n✅ Done: ${totalOk} fetched, ${totalSkip} skipped (${dates.length} total)`
+      `\n✅ Done: ${total.attended} participant(s) over ${dates.length} date(s)`
     );
-  } else if (totalOk === 0) {
-    console.log(`\n✅ Done — attendance list already cached.`);
   }
+  return total;
 }
 
 /**
@@ -171,6 +168,7 @@ async function main() {
  * @returns {'ok' | 'skip' | 'done'}
  */
 async function processDate(date, force) {
+  const stats = { attended: 0 };
   // Construct identifier directly — pattern is always PV-10-YYYY-MM-DD-ATT
   const identifier = `PV-10-${date}-ATT`;
   const resolved = {
@@ -249,6 +247,7 @@ async function processDate(date, force) {
         { folder: "./data/ATT/", force }
       );
       if (result) {
+        stats.attended = result.participant || 0;
         console.log(
           `   → ${result.participant} participants, ${result.excused} excused`
         );
@@ -262,7 +261,7 @@ async function processDate(date, force) {
   }
 
   console.log(`\n✅ Done — attendance list saved.`);
-  return "ok";
+  return stats;
 }
 
 /**
@@ -271,7 +270,7 @@ async function processDate(date, force) {
  */
 async function run(options = {}) {
   Object.assign(argv, options);
-  await main();
+  return main();
 }
 
 module.exports = { run, main, argv };

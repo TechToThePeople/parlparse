@@ -304,9 +304,12 @@ const votPath = (date) =>
 /** Run one importer, keeping the loop going when it throws. */
 async function step(name, fn) {
   try {
-    await fn();
+    // each importer reports what it did ({votes, positions, texts} …), or nothing
+    // when it had nothing to do: that is what decides the next step
+    return await fn();
   } catch (e) {
     console.warn(`   ⚠️  ${name}: ${e.message}`);
+    return null;
   }
 }
 
@@ -331,6 +334,10 @@ async function sync(rows) {
   }
   console.log(`\n→ importing ${dates.length} sitting(s): ${dates.join(" ")}\n`);
 
+  // what the import changed, so the aggregates are only rebuilt when a majority
+  // can have moved (a text never can)
+  const changed = { votes: 0, positions: 0, attended: 0, updated: 0 };
+
   for (const [i, date] of dates.entries()) {
     const row = rows.find((r) => r.date === date);
     console.log(`\n[${i + 1}/${dates.length}] ${date}`);
@@ -339,23 +346,32 @@ async function sync(rows) {
     await step("decisions", () => decisions.run({ date }));
     // "new" also covers a document that was republished (the EP adds the other
     // languages later), so force re-reads it instead of the cached copy
-    if (row.docs.RCV === "new")
-      await step("rcv", () => rcv.run({ _: [date], force: true }));
-    if (row.docs.ATT === "new")
-      await step("att", () => att.run({ _: [date], force: true }));
+    if (row.docs.RCV === "new") {
+      const r = await step("rcv", () => rcv.run({ _: [date], force: true }));
+      if (r) {
+        changed.votes += r.votes || 0;
+        changed.positions += r.positions || 0;
+      }
+    }
+    if (row.docs.ATT === "new") {
+      const r = await step("att", () => att.run({ _: [date], force: true }));
+      if (r) changed.attended += r.attended || 0;
+    }
     // VOT is the authority on how a vote was taken (ROLL_CALL vs ELECTRONICAL),
     // and decisions.js re-applies the API's ambiguous decision_method each run —
     // so vot-xml has to run again, not only when the document is new. Its XML is
     // cached after the first import, so this costs a local parse.
     if (row.docs.VOT === "new")
       await step("vot-xml", () => votXml.run({ _: [date], force: true }));
-    else if (fs.existsSync(votPath(date)))
-      await step("vot-xml", () => votXml.run({ _: [date] }));
+    else if (fs.existsSync(votPath(date))) {
+      const r = await step("vot-xml", () => votXml.run({ _: [date] }));
+      if (r) changed.updated += r.updated || 0;
+    }
     // the agenda's "planned" votes become "voted" once the roll-calls are in
     await step("agenda", () => agenda.run({ date }));
   }
 
-  await derive(dates, { force: argv.force });
+  await derive(dates, { force: argv.force, changed });
   return dates;
 }
 
@@ -378,7 +394,7 @@ async function derivedState() {
   return { votes, texts, positions, at };
 }
 
-async function derive(dates, { network = true, force = false } = {}) {
+async function derive(dates, { network = true, force = false, changed } = {}) {
   const before = await derivedState();
   const state = JSON.stringify(before);
   if (!force && fs.existsSync(DERIVED_STATE)) {
@@ -423,7 +439,20 @@ async function derive(dates, { network = true, force = false } = {}) {
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));
-  await step("majority:csv", () => sqlRun.run());
+  // the aggregates are about majorities: a new vote, a new position or a new
+  // attendance list can move one, a text never can
+  const moved =
+    force ||
+    (changed &&
+      (changed.votes ||
+        changed.positions ||
+        changed.attended ||
+        changed.updated));
+  if (moved) await step("majority:csv", () => sqlRun.run());
+  else
+    console.log(
+      "   · majority:csv skipped (no new vote, position or attendance)"
+    );
   fs.mkdirSync(path.dirname(DERIVED_STATE), { recursive: true });
   fs.writeFileSync(DERIVED_STATE, JSON.stringify(await derivedState()));
   console.log("\nnext: sh prod.sh (publishes the CSVs to ../10/data)");

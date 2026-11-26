@@ -152,18 +152,17 @@ async function main() {
     dates = [input];
   }
 
-  let totalOk = 0;
-  let totalSkip = 0;
+  const total = { votes: 0, positions: 0 };
 
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
     if (dates.length > 1) console.log(`\n[${i + 1}/${dates.length}] ${date}`);
 
     const result = await processDate(date, force);
-    if (result === "ok") totalOk++;
-    else if (result === "skip") totalSkip++;
+    total.votes += result.votes;
+    total.positions += result.positions;
 
-    if (result === "ok" && dates.length > 1 && i < dates.length - 1) {
+    if (dates.length > 1 && i < dates.length - 1) {
       await new Promise((r) => setTimeout(r, 1500));
     }
   }
@@ -180,11 +179,11 @@ async function main() {
 
   if (dates.length > 1) {
     console.log(
-      `\n✅ Done: ${totalOk} fetched, ${totalSkip} skipped (${dates.length} total)`
+      `\n✅ Done: ${total.votes} vote(s), ${total.positions} position(s) over ` +
+        `${dates.length} date(s)`
     );
-  } else if (totalOk === 0) {
-    console.log(`\n✅ Done — roll-call votes already cached.`);
   }
+  return total;
 }
 
 /** Uncompressed size of a gzip file: the last 4 bytes are the size mod 2^32. */
@@ -276,6 +275,7 @@ async function staleDates() {
  * @returns {'ok' | 'skip'}
  */
 async function processDate(date, force, reimportPositions = false) {
+  const stats = { votes: 0, positions: 0 };
   // Construct identifier directly — pattern is always PV-10-YYYY-MM-DD-RCV
   const identifier = `PV-10-${date}-RCV`;
   const rcvDir = path.resolve(__dirname, "..", "data", "RCV");
@@ -312,6 +312,8 @@ async function processDate(date, force, reimportPositions = false) {
         position: reimportPositions,
       });
       if (result) {
+        stats.votes += result.votes;
+        stats.positions += result.added;
         console.log(`   → ${result.votes} votes, ${result.added} positions`);
       }
     } catch (e) {
@@ -320,7 +322,7 @@ async function processDate(date, force, reimportPositions = false) {
   }
 
   console.log(`\n✅ Done — roll-call votes saved.`);
-  return cached ? "skip" : "ok";
+  return stats;
 }
 
 /** Download English RCV XML from doceo into data/RCV/. */
@@ -369,7 +371,7 @@ async function download(date, identifier, zipPath) {
  */
 async function run(options = {}) {
   Object.assign(argv, options);
-  await main();
+  return main();
 }
 
 module.exports = { run, main, argv };

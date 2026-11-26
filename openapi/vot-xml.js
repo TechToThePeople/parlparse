@@ -814,6 +814,7 @@ async function main() {
   console.log(
     `split parts: ${stats.texts} texts saved, ${stats.noText} without a text in the XML`
   );
+  return stats;
 }
 
 /**
@@ -822,7 +823,7 @@ async function main() {
  */
 async function run(options = {}) {
   Object.assign(argv, options);
-  await main();
+  return main();
 }
 
 module.exports = { run, main, argv };
