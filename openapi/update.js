@@ -397,6 +397,15 @@ async function derivedState() {
 async function derive(dates, { network = true, force = false, changed } = {}) {
   const before = await derivedState();
   const state = JSON.stringify(before);
+  let previous = null;
+  try {
+    previous = JSON.parse(
+      fs.readFileSync(DERIVED_STATE, "utf8").trim() || "null"
+    );
+  } catch {
+    // a half-written marker is no marker: rebuild
+    previous = null;
+  }
   if (!force && fs.existsSync(DERIVED_STATE)) {
     if (fs.readFileSync(DERIVED_STATE, "utf8").trim() === state) {
       console.log(
@@ -439,10 +448,16 @@ async function derive(dates, { network = true, force = false, changed } = {}) {
   await step("csv.js", () => csvBuilder.run());
   for (const date of dates)
     await step(`cards ${date}`, () => cards.run({ date }));
-  // the aggregates are about majorities: a new vote, a new position or a new
-  // attendance list can move one, a text never can
+  // The aggregates are about majorities: a new vote, a new position or a new
+  // attendance list can move one, a text never can. The database says whether
+  // anything moved, even when this run did not do it (a hand-run importer, a
+  // step that failed halfway, a row fixed by hand).
   const moved =
     force ||
+    !previous ||
+    previous.votes !== before.votes ||
+    previous.positions !== before.positions ||
+    previous.attended !== before.attended ||
     (changed &&
       (changed.votes ||
         changed.positions ||
