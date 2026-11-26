@@ -24,3 +24,4 @@ data/ep_plenary_amendments.json
 data/ep_votes.json
 data/mep_rollcall.csv*
 term8/mep_rollcall.csv*
+*.db
