@@ -32,6 +32,7 @@ const fs = require("fs");
 const path = require("path");
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { clause } = require("../lib/dates");
 const { apiFetch } = require("./lib");
 
 const ROOT = path.join(__dirname, "..");
@@ -60,12 +61,16 @@ Usage: node openapi/procedure.js [options]
 const referenceOf = (file) => file.replace(/\.md$/, "").replace(/_/, "/");
 
 /** 2025/0227(COD) from the report's markdown, null when there is none. */
+// 2026/0132(NLE) is a procedure; 0022/2024(PPE) is a joint motion's own numbering
+// (RC-B10-*), which the API does not know and which produced 80 warnings a run
+const PROCEDURE_CODE = /(?:19|20)\d{2}\/\d{4}\s*\([A-Z]+\)/;
+
 function procedureCode(markdown) {
   const docRef = markdown.match(/<DocRef>(.*?)<\/DocRef>/s);
-  const there = docRef && docRef[1].match(/\d{4}\/\d{4}\s*\([A-Z]+\)/);
+  const there = docRef && docRef[1].match(PROCEDURE_CODE);
   if (there) return there[0].replace(/\s+/g, "");
   // no DocRef line: the first code the document mentions
-  const first = markdown.slice(0, 6000).match(/\d{4}\/\d{4}\s*\([A-Z]+\)/);
+  const first = markdown.slice(0, 6000).match(PROCEDURE_CODE);
   return first ? first[0].replace(/\s+/g, "") : null;
 }
 
@@ -131,9 +136,14 @@ async function main() {
   // A report matters when something points at it: a vote (term 10 voted on 7
   // term-9 reports as well) or an agenda entry. 81 of the 88 A9-* reports were
   // never voted here, and their term-9 procedures would only buy old OEIL fetches.
+  const dayVotes = clause("date", argv.dates);
   const voted = new Set(
     (
-      await db.raw("select distinct ref from rollcalls where ref is not null")
+      await db.raw(
+        "select distinct ref from rollcalls where ref is not null" +
+          dayVotes.sql,
+        dayVotes.bindings
+      )
     ).map((r) => r.ref)
   );
   // only a *forthcoming* agenda point counts: the July 2024 agendas list 88 A9-*
@@ -142,8 +152,10 @@ async function main() {
   const planned = new Set(
     (
       await db.raw(
-        "select distinct report from agenda_items where report is not null and date >= ?",
-        [today]
+        "select distinct report from agenda_items where report is not null" +
+          " and date >= ?" +
+          clause("date", argv.dates).sql,
+        [today, ...clause("date", argv.dates).bindings]
       )
     ).map((r) => r.report)
   );

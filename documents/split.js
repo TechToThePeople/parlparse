@@ -27,6 +27,7 @@ const minimist = require("minimist");
 const db = require("../lib/db");
 const { toRules } = require("../lib/markdown");
 const { isDocumentRef } = require("../lib/refs");
+const { clause } = require("../lib/dates");
 
 const ROOT = path.resolve(__dirname, "..");
 const OEIL_DIR = path.join(ROOT, "data", "content", "oeil");
@@ -332,15 +333,8 @@ async function contextPass(rows) {
   return { written, noParagraph };
 }
 
-/** --dates: only the votes of these sittings (openapi/update.js passes them). */
-function dateClause(dates) {
-  const list = Array.isArray(dates) ? dates : dates ? [dates] : [];
-  return list.length
-    ? `AND substr(r.date, 1, 10) IN (${list.map(() => "?").join(", ")})`
-    : "";
-}
-
 async function main() {
+  const dayFilter = clause("r.date", argv.dates);
   const rows = await db.raw(
     `SELECT r.id, r.ref, r.name
        FROM rollcalls r
@@ -353,9 +347,9 @@ async function main() {
              OR r.name GLOB 'Article [0-9]*' OR r.name GLOB '* Article [0-9]*'
              OR r.name GLOB 'Citation *' OR r.name GLOB '* Citation *')
       ${argv.ref ? "AND r.ref = ?" : ""}
-      ${dateClause(argv.dates)}
+      ${dayFilter.sql}
       ORDER BY r.ref, r.id`,
-    argv.ref ? [argv.ref] : []
+    [...(argv.ref ? [argv.ref] : []), ...dayFilter.bindings]
   );
 
   const byRef = new Map();

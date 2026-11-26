@@ -31,6 +31,7 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const minimist = require("minimist");
 const db = require("../lib/db");
+const { clause, list: dateList } = require("../lib/dates");
 const { fetchDocumentById, TERM } = require("./lib");
 
 // API group codes -> the names used in meps.eugroup (what ../10 colours by).
@@ -182,22 +183,40 @@ function rowOf(reference, { doc, eli }) {
 async function main() {
   // 1. what needs a row: references a vote or the agenda names, and rows the
   //    old scraper left without a url
+  // --dates limits the list to the references a vote or an agenda point of those
+  // sittings names (openapi/update.js passes the dates it is working on)
+  const dayVotes = clause("r.date", argv.dates);
+  const dayAgenda = clause("a.date", argv.dates);
   const missing = await db.raw(
     `SELECT reference, votes FROM (
        SELECT r.ref AS reference, COUNT(*) AS votes
          FROM rollcalls r LEFT JOIN reports rep ON rep.reference = r.ref
         WHERE r.ref IS NOT NULL AND rep.id IS NULL AND r.ref != 'EP error'
+          ${dayVotes.sql}
         GROUP BY r.ref
        UNION ALL
        SELECT a.report AS reference, 0 AS votes
          FROM agenda_items a LEFT JOIN reports rep ON rep.reference = a.report
         WHERE a.report IS NOT NULL AND rep.id IS NULL
+          ${dayAgenda.sql}
         GROUP BY a.report
-     ) GROUP BY reference ORDER BY votes DESC, reference`
+     ) GROUP BY reference ORDER BY votes DESC, reference`,
+    [...dayVotes.bindings, ...dayAgenda.bindings]
   );
   const partial = await db("reports")
     .select("reference")
-    .where((q) => q.whereNull("url").orWhereNull("raw").orWhereNull("creator"));
+    .where((q) => q.whereNull("url").orWhereNull("raw").orWhereNull("creator"))
+    .modify((query) => {
+      // a row with no url is worth a request when its report was voted or
+      // planned; --dates narrows that to the sittings of this run
+      if (!argv.dates) return;
+      query.whereIn(
+        "reference",
+        db("rollcalls")
+          .select("ref")
+          .whereIn(db.raw("substr(date, 1, 10)"), dateList(argv.dates))
+      );
+    });
   const seen = new Set(missing.map((m) => m.reference));
   const todo = [...missing];
   for (const row of partial)
