@@ -31,7 +31,7 @@
     "node-fetch": "^2.6.1",
     "osmosis": "^1.1.8",
     "pg": "^8.5.1",
-    "puppeteer-core": "^25.3.0",
+    "puppeteer-core": "^25.19.0",
     "signale": "^1.4.0",
     "sqlite3": "^5.1.7",
     "xlsx": "^0.16.9",
