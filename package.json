@@ -20,7 +20,7 @@
   "license": "aGPL3",
   "dependencies": {
     "@fast-csv/format": "^4.3.5",
-    "@sentry/node": "^5.29.2",
+    "@sentry/node": "^11.19.0",
     "@sentry/tracing": "^5.29.2",
     "d3-dsv": "^2.0.0",
     "date-fns": "^4.1.0",
