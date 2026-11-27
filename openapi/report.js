@@ -203,9 +203,11 @@ async function main() {
      ) GROUP BY reference ORDER BY votes DESC, reference`,
     [...dayVotes.bindings, ...dayAgenda.bindings]
   );
+  // a row that already holds the document record is done: 51 motions have no
+  // creator in the API at all, and asking again every run bought nothing
   const partial = await db("reports")
     .select("reference")
-    .where((q) => q.whereNull("url").orWhereNull("raw").orWhereNull("creator"))
+    .where((q) => q.whereNull("url").orWhereNull("raw"))
     .modify((query) => {
       // a row with no url is worth a request when its report was voted or
       // planned; --dates narrows that to the sittings of this run
@@ -234,7 +236,7 @@ async function main() {
   for (const [i, item] of list.entries()) {
     const reference = item.reference;
     const existing = await db("reports").where("reference", reference).first();
-    if (existing && !argv.force && existing.creator && existing.raw) {
+    if (existing && !argv.force && existing.raw && existing.url) {
       stats.unchanged++;
       continue;
     }
