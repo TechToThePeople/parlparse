@@ -1,6 +1,6 @@
 "use strict";
-const log = require("../lib/log.js");
-const db = require("../lib/db.js");
+const log = require("../../lib/log.js");
+const db = require("../../lib/db.js");
 const XLSX = require("xlsx");
 
 let argv = require("minimist")(process.argv.slice(2), {

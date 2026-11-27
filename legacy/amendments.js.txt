@@ -1,2 +1,4 @@
+-- archive: a shell one-liner saved with a .js extension; kept for the record, not runnable.
+
 $curl https://parltrack.org/dumps/ep_plenary_amendments.json.zst | zstd -d > data/amendments.json
 //https://parltrack.org/dumps/ep_plenary_amendments.json.zst

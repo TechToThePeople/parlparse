@@ -1,3 +1,5 @@
+-- archive: a half-typed script (raw SQL at top level) that never parsed; kept for the record, not runnable.
+
 const parties = `INSERT INTO parties (name, country, code, term, created_by, updated_by, created_at, updated_at)
 SELECT 
     m.party as name,

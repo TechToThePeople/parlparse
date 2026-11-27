@@ -1,3 +1,5 @@
+-- archive: SQL typed into a .js file; kept for the record, not runnable.
+
 "insert into eugroups (name,code,lang) (select eugroup as name, replace(replace(replace(lower(eugroup),'/',''),'&',''),' ','') as code , 'en' as lang  from meps group by eugroup)";
 
 "insert into parties (name,code,lang) (select party as name, concat (country," -
