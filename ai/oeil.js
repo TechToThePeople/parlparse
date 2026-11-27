@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-env node */
 /**
- * documents/oeil.js — fetch the European Parliament reports with the Open Data API,
+ * ai/oeil.js — fetch the European Parliament reports with the Open Data API,
  * turn them into markdown, and ask DeepSeek for a citizen-friendly summary.
  *
  * Sources, per report reference (`reports.reference`, e.g. A10-0275/2026):
@@ -15,10 +15,10 @@
  *   data/content/summary/<reference>.md   the summary (prose only)
  *
  * Usage:
- *   node documents/oeil.js A10-0275/2026      # one report
- *   node documents/oeil.js --all              # A / B / RC reports, skipping the rest
- *   node documents/oeil.js --all --limit 5    # trial run
- *   node documents/oeil.js --all --dry        # fetch + convert, no DeepSeek call
+ *   node ai/oeil.js A10-0275/2026      # one report
+ *   node ai/oeil.js --all              # A / B / RC reports, skipping the rest
+ *   node ai/oeil.js --all --limit 5    # trial run
+ *   node ai/oeil.js --all --dry        # fetch + convert, no DeepSeek call
  *
  * Options:
  *   --all        every report with a document: A, B and RC references
@@ -70,7 +70,9 @@ const argv = minimist(process.argv.slice(2), {
     "help",
   ],
   string: ["model", "ai-max-doc"],
-  alias: { h: "help", a: "all", n: "limit" },
+  // forceAi is used all over the file; without the alias minimist only ever set
+  // argv["force-ai"] and --force-ai did nothing at all
+  alias: { h: "help", a: "all", n: "limit", "force-ai": "forceAi" },
   // every step on by default; --no-fetch / --no-ai / --no-attach turn one off.
   // A summary nobody can read is a summary nobody needs, so attach always runs.
   default: { fetch: true, ai: true, attach: true },
@@ -78,7 +80,7 @@ const argv = minimist(process.argv.slice(2), {
 
 if (require.main === module && argv.help) {
   console.log(`
-Usage: node documents/oeil.js [<reference> | --all] [options]
+Usage: node ai/oeil.js [<reference> | --all] [options]
 
   <reference>  one or more reports.reference values, e.g. A10-0275/2026
   --all, -a    every A / B / RC report (the default with no reference)
@@ -394,40 +396,30 @@ async function documentMarkdown(reference) {
   return body;
 }
 
-const SYSTEM = `You explain decisions of the European Parliament to citizens who have no legal or EU background. Write plain English, short sentences, no jargon, no acronyms without expanding them, no preamble, no "this report" framing.
+// The prompts live in ai/prompt/*.md so they can be read and edited as prompts.
+const PROMPT_DIR = path.join(__dirname, "prompt");
 
-The text may be in a language other than English; answer in English regardless.
+function promptFile(name) {
+  return fs.readFileSync(path.join(PROMPT_DIR, `${name}.md`), "utf8").trim();
+}
 
-Ignore the procedural parts: the committee's own votes (the results of the vote in committee, the roll-call or show-of-hands results there), the list of members who voted, the composition of the committee, and the administrative references. They say how the text was adopted, not what it changes.`;
+const SYSTEM = promptFile("system");
+
+const fill = (template, values) =>
+  template.replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 
 function summaryPrompt(text) {
-  return `Here is a report of the European Parliament.
-
-${text}
-
-Write, in this order:
-1. one paragraph of 60 to 90 words explaining what this report changes, or what it asks for, in words a citizen can follow;
-2. three bullet points of at most 20 words each: what concretely changes, who it affects, what happens next.
-Do not invent facts that are not in the text. If the report only gives an opinion, say so plainly.`;
+  return fill(promptFile("summary"), { text });
 }
 
 function chunkPrompt(text, index, total) {
-  return `Part ${index + 1} of ${total} of a European Parliament report.
-
-${text}
-
-In at most 60 words, list only the concrete changes or positions stated in this part. No introduction.`;
+  return fill(promptFile("chunk"), { text, index: index + 1, total });
 }
 
 function mergePrompt(parts) {
-  return `You have summaries of the successive parts of the same European Parliament report.
-
-${parts.map((p, i) => `Part ${i + 1}: ${p}`).join("\n\n")}
-
-Write, in this order:
-1. one paragraph of 60 to 90 words explaining what this report changes, or asks for, in words a citizen can follow;
-2. three bullet points of at most 20 words each.
-Do not invent facts.`;
+  return fill(promptFile("merge"), {
+    parts: parts.map((p, i) => `Part ${i + 1}: ${p}`).join("\n\n"),
+  });
 }
 
 /** One DeepSeek call; returns the answer and accumulates the token counters. */
@@ -562,7 +554,7 @@ async function summarise(
 /**
  * The summary is also the text of the votes that are about the whole text
  * ("Proposition de résolution (ensemble du texte)", a motion's own document):
- * documents/attach.js keeps that rule, so oeil.js and the routine update agree on it.
+ * ai/attach.js keeps that rule, so oeil.js and the routine update agree on it.
  */
 async function storeWholeTextVotes(reference, summary) {
   const rows = await attachReference(reference, summary);
@@ -598,7 +590,7 @@ async function storeSummary(reference, text, model) {
 
 /**
  * Take the summaries on disk into the database — a file written before
- * `reports.summary` existed still has to reach its votes — then let documents/attach.js
+ * `reports.summary` existed still has to reach its votes — then let ai/attach.js
  * put them on the votes it recognises, which is idempotent and also covers the
  * votes created after the file was written.
  */
@@ -736,7 +728,8 @@ async function main() {
       }`
     );
     await runList(
-      argv.force
+      // --force-ai regenerates too: it is the flag for "the prompt changed"
+      argv.force || argv.forceAi
         ? inputs
         : inputs.filter(
             (r) => !fs.existsSync(path.join(SUMMARY_DIR, fileName(r)))

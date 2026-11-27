@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-env node */
 /**
- * documents/amendments.js — fill `rollcall_texts` for amendments, from the amendment
+ * ai/amendments.js — fill `rollcall_texts` for amendments, from the amendment
  * documents the EP publishes on doceo.
  *
  * The OpenAPI does not publish amendments (`/documents/…-AM-4` is a 404, there is
@@ -23,9 +23,9 @@
  * download; the markdown of each range is cached under data/content/amendments/.
  *
  * Usage:
- *   node documents/amendments.js --dry --ref A10-0271/2026   # what it would write
- *   node documents/amendments.js --ref A10-0271/2026         # one report
- *   node documents/amendments.js                             # every report with votes
+ *   node ai/amendments.js --dry --ref A10-0271/2026   # what it would write
+ *   node ai/amendments.js --ref A10-0271/2026         # one report
+ *   node ai/amendments.js                             # every report with votes
  */
 
 const fs = require("fs");
@@ -82,7 +82,7 @@ const argv = minimist(process.argv.slice(2), {
 
 if (argv.help) {
   console.log(`
-Usage: node documents/amendments.js [options]
+Usage: node ai/amendments.js [options]
 
   --ref <ref>  only that report (e.g. A10-0271/2026)
   --limit, -n  stop after N reports

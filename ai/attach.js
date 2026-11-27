@@ -13,7 +13,7 @@
  * next run, with no model call and no download. Idempotent: a row whose text
  * already is the summary is left alone.
  *
- * Usage: node documents/attach.js [--dry]
+ * Usage: node ai/attach.js [--dry]
  */
 const db = require("../lib/db.js");
 

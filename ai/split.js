@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /* eslint-env node */
 /**
- * documents/split.js — fill `rollcall_texts` for votes on a section or a recital by
- * extracting the passage from the markdown already saved by documents/oeil.js
+ * ai/split.js — fill `rollcall_texts` for votes on a section or a recital by
+ * extracting the passage from the markdown already saved by ai/oeil.js
  * (data/content/oeil/<reference>.md). No PDF, no conversion, no model call.
  *
  * Only what can be found unambiguously is written:
@@ -16,9 +16,9 @@
  *               is how a wrong `ref` used to show up
  *
  * Usage:
- *   node documents/split.js --dry --limit 5      # see what it would write
- *   node documents/split.js                      # write for every report with markdown
- *   node documents/split.js --ref A10-0275/2026  # one report
+ *   node ai/split.js --dry --limit 5      # see what it would write
+ *   node ai/split.js                      # write for every report with markdown
+ *   node ai/split.js --ref A10-0275/2026  # one report
  */
 
 const fs = require("fs");
@@ -49,7 +49,7 @@ const argv = minimist(process.argv.slice(2), {
 
 if (argv.help) {
   console.log(`
-Usage: node documents/split.js [options]
+Usage: node ai/split.js [options]
 
 Extracts the text of the votes on a paragraph (§ 19) or a recital (Recital U)
 from data/content/oeil/<reference>.md and writes it to rollcall_texts.
@@ -157,7 +157,7 @@ async function processReport(reference, votes) {
   if (!fs.existsSync(file)) {
     stats.noMarkdown += votes.length;
     console.log(
-      `   ⚠️  ${reference}: no markdown (run documents/oeil.js --dry for it)`
+      `   ⚠️  ${reference}: no markdown (run ai/oeil.js --dry for it)`
     );
     return;
   }
@@ -172,7 +172,7 @@ async function processReport(reference, votes) {
   for (const vote of votes) {
     // the API sometimes prefixes the name with a dash: "– § 6", "– Recital E"
     // The name can carry a prefix ("A10-0288/2026 – Zdechovský – § 28"): the key
-    // is what comes after the last separator, as in documents/amendments.js
+    // is what comes after the last separator, as in ai/amendments.js
     const full = String(vote.name || "").replace(/^[–—−-]\s*/, "");
     const name = full
       .split(/\s[–—−-]\s/)
