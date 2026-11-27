@@ -100,7 +100,11 @@ async function attachAll({ dates = null } = {}) {
  * Insert the summary where it is missing, and only there.
  */
 async function write(votes, summary, url) {
-  const text = String(summary || "").trim();
+  // the file and reports.summary keep the `# title` / `## description` structure;
+  // a vote page renders line by line, so the markers would show as literal hashes
+  const text = String(summary || "")
+    .replace(/^#{1,6}\s+/gm, "")
+    .trim();
   if (!text || !votes.length) return 0;
   const ids = votes.map((vote) => vote.id);
   const existing = new Map(

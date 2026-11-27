@@ -187,6 +187,20 @@ Formats the site relies on:
 citations), `amendments.js` (the range documents). Only `oeil.js` calls a model —
 the other two are deterministic parsers of the converted markdown.
 
+A summary has a fixed shape, because two readers depend on it:
+
+```markdown
+# a title of at most 12 words        (left out when it only repeats reports.title)
+## the description, 60–90 words      (the page description; stands alone)
+- three bullets: what changes, who it affects, what happens next
+```
+
+`reports.summary` and `data/content/summary/<ref>.md` keep that structure. The
+text attached to the votes (`rollcall_texts.kind = 'summary'`) has the `#`/`##`
+markers stripped: a vote page renders line by line and would show them literally.
+The model sometimes writes the description as a bare paragraph, so
+`normaliseSummary()` puts the `##` back before the file is written.
+
 The prompts are files, not string literals: `ai/prompt/system.md`, `summary.md`,
 `chunk.md` (one part of a long document) and `merge.md` (the parts joined), with
 `{{text}}`, `{{parts}}`, `{{index}}`, `{{total}}` filled in. A change of wording

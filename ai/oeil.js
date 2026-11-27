@@ -408,18 +408,51 @@ const SYSTEM = promptFile("system");
 const fill = (template, values) =>
   template.replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 
-function summaryPrompt(text) {
-  return fill(promptFile("summary"), { text });
+/** The title we already hold, so the model does not repeat it as a heading. */
+async function titleOf(reference) {
+  const row = await db("reports").where("reference", reference).first("title");
+  return (row && row.title) || "";
+}
+
+function summaryPrompt(text, title) {
+  return fill(promptFile("summary"), { text, title });
 }
 
 function chunkPrompt(text, index, total) {
   return fill(promptFile("chunk"), { text, index: index + 1, total });
 }
 
-function mergePrompt(parts) {
+function mergePrompt(parts, title) {
   return fill(promptFile("merge"), {
     parts: parts.map((p, i) => `Part ${i + 1}: ${p}`).join("\n\n"),
+    title,
   });
+}
+
+/**
+ * The answer has a shape the readers rely on: an optional `# title`, then a
+ * `## description` (used as the page description), then the bullets. The model
+ * sometimes writes the description as a bare paragraph, so the heading is put back
+ * here rather than trusting the prompt alone.
+ */
+function normaliseSummary(answer) {
+  const lines = String(answer || "")
+    .trim()
+    .split("\n");
+  const out = [];
+  let seenDescription = false;
+  for (const line of lines) {
+    const bare = line.trim();
+    if (!seenDescription && bare && !bare.startsWith("#") && out.length) {
+      // the block right after the title (or at the top) is the description
+      out.push(`## ${bare}`);
+      seenDescription = true;
+      continue;
+    }
+    if (bare.startsWith("## ")) seenDescription = true;
+    out.push(line);
+  }
+  return out.join("\n").trim();
 }
 
 /** One DeepSeek call; returns the answer and accumulates the token counters. */
@@ -518,13 +551,14 @@ async function summarise(
   }
 
   const started = Date.now();
+  const title = await titleOf(reference);
   const body = markdown.trim();
   const parts = chunks(body, CHUNK);
   const tokens = { in: stats.tokensIn, out: stats.tokensOut };
 
   let answer;
   if (parts.length === 1) {
-    answer = await complete(summaryPrompt(body), { model });
+    answer = await complete(summaryPrompt(body, title), { model });
   } else {
     console.log(`   ✂️  ${reference}: ${parts.length} chunks`);
     const partial = [];
@@ -536,9 +570,10 @@ async function summarise(
         })
       );
     }
-    answer = await complete(mergePrompt(partial), { model });
+    answer = await complete(mergePrompt(partial, title), { model });
   }
 
+  answer = normaliseSummary(answer);
   fs.writeFileSync(dest, answer.trim() + "\n");
   await storeSummary(reference, answer, model);
   stats.summaries++;
